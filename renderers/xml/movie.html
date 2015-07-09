@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<movie>
+    <tag>{{:tag}}</tag>
+    <stickers>{{for stickers}}
+        <sticker lib="{{:#data.lib}}"
+        		 subtype="{{:#data.subtype}}">{{:#data.value}}</sticker>{{/for}}
+    </stickers>
+    <main>{{:main}}</main>
+    <poster>{{:poster}}</poster>
+    <type bg="филми">movies</type>
+    <subtype bg="филм">movie</subtype>
+    <bg>{{:bgName}}</bg>
+    <en>{{:enName}}</en>
+    <serie>{{:serie}}</serie>
+    <genres>{{for genre}}
+        <genre>{{:#data.text}}</genre>{{/for}}
+    </genres>
+    <cast>{{for cast}}
+        <actor>{{:#data.text}}</actor>{{/for}}
+    </cast>
+    <directors>{{for directors}}
+        <director>{{:#data.text}}</director>{{/for}}
+    </directors>
+    <writers>{{for writers}}
+        <writer>{{:#data.text}}</writer>{{/for}}
+    </writers>
+    <camera>{{for camera}}
+        <operator>{{:#data.text}}</operator>{{/for}}
+    </camera>
+    <music>{{for music}}
+        <composer>{{:#data.text}}</composer>{{/for}}
+    </music>
+    <bg>{{:bgDate}}</bg>
+    <world>{{:worldDate}}</world>
+    <time>{{:time}}</time>
+    <similar>{{for similar.split(',')}}
+        <game>{{:#data}}</game>{{/for}}
+    </similar>
+</movie>

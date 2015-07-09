@@ -1,0 +1,308 @@
+<div class="layout">
+    <select aria-label="Тип оформление" class="header">
+        <option value="text">Текст</option>
+        <option value="img">Картинки</option>
+        <option value="inside">Текст в картинка</option>
+    </select>
+    <img class="svg select-svg" 
+    	 src="../assets/icons/iconmonstr/iconmonstr-menu-3-icon.svg" 
+         alt="icon" 
+         role="presentation" />
+    <p class="select-subtitle">Избери тип оформление.</p>
+    <div role="group">
+        <div class="inline-col left-col" 
+        	 data-type="" 
+             data-object="" 
+             data-url=""
+             data-valign="">
+            <button class="select" type="button"><span class="clip">Добави игра,
+            каре, цитат, статия или реклама</span></button>
+        </div>
+        <div class="center-col textLayout" contenteditable="true">
+            <p>Натиснете тук, за да редактирате текста, използвайки само параграфи, <strong>болд</strong>, <em>италик</em> и <a href="#" target="_blank">връзки</a>.
+                Този едитор поддържа и стандартни функции, като копи, пейст,
+                ънду и реду.</p>
+            <blockquote>
+                <p>За да оградите параграф, като цитат, използвайте бутона с
+                    кавичките.</p>
+            </blockquote>
+            <h3>Може да използвате и хединг 3</h3>
+            <p>За да редактирата съдържанието директно в HTML използвайте бутона <em>Source</em>.</p>
+        </div>
+        <div class="center-col imgLayout">
+            <select aria-label="Оформление на картинките" class="header">
+                <option disabled="disabled" value="z0">голяма</option>
+                <option disabled="disabled"  value="z1">средна</option>
+                <option value="a1">2 малки + голяма</option>
+                <option value="a2">голяма + 2 малки</option>
+                <option value="b1">голяма + средна + малка</option>
+                <option disabled="disabled" value="b2">шахматно без застъпване</option>
+                <option disabled="disabled" value="b3">шахматно със застъпване</option>
+                <option disabled="disabled" value="f1">цял екран</option>
+                <option value="f3">цял екран + траклист</option>
+            </select>
+            <img class="svg select-svg" 
+            	 src="../assets/icons/iconmonstr/iconmonstr-menu-3-icon.svg" 
+                 alt="icon" 
+                 role="presentation" />
+            <p class="select-subtitle">Избери позициониране на картинките.</p>
+            <div class="sublayout z0Sublayout">голяма</div>
+            <div class="sublayout z1Sublayout">средна</div>
+            <div class="sublayout a1Sublayout">
+                <div class="img-proxy">
+                    <div class="file"> <img alt="" 
+                    						role="presentation" 
+                                            src="../assets/helpers/16-9.png" />
+                        <input aria-label="Избери" type="file" />
+                        <label>
+                            <input type="checkbox" value="16-10" />
+                            <span>16:10</span></label>
+                    </div>
+                    <div class="settings">
+                        <p data-pointer="Горе" contenteditable="true">Натиснете
+                            тук, за да редактирате коментара.</p>
+                        <input placeholder="Видео" aria-label="Видео" type="text" />
+                    </div>
+                </div>
+                <div class="img-proxy">
+                    <div class="file"> <img alt="" 
+                    						role="presentation" 
+                                            src="../assets/helpers/16-9.png" />
+                        <input aria-label="Избери" type="file" />
+                        <label>
+                            <input type="checkbox" value="16-10" />
+                            <span>16:10</span></label>
+                    </div>
+                    <div class="settings">
+                        <p data-pointer="Дясно" contenteditable="true">Натиснете
+                            тук, за да редактирате коментара.</p>
+                        <input placeholder="Видео" aria-label="Видео" type="text" />
+                    </div>
+                </div>
+                <div class="img-proxy">
+                    <div class="file"> <img alt="" 
+                    						role="presentation" 
+                                            src="../assets/helpers/16-9.png" />
+                        <input aria-label="Избери" type="file" />
+                        <label>
+                            <input type="checkbox" value="16-10" />
+                            <span>16:10</span></label>
+                    </div>
+                    <div class="settings">
+                        <p data-pointer="Ляво" contenteditable="true">Натиснете
+                            тук, за да редактирате коментара.</p>
+                        <input placeholder="Видео" aria-label="Видео" type="text" />
+                        <select aria-label="Траклист">
+                            <option value="">Без траклист</option>
+                            <option value="bottom right">долу вдясно</option>
+                            <option value="bottom left">долу вляво</option>
+                            <option value="top right">горе вдясно</option>
+                            <option value="top left">горе вляво</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="sublayout a2Sublayout">
+                <div class="img-proxy">
+                    <div class="file"> <img alt="" 
+                    						role="presentation" 
+                                            src="../assets/helpers/16-9.png" />
+                        <input aria-label="Избери" type="file" />
+                        <label>
+                            <input type="checkbox" value="16-10" />
+                            <span>16:10</span></label>
+                    </div>
+                    <div class="settings">
+                        <p data-pointer="Ляво" contenteditable="true">Натиснете
+                            тук, за да редактирате коментара.</p>
+                        <input placeholder="Видео" aria-label="Видео" type="text" />
+                        <select aria-label="Траклист">
+                            <option value="">Без траклист</option>
+                            <option value="bottom right">долу вдясно</option>
+                            <option value="bottom left">долу вляво</option>
+                            <option value="top right">горе вдясно</option>
+                            <option value="top left">горе вляво</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="img-proxy">
+                    <div class="file"> <img alt="" 
+                    						role="presentation" 
+                                            src="../assets/helpers/16-9.png" />
+                        <input aria-label="Избери" type="file" />
+                        <label>
+                            <input type="checkbox" value="16-10" />
+                            <span>16:10</span></label>
+                    </div>
+                    <div class="settings">
+                        <p data-pointer="Долу" contenteditable="true">Натиснете
+                            тук, за да редактирате коментара.</p>
+                        <input placeholder="Видео" aria-label="Видео" type="text" />
+                    </div>
+                </div>
+                <div class="img-proxy">
+                    <div class="file"> <img alt="" 
+                    						role="presentation" 
+                                            src="../assets/helpers/16-9.png" />
+                        <input aria-label="Избери" type="file" />
+                        <label>
+                            <input type="checkbox" value="16-10" />
+                            <span>16:10</span></label>
+                    </div>
+                    <div class="settings">
+                        <p data-pointer="Дясно" contenteditable="true">Натиснете
+                            тук, за да редактирате коментара.</p>
+                        <input placeholder="Видео" aria-label="Видео" type="text" />
+                    </div>
+                </div>
+            </div>
+            <div class="sublayout b1Sublayout">
+                <div class="img-proxy">
+                    <div class="file"> <img alt="" 
+                    						role="presentation" 
+                                            src="../assets/helpers/16-9.png" />
+                        <input aria-label="Избери" type="file" />
+                        <label>
+                            <input type="checkbox" value="16-10" />
+                            <span>16:10</span></label>
+                    </div>
+                    <div class="settings">
+                        <p data-pointer="Ляво" contenteditable="true">Натиснете
+                            тук, за да редактирате коментара.</p>
+                        <input placeholder="Видео" aria-label="Видео" type="text" />
+                        <select aria-label="Траклист">
+                            <option value="">Без траклист</option>
+                            <option value="bottom right">долу вдясно</option>
+                            <option value="bottom left">долу вляво</option>
+                            <option value="top right">горе вдясно</option>
+                            <option value="top left">горе вляво</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="img-proxy">
+                    <div class="file"> <img alt="" 
+                    						role="presentation" 
+                                            src="../assets/helpers/16-9.png" />
+                        <input aria-label="Избери" type="file" />
+                        <label>
+                            <input type="checkbox" value="16-10" />
+                            <span>16:10</span></label>
+                    </div>
+                    <div class="settings">
+                        <p data-pointer="Долу" contenteditable="true">Натиснете
+                            тук, за да редактирате коментара.</p>
+                        <input placeholder="Видео" aria-label="Видео" type="text" />
+                    </div>
+                </div>
+                <div class="img-proxy">
+                    <div class="file"> <img alt="" 
+                    						role="presentation" 
+                                            src="../assets/helpers/16-9.png" />
+                        <input aria-label="Избери" type="file" />
+                        <label>
+                            <input type="checkbox" value="16-10" />
+                            <span>16:10</span></label>
+                    </div>
+                    <div class="settings">
+                        <p data-pointer="Горе" contenteditable="true">Натиснете
+                            тук, за да редактирате коментара.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="sublayout b2Sublayout">шахматно без застъпване</div>
+            <div class="sublayout b3Sublayout">шахматно със застъпване</div>
+            <div class="sublayout f1Sublayout">цял екран</div>
+            <div class="sublayout f3Sublayout">
+                <div class="img-proxy">
+                    <div class="file"> <img alt="" 
+                    						role="presentation" 
+                                            src="../assets/helpers/16-9.png" />
+                        <input aria-label="Избери" type="file" />
+                    </div>
+                    <div class="tracklist">
+                        <select aria-label="Позициониране на траклиста">
+                            <option value="bottom right">долу вдясно</option>
+                            <option value="bottom left">долу вляво</option>
+                            <option value="top right">горе вдясно</option>
+                            <option value="top left">горе вляво</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="center-col insideLayout">
+            <select aria-label="Оформление на картинките" class="header">
+                <option value="i1">цял екран</option>
+                <option value="i2">2/3 прозрачна</option>
+                <option disabled="disabled" value="i3">2 малки + голяма</option>
+            </select>
+            <img class="svg select-svg" 
+            	 src="../assets/icons/iconmonstr/iconmonstr-menu-3-icon.svg" 
+                 alt="icon" 
+                 role="presentation" />
+            <p class="select-subtitle">Избери оформление на картинките.</p>
+            <div class="sublayout i1Sublayout">
+            	<div class="img-proxy">
+                    <div class="file"> <img alt="" 
+                                        role="presentation" 
+                                        src="../assets/helpers/16-9.png" />
+                        <input aria-label="Избери" type="file" />
+                    </div>
+            	</div>
+            </div>
+            <div class="sublayout i2Sublayout">
+            	<div class="img-proxy">
+                    <div class="file"> <img alt="" 
+                                        role="presentation" 
+                                        src="../assets/helpers/16-9.png" />
+                        <input aria-label="Избери" type="file" />
+                    </div>
+            	</div>
+            </div>
+            <div class="sublayout i3Sublayout">2 малки + голяма</div>
+            <div class="settings">
+                <select aria-label="Позициониране на текста">
+                    <option value="bottom right">долу вдясно</option>
+                    <option value="bottom center">долу център</option>
+                    <option value="bottom left">долу вляво</option>
+                    <option value="top right">горе вдясно</option>
+                    <option value="top center">горе център</option>
+                    <option value="top left">горе вляво</option>  
+                </select>
+            	<select aria-label="Автор">
+                	<option value="">Без автор</option>
+                </select>
+            </div>
+            <div contenteditable="true" class="insideLayoutText">
+                <p>Натиснете тук, за да редактирате текста, използвайки само
+                    параграфи, <strong>болд</strong>, <em>италик</em> и <a href="#" target="_blank">връзки</a>.
+                    Този едитор поддържа и стандартни функции, като копи, пейст,
+                    ънду и реду.</p>
+                <h3>Може да използвате и хединг 3</h3>
+                <p>За да редактирата съдържанието директно в HTML използвайте
+                    бутона <em>Source</em>.</p>
+                <h3>Специален текст</h3>
+                <ol>
+                    <li>Time to Relax</li>
+                    <li>Nitro (Youth Energy)</li>
+                    <li>Bad Habit</li>
+                    <li>Gotta Get Away</li>
+                </ol>
+                <p>Бис:</p>
+                <ol>
+                    <li>Intermission</li>
+                    <li>All I Want</li>
+                </ol>
+            </div>
+        </div>
+        <div class="inline-col right-col"
+        	 data-type="" 
+             data-object="" 
+             data-url=""
+             data-valign="">
+            <button class="select" type="button"><span class="clip">Добави каре,
+            цитат, статия или реклама</span></button>
+        </div>
+    </div>
+    <button class="remove" type="button"><span class="clip">Изтрий</span></button>
+</div>

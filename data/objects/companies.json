@@ -1,0 +1,86 @@
+[ { "text" : "Square Enix",
+	"value" : "square-enix",
+    "type" : "games",
+    "subtype" : "publisher"
+  },
+  { "text" : "Airtight Games",
+  	"value" : "airtight-games",
+    "type" : "games",
+    "subtype" : "developer"
+  },
+  { "text" : "Focus Home Interactive",
+	"value" : "focus-home-interactive",
+    "type" : "games",
+    "subtype" : "publisher"
+  },
+  { "text" : "SCEE",
+  	"value" : "scee",
+    "type" : "games",
+    "subtype" : "publisher"
+  },
+  { "text" : "Honeyslug",
+  	"value" : "honeyslug",
+    "type" : "games",
+    "subtype" : "developer"
+  },
+  { "text" : "EA Sports",
+  	"value" : "ea-sports",
+    "type" : "games",
+    "subtype" : "publisher"
+  },
+  { "text" : "EA Canada",
+  	"value" : "ea-canada",
+    "type" : "games",
+    "subtype" : "developer"
+  },
+  { "text" : "Ikaron",
+  	"value" : "ikaron",
+    "type" : "games",
+    "subtype" : "publisher"
+  },
+  { "text" : "Larian Studios",
+  	"value" : "larian-studios",
+    "type" : "games",
+    "subtype" : "developer"
+  },
+  { "text" : "Namco Bandai",
+  	"value" : "namco-bandai",
+    "type" : "games",
+    "subtype" : "publisher"
+  },
+  { "text" : "From Software",
+  	"value" : "from-software",
+    "type" : "games",
+    "subtype" : "developer"
+  },
+  { "text" : "Ubisoft",
+  	"value" : "ubisoft",
+    "type" : "games",
+    "subtype" : "publisher"
+  },
+  { "text" : "Ubisoft Montpelier",
+  	"value" : "ubisoft-montpelier",
+    "type" : "games",
+    "subtype" : "developer"
+  },
+  { "text" : "Polydor Records",
+  	"value" : "polydor-records",
+    "type" : "music",
+    "subtype" : "label"
+  },
+  { "text" : "Interscope Records",
+  	"value" : "interscope-records",
+    "type" : "music",
+    "subtype" : "label"
+  },
+  { "text" : "Deep Silver",
+  	"value" : "deep-silver",
+    "type" : "games",
+    "subtype" : "publisher"
+  },
+  { "text" : "Piranha Bites",
+  	"value" : "piranha-bites",
+    "type" : "games",
+    "subtype" : "developer"
+  }
+]

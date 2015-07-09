@@ -1,0 +1,101 @@
+[ { "text" : "Ghost",
+	"value" : "ghost",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Broadsword",
+	"value" : "broadsword",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Diablo skull",
+	"value" : "diablo-skull",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Angel outfit",
+	"value" : "angel-outfit",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "High shot",
+	"value" : "high-shot",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Snake",
+	"value" : "snake",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Dripping knife",
+	"value" : "dripping-knife",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Voodoo doll",
+	"value" : "voodoo-doll",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Soccer ball",
+	"value" : "soccer-ball",
+    "lib" : "delapouite",
+	"subtype" : "sports"
+  },
+  { "text" : "Soccer field",
+	"value" : "soccer-field",
+    "lib" : "delapouite",
+	"subtype" : "sports"
+  },
+  { "text" : "Burning meteor",
+	"value" : "burning-meteor",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Minotaur",
+	"value" : "minotaur",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Brutal helm",
+	"value" : "brutal-helm",
+    "lib" : "carl-olsen",
+	"subtype" : "originals"
+  },
+  { "text" : "Black hand shield",
+	"value" : "black-hand-shield",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Crowned skull",
+	"value" : "crowned-skull ",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Revolver",
+	"value" : "revolver",
+    "lib" : "delapouite",
+	"subtype" : "originals"
+  },
+  { "text" : "Temptation",
+	"value" : "temptation",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Bleeding wound",
+	"value" : "bleeding-wound",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Jigsaw piece",
+	"value" : "jigsaw-piece",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Tear tracks",
+	"value" : "tear-tracks",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  }
+]

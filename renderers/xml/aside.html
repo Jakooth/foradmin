@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<caret>
+    <site>{{:site}}</site>
+    <url>{{:url}}</url>
+    <tags prime="{{:prime.value}}">{{for tags.split(',')}}
+        <tag>{{:#data}}</tag>{{/for}}
+    </tags>
+    <main tag="{{:main.tag}}">{{:main.index}}</main>
+    <type bg="{{:type.bg}}">{{:type.tag}}</type>
+    <subtype bg="{{:subtype.bg}}">{{:subtype.tag}}</subtype>
+    <title>
+        <![CDATA[{{:title}}]]>
+    </title>
+    <subtitle>
+        <![CDATA[{{:subtitle}}]]>
+    </subtitle>
+    <authors>{{for authors.split(',')}}
+        <author>{{:#data}}</author>{{/for}}
+    </authors>
+    <date>{{:date}}</date>
+    <issue>{{:issue}}</issue>
+    <center>
+    	<![CDATA[{{:center}}]]>
+    </center>
+</caret>

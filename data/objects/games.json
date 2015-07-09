@@ -1,0 +1,216 @@
+[ { "text" : "Murdered: Soul Suspect",
+	"value" : "murdered-soul-suspect",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Heavy Rain",
+	"value" : "heavy-rain",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Fahrenheit",
+	"value" : "fahrenheit",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "The Wolf Among Us",
+	"value" : "the-wolf-among-us",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "L.A. Noire",
+	"value" : "la-noire",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "CSI: Miami",
+	"value" : "csi-miami",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Bound by Flame",
+	"value" : "bound-by-flame",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Game of Thrones",
+	"value" : "game-of-thrones",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Dragon Age 2",
+	"value" : "dragon-age-2",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "The Witcher 2: Assassin of Kings",
+	"value" : "the-witcherw-2-assassin-of-kings",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Dark Souls",
+	"value" : "dark-souls",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Kingdoms of Amalur: Reckoning",
+	"value" : "kingdoms-of-amalur-reckoning",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Hohokum",
+	"value" : "hohokum",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Snake",
+	"value" : "snake",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "FIFA 15",
+	"value" : "fifa-15",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "FIFA 14",
+	"value" : "fifa-14",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Winning Eleven 7",
+	"value" : "winning-eleven-7",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "PES 15",
+	"value" : "pes-15",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Divinity: Original Sin",
+	"value" : "divinity-original-sin",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Baldur's Gate",
+	"value" : "baldurs-gate",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Baldur's Gate 2",
+	"value" : "baldurs-gate-2",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Fallout",
+	"value" : "fallout",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Fallout 2",
+	"value" : "fallout-2",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Neverwinter Nights 2",
+	"value" : "neverwinter-nights-2",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Beyond Divinity",
+	"value" : "beyond-divinity",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Dragon Age: Inquisition",
+	"value" : "dragon-age-inquisition",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Dark Souls",
+	"value" : "dark-souls",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Dark Souls 2",
+	"value" : "dark-souls-2",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Demon's Souls",
+	"value" : "demons-souls",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Crown of the Sunken King",
+	"value" : "crown-of-the-sunken-king",
+    "type" : "games",
+    "object" : "dlc"
+  },
+  { "text" : "Crown of the Old Iron King",
+	"value" : "crown-of-the-old-iron-king",
+    "type" : "games",
+    "object" : "dlc"
+  },
+  { "text" : "Crown of the Ivory King",
+	"value" : "crown-of-the-ivory-king",
+    "type" : "games",
+    "object" : "dlc"
+  },
+  { "text" : "Valiant Hearts",
+	"value" : "valiant-hearts",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Call of Duty: Black Ops 2",
+	"value" : "call-of-duty-black-ops-2",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Brothers: A Tale of Two Sons",
+	"value" : "brothers-a-tale-of-two-sons",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Limbo",
+	"value" : "limbo",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Journey",
+	"value" : "journey",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Child of Light",
+	"value" : "child-of-Light",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Risen 3: Titan Lords",
+	"value" : "risen-3",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Two Worlds 2",
+	"value" : "two-worlds-2",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Gothic 2",
+	"value" : "gothic-2",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Risen 2: Dark Waters",
+	"value" : "risen-3",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Risen",
+	"value" : "risen",
+    "type" : "games",
+    "object" : "game"
+  }
+]

@@ -1,0 +1,10 @@
+[ { "text" : "lighten",
+    "value" : "FFFFFF"
+  },
+  { "text" : "darken",
+    "value" : "000000"
+  },
+  { "text" : "tuborg",
+    "value" : "33CC33"
+  }
+]

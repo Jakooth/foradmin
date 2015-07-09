@@ -1,0 +1,25 @@
+﻿        <layout type="{{:type}}" subtype="{{:subtype}}"
+                tag="{{:~tag}}" {{if ratio}}ratio="{{:ratio}}"{{/if}}
+                order="{{:#getIndex()}}">
+            <center>{{for imgs}}
+            	<img>
+                    <tag>{{:#data.tag}}</tag>{{if #data.ratio}}
+                    <ratio>{{:#data.ratio}}</ratio>{{/if}}
+                    <index>{{:#data.index}}</index>{{if #data.center}}
+                    <center author="{{:#data.author}}" 
+                    		valign="{{:#data.valign}}">
+                    	<![CDATA[{{:#data.center}}]]>
+                    </center>{{/if}}
+                    <pointer>{{:#data.pointer}}</pointer>{{if #data.video}}
+                    <video>
+                    	<player>{{:#data.player}}</video>
+                        <tech>youtube</tech>
+                        <url>{{:#data.video}}</url>
+                    </video>{{/if}}
+                    <alt>
+                        <![CDATA[{{:#data.alt}}]]>
+                    </alt>{{if #data.tracklist}}
+                    <tracklist tag="{{:~tag}}">{{:#data.tracklist}}</tracklist>{{/if}}
+                </img>{{/for}}
+            </center>
+        </layout>

@@ -1,0 +1,22 @@
+[ { "text" : "цитат",
+    "value" : "aside,quote"
+  },
+  { "text" : "каре",
+    "value" : "aside,caret"
+  },
+  { "text" : "игра",
+    "value" : "games,game"
+  },
+  { "text" : "филм",
+    "value" : "movies,movie"
+  },
+  { "text" : "албум",
+    "value" : "music,album"
+  },
+  { "text" : "картинка",
+    "value" : "aside,image"
+  },
+  { "text" : "реклама",
+    "value" : "aside,adv"
+  }
+]

@@ -1,0 +1,55 @@
+[ { "text" : "red",
+    "value" : "F44336"
+  },
+  { "text" : "pink",
+    "value" : "E91E63"
+  },
+  { "text" : "purple",
+    "value" : "9C27B0"
+  },
+  { "text" : "deep-purple",
+    "value" : "673AB7"
+  },
+  { "text" : "indigo",
+    "value" : "3F51B5"
+  },
+  { "text" : "blue",
+    "value" : "2196F3"
+  },
+  { "text" : "cyan",
+    "value" : "00BCD4"
+  },
+  { "text" : "teal",
+    "value" : "009688"
+  },
+  { "text" : "green",
+    "value" : "4CAF50"
+  },
+  { "text" : "light-green",
+    "value" : "8BC34A"
+  },
+  { "text" : "lime",
+    "value" : "CDDC39"
+  },
+  { "text" : "yellow",
+    "value" : "FFEB3B"
+  },
+  { "text" : "amber",
+    "value" : "FFC107"
+  },
+  { "text" : "orange",
+    "value" : "FF9800"
+  },
+  { "text" : "deep-orange",
+    "value" : "FF5722"
+  },
+  { "text" : "brown",
+    "value" : "795548"
+  },
+  { "text" : "grey",
+    "value" : "9E9E9E"
+  },
+  { "text" : "blue-grey",
+    "value" : "607D8B"
+  }
+]

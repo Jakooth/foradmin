@@ -1,0 +1,16 @@
+[ { "text" : "Vulcan",
+    "value" : "vulcan",
+	"type" : "games",
+	"object": "character"
+  },
+  { "text" : "Mason",
+    "value" : "mason",
+	"type" : "games",
+	"object": "character"
+  },
+  { "text" : "Tombstone",
+    "value" : "tombstone",
+	"type" : "games",
+	"object": "character"
+  }
+]

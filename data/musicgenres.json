@@ -1,0 +1,22 @@
+[ { "text" : "nu metal",
+    "value" : "nu-metal"
+  },
+  { "text" : "alternative",
+    "value" : "alternative"
+  },
+  { "text" : "crossover",
+    "value" : "crossover"
+  },
+  { "text" : "rapcore",
+    "value" : "rapcore"
+  },
+  { "text" : "blues rock",
+    "value" : "blues-rock"
+  },
+  { "text" : "indie rock",
+    "value" : "indie-rock"
+  },
+  { "text" : "dream pop",
+    "value" : "dream-pop"
+  }
+]

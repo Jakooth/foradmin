@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<article>
+    <site>{{:site}}</site>
+    <url>{{:url}}</url>{{if video}}
+    <video>
+        <tech>{{:video.tech}}</tech>
+        <url>{{:video.url}}</url>
+    </video>{{/if}}{{if audio}}
+    <audio>
+        <tech>{{:audio.tech}}</tech>
+        <frame>{{:audio.frame}}</frame>
+        <url>{{:audio.url}}</url>
+    </audio>{{/if}}
+    <tags prime="{{:prime.value}}">{{for tags.split(',')}}
+        <tag>{{:#data}}</tag>{{/for}}
+    </tags>
+    <cover align="{{:bgH}}" 
+    	   valign="{{:bgV}}"
+       	   theme="{{:theme}}" 
+           subtheme="{{:subtheme}}"
+           tag="{{:cover.tag}}">{{:cover.index}}</cover>
+    <main>
+        <wide tag="{{:mainWide.tag}}">{{:mainWide.index}}</wide>
+        <shot tag="{{:mainShot.tag}}">{{:mainShot.index}}</shot>
+        <caret tag="{{:mainCaret.tag}}">{{:mainCaret.index}}</caret>
+    </main>
+    <type bg="{{:type.bg}}">{{:type.tag}}</type>
+    <subtype bg="{{:subtype.bg}}">{{:subtype.tag}}</subtype>
+    <title>
+        <![CDATA[{{:title}}]]>
+    </title>
+    <subtitle>
+        <![CDATA[{{:subtitle}}]]>
+    </subtitle>
+    <authors>{{for authors.split(',')}}
+        <author>{{:#data}}</author>{{/for}}
+    </authors>
+    <date>{{:date}}</date>
+    <priority>{{:priority}}</priority>
+    <issue>{{:issue}}</issue>
+    <hype>{{:hype}}</hype>
+    <better tag="{{:better.value}}">{{:better.text}}</better>
+    <worse tag="{{:worse.value}}">{{:worse.text}}</worse>
+    <equal tag="{{:equal.value}}">{{:equal.text}}</equal>
+    <versionTested>{{:versionTested}}</versionTested>
+    <preview>
+        <![CDATA[{{:preview}}]]>
+    </preview>{{if stickers}}
+    <stickers>{{for stickers}}
+        <sticker lib="{{:#data.lib}}"
+        		 subtype="{{:#data.subtype}}">{{:#data.text}}</sticker>{{/for}}
+    </stickers>{{/if}}
+    <layouts>{{for layouts}}
+{{if type == 'text' ~tag=#view.parent.parent.data.url tmpl="textLayout"}}
+{{else type == 'img' ~tag=#view.parent.parent.data.url tmpl="imgLayout"}}
+{{else type == 'inside' ~tag=#view.parent.parent.data.url tmpl="imgLayout"}}{{/if}}{{/for}}
+    </layouts>
+</article>

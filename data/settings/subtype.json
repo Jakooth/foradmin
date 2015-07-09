@@ -1,0 +1,10 @@
+[ { "text" : "ревю",
+    "value" : "review"
+  },
+  { "text" : "мнение",
+    "value" : "feature"
+  },
+  { "text" : "новина",
+    "value" : "news"
+  }
+]

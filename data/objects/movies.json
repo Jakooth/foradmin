@@ -1,0 +1,41 @@
+[ { "text" : "Annabelle",
+	"value" : "annabelle",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "The Conjuring",
+	"value" : "the-conjuring",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Insidious",
+	"value" : "insidious",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Insidious Chapter 2",
+	"value" : "insidious-chapter-2",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Mama",
+	"value" : "mama",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Sin City: A Dame to Kill For",
+	"value" : "sin-city-2",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Sin City",
+	"value" : "sin-city",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "The Spirit",
+	"value" : "the-spirit",
+    "type" : "movies",
+    "object" : "movie"
+  }
+]

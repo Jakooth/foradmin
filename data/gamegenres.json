@@ -1,0 +1,61 @@
+[ { "text" : "Шуутър от първо/трето лице",
+    "value" : "fps"
+  },
+  { "text" : "Екшън от първо/трето лице",
+    "value" : "tps"
+  },
+  { "text" : "Рейл шуутър",
+    "value" : "rail"
+  },
+  { "text" : "Стелт",
+    "value" : "stealth"
+  },
+  { "text" : "Хорър",
+    "value" : "horror"
+  },
+  { "text" : "Сървайвъл хорър",
+    "value" : "survival"
+  },
+  { "text" : "Платформър",
+    "value" : "platformer"
+  },
+  { "text" : "Екшън-адвенчър",
+    "value" : "action-adventure"
+  },
+  { "text" : "Куест",
+    "value" : "adventure"
+  },
+  { "text" : "Аркадна игра",
+    "value" : "arcade"
+  },
+  { "text" : "ММО",
+    "value" : "mmo"
+  },
+  { "text" : "MOBA",
+    "value" : "moba"
+  },
+  { "text" : "Ролева",
+    "value" : "rpg"
+  },
+  { "text" : "Рейсър",
+    "value" : "racing"
+  },
+  { "text" : "Спортна",
+    "value" : "sport"
+  },
+  { "text" : "Симулатор",
+    "value" : "simulation"
+  },
+  { "text" : "Стратегия в реално време",
+    "value" : "rts"
+  },
+  { "text" : "Походова стратегия",
+    "value" : "tbs"
+  },
+  { "text" : "Кежуъл/парти/музикална",
+    "value" : "casual"
+  },
+  { "text" : "Инди",
+    "value" : "indie"
+  }
+]

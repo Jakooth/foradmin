@@ -1,0 +1,49 @@
+[ { "text" : "Драма",
+    "value" : "drama"
+  },
+  { "text" : "Екшън",
+    "value" : "action"
+  },
+  { "text" : "Комедия",
+    "value" : "comedy"
+  },
+  { "text" : "Приключенски",
+    "value" : "adventure"
+  },
+  { "text" : "Анимация",
+    "value" : "animation"
+  },
+  { "text" : "Документален",
+    "value" : "documentary"
+  },
+  { "text" : "Семеен",
+    "value" : "family"
+  },
+  { "text" : "Ноар",
+    "value" : "noir"
+  },
+  { "text" : "Хорър",
+    "value" : "horror"
+  },
+  { "text" : "Мюзикъл",
+    "value" : "musical"
+  },
+  { "text" : "Романтика",
+    "value" : "romance"
+  },
+  { "text" : "Фентъзи",
+    "value" : "fantasy"
+  },
+  { "text" : "Фантастика",
+    "value" : "sci-fi"
+  },
+  { "text" : "Трилър",
+    "value" : "thriller"
+  },
+  { "text" : "Уестърн",
+    "value" : "western"
+  },
+  { "text" : "Черно-бял ултра хардбойл мачо ноар с изобилие от насилие, кръв и цици",
+    "value" : "black-and-white-ultra-hard-boiled-macho-noir-with-lot-of-violence-blood-and-boobs"
+  }
+]

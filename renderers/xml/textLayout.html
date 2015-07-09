@@ -1,0 +1,14 @@
+﻿        <layout type="{{:type}}" subtype="{{:subtype}}"
+                tag="{{:~tag}}" order="{{:#getIndex()}}">{{if left}}
+            <left>
+                <url type="{{:left.type}}" object="{{:left.object}}"
+                     valign="{{:left.valign}}">{{:left.url}}</url>
+            </left>{{/if}}
+            <center>
+                <![CDATA[{{:center}}]]>
+            </center>{{if right}}
+            <right>
+                <url type="{{:right.type}}" object="{{:right.object}}"
+                     valign="{{:right.valign}}">{{:right.url}}</url>
+            </right>{{/if}}
+        </layout>

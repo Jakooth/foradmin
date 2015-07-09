@@ -1,0 +1,16 @@
+[ { "text" : "игри",
+    "value" : "games"
+  },
+  { "text" : "филми",
+    "value" : "movies"
+  },
+  { "text" : "книги",
+    "value" : "books"
+  },
+  { "text" : "музика",
+    "value" : "music"
+  },
+  { "text" : "настолни игри",
+    "value" : "boards"
+  }
+]

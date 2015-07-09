@@ -1,0 +1,34 @@
+[ { "text" : "Windows",
+    "value" : "win"
+  },
+  { "text" : "Mac OS",
+    "value" : "mac"
+  },
+  { "text" : "Xbox 360",
+    "value" : "360"
+  },
+  { "text" : "Xbox One",
+    "value" : "one"
+  },
+  { "text" : "PlayStation 3",
+    "value" : "ps3"
+  },
+  { "text" : "PlayStation 4",
+    "value" : "ps4"
+  },
+  { "text" : "PlayStation Vita",
+    "value" : "vita"
+  },
+  { "text" : "Nintendo Wii",
+    "value" : "wii"
+  },
+  { "text" : "Nintendo 3DS",
+    "value" : "3ds"
+  },
+  { "text" : "iOS",
+    "value" : "ios"
+  },
+  { "text" : "Android",
+    "value" : "android"
+  }
+]
