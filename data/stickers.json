@@ -97,5 +97,90 @@
 	"value" : "tear-tracks",
     "lib" : "lorc",
 	"subtype" : "originals"
+  },
+  { "text" : "Monkey",
+	"value" : "monkey",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "MP5",
+	"value" : "mp5",
+    "lib" : "delapouite",
+	"subtype" : "originals"
+  },
+  { "text" : "Phone",
+	"value" : "phone",
+    "lib" : "delapouite",
+	"subtype" : "gui"
+  },
+  { "text" : "Laser blast",
+	"value" : "laser-blast",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Forward field",
+	"value" : "forward-field",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Forward field",
+	"value" : "forward-field",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Alien skull",
+	"value" : "alien-skull",
+    "lib" : "lorc",
+	"subtype" : "originals"
+  },
+  { "text" : "Beer stein",
+	"value" : "beer-stein",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Guitar",
+	"value" : "guitar",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Sonic shout",
+	"value" : "sonic-shout",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Curled tentacle",
+	"value" : "curled-tentacle",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Pointing",
+	"value" : "pointing",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Palette",
+	"value" : "palette",
+    "lib" : "delapouite",
+    "subtype" : "originals"
+  },
+  { "text" : "Full motorcycle helmet",
+	"value" : "full-motorcycle-helmet",
+    "lib" : "delapouite",
+    "subtype" : "originals"
+  },
+  { "text" : "Circuitry",
+	"value" : "circuitry",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Car key",
+	"value" : "car-key",
+    "lib" : "delapouite",
+    "subtype" : "originals"
+  },
+  { "text" : "Pistol gun",
+	"value" : "pistol-gun",
+    "lib" : "john-colburn",
+    "subtype" : "originals"
   }
 ]

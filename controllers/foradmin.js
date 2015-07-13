@@ -416,6 +416,17 @@ function AdminManager() {
 	initTagInput(stickers, 'stickers', '#albumStickersInput');
 	initTagInput(music, 'music', '#albumSimilarInput');
 	
+	/**
+	 * MUSIC::EVEENT
+	 */
+	
+	this.loadOptions($('#eventGenreGroup'), musicGenres, 'checkbox');
+	this.loadOptions($('#eventCountrySelect'), countries, 'option');
+	
+	initTagInput(music, 'music', '#eventArtistInput');
+	initTagInput(stickers, 'stickers', '#eventStickersInput');
+	initTagInput(music, 'music', '#eventSimilarInput');
+	
 	
 	
 	
@@ -598,18 +609,26 @@ function AdminManager() {
 	
 	$('#article').on('change', '#articleSubtypeSelect', function (e) {
 		var $reviewRegion = $('#articleReviewRegion'),
-			$aVRegion = $('#articleAVRegion');
+			$aVRegion = $('#articleAVRegion'),
+			$audioTechSelect = $('#articleAudioTechSelect').parents('label');
 		
-		if ($(this).val() == "review") {
+		$aVRegion.hide();
+		$reviewRegion.hide();
+		$aVRegion.find('select').val('').change();
+		
+		if ($(this).val() == "review" || 
+			$(this).val() == "video") {
 			$reviewRegion.show();
-		} else {
-			$reviewRegion.hide();
 		}
 		
 		if ($(this).val() == "news") {
 			$aVRegion.show();
-		} else {
-			$aVRegion.hide();
+			$audioTechSelect.show();
+		}
+		
+		if ($(this).val() == "video") {
+			$aVRegion.show();
+			$audioTechSelect.hide();
 		}
 	});
 	
@@ -757,13 +776,20 @@ function AdminManager() {
 	});
 	
 	$('#game').on('keyup', '#gameEnNameInput', function (e) {
-		var tag = $(this).val().toLowerCase().replace(/[:?\.,!]|– |- /g, '');
-		
-		tag = tag.replace(/ /g, '-');
-		
-		$('#gameTagInput').val(tag);
+		$('#gameTagInput').val(utils.formatTag($(this).val()));
 	});
 	
+	$('#movie').on('keyup', '#movieEnNameInput', function (e) {
+		$('#movieTagInput').val(utils.formatTag($(this).val()));
+	});
+	
+	$('#album').on('keyup', '#albumEnNameInput', function (e) {
+		$('#albumTagInput').val(utils.formatTag($(this).val()));
+	});
+	
+	$('#event').on('keyup', '#eventEnNameInput', function (e) {
+		$('#eventTagInput').val(utils.formatTag($(this).val()));
+	});
 	
 	$('#game').on('click', 'button.save', function (e) {
 		var o = new Game();
@@ -794,6 +820,17 @@ function AdminManager() {
 		
 		self.showSectionInWindow('#xml');
 		utils.xml(o, 'album', '#xmlCodeOutput');	
+		
+		console.log(o);
+	});
+	
+	$('#event').on('click', 'button.save', function (e) {
+		var o = new Happening();
+		
+		o.save();
+		
+		self.showSectionInWindow('#xml');
+		utils.xml(o, 'event', '#xmlCodeOutput');	
 		
 		console.log(o);
 	});

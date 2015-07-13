@@ -6,5 +6,8 @@
   },
   { "text" : "новина",
     "value" : "news"
+  },
+  { "text" : "видео ревю",
+    "value" : "video"
   }
 ]

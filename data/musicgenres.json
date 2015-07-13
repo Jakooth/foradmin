@@ -1,22 +1,25 @@
-[ { "text" : "nu metal",
+[ { "text" : "Ню метъл",
     "value" : "nu-metal"
   },
-  { "text" : "alternative",
+  { "text" : "Алтърнатив",
     "value" : "alternative"
   },
-  { "text" : "crossover",
+  { "text" : "Кросоувър",
     "value" : "crossover"
   },
-  { "text" : "rapcore",
+  { "text" : "Рапкор",
     "value" : "rapcore"
   },
-  { "text" : "blues rock",
+  { "text" : "Блус рок",
     "value" : "blues-rock"
   },
-  { "text" : "indie rock",
+  { "text" : "Инди рок",
     "value" : "indie-rock"
   },
-  { "text" : "dream pop",
+  { "text" : "Дрийм поп",
     "value" : "dream-pop"
+  },
+  { "text" : "За всеки по нещо, стига да не си фен предимно на Веско",
+    "value" : "something-for-everyone-but-hardcore-vesko-fans"
   }
 ]

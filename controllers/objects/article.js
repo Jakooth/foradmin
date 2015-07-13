@@ -138,7 +138,7 @@ function Article() {
 													 	     $mainShotInput.val().lastIndexOf('-')), 
 					 	 index: $mainShotInput.val().split('\\').pop().split('-').pop()}
 		
-		if (self.subtype.tag == 'review') {
+		if (self.subtype.tag == 'review' || self.subtype.tag == 'video') {
 			self.hype = $hypeInput.val();
 			
 			if (self.type.tag == 'games') {
@@ -184,13 +184,13 @@ function Article() {
 			self.equal = "";
 		}
 		
-		if (self.subtype.tag == 'news') {
+		if (self.subtype.tag == 'news' || self.subtype.tag == "video") {
 			if ($audioTechInput.val() == "") {
 				self.audio = "";
 			} else {
 				self.audio = {'tech': $audioTechInput.val(), 
-							 'url': $audioUrlInput.val(), 
-							 'frame': $audioFrameInput.val()};
+							  'url': $audioUrlInput.val(), 
+							  'frame': $audioFrameInput.val()};
 			}
 			
 			if ($videoTechInput.val() == "") {
@@ -280,7 +280,9 @@ function Article() {
 		 * first layout left column.
 		 */
 		
-		if (self.subtype.tag == 'review') {
+		if (self.subtype.tag == 'review' || 
+			self.prime.object == 'event' ||
+			self.subtype.tag == 'video') {
 			self.layouts[0].left = {type: self.prime.type, 
 							   		object: self.prime.object, 
 							   		valign: 'top', 
@@ -297,7 +299,7 @@ function Article() {
 			self.prime = $tags.eq(0).data().item;
 		}
 		
-		if (self.subtype.tag == 'review') {
+		if (self.subtype.tag == 'review' || self.subtype.tag == 'video') {
 			self.url = self.prime.value;
 		} else {
 			self.url = self.title.toLowerCase().replace(/[:?\.,!]|– |- /g, '');

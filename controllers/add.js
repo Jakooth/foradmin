@@ -290,7 +290,7 @@ function AddManager() {
 	 * ARTICLE
 	 */
 	
-	$('.Content').on('click', 'button.add', function (e) {
+	$('.Content').on('click', '> button.add', function (e) {
 		self.addLayout($(this));
 	});
 	
@@ -299,10 +299,10 @@ function AddManager() {
 	 */
 	
 	$('.Content').on('change', '.layout > select', function (e) {
-		$this = $(this),
-		$layout = $this.parents('.layout'),
-		$imgs = $this.parents('.layout').find('.center-col.imgLayout'),
-		$inside = $this.parents('.layout').find('.center-col.insideLayout');
+		var $this = $(this),
+			$layout = $this.parents('.layout'),
+			$imgs = $this.parents('.layout').find('.center-col.imgLayout'),
+			$inside = $this.parents('.layout').find('.center-col.insideLayout');
 		
 		self.hideLayouts($layout);
 		self.showLayout($layout, $this.val());
@@ -316,8 +316,8 @@ function AddManager() {
 	 */
 	
 	$('.Content').on('change', '.layout .center-col > select', function (e) {
-		$this = $(this),
-		$center = $this.parents('.center-col');
+		var $this = $(this),
+			$center = $this.parents('.center-col');
 		
 		self.hideSublayouts($center);
 		self.showSublayout($center, $this.val());
@@ -340,11 +340,33 @@ function AddManager() {
 	});
 	
 	/**
+	 * Image layout b1 with checkered images
+	 */
+	
+	$('.Content').on('click', '.b2Sublayout button.add', function (e) {
+		var $this = $(this),
+			$layout = $this.parents('.sublayout'),
+			$img = $layout.find('.img-proxy').first();
+		
+		$img.clone().insertAfter($img);
+	});
+	
+	$('.Content').on('click', '.b2Sublayout button.remove', function (e) {
+		var $this = $(this),
+			$layout = $this.parents('.sublayout'),
+			$imgs = $layout.find('.img-proxy').first();
+		
+		if ($imgs.length > 1) {
+			$imgs.last().remove();
+		}
+	});
+	
+	/**
 	 * Tracklist.
 	 */
 	
 	$('.Content').on('change', '.tracklist select', function (e) {
-		$this = $(this);
+		var $this = $(this);
 		
 		$this.parents('.tracklist').removeClass('left right top bottom')
 								   .addClass($this.val());
@@ -355,7 +377,7 @@ function AddManager() {
 	 */
 	
 	$('.Content').on('change', '.insideLayout .settings select:nth-of-type(1)', function (e) {
-		$this = $(this);
+		var $this = $(this);
 		
 		$this.parents('.insideLayout').removeClass('left right top bottom center')
 								   	  .addClass($this.val());
@@ -366,19 +388,19 @@ function AddManager() {
 	 */
 	 
 	$('.Content').on('change', '.img-proxy input[type=checkbox]', function (e) {
-		$this = $(this),
-		$checkboxes = $this.parents('.sublayout').find('.img-proxy input[type=checkbox]');
+		var $this = $(this),
+			$checkboxes = $this.parents('.sublayout').find('.img-proxy input[type=checkbox]');
 		
 		$checkboxes.prop('checked', $this.is(':checked'))
 	}); 
 	
-	$('.Content').on('click', 'button.remove', function (e) {
+	$('.Content').on('click', '.layout > button.remove', function (e) {
 		self.removeLayout($(this));
 	});
 	
-	$('#game, #article, #album, #movie, #aside').on('change', 
-													'.file input[type=file]', 
-													function (e) {
+	$('#game, #article, #album, #movie, #aside, #event').on('change', 
+															'.file input[type=file]', 
+															function (e) {
 		var reader = new FileReader();
 		
 		var $file = $(e.target).parents('.file');

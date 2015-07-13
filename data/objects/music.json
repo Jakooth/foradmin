@@ -77,5 +77,40 @@
 	"value" : "ultraviolence",
     "type" : "music",
 	"object" : "album"
+  },
+  { "text" : "Sofia Rocks 2014",
+	"value" : "sofia-rocks-2014",
+    "type" : "music",
+	"object" : "event"
+  },
+  { "text" : "Osssy",
+	"value" : "ossy",
+    "type" : "music",
+	"object" : "band"
+  },
+  { "text" : "Alcest",
+	"value" : "alcest",
+    "type" : "music",
+	"object" : "event"
+  },
+  { "text" : "Skillet",
+	"value" : "skillet",
+    "type" : "music",
+	"object" : "event"
+  },
+  { "text" : "Mando Diao",
+	"value" : "mando-diao",
+    "type" : "music",
+	"object" : "event"
+  },
+  { "text" : "The Offspring",
+	"value" : "the-offspring",
+    "type" : "music",
+	"object" : "event"
+  },
+  { "text" : "Thirty Seconds to Mars",
+	"value" : "thirty-seconds-to-mars",
+    "type" : "music",
+	"object" : "event"
   }
 ]

@@ -37,5 +37,120 @@
 	"value" : "the-spirit",
     "type" : "movies",
     "object" : "movie"
+  },
+  { "text" : "Dawn of the Planet of the Apes",
+	"value" : "dawn-of-the-planet-of-the-apes",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Rise of the Planet of the Apes",
+	"value" : "rise-of-the-planet-of-the-apes",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Planet of the Apes (2001)",
+	"value" : "planet-of-the-apes-2001",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Avatar",
+	"value" : "avatar",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Locke",
+	"value" : "locke",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Locke",
+	"value" : "locke",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "The Affair",
+	"value" : "the-affair",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "The Guitar",
+	"value" : "the-guitar",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "All Is Lost",
+	"value" : "all-is-lost",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Phone Booth",
+	"value" : "phone-booth",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Buried",
+	"value" : "buried",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "127 Hours",
+	"value" : "127-hours",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Guardians of the Galaxy",
+	"value" : "guardians-of-the-galaxy",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Star Wars Episode 1",
+	"value" : "star-wars-episode-1",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Star Wars Episode 2",
+	"value" : "star-wars-episode-2",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Star Wars Episode 3",
+	"value" : "star-wars-episode-3",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Star Wars Episode 4",
+	"value" : "star-wars-episode-4",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Star Wars Episode 5",
+	"value" : "star-wars-episode-5",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Star Wars Episode 6",
+	"value" : "star-wars-episode-6",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Raiders of the Lost Ark",
+	"value" : "raiders-of-the-lost-ark",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Indiana Jones and the Temple of Doom",
+	"value" : "indiana-jones-and-the-temple-of-doom",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Indiana Jones and the Last Crusade",
+	"value" : "indiana-jones-and-the-last-crusade",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Frankenweenie",
+	"value" : "frankenweenie",
+    "type" : "movies",
+    "object" : "movie"
   }
 ]

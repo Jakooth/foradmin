@@ -74,7 +74,10 @@
             </script> 
     <script src="controllers/objects/album.js?v=1.0.0">
                 <!--script-->
-            </script>            
+            </script>
+    <script src="controllers/objects/event.js?v=1.0.0">
+                <!--script-->
+            </script>                    
 	<script src="controllers/objects/quote.js?v=1.0.0">
                 <!--script-->
             </script>
@@ -167,6 +170,7 @@
         <jsp:include page="views/movie.jsp" />
         <jsp:include page="views/music.jsp" />
         <jsp:include page="views/album.jsp" />
+        <jsp:include page="views/event.jsp" />
         <jsp:include page="views/books.jsp" />
         <jsp:include page="views/boards.jsp" />
         <jsp:include page="views/article.jsp" />

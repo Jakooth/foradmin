@@ -72,5 +72,25 @@
 	"value" : "risen",
     "type" : "games",
     "object" : "serie"
+  },
+  { "text" : "Planet of the Apes",
+	"value" : "planet-of-the-apes",
+    "type" : "movies",
+    "object" : "serie"
+  },
+  { "text" : "Indiana Jones",
+	"value" : "indiana-jones",
+    "type" : "movies",
+    "object" : "serie"
+  },
+  { "text" : "Assassin's Creed",
+    "value" : "assassins-creed",
+	"type" : "games",
+	"object": "serie"
+  },
+  { "text" : "Saints Row",
+    "value" : "saints-row",
+	"type" : "games",
+	"object": "serie"
   }
 ]

@@ -82,5 +82,15 @@
   	"value" : "piranha-bites",
     "type" : "games",
     "subtype" : "developer"
+  },
+  { "text" : "Ovosonico",
+  	"value" : "ovosonico",
+    "type" : "games",
+    "subtype" : "developer"
+  },
+  { "text" : "Ubisoft Montreal",
+  	"value" : "ubisoft-montreal",
+    "type" : "games",
+    "subtype" : "developer"
   }
 ]

@@ -913,6 +913,13 @@ button.select:after {
 	pointer-events: none;
 }
 
+button.add {
+	background-size: 64px 64px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	min-height: 76px;
+}
+
 button.remove {
 	background-image: url(../../assets/icons/iconmonstr/iconmonstr-x-mark-5-icon.svg);
 	background-size: 64px 64px;
@@ -955,6 +962,7 @@ button.remove {
 	height: 128px;
 }
 
+#event .Main .file,
 #movie .Main .file:nth-child(2) {
 	width: 346px;
 	height: 512px;
@@ -1314,10 +1322,11 @@ button.remove {
 } 
 
 /**
- * a1
+ * a1, i3
  */
 
-.a1Sublayout .img-proxy:nth-of-type(1) {
+.a1Sublayout .img-proxy:nth-of-type(1),
+.i3Sublayout .img-proxy:nth-of-type(1) {
 	float: right;
 	width: 40%;
 	padding-right: 0;
@@ -1325,13 +1334,15 @@ button.remove {
 	z-index: 1000;
 }
 
-.a1Sublayout .img-proxy:nth-of-type(1) div.settings {
+.a1Sublayout .img-proxy:nth-of-type(1) div.settings,
+.i3Sublayout .img-proxy:nth-of-type(1) div.settings {
 	right: 0;
 	top: 0;
 	margin-top: 60%;
 }
 
-.a1Sublayout .img-proxy:nth-of-type(2) {
+.a1Sublayout .img-proxy:nth-of-type(2),
+.i3Sublayout .img-proxy:nth-of-type(2) {
 	float: right;
 	width: 40%;
 	padding-right: 0;
@@ -1340,19 +1351,22 @@ button.remove {
 	z-index: 999;
 }
 
-.a1Sublayout .img-proxy:nth-of-type(2) div.settings {
+.a1Sublayout .img-proxy:nth-of-type(2) div.settings,
+.i3Sublayout .img-proxy:nth-of-type(2) div.settings {
 	left: -50%;
 	bottom: 0;
 }
 
-.a1Sublayout .img-proxy:nth-of-type(3) {
+.a1Sublayout .img-proxy:nth-of-type(3),
+.i3Sublayout .img-proxy:nth-of-type(3) {
 	width: 80%;
 	padding-left: 0;
 	padding-top: 0;
 	padding-bottom: 0;
 }
 
-.a1Sublayout .img-proxy:nth-of-type(3) div.settings {
+.a1Sublayout .img-proxy:nth-of-type(3) div.settings,
+.i3Sublayout .img-proxy:nth-of-type(3) div.settings {
 	left: 100%;
 	bottom: 0;
 	width: 25%;
@@ -1402,43 +1416,90 @@ button.remove {
 }
 
 /**
- * b1
+ * a3
  */
 
-.b1Sublayout .img-proxy:nth-of-type(1) {
+.a3Sublayout .img-proxy:nth-of-type(1) {
 	width: 80%;
 	padding-top: 0;
 	padding-bottom: 0;
 	padding-left: 0;
 }
 
-.b1Sublayout .img-proxy:nth-of-type(1) div.settings {
+.a3Sublayout .img-proxy:nth-of-type(1) div.settings {
 	left: 100%;
 	top: 0;
 	width: 25%;
 }
 
-.b1Sublayout .img-proxy:nth-of-type(3) {
+.a3Sublayout .img-proxy:nth-of-type(3) {
 	float: right;
 	width: 20%;
 	padding-right: 0;
 }
 
-.b1Sublayout .img-proxy:nth-of-type(3) div.settings {
+.a3Sublayout .img-proxy:nth-of-type(3) div.settings {
 	width: 100%;
 	top: 100%;
 }
 
-.b1Sublayout .img-proxy:nth-of-type(2) {
+.a3Sublayout .img-proxy:nth-of-type(2) {
 	float: right;
 	width: 40%;
 	padding-right: 0;
 }
 
-.b1Sublayout .img-proxy:nth-of-type(2) div.settings {
+.a3Sublayout .img-proxy:nth-of-type(2) div.settings {
 	right: 0;
 	bottom: 0;
 	margin-bottom: 60%;
+}
+
+/**
+ * b1
+ */
+
+.b2Sublayout .settings,
+.b2Sublayout .img-proxy {
+	width: 30%;
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+
+.b2Sublayout .img-proxy p {
+	z-index: 1;
+	width: 100%;
+	padding: 20px;
+	background: fade(@light, 70%);
+	bottom: 0;
+	position: absolute;
+}
+
+.b2Sublayout .img-proxy:nth-child(4n-2) p, 
+.b2Sublayout .img-proxy:nth-child(4n-3) p {
+	margin-left: -50%;
+	text-align: right;
+}
+
+.b2Sublayout .img-proxy:nth-child(4n) p, 
+.b2Sublayout .img-proxy:nth-child(4n-1) p {
+	margin-left: 50%;
+	text-align: left;
+}
+
+.b2Sublayout .settings:nth-child(4n-2), 
+.b2Sublayout .settings:nth-child(4n-3),
+.b2Sublayout .img-proxy:nth-child(4n-2), 
+.b2Sublayout .img-proxy:nth-child(4n-3) {
+	margin-left: 20%;
+}
+
+.b2Sublayout .settings:nth-child(4n), 
+.b2Sublayout .settings:nth-child(4n-1),
+.b2Sublayout .img-proxy:nth-child(4n), 
+.b2Sublayout .img-proxy:nth-child(4n-1) {
+	margin-right: 20%;
 }
 
 /**
@@ -1496,7 +1557,7 @@ button.remove {
  * INSIDE LAYOUT
  */
  
-.insideLayout .settings {
+.insideLayout > .settings {
 	position: absolute;
 	top: 84px;
 	right: 0;
@@ -1504,7 +1565,7 @@ button.remove {
 	width: 20%;
 }
 
-.insideLayout .settings select {
+.insideLayout > .settings select {
 	min-width: 100%;
 	display: block;
 }
@@ -1550,6 +1611,34 @@ button.remove {
 	right: auto;
 	width: 60%;
 	overflow: auto;
+}
+
+.insideLayout[data-sublayout=i3] > .settings {
+	bottom: 0;
+	left: 0;
+	top: auto;
+	right: auto;
+	width: 15%;
+}
+
+.insideLayout[data-sublayout=i3] .insideLayoutText {
+	bottom: 0;
+	left: 15%;
+	top: auto;
+	right: auto;
+	width: 30%;
+	margin-left: 0;
+}
+
+.insideLayout[data-sublayout=i3].left .insideLayoutText,
+.insideLayout[data-sublayout=i3].center .insideLayoutText {
+	left: 15%;
+}
+
+.insideLayout[data-sublayout=i3].right .insideLayoutText {
+	right: 20%;
+	margin-right: 20px;
+	left: auto;
 }
 
 

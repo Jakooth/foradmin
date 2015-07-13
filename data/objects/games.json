@@ -212,5 +212,40 @@
 	"value" : "risen",
     "type" : "games",
     "object" : "game"
+  },
+  { "text" : "Murasaki Baby",
+	"value" : "murasaki-baby",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Grand Theft Auto 5",
+	"value" : "gta-5",
+    "type" : "games",
+    "object" : "game"
+  },
+  { "text" : "Assassin's Creed Unity",
+    "value" : "assassins-creed-unity",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Saints Row: The Third",
+    "value" : "saints-row-3",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Sleeping Dogs",
+    "value" : "sleeping-dogs",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "iCloud",
+    "value" : "i-cloud",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Watch Dogs",
+    "value" : "watch-dogs",
+	"type" : "games",
+	"object": "game"
   }
 ]

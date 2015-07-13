@@ -103,7 +103,9 @@ function Layout(id) {
 												   .getData()
 												   .replace(/\n/g, '');
 				
-				
+				if (self.subtype == "i3" && index < 2) {
+					center = false;
+				}
 			}	
 			
 			self.ratio = ratio;
