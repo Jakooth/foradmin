@@ -247,5 +247,40 @@
     "value" : "watch-dogs",
 	"type" : "games",
 	"object": "game"
+  },
+  { "text" : "Final Fantasy X/X-2 HD Remaster",
+    "value" : "final-fantasy-10-hd-remaster",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Final Fantasy XII",
+    "value" : "final-fantasy-12",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Shin Megami Tensei",
+    "value" : "shin-megami-tensei",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Ni No Kuni",
+    "value" : "ni-no-kuni",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Dear Easter",
+    "value" : "dear-easter",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Gone Home",
+    "value" : "gone-home",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "The Vanishing of Ethan Carter",
+    "value" : "the-vanishing-of-ethan-carter",
+	"type" : "games",
+	"object": "game"
   }
 ]

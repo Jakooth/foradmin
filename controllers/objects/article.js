@@ -197,7 +197,8 @@ function Article() {
 				self.video = "";
 			} else {
 				self.video = {'tech': $videoTechInput.val(), 
-							  'url': $videoUrlInput.val()};
+							  'url': $videoUrlInput.val(),
+							  'player': Math.round(Math.random() * 100000)};
 			}
 		} else {
 			self.audio =

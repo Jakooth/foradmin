@@ -3,6 +3,11 @@
     "type" : "games",
     "subtype" : "publisher"
   },
+  { "text" : "Forplay",
+	"value" : "forplay",
+    "type" : "games",
+    "subtype" : "other"
+  },
   { "text" : "Airtight Games",
   	"value" : "airtight-games",
     "type" : "games",
@@ -90,6 +95,16 @@
   },
   { "text" : "Ubisoft Montreal",
   	"value" : "ubisoft-montreal",
+    "type" : "games",
+    "subtype" : "developer"
+  },
+  { "text" : "Virtuos",
+  	"value" : "virtuos",
+    "type" : "games",
+    "subtype" : "developer"
+  },
+  { "text" : "The Astronauts",
+  	"value" : "the-astronauts ",
     "type" : "games",
     "subtype" : "developer"
   }

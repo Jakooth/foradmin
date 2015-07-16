@@ -182,5 +182,40 @@
 	"value" : "pistol-gun",
     "lib" : "john-colburn",
     "subtype" : "originals"
+  },
+  { "text" : "Lips",
+	"value" : "lips",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Sunglasses",
+	"value" : "sunglasses",
+    "lib" : "delapouite",
+    "subtype" : "originals"
+  },
+  { "text" : "Relic blade",
+	"value" : "relic-blade",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Bright explosion",
+	"value" : "bright-explosion",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Gooey daemon",
+	"value" : "gooey-daemon",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Magnifying glass",
+	"value" : "magnifying-glass",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Forest",
+	"value" : "forest",
+    "lib" : "delapouite",
+    "subtype" : "originals"
   }
 ]

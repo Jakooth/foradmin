@@ -89,6 +89,7 @@ function AdminManager() {
 	var characters = bloodhound('data/objects/characters.json');
 	var persons = bloodhound('data/objects/persons.json');
 	var music = bloodhound('data/objects/music.json');
+	var books = bloodhound('data/objects/books.json');
 	
 	/**
 	 * Merging all tags into a single data source.
@@ -102,7 +103,8 @@ function AdminManager() {
 			d4 = $.get('data/objects/characters.json'),
 			d5 = $.get('data/objects/music.json'),
 			d6 = $.get('data/objects/series.json'),
-			d7 = $.get('data/objects/persons.json');
+			d7 = $.get('data/objects/persons.json'),
+			d8 = $.get('data/objects/books.json');
 			
 		$.when(d1, 
 			   d2, 
@@ -110,13 +112,15 @@ function AdminManager() {
 			   d4, 
 			   d5, 
 			   d6,
-			   d7).done(function(data1, 
+			   d7,
+			   d8).done(function(data1, 
 								 data2, 
 								 data3,
 								 data4,
 								 data5,
 								 data6,
-								 data7) {
+								 data7,
+								 data8) {
 			self.allTags = new Bloodhound({
 				datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text', 'value'),
 				queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -126,6 +130,7 @@ function AdminManager() {
 							   .concat(data5[0])
 							   .concat(data6[0])
 							   .concat(data7[0])
+							   .concat(data8[0])
 			});
 			
 			self.allTags.initialize();

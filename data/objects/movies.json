@@ -78,7 +78,7 @@
     "type" : "movies",
     "object" : "movie"
   },
-  { "text" : "All Is Lost",
+  { "text" : "All is Lost",
 	"value" : "all-is-lost",
     "type" : "movies",
     "object" : "movie"
@@ -150,6 +150,31 @@
   },
   { "text" : "Frankenweenie",
 	"value" : "frankenweenie",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Horns",
+	"value" : "horns",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Maleficent",
+	"value" : "maleficent",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Stand by Me",
+	"value" : "stand-by-me",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Advanced Style",
+	"value" : "advanced-style",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Български Национален Отбор по Футбол",
+	"value" : "bulgarian-national-football-team",
     "type" : "movies",
     "object" : "movie"
   }

@@ -92,5 +92,15 @@
     "value" : "saints-row",
 	"type" : "games",
 	"object": "serie"
+  },
+  { "text" : "Форплей Подкаст",
+    "value" : "forplay-podcast",
+	"type" : "games",
+	"object": "serie"
+  },
+  { "text" : "Final Fantasy",
+    "value" : "final-fantasy",
+	"type" : "games",
+	"object": "game"
   }
 ]
