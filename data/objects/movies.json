@@ -177,5 +177,10 @@
 	"value" : "bulgarian-national-football-team",
     "type" : "movies",
     "object" : "movie"
+  },
+  { "text" : "Alien",
+	"value" : "alien",
+    "type" : "movies",
+    "object" : "movie"
   }
 ]

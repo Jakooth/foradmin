@@ -38,7 +38,7 @@
                 <option value="a3">голяма + средна + малка</option>
                 <option disabled="disabled" value="b1">шахматно без застъпване</option>
                 <option value="b2">шахматно със застъпване</option>
-                <option disabled="disabled" value="f1">цял екран</option>
+                <option value="f1">цял екран</option>
                 <option value="f3">цял екран + траклист</option>
             </select>
             <img class="svg select-svg" 
@@ -225,7 +225,18 @@
                     <button class="remove" type="button"><span class="clip">Изтрий</span></button>
                 </div>
             </div>
-            <div class="sublayout f1Sublayout">цял екран</div>
+            <div class="sublayout f1Sublayout">
+            	<div class="img-proxy">
+                    <div class="file"> <img alt="" 
+                    						role="presentation" 
+                                            src="../assets/helpers/16-9.png" />
+                        <input aria-label="Избери" type="file" />
+                    </div>
+                    <div class="settings">
+                        <input placeholder="Видео" aria-label="Видео" type="text" />
+                    </div>
+                </div>	
+            </div>
             <div class="sublayout f3Sublayout">
                 <div class="img-proxy">
                     <div class="file"> <img alt="" 

@@ -282,5 +282,40 @@
     "value" : "the-vanishing-of-ethan-carter",
 	"type" : "games",
 	"object": "game"
+  },
+  { "text" : "Destiny",
+    "value" : "destiny",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Borderlands",
+    "value" : "borderlands",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Driveclub",
+    "value" : "driveclub",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Need for Speed: Rivals",
+    "value" : "need-for-speed-rivals",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Need for Speed: Hot Pursuit",
+    "value" : "need-for-speed-hot-pursuit",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Alien: Isolation",
+    "value" : "alien-isolation",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Outlast",
+    "value" : "outlast",
+	"type" : "games",
+	"object": "game"
   }
 ]

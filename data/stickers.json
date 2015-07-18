@@ -217,5 +217,35 @@
 	"value" : "forest",
     "lib" : "delapouite",
     "subtype" : "originals"
+  },
+  { "text" : "Bullets",
+	"value" : "bullets",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Crosshair",
+	"value" : "crosshair",
+    "lib" : "delapouite",
+    "subtype" : "originals"
+  },
+  { "text" : "Front teeth",
+	"value" : "front-teeth",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Steering wheel",
+	"value" : "steering-wheel",
+    "lib" : "delapouite",
+    "subtype" : "originals"
+  },
+  { "text" : "Checkered flag",
+	"value" : "checkered-flag",
+    "lib" : "delapouite",
+    "subtype" : "originals"
+  },
+  { "text" : "Heart beats",
+	"value" : "heart-beats",
+    "lib" : "delapouite",
+    "subtype" : "originals"
   }
 ]

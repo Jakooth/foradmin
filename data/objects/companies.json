@@ -107,5 +107,40 @@
   	"value" : "the-astronauts ",
     "type" : "games",
     "subtype" : "developer"
+  },
+  { "text" : "Activision",
+  	"value" : "activision",
+    "type" : "games",
+    "subtype" : "publisher"
+  },
+  { "text" : "Bungie",
+  	"value" : "bungie",
+    "type" : "games",
+    "subtype" : "developer"
+  },
+  { "text" : "Activision",
+  	"value" : "activision",
+    "type" : "games",
+    "subtype" : "publisher"
+  },
+  { "text" : "Bungie",
+  	"value" : "bungie",
+    "type" : "games",
+    "subtype" : "developer"
+  },
+  { "text" : "Evolution Studios",
+  	"value" : "evolution-studios",
+    "type" : "games",
+    "subtype" : "developer"
+  },
+  { "text" : "SEGA",
+  	"value" : "sega",
+    "type" : "games",
+    "subtype" : "publisher"
+  },
+  { "text" : "Creative Assembly",
+  	"value" : "creative-assembly",
+    "type" : "games",
+    "subtype" : "developer"
   }
 ]

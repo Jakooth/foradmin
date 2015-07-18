@@ -101,6 +101,16 @@
   { "text" : "Final Fantasy",
     "value" : "final-fantasy",
 	"type" : "games",
-	"object": "game"
+	"object": "serie"
+  },
+  { "text" : "Alien",
+    "value" : "alien",
+	"type" : "movies",
+	"object": "serie"
+  },
+  { "text" : "Need for Speed",
+    "value" : "need-for-speed",
+	"type" : "games",
+	"object": "serie"
   }
 ]
