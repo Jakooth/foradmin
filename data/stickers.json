@@ -43,6 +43,16 @@
     "lib" : "delapouite",
 	"subtype" : "sports"
   },
+  { "text" : "Basketball ball",
+	"value" : "basketball-ball",
+    "lib" : "delapouite",
+	"subtype" : "sports"
+  },
+  { "text" : "Basketball basket",
+	"value" : "basketball-basket",
+    "lib" : "delapouite",
+	"subtype" : "sports"
+  },
   { "text" : "Soccer field",
 	"value" : "soccer-field",
     "lib" : "delapouite",
@@ -69,7 +79,7 @@
 	"subtype" : "originals"
   },
   { "text" : "Crowned skull",
-	"value" : "crowned-skull ",
+	"value" : "crowned-skull",
     "lib" : "lorc",
 	"subtype" : "originals"
   },
@@ -115,11 +125,6 @@
   },
   { "text" : "Laser blast",
 	"value" : "laser-blast",
-    "lib" : "lorc",
-	"subtype" : "originals"
-  },
-  { "text" : "Forward field",
-	"value" : "forward-field",
     "lib" : "lorc",
 	"subtype" : "originals"
   },
@@ -245,6 +250,66 @@
   },
   { "text" : "Heart beats",
 	"value" : "heart-beats",
+    "lib" : "delapouite",
+    "subtype" : "originals"
+  },
+  { "text" : "Finger print",
+	"value" : "finger-print",
+    "lib" : "delapouite",
+    "subtype" : "originals"
+  },
+  { "text" : "Overlord helm",
+	"value" : "overlord-helm",
+    "lib" : "delapouite",
+    "subtype" : "originals"
+  },
+  { "text" : "Trophy",
+	"value" : "trophy",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Minigun",
+	"value" : "minigun",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Envelope",
+	"value" : "envelope",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Transfuse",
+	"value" : "transfuse",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Life in the balance",
+	"value" : "life-in-the-balance",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Ninja mask",
+	"value" : "ninja-mask",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Binoculars",
+	"value" : "binoculars",
+    "lib" : "delapouite",
+    "subtype" : "originals"
+  },
+  { "text" : "Dragon head",
+	"value" : "dragon-head",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Female elf face",
+	"value" : "woman-elf-face",
+    "lib" : "delapouite",
+    "subtype" : "originals"
+  },
+  { "text" : "Dwarf face",
+	"value" : "dwarf-face",
     "lib" : "delapouite",
     "subtype" : "originals"
   }

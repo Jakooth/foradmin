@@ -30,6 +30,13 @@ span.twitter-typeahead .tt-suggestion > p {
 	width: 100%;
 }
 
+span.twitter-typeahead .tt-suggestion > p.sticker {
+	background-size: 64px 64px;
+	background-position: left;
+	background-repeat: no-repeat;
+	padding-left: 84px;
+}
+
 span.twitter-typeahead .tt-suggestion > p:hover,
 span.twitter-typeahead .tt-suggestion > p:focus {
 	color: #FFF;

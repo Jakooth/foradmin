@@ -25,7 +25,7 @@
             <admin:formItem id="gameTagInput" label="Таг" 
             				placeholder="gta-5" type="text" />
             <admin:formItem id="gameStickersInput" label="Стикери" 
-            				placeholder="girl, beer, 18+" type="text" />
+            				placeholder="Broadsword, Soccer ball, Female elf face" type="text" />
             <admin:formItem id="gameGenreGroup" label="Жанр" type="group">
                 <!--AdminManager.js-->
             </admin:formItem>
@@ -41,7 +41,7 @@
             <admin:formItem id="gameUsDateInput" label="Премиера за САЩ" type="date" layout="two-cols" />
             <admin:formItem id="gameEuDateInput" label="Премиера за Европа" type="date" layout="two-cols" />
             <admin:formItem id="gameSimilarInput" label="Подобни" 
-            				placeholder="saints-row, mafia, red-dead-redemption, crackdown" 
+            				placeholder="saints-row, mafia, Red Dead Redemption, Crackdown" 
                             type="text" autocomplete="off" />
             <div class="Add Box">
                 <button class="add" type="button">Добави обложка</button>

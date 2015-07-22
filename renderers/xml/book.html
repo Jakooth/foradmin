@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<book>
+    <tag>{{:tag}}</tag>
+    <stickers>{{for stickers}}
+        <sticker lib="{{:#data.lib}}"
+        		 subtype="{{:#data.subtype}}">{{:#data.value}}</sticker>{{/for}}
+    </stickers>
+    <main>{{:main}}</main>
+    <type bg="книги">books</type>
+    <subtype bg="книга">book</subtype>
+    <artist>{{:artist.text}}</artist>
+    <translator>{{:translator.text}}</translator>
+    <country>{{:country}}</country>
+    <en>{{:enName}}</en>
+    <bg>{{:bgName}}</bg>
+    <serie>{{:serie}}</serie>
+    <genres>{{for genre}}
+        <genre>{{:#data.text}}</genre>{{/for}}
+    </genres>
+    <date>{{:date}}</date>
+    <similar>{{for similar.split(',')}}
+        <artist>{{:#data}}</artist>{{/for}}
+    </similar>
+</book>

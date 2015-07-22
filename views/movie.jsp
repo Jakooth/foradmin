@@ -31,7 +31,7 @@
             <admin:formItem id="movieTagInput" label="Таг" 
             				placeholder="star-wars-episode-the-force-awakens" type="text" />
             <admin:formItem id="movieStickersInput" label="Стикери" 
-            				placeholder="girl, beer, 18+" type="text" />
+            				placeholder="Broadsword, Soccer ball, Female elf face" type="text" />
             <admin:formItem id="movieGenreGroup" label="Жанр" type="group">
                 <!--AdminManager.js-->
             </admin:formItem>
@@ -55,7 +55,7 @@
             <admin:formItem id="movieTimeInput" label="Времетраене" 
             				placeholder="149" type="text" layout="two-cols" />
             <admin:formItem id="movieSimilarInput" label="Подобни" 
-            				placeholder="turks-in-space" 
+            				placeholder="turks-in-space, Пазители на Галктиката" 
                             type="text" autocomplete="off" />
         </form>
         <div role="toolbar">

@@ -13,6 +13,9 @@
   { "text" : "албум",
     "value" : "music,album"
   },
+  { "text" : "книга",
+    "value" : "books,book"
+  },
   { "text" : "картинка",
     "value" : "aside,image"
   },

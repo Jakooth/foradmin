@@ -182,5 +182,90 @@
 	"value" : "alien",
     "type" : "movies",
     "object" : "movie"
+  },
+  { "text" : "Taxi Driver",
+	"value" : "taxi-driver",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Nightcrawler",
+	"value" : "nightcrawler",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Space Jam",
+	"value" : "space-jam",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Gone Girl",
+	"value" : "gone-girl",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Se7en",
+	"value" : "seven",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Gone Baby Gone",
+	"value" : "gone-baby-gone",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Prisoners",
+	"value" : "prisoners",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Wild Things",
+	"value" : "wild-things",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Terminator: Genisys",
+	"value" : "terminator-genisys",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Harry Potter and the Deathly Hallows: Part 1",
+	"value" : "harry-potter-and-the-deathly-hallows",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Harry Potter and the Deathly Hallows: Part 2",
+	"value" : "harry-potter-and-the-deathly-hallows-2",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "The Lord of the Rings: The Fellowship of the Ring",
+	"value" : "the-lord-of-the-rings-the-fellowship-of-the-ring",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "The Lord of the Rings: The Two Towers",
+	"value" : "the-lord-of-the-rings-the-two-towers",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "The Lord of the Rings: The Return of the King",
+	"value" : "the-lord-of-the-rings-the-return-of-the-king",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "The Hobbit: An Unexpected Journey",
+	"value" : "the-hobbit-an-unexpected-journey",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "The Hobbit: The Desolation of Smaug",
+	"value" : "the-hobbit-the-desolation-of-smaug",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "The Hobbit: The Battle of the Five Armies",
+	"value" : "the-hobbit-the-battle-of-the-five-armies",
+    "type" : "movies",
+    "object" : "movie"
   }
 ]

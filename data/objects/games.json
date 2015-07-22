@@ -317,5 +317,75 @@
     "value" : "outlast",
 	"type" : "games",
 	"object": "game"
+  },
+  { "text" : "NBA 2K15",
+    "value" : "nba-2k15",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "NBA Live 15",
+    "value" : "nba-live-15",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Wolfenstein: The New Order",
+    "value" : "wolfenstein-the-new-order",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Call of Duty 4",
+    "value" : "call-of-duty-4",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Bioshock: Infinite",
+    "value" : "bioshock-infinite",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Metal Gear Solid V: Ground Zeroes",
+    "value" : "metal-gear-solid-5",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Metal Gear Solid",
+    "value" : "metal-gear-solid",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Splinter Cell: Black List",
+    "value" : "splinter-cell-black-list",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Assassin's Creed Rogue",
+    "value" : "assassins-creed-rogue",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Grand Theft Auto 4",
+    "value" : "gta-4",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Grand Theft Auto 6",
+    "value" : "gta-6",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Red Dead Redemption",
+    "value" : "red-dead-redemption",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "The Witcher 3",
+    "value" : "the-witcher-3",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Uncharted 4",
+    "value" : "uncharted-4",
+	"type" : "games",
+	"object": "game"
   }
 ]

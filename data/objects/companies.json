@@ -142,5 +142,45 @@
   	"value" : "creative-assembly",
     "type" : "games",
     "subtype" : "developer"
+  },
+  { "text" : "2K Sports",
+  	"value" : "2k-sports",
+    "type" : "games",
+    "subtype" : "publisher"
+  },
+  { "text" : "Visual Concepts",
+  	"value" : "visual-concepts",
+    "type" : "games",
+    "subtype" : "developer"
+  },
+  { "text" : "Bethesda Softworks",
+  	"value" : "bethesda-softworks",
+    "type" : "games",
+    "subtype" : "publisher"
+  },
+  { "text" : "MachineGames",
+  	"value" : "machinegames",
+    "type" : "games",
+    "subtype" : "developer"
+  },
+  { "text" : "Konami",
+  	"value" : "konami",
+    "type" : "games",
+    "subtype" : "developer"
+  },
+  { "text" : "Kojima Productions",
+  	"value" : "kojima-productions",
+    "type" : "games",
+    "subtype" : "developer"
+  },
+  { "text" : "Take Two",
+  	"value" : "take-two",
+    "type" : "games",
+    "subtype" : "publisher"
+  },
+  { "text" : "Rockstar",
+  	"value" : "rockstar",
+    "type" : "games",
+    "subtype" : "developer"
   }
 ]

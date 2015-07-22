@@ -75,13 +75,22 @@
     <script src="controllers/objects/album.js?v=1.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/objects/event.js?v=1.0.0">
+    <script src="controllers/objects/book.js?v=1.0.0">
+                <!--script-->
+            </script>
+	<script src="controllers/objects/event.js?v=1.0.0">
                 <!--script-->
             </script>                    
 	<script src="controllers/objects/quote.js?v=1.0.0">
                 <!--script-->
             </script>
     <script src="controllers/objects/aside.js?v=1.0.0">
+                <!--script-->
+            </script> 
+	<script src="controllers/objects/fortag.js?v=1.0.0">
+                <!--script-->
+            </script> 
+	<script src="controllers/objects/forobject.js?v=1.0.0">
                 <!--script-->
             </script> 
 	<script>$(document).ready(function() { 
@@ -172,6 +181,7 @@
         <jsp:include page="views/album.jsp" />
         <jsp:include page="views/event.jsp" />
         <jsp:include page="views/books.jsp" />
+        <jsp:include page="views/book.jsp" />
         <jsp:include page="views/boards.jsp" />
         <jsp:include page="views/article.jsp" />
         <jsp:include page="views/aside.jsp" />

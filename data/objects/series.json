@@ -112,5 +112,50 @@
     "value" : "need-for-speed",
 	"type" : "games",
 	"object": "serie"
+  },
+  { "text" : "NBA",
+    "value" : "nba",
+	"type" : "games",
+	"object": "serie"
+  },
+  { "text" : "Wolfenstein",
+    "value" : "wolfenstein",
+	"type" : "games",
+	"object": "serie"
+  },
+  { "text" : "Pro Evolution Soccer",
+    "value" : "pes",
+	"type" : "games",
+	"object": "serie"
+  },
+  { "text" : "Metal Gear",
+    "value" : "metal-gear",
+	"type" : "games",
+	"object": "serie"
+  },
+  { "text" : "Splinter Cell",
+    "value" : "splinter-cell",
+	"type" : "games",
+	"object": "serie"
+  },
+  { "text" : "Assassin's Creed",
+    "value" : "assassins-creed",
+	"type" : "games",
+	"object": "serie"
+  },
+  { "text" : "The Hobbit",
+    "value" : "the-hobbit",
+	"type" : "movies",
+	"object": "serie"
+  },
+  { "text" : "The Lord of the Rings",
+    "value" : "the-lord-of-the-rings",
+	"type" : "movies",
+	"object": "serie"
+  },
+  { "text" : "Harry Potter",
+    "value" : "harry-potter",
+	"type" : "movies",
+	"object": "serie"
   }
 ]

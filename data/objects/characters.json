@@ -1,16 +1,31 @@
-[ { "text" : "Vulcan",
+[ { "text" : "Вулкан",
     "value" : "vulcan",
 	"type" : "games",
 	"object": "character"
   },
-  { "text" : "Mason",
+  { "text" : "Мейсън",
     "value" : "mason",
 	"type" : "games",
 	"object": "character"
   },
-  { "text" : "Tombstone",
+  { "text" : "Надгробен камък",
     "value" : "tombstone",
 	"type" : "games",
 	"object": "character"
+  },
+  { "text" : "Би Джей Бласковиц",
+	"value" : "bj-blazkowicz",
+    "type" : "games",
+	"object" : "character"
+  },
+  { "text" : "Майкъл",
+	"value" : "michael",
+    "type" : "games",
+	"object" : "character"
+  },
+  { "text" : "Тревор",
+	"value" : "trevor",
+    "type" : "games",
+	"object" : "character"
   }
 ]

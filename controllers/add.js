@@ -49,8 +49,7 @@ function AddManager() {
 	}
 	
 	this.addLayout = function($appender) {
-		var d1 = $.get('renderers/layout.html' + 
-					   '?v=' + Math.round(Math.random() * 100000));
+		var d1 = $.get('renderers/layout.html');
 			
 		$.when(d1).done(function(data1) {
 			var html = data1,
@@ -183,7 +182,7 @@ function AddManager() {
 			
 			$(document).scrollTop($appender.offset().top);
 			
-			admin.loadOptions($box.find('select'), gamePlatforms, 'option');
+			admin.loadOptions($box.find('.platform:last-of-type select'), gamePlatforms, 'option');
 			utils.convertSVG($box.find('img'));
 		}).fail(function() {
 			alert("Failed to load platforms.");
@@ -354,7 +353,7 @@ function AddManager() {
 	$('.Content').on('click', '.b2Sublayout button.remove', function (e) {
 		var $this = $(this),
 			$layout = $this.parents('.sublayout'),
-			$imgs = $layout.find('.img-proxy').first();
+			$imgs = $layout.find('.img-proxy');
 		
 		if ($imgs.length > 1) {
 			$imgs.last().remove();
@@ -398,9 +397,9 @@ function AddManager() {
 		self.removeLayout($(this));
 	});
 	
-	$('#game, #article, #album, #movie, #aside, #event').on('change', 
-															'.file input[type=file]', 
-															function (e) {
+	$('#game, #article, #album, ' + 
+	  '#movie, #aside, #eventm, ' + 
+	  '#book').on('change', '.file input[type=file]', function (e) {
 		var reader = new FileReader();
 		
 		var $file = $(e.target).parents('.file');

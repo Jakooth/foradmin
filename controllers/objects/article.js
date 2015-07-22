@@ -303,8 +303,7 @@ function Article() {
 		if (self.subtype.tag == 'review' || self.subtype.tag == 'video') {
 			self.url = self.prime.value;
 		} else {
-			self.url = self.title.toLowerCase().replace(/[:?\.,!]|– |- /g, '');
-			self.url = self.url.replace(/ /g, '-');
+			self.url = utils.formatTag(self.title);
 		}
 		
 		$urlInput.val(self.url);

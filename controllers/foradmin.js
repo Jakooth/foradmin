@@ -16,6 +16,7 @@ function AdminManager() {
 	var musicGenres = 'data/musicgenres.json';
 	var gamePlatforms = 'data/platforms.json';
 	var movieGenres = 'data/moviegenres.json';
+	var bookGenres = 'data/bookgenres.json';
 	var countries = 'data/settings/countries.json';
 	
 	var bloodhound = function(data, key) {
@@ -73,6 +74,38 @@ function AdminManager() {
 				name: text,
 				displayKey: displayKey || 'text', 
 				source: data.ttAdapter()
+			}],
+			freeInput: false
+		});
+	}
+	
+	var initStickersTagInput = function(data, 
+								text, 
+								input, 
+								maxTags, 
+								displayKey) {
+		data.initialize();
+		
+		$(input).tagsinput({
+			maxTags: maxTags || null,
+			itemValue: 'value',
+  			itemText: displayKey || 'text',
+			typeaheadjs: [{
+      			hint: true,
+				highlight: true
+			}, {
+				name: text,
+				displayKey: displayKey || 'text', 
+				source: data.ttAdapter(),
+				templates: {
+					suggestion: function(data) {
+						return $.templates('<p class="sticker" style="background-image: ' + 
+										   'url(../assets/icons/' + 
+										   '{{:lib}}/' + 
+										   '{{:subtype}}/svg/000000/transparent/' + 
+										   '{{:value}}.svg)">{{:text}}</p></div>').render(data);
+					}
+				}
 			}],
 			freeInput: false
 		});
@@ -342,7 +375,7 @@ function AdminManager() {
 	this.loadOptions($('#characterTypeSelect'), type, 'option');
 	this.loadOptions($('#serieTypeSelect'), type, 'option');
 	
-	initTagInput(stickers, 'stickers', '#movieStickersInput');
+	initStickersTagInput(stickers, 'stickers', '#movieStickersInput');
 	initTypeAhead(series, 'series', '#movieSerieInput');
 	
 	/**
@@ -404,7 +437,7 @@ function AdminManager() {
 	this.loadOptions($('#gamePlatformGroup'), gamePlatforms, 'checkbox');
 	
 	initTagInput(series, 'series', '#gameSerieInput', 1);
-	initTagInput(stickers, 'stickers', '#gameStickersInput');
+	initStickersTagInput(stickers, 'stickers', '#gameStickersInput');
 	initTagInput(companies, 'companies', '#gamePublisherInput', 1);
 	initTagInput(companies, 'companies', '#gameDeveloperInput', 1);
 	initTagInput(games, 'games', '#gameSimilarInput');
@@ -418,19 +451,32 @@ function AdminManager() {
 	this.loadOptions($('#albumCountrySelect'), countries, 'option');
 	
 	initTagInput(music, 'music', '#albumArtistInput');
-	initTagInput(stickers, 'stickers', '#albumStickersInput');
+	initStickersTagInput(stickers, 'stickers', '#albumStickersInput');
 	initTagInput(music, 'music', '#albumSimilarInput');
 	
 	/**
-	 * MUSIC::EVEENT
+	 * MUSIC::EVENT
 	 */
 	
 	this.loadOptions($('#eventGenreGroup'), musicGenres, 'checkbox');
 	this.loadOptions($('#eventCountrySelect'), countries, 'option');
 	
 	initTagInput(music, 'music', '#eventArtistInput');
-	initTagInput(stickers, 'stickers', '#eventStickersInput');
+	initStickersTagInput(stickers, 'stickers', '#eventStickersInput');
 	initTagInput(music, 'music', '#eventSimilarInput');
+	
+	/**
+	 * BOOKS::BOOK
+	 */
+	
+	this.loadOptions($('#bookGenreGroup'), bookGenres, 'checkbox');
+	this.loadOptions($('#bookCountrySelect'), countries, 'option');
+	
+	initTagInput(persons, 'persons', '#bookArtistInput');
+	initTagInput(persons, 'persons', '#bookTranslatorInput');
+	initTagInput(series, 'series', '#bookSerieInput', 1);
+	initStickersTagInput(stickers, 'stickers', '#bookStickersInput');
+	initTagInput(books, 'books', '#bookSimilarInput');
 	
 	
 	
@@ -483,7 +529,7 @@ function AdminManager() {
 	});
 	
 	$('header').on('click', 'button.logout', function (e) {
-		window.location.href = "login.jsp";
+		window.location.href = "login.html";
 	});
 	
 	/**
@@ -565,7 +611,7 @@ function AdminManager() {
 		 * If it is a quote show the character images.
 		 */
 		
-		var d1 = $.get('data/' + type + '/' + 
+		var d1 = $.get('../data/' + type + '/' + 
 					   				object + '/' + 
 									url + '.xml');
 			
@@ -595,45 +641,46 @@ function AdminManager() {
 		});
 	});
 	
-	$('#article').on('change', '#articleTypeSelect', function (e) {
-		var $gameRegion = $('#articleReviewRegion').children(':gt(0)'),
-			$versionTested = $('#articleVersionTestedSelect').parents('.two-cols');
-		
-		if ($(this).val() == "music") {
-			$gameRegion.hide();
-		} else {
-			$gameRegion.show();
-		}
-		
-		if ($(this).val() == "games") {
-			$versionTested.show();
-		} else {
-			$versionTested.hide();
-		}
-	});
-	
-	$('#article').on('change', '#articleSubtypeSelect', function (e) {
+	$('#article').on('change', '#articleTypeSelect, #articleSubtypeSelect', function (e) {
 		var $reviewRegion = $('#articleReviewRegion'),
 			$aVRegion = $('#articleAVRegion'),
-			$audioTechSelect = $('#articleAudioTechSelect').parents('label');
+			$audioTechSelect = $('#articleAudioTechSelect').parents('label'),
+			$gameRegion = $('#articleReviewRegion').children(':gt(0)'),
+			$versionTested = $('#articleVersionTestedSelect').parents('.two-cols');
+		
+		var type = $('#articleTypeSelect').val(),
+			subtype = $('#articleSubtypeSelect').val(); 
 		
 		$aVRegion.hide();
-		$reviewRegion.hide();
+		$audioTechSelect.hide();
 		$aVRegion.find('select').val('').change();
+		$reviewRegion.hide();
+		$gameRegion.hide();
+		$versionTested.hide();
 		
-		if ($(this).val() == "review" || 
-			$(this).val() == "video") {
+		if ((subtype == 'review' || subtype == 'video') && type == 'games') {
+			$reviewRegion.show();
+			$gameRegion.show();
+			$versionTested.show();
+		}
+		
+		if ((subtype == 'review' || subtype == 'video') && type == 'movies') {
+			$reviewRegion.show();
+			$gameRegion.show();
+			$versionTested.hide();
+		}
+		
+		if ((subtype == 'review' || subtype == 'video') && type == 'music') {
 			$reviewRegion.show();
 		}
 		
-		if ($(this).val() == "news") {
+		if (subtype == "news") {
 			$aVRegion.show();
 			$audioTechSelect.show();
 		}
 		
-		if ($(this).val() == "video") {
+		if (subtype == "video") {
 			$aVRegion.show();
-			$audioTechSelect.hide();
 		}
 	});
 	
@@ -796,6 +843,10 @@ function AdminManager() {
 		$('#eventTagInput').val(utils.formatTag($(this).val()));
 	});
 	
+	$('#book').on('keyup', '#bookEnNameInput', function (e) {
+		$('#bookTagInput').val(utils.formatTag($(this).val()));
+	});
+	
 	$('#game').on('click', 'button.save', function (e) {
 		var o = new Game();
 		
@@ -836,6 +887,17 @@ function AdminManager() {
 		
 		self.showSectionInWindow('#xml');
 		utils.xml(o, 'event', '#xmlCodeOutput');	
+		
+		console.log(o);
+	});
+	
+	$('#book').on('click', 'button.save', function (e) {
+		var o = new Book();
+		
+		o.save();
+		
+		self.showSectionInWindow('#xml');
+		utils.xml(o, 'book', '#xmlCodeOutput');	
 		
 		console.log(o);
 	});

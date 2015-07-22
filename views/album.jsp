@@ -23,7 +23,7 @@
             <admin:formItem id="albumTagInput" label="Таг" 
             				placeholder="sacrifice-to-venus" type="text" />
             <admin:formItem id="albumStickersInput" label="Стикери" 
-            				placeholder="girl, beer, 18+" type="text" />
+            				placeholder="Broadsword, Soccer ball, Female elf face" type="text" />
             <admin:formItem id="albumGenreGroup" label="Жанр" type="group">
                 <!--AdminManager.js-->
             </admin:formItem>
@@ -32,7 +32,7 @@
             <admin:formItem id="albumDateInput" label="Дата на издаване" 
             				type="date" layout="two-cols" />
             <admin:formItem id="albumSimilarInput" label="Подобни" 
-            				placeholder="saints-row, mafia, red-dead-redemption, crackdown" 
+            				placeholder="" 
                             type="text" autocomplete="off" />
             <h3>Траклист</h3>
             <div class="Add Track">

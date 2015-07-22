@@ -2,5 +2,10 @@
     "value" : "villa-triste",
 	"type" : "books",
 	"object": "book"
+  },
+  { "text" : "The Woman I Wanted to Be",
+    "value" : "the-woman-i-wanted-to-be",
+	"type" : "books",
+	"object": "book"
   }
 ]

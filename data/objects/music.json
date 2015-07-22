@@ -112,5 +112,10 @@
 	"value" : "thirty-seconds-to-mars",
     "type" : "music",
 	"object" : "event"
+  },
+  { "text" : "Фарел Уилямс",
+	"value" : "pharrell-williams",
+    "type" : "music",
+	"object" : "person"
   }
 ]

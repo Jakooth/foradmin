@@ -23,7 +23,7 @@
             <admin:formItem id="eventTagInput" label="Таг" 
             				placeholder="sacrifice-to-venus" type="text" />
             <admin:formItem id="eventStickersInput" label="Стикери" 
-            				placeholder="girl, beer, 18+" type="text" />
+            				placeholder="Broadsword, Soccer ball, Female elf face" type="text" />
             <admin:formItem id="eventGenreGroup" label="Жанр" type="group">
                 <!--AdminManager.js-->
             </admin:formItem>
@@ -35,7 +35,7 @@
             				placeholder="София, Каварна" 
                             type="text" layout="two-cols" />                
             <admin:formItem id="eventSimilarInput" label="Подобни" 
-            				placeholder="saints-row, mafia, red-dead-redemption, crackdown" 
+            				placeholder="" 
                             type="text" autocomplete="off" />
         </form>
         <div role="toolbar">
