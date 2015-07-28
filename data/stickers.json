@@ -312,5 +312,20 @@
 	"value" : "dwarf-face",
     "lib" : "delapouite",
     "subtype" : "originals"
+  },
+  { "text" : "Missile mech",
+	"value" : "missile-mech",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Tank",
+	"value" : "tank",
+    "lib" : "lorc",
+    "subtype" : "originals"
+  },
+  { "text" : "Ringed planet",
+	"value" : "ringed-planet",
+    "lib" : "lorc",
+    "subtype" : "originals"
   }
 ]

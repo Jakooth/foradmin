@@ -267,5 +267,30 @@
 	"value" : "the-hobbit-the-battle-of-the-five-armies",
     "type" : "movies",
     "object" : "movie"
+  },
+  { "text" : "Jupiter Ascending",
+	"value" : "jupiter-ascending",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Elysium",
+	"value" : "elysium",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Spectre",
+	"value" : "spectre",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "The Revenant",
+	"value" : "the-revenant",
+    "type" : "movies",
+    "object" : "movie"
+  },
+  { "text" : "Ouch! That's Big",
+	"value" : "ouch-thats-big",
+    "type" : "movies",
+    "object" : "movie"
   }
 ]

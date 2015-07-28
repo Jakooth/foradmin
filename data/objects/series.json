@@ -157,5 +157,25 @@
     "value" : "harry-potter",
 	"type" : "movies",
 	"object": "serie"
+  },
+  { "text" : "Call of Duty",
+    "value" : "call-of-duty",
+	"type" : "games",
+	"object": "serie"
+  },
+  { "text" : "Far Cry",
+    "value" : "far-cry",
+	"type" : "games",
+	"object": "serie"
+  },
+  { "text" : "LittleBigPlanet",
+    "value" : "littlebigplanet",
+	"type" : "games",
+	"object": "serie"
+  },
+  { "text" : "Terminator",
+    "value" : "terminator",
+	"type" : "movies",
+	"object": "serie"
   }
 ]

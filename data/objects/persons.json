@@ -741,5 +741,83 @@
     "type" : "books",
 	"object" : "person",
 	"subtype" : "writer"
+  },
+  { "text" : "Анди Уашовски",
+	"value" : "andy-wachowski",
+    "type" : "movies",
+	"object" : "person",
+	"subtype" : "director"
+  },
+  { "text" : "Лана Уашовски",
+	"value" : "lana-wachowski",
+    "type" : "movies",
+	"object" : "person",
+	"subtype" : "director"
+  },
+  { "text" : "Мила Кунис",
+	"value" : "mila-kunis",
+    "type" : "movies",
+	"object" : "person",
+	"subtype" : "cast"
+  },
+  { "text" : "Чанинг Тейтъм",
+	"value" : "channing-tatum",
+    "type" : "movies",
+	"object" : "person",
+	"subtype" : "cast"
+  },
+  { "text" : "Шон Бийн",
+	"value" : "sean-bean",
+    "type" : "movies",
+	"object" : "person",
+	"subtype" : "cast"
+  },
+  { "text" : "Еди Редмейн",
+	"value" : "eddie-redmayne",
+    "type" : "movies",
+	"object" : "person",
+	"subtype" : "cast"
+  },
+  { "text" : "Дъглас Буут",
+	"value" : "douglas-booth",
+    "type" : "movies",
+	"object" : "person",
+	"subtype" : "cast"
+  },
+  { "text" : "Джон Тол",
+	"value" : "john-toll",
+    "type" : "movies",
+	"object" : "person",
+	"subtype" : "camera"
+  },
+  { "text" : "Даниел Крейг",
+	"value" : "daniel-craig",
+    "type" : "movies",
+	"object" : "person",
+	"subtype" : "cast"
+  },
+  { "text" : "Кристоф Валц",
+	"value" : "christoph-waltz",
+    "type" : "movies",
+	"object" : "person",
+	"subtype" : "cast"
+  },
+  { "text" : "Алехандро Гонсалес Иняриту",
+	"value" : "alejandro-gonzález-iñárritu",
+    "type" : "movies",
+	"object" : "person",
+	"subtype" : "director"
+  },
+  { "text" : "Леонардо ди Каприо",
+	"value" : "leonardo-dicaprio",
+    "type" : "movies",
+	"object" : "person",
+	"subtype" : "cast"
+  },
+  { "text" : "Ана Юърс",
+	"value" : "anna-ewers",
+    "type" : "movies",
+	"object" : "person",
+	"subtype" : "cast"
   }
 ]

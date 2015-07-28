@@ -333,7 +333,7 @@
 	"type" : "games",
 	"object": "game"
   },
-  { "text" : "Call of Duty 4",
+  { "text" : "Call of Duty 4: Modern Warfare",
     "value" : "call-of-duty-4",
 	"type" : "games",
 	"object": "game"
@@ -385,6 +385,56 @@
   },
   { "text" : "Uncharted 4",
     "value" : "uncharted-4",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Call of Duty: Advanced Warfare",
+    "value" : "call-of-duty-advanced-warfare",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Far Cry 4",
+    "value" : "far-cry-4",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Call of Duty: Ghosts",
+    "value" : "call-of-duty-ghosts",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "LittleBigPlanet 3",
+    "value" : "littlebigplanet-3",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "LittleBigPlanet 2",
+    "value" : "littlebigplanet-2",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "LittleBigPlanet PSP",
+    "value" : "littlebigplanet-psp",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "LittleBigPlanet",
+    "value" : "littlebigplanet",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Tearway",
+    "value" : "tearway",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "Super Mario Maker",
+    "value" : "super-mario-maker",
+	"type" : "games",
+	"object": "game"
+  },
+  { "text" : "WWE 2K16",
+    "value" : "wwe-2k16",
 	"type" : "games",
 	"object": "game"
   }
