@@ -31,8 +31,8 @@
         </div>
         <div class="center-col imgLayout">
             <select aria-label="Оформление на картинките" class="header">
-                <option disabled="disabled" value="z0">голяма</option>
-                <option disabled="disabled" value="z1">средна</option>
+                <option value="z0">голяма</option>
+                <option value="z1">средна</option>
                 <option value="a1">2 малки + голяма</option>
                 <option value="a2">голяма + 2 малки</option>
                 <option value="a3">голяма + средна + малка</option>
@@ -46,8 +46,34 @@
                  alt="icon" 
                  role="presentation" />
             <p class="select-subtitle">Избери позициониране на картинките.</p>
-            <div class="sublayout z0Sublayout">голяма</div>
-            <div class="sublayout z1Sublayout">средна</div>
+            <div class="sublayout z0Sublayout">
+            	<div class="img-proxy">
+                    <div class="file"> <img alt="" 
+                    						role="presentation" 
+                                            src="../assets/helpers/16-9.png" />
+                        <input aria-label="Избери" type="file" />
+                    </div>
+                    <div class="settings">
+                        <p data-pointer="Ляво" contenteditable="true">Натиснете
+                            тук, за да редактирате коментара.</p>
+                        <input placeholder="Видео" aria-label="Видео" type="text" />
+                    </div>
+                </div>
+            </div>
+            <div class="sublayout z1Sublayout">
+            	<div class="img-proxy">
+                    <div class="file"> <img alt="" 
+                    						role="presentation" 
+                                            src="../assets/helpers/16-9.png" />
+                        <input aria-label="Избери" type="file" />
+                    </div>
+                    <div class="settings">
+                        <p data-pointer="Ляво" contenteditable="true">Натиснете
+                            тук, за да редактирате коментара.</p>
+                        <input placeholder="Видео" aria-label="Видео" type="text" />
+                    </div>
+                </div>
+           	</div>
             <div class="sublayout a1Sublayout">
                 <div class="img-proxy">
                     <div class="file"> <img alt="" 
@@ -258,9 +284,9 @@
         <div class="center-col insideLayout">
             <select aria-label="Оформление на картинките" class="header">
                 <option value="i1">цял екран</option>
+                <option value="i4">2/3</option>
                 <option value="i2">2/3 прозрачна</option>
                 <option value="i3">2 малки + голяма</option>
-                <option value="i4">2/3</option>
             </select>
             <img class="svg select-svg" 
             	 src="../assets/icons/iconmonstr/iconmonstr-menu-3-icon.svg" 

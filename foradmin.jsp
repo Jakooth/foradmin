@@ -21,7 +21,7 @@
     <link rel="stylesheet" type="text/css" href="assets/bootstrap-tagsinput.css" />
     <link rel="stylesheet" type="text/css" href="assets/typeaheadjs.css" />
     <link rel="stylesheet" type="text/css" href="assets/foradmin.css" />
-    <script src="../jslib/jquery-1.11.0.min.js">
+    <script src="../jslib/jquery-2.1.4.min.js">
                 <!--script-->
             </script>
     <script src="jslib/jquery-ui.min.js">

@@ -19,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Foradmin Login Page</title>
     <link rel="stylesheet" type="text/css" href="assets/foradmin.css" />
-    <script src="../jslib/jquery-1.11.0.min.js">
+    <script src="../jslib/jquery-2.1.4.min.js">
                 <!--script-->
             </script>
     <script src="../controllers/utils.js?v=1.5.0">

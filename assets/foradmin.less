@@ -1323,6 +1323,34 @@ button.remove {
 } 
 
 /**
+ * z0, z1
+ */
+ 
+.z0Sublayout .img-proxy {
+	width: 60%;
+	margin-left: 20%;
+}
+
+.z1Sublayout .img-proxy {
+	width: 40%;
+	margin-left: 20%;
+}
+
+.z0Sublayout .img-proxy div.settings {
+	right: 0;
+	top: 0;
+	width: 40%;
+	margin: 20px;
+} 
+
+.z1Sublayout .img-proxy div.settings {
+	left: 100%;
+	top: 0;
+	width: 40%;
+	margin: 20px;
+} 
+
+/**
  * a1, i3
  */
 
@@ -1511,6 +1539,7 @@ button.remove {
 
 .i1Sublayout .img-proxy:nth-of-type(1),
 .i2Sublayout .img-proxy:nth-of-type(1),
+.i4Sublayout .img-proxy:nth-of-type(1),
 .f1Sublayout .img-proxy:nth-of-type(1),
 .f3Sublayout .img-proxy:nth-of-type(1) {
 	padding: 0;
@@ -1651,6 +1680,30 @@ button.remove {
 	right: 20%;
 	margin-right: 20px;
 	left: auto;
+}
+
+.insideLayout[data-sublayout=i4].left .insideLayoutText {
+	right: 20%;
+}
+
+.insideLayout[data-sublayout=i4].right .insideLayoutText {
+	right: auto;
+	margin-left: 20%;
+}
+
+.insideLayout.center .i4Sublayout .img-proxy {
+	width: 60%;
+	margin-left: 20%;
+}
+
+.insideLayout.left .i4Sublayout .img-proxy {
+	width: 80%;
+	float: left;
+}
+
+.insideLayout.right .i4Sublayout .img-proxy {
+	width: 80%;
+	float: right;
 }
 
 
