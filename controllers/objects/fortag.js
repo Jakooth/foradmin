@@ -31,13 +31,27 @@ function Fortag(o) {
 	this.object = o;
 }
 
-Fortag.prototype.save = function() {
+Fortag.prototype.save = function() {	
 	this.enName = this._$enNameInput.val();
 	this.bgName = this._$bgNameInput.val();
 	this.date = this._$dateInput.val() || null;
 	this.tag = this._$tagInput.val();
 	this.type = this._$typeSelect.val();
 	this.subtype = this._$subtypeSelect.val() || null;
+	
+	/**
+	 * TODO: Better error display.
+	 * The only require field is TAG.
+	 * Minimum tow characters are required for a tag.
+	 * All other can be updated at any time.
+	 */
+	 
+	if (this.tag.length < 2) {
+		admin.showAlert({message: 'Tаг трябва да е минимум 2 символа.', 
+						 status: 'error'});
+		
+		return false;
+	}
 	
 	var o = {
 		enName: this.enName,
@@ -49,17 +63,28 @@ Fortag.prototype.save = function() {
 		object: this.object
 	};
 	
+	admin.showAlert({message: 'Saving...', status: 'loading'});
+	
 	$.ajax({
 		type: "POST",
 		contentType: "application/json; charset=utf-8",
-		url: 'http://localhost/forapi/save.php',
+		url: 'http://localhost/forapi/save.php?',
 		data: JSON.stringify(o),
 		dataType: 'json'
 	}).done(function (data, textStatus, jqXHR) {
-		console.log('success');
+		if (!data.events.mysql.connection) {
+			admin.showAlert({message: data.events.mysql.error, status: 'error'});
+		} else if (!data.events.mysql.result) {
+			admin.showAlert({message: data.events.mysql.error, status: 'error'});
+		} else {
+			admin.showAlert({message: o.object.charAt(0).toUpperCase() + 
+									  o.object.slice(1) + ' saved', status: 'success'});
+		}
 	}).fail(function (data, textStatus, jqXHR) {
-		console.log('fail');
-	}).fail(function (data, textStatus, jqXHR) {
-		console.log('always');
+		console.log(data);
+	}).always(function (data, textStatus, jqXHR) {
+		console.log(data);
 	});
+	
+	return true;
 }

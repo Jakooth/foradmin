@@ -313,11 +313,11 @@ function AdminManager() {
 		$('.Overlay').hide();
 	}
 	
-	this.showSectionInWindow = function(appendee) {
-		var d1 = $.get('renderers/window.html');
+	this.showSectionInWindow = function(view) {
+		var get1 = $.get('renderers/window.html');
 			
-		$.when(d1).done(function(data1) {
-			var html = $(data1).append($(appendee).show());
+		$.when(get1).done(function(data1) {
+			var html = $(data1).append($(view).show());
 			
 			self.showOverlay();
 			
@@ -329,8 +329,42 @@ function AdminManager() {
 		});
 	}
 	
-	this.hideSectionInWindow = function($appendee) {
-		$('main').append($appendee.hide());
+	this.showAlert = function(message) {
+		var $alert = $('.Alert');
+		
+		/**
+		 * Allow only once instance of an alert.
+		 */
+		
+		if ($alert.is(':visible')) {
+			$alert.find('div:first-of-type')
+				  .removeClass()
+				  .addClass(message.status);
+			$alert.find('p').html(message.message);
+			
+			return false;
+		}
+		
+		var get1 = $.get('renderers/alert.html');
+			
+		$.when(get1).done(function(data1) {
+			var tmpls = $.templates({
+					notification: data1
+				}),
+				html = $.templates.notification.render(message);
+			
+			self.showOverlay();
+			
+			$('body').append(html);
+			$('.Alert :tabbable').eq(1).focus();
+			$(window).scrollTop(0);
+		}).fail(function() {
+			alert("Failed to load alert.");
+		});
+	}
+	
+	this.hideSectionInWindow = function($view) {
+		$('main').append($view.hide());
 		$('.Window').remove();
 		
 		self.hideOverlay();
@@ -493,7 +527,7 @@ function AdminManager() {
 	 * Views
 	 */
 	
-	$(window).on('load', function (e) {
+	$(window).on('load', function(e) {
 		$('img.svg').each(function() {
 			utils.convertSVG($(this));
 		});
@@ -516,7 +550,7 @@ function AdminManager() {
 		$('#publishTimeInput').val(utils.now());
 	});
 	
-	$('body').on('click', 'nav a:not(.active), header a:not(.active)', function (e) {
+	$('body').on('click', 'nav a:not(.active), header a:not(.active)', function(e) {
 		self.showSection($(this).attr('href'), $(this).parents().hasClass('breadcrumb'));
 	});
 	
@@ -524,11 +558,11 @@ function AdminManager() {
 	 * Header
 	 */
 	
-	$('header').on('click', 'button.search', function (e) {
+	$('header').on('click', 'button.search', function(e) {
 		self.showSection('#search');
 	});
 	
-	$('header').on('click', 'button.logout', function (e) {
+	$('header').on('click', 'button.logout', function(e) {
 		window.location.href = "login.html";
 	});
 	
@@ -536,11 +570,11 @@ function AdminManager() {
 	 * Focus
 	 */
 	
-	$('form').on('focus', '.bootstrap-tagsinput input', function (e) {
+	$('form').on('focus', '.bootstrap-tagsinput input', function(e) {
 		$(this).parents('.bootstrap-tagsinput').addClass('focus');
 	});
 	
-	$('form').on('blur', '.bootstrap-tagsinput input', function (e) {
+	$('form').on('blur', '.bootstrap-tagsinput input', function(e) {
 		$(this).parents('.bootstrap-tagsinput').removeClass('focus');
 	});
 	
@@ -548,25 +582,25 @@ function AdminManager() {
 	 * Windows
 	 */
 	
-	$('body').on('click', '.Window button', function (e) {
+	$('body').on('click', '.Window button', function(e) {
 		self.hideSectionInWindow($(this).parents('section'));
 	});
 	
-	$('body').on('click', '.Window h2 a', function (e) {
+	$('body').on('click', '.Window h2 a', function(e) {
 		e.preventDefault();
 	});
 	
-	$('form').on('click', '.create', function (e) {
+	$('form').on('click', '.create', function(e) {
 		e.preventDefault();
 		self.showSectionInWindow($(this).attr('href'));
 	});
 	
-	$('section:not(#publish)').on('click', 'button.publish', function (e) {
+	$('section:not(#publish)').on('click', 'button.publish', function(e) {
 		e.preventDefault();
 		self.showSectionInWindow('#publish');
 	});
 	
-	$('body').on('click', '.Window #search button.ok', function (e) {
+	$('body').on('click', '.Window #search button.ok', function(e) {
 		var img = $('#search input:checked').parents('label').find('img').attr('src');														 
 		window.admin.selectTarget.focus();
 		window.admin.selectTarget.find('input').val(img);
@@ -577,14 +611,14 @@ function AdminManager() {
 	 * Article & Publish
 	 */
 	 
-	$('#article').on('click', '.select', function (e) {
+	$('#article').on('click', '.select', function(e) {
 		e.preventDefault();
 		self.showSectionInWindow('#url');
 		
 		window.admin.selectTarget = $(this);
 	});
 	
-	$('#url').on('click', 'button.save', function (e) {
+	$('#url').on('click', 'button.save', function(e) {
 		var $objectInput = $('#urlOjbectSelect'),
 			$urlInput = $('#urlUrlInput'),
 			$vInput = $('#urlVSelect'),
@@ -641,7 +675,7 @@ function AdminManager() {
 		});
 	});
 	
-	$('#article').on('change', '#articleTypeSelect, #articleSubtypeSelect', function (e) {
+	$('#article').on('change', '#articleTypeSelect, #articleSubtypeSelect', function(e) {
 		var $reviewRegion = $('#articleReviewRegion'),
 			$aVRegion = $('#articleAVRegion'),
 			$audioTechSelect = $('#articleAudioTechSelect').parents('label'),
@@ -684,7 +718,7 @@ function AdminManager() {
 		}
 	});
 	
-	$('#article').on('change', '#articleVideoTechSelect', function (e) {
+	$('#article').on('change', '#articleVideoTechSelect', function(e) {
 		var $videoTechSelect = $('#articleVideoUrlInput').parents('label');
 																
 		if ($(this).val() == "") {
@@ -694,7 +728,7 @@ function AdminManager() {
 		}
 	});
 	
-	$('#article').on('change', '#articleAudioTechSelect', function (e) {
+	$('#article').on('change', '#articleAudioTechSelect', function(e) {
 		var $audioFrameSelect = $('#articleAudioFrameInput').parents('label')
 			$audioUrlSelect = $('#articleAudioUrlInput').parents('label');
 																
@@ -707,7 +741,7 @@ function AdminManager() {
 		}
 	});
 	
-	$('#article').on('change', '#articleBgHSelect, #articleBgVSelect', function (e) {
+	$('#article').on('change', '#articleBgHSelect, #articleBgVSelect', function(e) {
 		$('#article .h-preview').css('background-position', $('#articleBgHSelect')
 					   			.val() + ' ' + $('#articleBgVSelect').val());
 		$('#article .v-preview').css('background-position', $('#articleBgHSelect')
@@ -716,7 +750,7 @@ function AdminManager() {
 					   				   .val() + ' ' + $('#articleBgVSelect').val());
 	});
 	
-	$('#article').on('change', '#articleThemeSelect', function (e) {
+	$('#article').on('change', '#articleThemeSelect', function(e) {
 		var $this = $(this);
 		
 		var t1 = $this.find(':selected').text(),
@@ -734,7 +768,7 @@ function AdminManager() {
 		$('#article').removeClass().addClass(t1);
 	});
 	
-	$('#article').on('change', '#articleSubthemeSelect', function (e) {
+	$('#article').on('change', '#articleSubthemeSelect', function(e) {
 		var $this = $(this);
 		
 		var t2 = $this.find(':selected').text(),
@@ -752,7 +786,7 @@ function AdminManager() {
 		$('#article').removeClass().addClass(t1);
 	});
 	
-	$('#article').on('click', 'button.save, button.publish', function (e) {
+	$('#article').on('click', 'button.save, button.publish', function(e) {
 		var a = new Article();
 		
 		a.save();
@@ -772,7 +806,7 @@ function AdminManager() {
 		console.log(window.admin.publishTarget);
 	});
 	
-	$('#publish').on('click', 'button.publish', function (e) {
+	$('#publish').on('click', 'button.publish', function(e) {
 		var isArticle = $('#article').is(':visible');
 		
 		window.admin.publishTarget.publish();
@@ -792,7 +826,7 @@ function AdminManager() {
 		console.log(window.admin.publishTarget);
 	});
 	
-	$('#publish').on('change', '#publishTagsInput', function (e) {
+	$('#publish').on('change', '#publishTagsInput', function(e) {
 		window.admin.publishTarget.setUrl();													  
 															  
 		$('#publishUrlInput').parents('label').find('span')
@@ -800,7 +834,7 @@ function AdminManager() {
 							 .replaceWith(window.admin.publishTarget.url);
 	});
 	
-	$('#quote').on('click', 'button.save', function (e) {
+	$('#quote').on('click', 'button.save', function(e) {
 		var o = new Quote();
 		
 		o.save();
@@ -815,7 +849,7 @@ function AdminManager() {
 	 * Objects
 	 */
 	
-	$('#aside').on('click', 'button.save, button.publish', function (e) {
+	$('#aside').on('click', 'button.save, button.publish', function(e) {
 		var a = new Aside();
 		
 		a.save();
@@ -827,27 +861,15 @@ function AdminManager() {
 		console.log(window.admin.publishTarget);
 	});
 	
-	$('#game').on('keyup', '#gameEnNameInput', function (e) {
-		$('#gameTagInput').val(utils.formatTag($(this).val()));
+	
+	$('main').on('keyup', '[id*=EnNameInput]',  function(e) {
+		var $this = $(this);												 
+														 
+		$this.parents('form').find('[id*=TagInput]')
+							 .val(utils.formatTag($this.val()));
 	});
 	
-	$('#movie').on('keyup', '#movieEnNameInput', function (e) {
-		$('#movieTagInput').val(utils.formatTag($(this).val()));
-	});
-	
-	$('#album').on('keyup', '#albumEnNameInput', function (e) {
-		$('#albumTagInput').val(utils.formatTag($(this).val()));
-	});
-	
-	$('#event').on('keyup', '#eventEnNameInput', function (e) {
-		$('#eventTagInput').val(utils.formatTag($(this).val()));
-	});
-	
-	$('#book').on('keyup', '#bookEnNameInput', function (e) {
-		$('#bookTagInput').val(utils.formatTag($(this).val()));
-	});
-	
-	$('#game').on('click', 'button.save', function (e) {
+	$('#game').on('click', 'button.save', function(e) {
 		var o = new Game();
 		
 		o.save();
@@ -858,7 +880,7 @@ function AdminManager() {
 		console.log(o);
 	});
 	
-	$('#movie').on('click', 'button.save', function (e) {
+	$('#movie').on('click', 'button.save', function(e) {
 		var o = new Movie();
 		
 		o.save();
@@ -869,7 +891,7 @@ function AdminManager() {
 		console.log(o);
 	});
 	
-	$('#album').on('click', 'button.save', function (e) {
+	$('#album').on('click', 'button.save', function(e) {
 		var o = new Album();
 		
 		o.save();
@@ -880,7 +902,7 @@ function AdminManager() {
 		console.log(o);
 	});
 	
-	$('#event').on('click', 'button.save', function (e) {
+	$('#event').on('click', 'button.save', function(e) {
 		var o = new Happening();
 		
 		o.save();
@@ -891,7 +913,7 @@ function AdminManager() {
 		console.log(o);
 	});
 	
-	$('#book').on('click', 'button.save', function (e) {
+	$('#book').on('click', 'button.save', function(e) {
 		var o = new Book();
 		
 		o.save();
@@ -900,5 +922,11 @@ function AdminManager() {
 		utils.xml(o, 'book', '#xmlCodeOutput');	
 		
 		console.log(o);
+	});
+	
+	$('#company').on('click', 'button.save', function(e) {
+		var o = new Fortag('company');
+		
+		o.save();
 	});
 }

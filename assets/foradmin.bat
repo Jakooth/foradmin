@@ -1,1 +1,1 @@
-lessc foradmin.less  foradmin.css -x --clean-css
+lessc foradmin.less  foradmin.css --clean-css

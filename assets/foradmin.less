@@ -333,7 +333,6 @@ nav li a {
 
 header h2,
 .coverLayout,
-.Window,
 .Add button.add,
 .Add button.remove,
 select.header,
@@ -801,6 +800,7 @@ form input[type=time],
 	right: 9%;
 	background-color: rgba(0, 0, 0, 0.5);
 	z-index: 12000;
+	padding: 20px;
 }
 
 .Window section {
@@ -822,6 +822,70 @@ form input[type=time],
 .Window div[role=toolbar] {
 	position: relative;
 	float: right;
+}
+
+.Window.Alert {
+	left: 18%;
+	right: 18%;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+.Window.Alert div[role=toolbar] {
+	height: 128px;
+}
+
+.Window.Alert div[role=toolbar] button {
+	height: 100%;
+}
+
+.Window.Alert p {
+	padding: 20px;
+	font-size: 14pt;
+	color: @light;
+	float: left;
+}
+
+.Window.Alert div:first-of-type {
+	width: 128px;
+	height: 128px;
+	float: left;
+}
+
+.Window.Alert .error {
+	background-color: @red;	
+}
+
+.Window.Alert .success {
+	background-color: @green;
+	border-radius: 128px;
+}
+
+
+.Window.Alert .loading {
+  background-color: @light;
+
+  margin: 0 auto;
+  -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+  animation: sk-rotateplane 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-rotateplane {
+  0% { -webkit-transform: perspective(120px) }
+  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+
+@keyframes sk-rotateplane {
+  0% { 
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
+  } 50% { 
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
+  } 100% { 
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
 }
 
 
