@@ -10,10 +10,10 @@
         <form>
             <admin:formItem id="companyEnNameInput" label="Компания" 
             				placeholder="Crytek, HBO, Walt Disney Animation Studios" type="text" />
-            <admin:formItem id="companyBgNameInput" label="Име на компанията на български" 
-            				placeholder="Крайтек, ЕйчБиОу, Уолт Дисни Анимейшън Студиос" type="text" />
             <admin:formItem id="companyTagInput" label="Таг" 
             				placeholder="crytek, hbo, walt-disney-animation-studios" type="text" />
+            <admin:formItem id="companyBgNameInput" label="Имe на български" 
+            				placeholder="Крайтек, ЕйчБиОу, Уолт Дисни Анимейшън Студиос" type="text" />
             <admin:formItem id="companyTypeSelect" label="Тип" type="select"/>
         </form>
         <div role="toolbar">

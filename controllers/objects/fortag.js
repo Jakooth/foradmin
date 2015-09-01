@@ -38,11 +38,12 @@ Fortag.prototype.save = function() {
 	this.tag = this._$tagInput.val();
 	this.type = this._$typeSelect.val();
 	this.subtype = this._$subtypeSelect.val() || null;
+	this.related = this._$relatedInput.typeahead().data('tagsinput').itemsArray;
 	
 	/**
-	 * TODO: Better error display.
+	 * TODO: Move all stringa to external file.
 	 * The only require field is TAG.
-	 * Minimum tow characters are required for a tag.
+	 * Minimum two characters are required for a tag.
 	 * All other can be updated at any time.
 	 */
 	 
@@ -60,10 +61,11 @@ Fortag.prototype.save = function() {
 		tag: this.tag,
 		type: this.type,
 		subtype: this.subtype,
-		object: this.object
+		object: this.object,
+		related: this.related
 	};
 	
-	admin.showAlert({message: 'Saving...', status: 'loading'});
+	admin.showAlert({message: 'Записвам...', status: 'loading'});
 	
 	$.ajax({
 		type: "POST",
@@ -81,8 +83,6 @@ Fortag.prototype.save = function() {
 									  o.object.slice(1) + ' saved', status: 'success'});
 		}
 	}).fail(function (data, textStatus, jqXHR) {
-		console.log(data);
-	}).always(function (data, textStatus, jqXHR) {
 		console.log(data);
 	});
 	

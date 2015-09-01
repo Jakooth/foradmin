@@ -169,10 +169,10 @@ function AdminManager() {
 			self.allTags.initialize();
 			
 			$('#publishTagsInput, ' + 
-			  '#personTagsInputm, ' +
+			  '#personRelatedInput, ' +
 			  '#imagesTagInput, ' + 
 			  '#searchTagInput, ' + 
-			  '#characterTagsInput').tagsinput({
+			  '#characterRelatedInput').tagsinput({
 				maxTags: null,
 				itemValue: 'value',
 				itemText: 'value',			 
@@ -926,6 +926,12 @@ function AdminManager() {
 	
 	$('#company').on('click', 'button.save', function(e) {
 		var o = new Fortag('company');
+		
+		o.save();
+	});
+	
+	$('#person').on('click', 'button.save', function(e) {
+		var o = new Fortag('person');
 		
 		o.save();
 	});
