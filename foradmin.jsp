@@ -66,9 +66,6 @@
     <script src="controllers/objects/article.js?v=1.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/objects/game.js?v=1.0.0">
-                <!--script-->
-            </script>
 	<script src="controllers/objects/movie.js?v=1.0.0">
                 <!--script-->
             </script> 
@@ -90,9 +87,12 @@
 	<script src="controllers/objects/fortag.js?v=1.0.0">
                 <!--script-->
             </script> 
-	<script src="controllers/objects/forobject.js?v=1.0.0">
+	<script src="controllers/objects/formain.js?v=1.0.0">
                 <!--script-->
-            </script> 
+            </script>
+    <script src="controllers/objects/game.js?v=1.0.0">
+                <!--script-->
+            </script>        
 	<script>$(document).ready(function() { 
 				window.utils = new UtilsManager(); 
 				window.admin = new AdminManager(); 

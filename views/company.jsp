@@ -8,6 +8,13 @@
             <admin:menuItem label="Добави компания и създай таг." title="Компания" url="company" />
         </h2>
         <form>
+        	<div class="Main" role="group">
+                <div class="file">
+                    <label><span class="clip">Избери</span>
+                        <input id="companyMainInput" type="file" />
+                    </label>
+                </div>
+            </div>
             <admin:formItem id="companyEnNameInput" label="Компания" 
             				placeholder="Crytek, HBO, Walt Disney Animation Studios" type="text" />
             <admin:formItem id="companyTagInput" label="Таг" 

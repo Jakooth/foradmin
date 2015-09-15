@@ -8,6 +8,13 @@
             <admin:menuItem label="Добави персона и създай таг." title="Персона" url="person" />
         </h2>
         <form>
+        	<div class="Main" role="group">
+                <div class="file">
+                    <label><span class="clip">Избери</span>
+                        <input id="personMainInput" type="file" />
+                    </label>
+                </div>
+            </div>
             <admin:formItem id="personBgNameInput" label="Персона" 
             				placeholder="Шигеру Миямото, Сам Хаузър, Чък Норис, Дейвид Финчър, Кърк Хамет, Айс-Ти, Фарел Уилямс, Тери Пратчет, Патрик Модиано" type="text" />
             <admin:formItem id="personEnNameInput" label="Име на латиница" 

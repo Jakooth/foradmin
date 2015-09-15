@@ -3,8 +3,8 @@ function Fortag(o) {
 	/** 
 	 * PRIVATE
 	 */
-	 
-	var self = this;
+	
+	this._$mainInput = $('#' + o + 'MainInput');
 	
 	this._$enNameInput = $('#' + o + 'EnNameInput');
 	this._$bgNameInput = $('#' + o + 'BgNameInput');
@@ -13,22 +13,23 @@ function Fortag(o) {
 	this._$typeSelect = $('#' + o + 'TypeSelect');
 	this._$subtypeSelect = $('#' + o + 'SubtypeSelect');
 	this._$relatedInput = $('#' + o + 'RelatedInput');
-	this._$akaInput = $('#' + o + 'AkaInput');
 	
 	/** 
 	 * PUBLIC
-	 * Variables without value are objects.
 	 */
 
+	this.main;
+	
 	this.enName;
 	this.bgName;
 	this.tag;
 	this.date;
 	this.type;
 	this.subtype;
-	this.aka;
 	this.related;
 	this.object = o;
+	
+	this.json = {};
 }
 
 Fortag.prototype.save = function() {	
@@ -38,23 +39,12 @@ Fortag.prototype.save = function() {
 	this.tag = this._$tagInput.val();
 	this.type = this._$typeSelect.val();
 	this.subtype = this._$subtypeSelect.val() || null;
-	this.related = this._$relatedInput.typeahead().data('tagsinput').itemsArray;
+	this.related = this._$relatedInput.length ? 
+				   this._$relatedInput.typeahead()
+				   					  .data('tagsinput')
+									  .itemsArray : null;
 	
-	/**
-	 * TODO: Move all stringa to external file.
-	 * The only require field is TAG.
-	 * Minimum two characters are required for a tag.
-	 * All other can be updated at any time.
-	 */
-	 
-	if (this.tag.length < 2) {
-		admin.showAlert({message: 'Tаг трябва да е минимум 2 символа.', 
-						 status: 'error'});
-		
-		return false;
-	}
-	
-	var o = {
+	this.json = {
 		enName: this.enName,
 		bgName: this.bgName,
 		date: this.date,
@@ -64,6 +54,32 @@ Fortag.prototype.save = function() {
 		object: this.object,
 		related: this.related
 	};
+}
+
+/**
+ * TODO: The final function will not work like this.
+ */
+
+Fortag.prototype.uploadMainImage = function() {
+	this.main = utils.parseImgIndex($mainInput.val());
+}
+
+Fortag.prototype.post = function() {
+	var self = this;
+	
+	/**
+	 * The only require field is TAG.
+	 * Minimum two characters are required for a tag.
+	 * All other can be updated at any time.
+	 * TODO: Move all stringa to external file.
+	 */
+	 
+	if (this.tag.length < 2) {
+		admin.showAlert({message: 'Tаг трябва да е минимум 2 символа.', 
+						 status: 'error'});
+		
+		return false;
+	}
 	
 	admin.showAlert({message: 'Записвам...', status: 'loading'});
 	
@@ -71,7 +87,7 @@ Fortag.prototype.save = function() {
 		type: "POST",
 		contentType: "application/json; charset=utf-8",
 		url: 'http://localhost/forapi/save.php?',
-		data: JSON.stringify(o),
+		data: JSON.stringify(this.json),
 		dataType: 'json'
 	}).done(function (data, textStatus, jqXHR) {
 		if (!data.events.mysql.connection) {
@@ -79,8 +95,10 @@ Fortag.prototype.save = function() {
 		} else if (!data.events.mysql.result) {
 			admin.showAlert({message: data.events.mysql.error, status: 'error'});
 		} else {
-			admin.showAlert({message: o.object.charAt(0).toUpperCase() + 
-									  o.object.slice(1) + ' saved', status: 'success'});
+			admin.showAlert({message: self.json.object
+										  .charAt(0).toUpperCase() + 
+									  self.json.object
+									  	  .slice(1) + ' saved', status: 'success'});
 		}
 	}).fail(function (data, textStatus, jqXHR) {
 		console.log(data);

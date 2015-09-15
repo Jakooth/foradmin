@@ -8,20 +8,23 @@
             <admin:menuItem label="Добави герой и създай таг." title="Герой" url="character" />
         </h2>
         <form>
-        	<div class="Main" role="group">
+            <div class="Main" role="group">
                 <div class="file">
-                    <label><span class="clip">Избери</span>
+                    <label>
+                        <span class="clip">Избери</span>
                         <input id="characterMainInput" type="file" />
                     </label>
                 </div>
             </div>
-            <admin:formItem id="characterNameInput" label="Герой" 
-            				placeholder="Sonic, Master Chief, Duke Nukem, Батман, Фокс Мълдър, Рапунцел, Ринсуинд, Ходор" type="text" />
+            <admin:formItem id="characterEnNameInput" label="Герой" 
+            				placeholder="Sonic, Master Chief, Duke Nukem, Batman, Fox Mulder, Rapunzel, Rincewind, Hodor" type="text" />
             <admin:formItem id="characterTagInput" label="Таг" 
             				placeholder="sonic, master-chief, duke-nukem, batman, fox-mulder, rapunzel, rincewind, hodor" type="text" />
-        	<admin:formItem id="characterTagsInput" label="Свързани игри, комапнии или други" 
+            <admin:formItem id="characterBgNameInput" label="Имe на български" 
+            				placeholder="Тарaлежко, Мастер Шеф, Дюк Нюкем, Батман, Фокс Мълдър, Рапунцел, Ринсуинд, Ходор" type="text" />
+            <admin:formItem id="characterRelatedInput" label="Свързани игри, комапнии или други" 
             				placeholder="halo, bungie" type="text" />
-        	<admin:formItem id="characterTypeSelect" label="Тип" type="select"/>
+            <admin:formItem id="characterTypeSelect" label="Тип" type="select"/>
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

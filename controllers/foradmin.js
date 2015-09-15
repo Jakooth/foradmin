@@ -410,7 +410,7 @@ function AdminManager() {
 	this.loadOptions($('#serieTypeSelect'), type, 'option');
 	
 	initStickersTagInput(stickers, 'stickers', '#movieStickersInput');
-	initTypeAhead(series, 'series', '#movieSerieInput');
+	initTagInput(games, 'games', '#dlcRelatedInput', 1);
 	
 	/**
 	 * ASIDE
@@ -456,6 +456,7 @@ function AdminManager() {
 	
 	this.loadOptions($('#movieGenreGroup'), movieGenres, 'checkbox');
 	
+	initTagInput(series, 'series', '#movieSerieInput', 1);
 	initTagInput(movies, 'movies', '#movieSimilarInput');
 	initTagInput(persons, 'persons', '#movieCastInput');
 	initTagInput(persons, 'persons', '#movieDirectorInput');
@@ -870,14 +871,10 @@ function AdminManager() {
 	});
 	
 	$('#game').on('click', 'button.save', function(e) {
-		var o = new Game();
+		var o = new Game('game');
 		
 		o.save();
-		
-		self.showSectionInWindow('#xml');
-		utils.xml(o, 'game', '#xmlCodeOutput');	
-		
-		console.log(o);
+		o.post();
 	});
 	
 	$('#movie').on('click', 'button.save', function(e) {
@@ -924,15 +921,12 @@ function AdminManager() {
 		console.log(o);
 	});
 	
-	$('#company').on('click', 'button.save', function(e) {
-		var o = new Fortag('company');
+	$('#company, #person, #character, ' + 
+	  '#serie, #dlc').on('click', 'button.save', function(e) {
+		  
+		var o = new Fortag($(this).parents('section').prop('id'));
 		
 		o.save();
-	});
-	
-	$('#person').on('click', 'button.save', function(e) {
-		var o = new Fortag('person');
-		
-		o.save();
+		o.post();
 	});
 }

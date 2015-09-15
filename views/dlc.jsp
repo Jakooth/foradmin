@@ -8,19 +8,23 @@
             <admin:menuItem label="Добави dlc и създай таг." title="DLC" url="dlc" />
         </h2>
         <form>
-        	<div class="Main" role="group">
+            <div class="Main" role="group">
                 <div class="file">
-                    <label><span class="clip">Избери</span>
+                    <label>
+                        <span class="clip">Избери</span>
                         <input id="dlcMainInput" type="file" />
                     </label>
                 </div>
             </div>
-            <admin:formItem id="dlcNameInput" label="Герой" 
+            <admin:formItem id="dlcEnNameInput" label="DLC" 
             				placeholder="Crown of the Ivory King" type="text" />
             <admin:formItem id="dlcTagInput" label="Таг" 
             				placeholder="crown-of-the-ivory-king" type="text" />
-        	<admin:formItem id="dlcTagsInput" label="Свързана игра" 
+            <admin:formItem id="dlcBgNameInput" label="Имe на български" 
+            				placeholder="Краун ъф дъ Ейвъри Кинг" type="text" />
+            <admin:formItem id="dlcRelatedInput" label="Свързана игра" 
             				placeholder="dark-souls-2" type="text" />
+        	<admin:formItem id="dlcTypeSelect" label="Тип" type="hidden" value="games" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>
