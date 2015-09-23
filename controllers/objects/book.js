@@ -1,80 +1,30 @@
-function Book() {
+function Book(o) {
+	Formain.call(this, o);
 	
 	/** 
 	 * PRIVATE
 	 */
-	 
-	var self = this;
 	
-	var $mainInput = $('#bookMainInput'),
-		$enNameInput = $('#bookEnNameInput'),
-		$bgNameInput = $('#bookBgNameInput'),
-		$serieInput = $('#bookSerieInput'),
-		$artistInput = $('#bookArtistInput'),
-		$translatorInput = $('#bookTranslatorInput'),
-		$tagInput = $('#bookTagInput'),
-		$stickersInput = $('#bookStickersInput'),
-		$genreInput = $('#bookGenreGroup'),
-		$countrySelect = $('#bookCountrySelect'),
-		$dateInput = $('#bookDateInput'),
-		$similarInput = $('#bookSimilarInput');
-	
-	
-	
+	this._$authorInput = $('#' + o + 'AuthorInput');
+	this._$translatorInput = $('#' + o + 'TranslatorInput');
 	
 	/** 
 	 * PUBLIC
-	 * Variables without value are objects.
 	 */
-
-	this.main = "C:/fakepath/object-tag-index.png";
-	this.enName = "Title Case String";
-	this.bgName = "Title Case String";
-	this.serie = "object-tag";
-	this.artist;
+	 
+	this.author;
 	this.translator;
-	this.country = "Country";
-	this.tag = "object-tag";
-	this.stickers;
-	this.genre = [];
-	this.date = new Date();
-	this.similar = "object-tag,object-tag,object-tag";
+}
+
+Book.prototype = Object.create(Formain.prototype);
+Book.prototype.constructor = Book;
+
+Book.prototype.save = function() { 
+	Formain.prototype.save.call(this);
 	
-	/**
-	 * TODO: Validate fields.
-	 */
+	this.author = this._getTypeaheadValue(this._$authorInput);
+	this.translator = this._getTypeaheadValue(this._$translatorInput);
 	
-	this.save = function () {
-		
-		/**
-		 * Images names are made from tag and number.
-		 * Fisrst strip the path, than strip the tag.
-		 * Only store the image index and format.
-		 */
-		
-		self.main = $mainInput.val().split('/').pop().split('-').pop() || 
-					self.main.split('-').pop();
-		
-		self.enName = $enNameInput.val();
-		self.bgName = $bgNameInput.val();
-		self.serie = $serieInput.val();
-		self.artist = $artistInput.typeahead().data('tagsinput').itemsArray[0];
-		self.translator = $translatorInput.typeahead().data('tagsinput').itemsArray[0];
-		self.country = $countrySelect.find(':selected').text();
-		self.tag = $tagInput.val();
-		self.stickers = $stickersInput.typeahead().data('tagsinput').itemsArray;
-		self.genre = $genreInput.find(':checked').map(function (i, element) {
-			return {value: $(element).val(), 
-					text: $(element).parents('label').find('span').text()};
-		}).get();
-		self.date = new Date($dateInput.val());
-		self.similar = $similarInput.val();
-	}
-	
-	
-	
-	
-	/** 
-	 * INIT
-	 */
+	this.json.author = this.author;
+	this.json.translator = this.translator;
 }

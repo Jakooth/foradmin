@@ -400,7 +400,8 @@ function AddManager() {
 	$('#game, #article, #album, ' + 
 	  '#movie, #aside, #eventm, ' + 
 	  '#book, #person, #company,' +
-	  '#character, #serie, #dlc').on('change', '.file input[type=file]', function (e) {
+	  '#character, #serie, #dlc, ' +
+	  '#band').on('change', '.file input[type=file]', function (e) {
 		var reader = new FileReader();
 		
 		var $file = $(e.target).parents('.file');

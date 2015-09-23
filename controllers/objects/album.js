@@ -1,77 +1,38 @@
-function Album() {
+function Album(o) {
+	Formain.call(this, o);
 	
 	/** 
 	 * PRIVATE
 	 */
-	 
-	var self = this;
 	
-	var $mainInput = $('#albumMainInput'),
-		$enNameInput = $('#albumEnNameInput'),
-		$artistInput = $('#albumArtistInput'),
-		$tagInput = $('#albumTagInput'),
-		$stickersInput = $('#albumStickersInput'),
-		$genreInput = $('#albumGenreGroup'),
-		$countrySelect = $('#albumCountrySelect'),
-		$dateInput = $('#albumDateInput'),
-		$similarInput = $('#albumSimilarInput'),
-		$trackInputs = $('#album .Track .track');
-	
-	
-	
+	this._$artistInput = $('#' + o + 'ArtistInput');
+	this._$trackInput = $('#album .Track .track');
 	
 	/** 
 	 * PUBLIC
-	 * Variables without value are objects.
 	 */
+	 
+	this.artists;
+	this.tracks;
+}
 
-	this.main = "C:/fakepath/object-tag-index.png";
-	this.enName = "Title Case String";
-	this.artist;
-	this.country = "Country";
-	this.tag = "object-tag";
-	this.stickers;
-	this.genre = [];
-	this.date = new Date();
-	this.similar = "object-tag,object-tag,object-tag";
-	this.tracks = [];
+Album.prototype = Object.create(Formain.prototype);
+Album.prototype.constructor = Album;
+
+Album.prototype.save = function() { 
+	Formain.prototype.save.call(this);
 	
-	/**
-	 * TODO: Validate fields.
-	 */
+	this.artists = this._getTypeaheadValue(this._$artistInput);
+	this.tracks = this._getTracksValue(this._$trackInput);
 	
-	this.save = function () {
-		
-		/**
-		 * Images names are made from tag and number.
-		 * Fisrst strip the path, than strip the tag.
-		 * Only store the image index and format.
-		 */
-		
-		self.main = $mainInput.val().split('/').pop().split('-').pop() || 
-					self.main.split('-').pop();
-		
-		self.enName = $enNameInput.val();
-		self.artist = $artistInput.typeahead().data('tagsinput').itemsArray[0];
-		self.country = $countrySelect.find(':selected').text();
-		self.tag = $tagInput.val();
-		self.stickers = $stickersInput.typeahead().data('tagsinput').itemsArray;
-		self.genre = $genreInput.find(':checked').map(function (i, element) {
-			return {value: $(element).val(), 
-					text: $(element).parents('label').find('span').text()};
-		}).get();
-		self.date = new Date($dateInput.val());
-		self.similar = $similarInput.val();
-		self.tracks = $trackInputs.map(function (i, element) {
-			return {name: $(element).find('input:eq(0)').val(),  
-					video: $(element).find('input:eq(1)').val()};
-		}).get();
-	}
-	
-	
-	
-	
-	/** 
-	 * INIT
-	 */
+	this.json.artists = this.artists;
+	this.json.tracks = this.tracks;
+}
+
+Album.prototype._getTracksValue = function(_$input) {
+	return _$input.map(function (i, element) {
+		return {order: i + 1,
+				name: $(element).find('input:eq(0)').val(),  
+				video: $(element).find('input:eq(1)').val()};
+	}).get();
 }

@@ -8,28 +8,30 @@
             <admin:menuItem label="Добави информация за книгата и създай таг." title="Книга" url="book" />
         </h2>
         <form>
-        	<div class="Main" role="group">
+            <div class="Main" role="group">
                 <div class="file">
-                    <label><span class="clip">Избери</span>
+                    <label>
+                        <span class="clip">Избери</span>
                         <input id="bookMainInput" type="file" />
                     </label>
                 </div>
             </div>
-            <admin:formItem id="bookEnNameInput" label="Оригинално име на книгата" 
-            				placeholder="Villa Triste" type="text" />
-            <admin:formItem id="bookBgNameInput" label="Име на книгата на български" 
+            <admin:formItem id="bookBgNameInput" label="Име на български" 
             				placeholder="Вила Тъга" type="text" />
+            <admin:formItem id="bookEnNameInput" label="Книга" 
+            				placeholder="Villa Triste" type="text" />
+            <admin:formItem id="bookTagInput" label="Таг" 
+            				placeholder="villa-triste" type="text" />
+            <admin:formItem id="bookTypeSelect" label="Тип" type="hidden" value="books" />
             <admin:formItem id="bookSerieInput" label="Поредица" 
             				placeholder="a-song-of-ice-and-fire, Discworld" type="text" 
-                            autocomplete="off" url="serie" layout="one-col" />             
+                            autocomplete="off" url="serie" layout="one-col" />
             <admin:formItem id="bookArtistInput" label="Автор" 
             				placeholder="Патрик Модиано" type="text" 
                             autocomplete="off" url="person" layout="one-col" />
             <admin:formItem id="bookTranslatorInput" label="Преводач" 
             				placeholder="" type="text" 
-                            autocomplete="off" url="person" layout="one-col" />                
-            <admin:formItem id="bookTagInput" label="Таг" 
-            				placeholder="sacrifice-to-venus" type="text" />
+                            autocomplete="off" url="person" layout="one-col" />
             <admin:formItem id="bookStickersInput" label="Стикери" 
             				placeholder="Broadsword, Soccer ball, Female elf face" type="text" />
             <admin:formItem id="bookGenreGroup" label="Жанр" type="group">

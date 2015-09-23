@@ -8,32 +8,41 @@
             <admin:menuItem label="Добави информация за събитието и създай таг." title="Събитие" url="event" />
         </h2>
         <form>
-        	<div class="Main" role="group">
+            <div class="Main" role="group">
                 <div class="file">
-                    <label><span class="clip">Избери</span>
+                    <label>
+                        <span class="clip">Избери</span>
                         <input id="eventMainInput" type="file" />
                     </label>
                 </div>
             </div>
-            <admin:formItem id="eventEnNameInput" label="Име на събитието" 
-            				placeholder="Sacrifice To Venus" type="text" />
+            <admin:formItem id="eventEnNameInput" label="Събитие" 
+            				placeholder="Sofia Rocks 2015" type="text" />
+            <admin:formItem id="eventTagInput" label="Таг" 
+            				placeholder="sofia-rocks-2015" type="text" />
+            <admin:formItem id="eventBgNameInput" label="Име на български" 
+            				placeholder="" type="text" />
+            <admin:formItem id="eventTypeSelect" label="Тип" type="hidden" value="music" />
             <admin:formItem id="eventArtistInput" label="Изпълнители" 
             				placeholder="Emil Bulls" type="text" 
                             autocomplete="off" url="band" layout="one-col" />
-            <admin:formItem id="eventTagInput" label="Таг" 
-            				placeholder="sacrifice-to-venus" type="text" />
+            <admin:formItem id="eventSerieInput" label="Поредица" 
+            				placeholder="sofia-rocks" type="text" 
+                            autocomplete="off" url="serie" layout="one-col" />
             <admin:formItem id="eventStickersInput" label="Стикери" 
             				placeholder="Broadsword, Soccer ball, Female elf face" type="text" />
             <admin:formItem id="eventGenreGroup" label="Жанр" type="group">
                 <!--AdminManager.js-->
             </admin:formItem>
-            <admin:formItem id="eventCountrySelect" label="Държава" 
-            				type="select" layout="two-cols" />                
             <admin:formItem id="eventDateInput" label="Начало" 
             				type="date" layout="two-cols" />
+            <admin:formItem id="eventEndDateInput" label="Край" 
+            				type="date" layout="two-cols" />
+            <admin:formItem id="eventCountrySelect" label="Държава" 
+            				type="select" layout="two-cols" />
             <admin:formItem id="eventCityInput" label="Град" 
             				placeholder="София, Каварна" 
-                            type="text" layout="two-cols" />                
+                            type="text" layout="two-cols" />
             <admin:formItem id="eventSimilarInput" label="Подобни" 
             				placeholder="" 
                             type="text" autocomplete="off" />

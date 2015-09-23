@@ -25,35 +25,33 @@ function Formain(o) {
 Formain.prototype = Object.create(Fortag.prototype);
 Formain.prototype.constructor = Formain;
 
-Formain.prototype.save = function() { 
-	Fortag.prototype.save.call(this);
-	
-	this.stickers = this._$stickersInput.length ? 
-				   	this._$stickersInput.typeahead()
-				   					   	.data('tagsinput')
-									   	.itemsArray : null;
-	
-	this.serie = this._$serieInput.length ? 
-				 this._$serieInput.typeahead()
-				   				  .data('tagsinput')
-								  .itemsArray : null;
-	
-	/**
-	 * TODO: In fact we need the genre id.
-	 */
-	
-	this.genres = this._$genreGroup.find(':checked').map(function (i, element) {
+/** 
+ * PRIVATE
+ */
+ 
+/**
+ * TODO: In fact we need the genre id.
+ */ 
+
+Formain.prototype._getGroupValue = function(_$input) {
+	return _$input.find(':checked').map(function (i, element) {
 		return {value: $(element).val(), 
 				text: $(element).parents('label').find('span').text()};
 	}).get();
+}
+
+/** 
+ * PUBLIC
+ */
+
+Formain.prototype.save = function() { 
+	Fortag.prototype.save.call(this);
 	
-	this.similar = this._$similarInput.length ? 
-				   this._$similarInput.typeahead()
-				   					  .data('tagsinput')
-									  .itemsArray : null;
-									  
-	this.country = this._$countryInput.length ? 
-				   this._$countryInput.val() : null;
+	this.stickers = this._getTypeaheadValue(this._$stickersInput);	
+	this.serie = this._getTypeaheadValue(this._$serieInput);
+	this.genres  =  this._getGroupValue(this._$genreGroup);
+	this.similar = this._getTypeaheadValue(this._$similarInput);
+	this.country = this._getInputValue(this._$countryInput);
 			   
 	this.json.stickers = this.stickers;
 	this.json.serie = this.serie;

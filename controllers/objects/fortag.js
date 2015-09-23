@@ -4,6 +4,9 @@ function Fortag(o) {
 	 * PRIVATE
 	 */
 	
+	this._url = "http://localhost/forapi/save.php";
+	this._isValid = true;
+	
 	this._$mainInput = $('#' + o + 'MainInput');
 	
 	this._$enNameInput = $('#' + o + 'EnNameInput');
@@ -32,17 +35,34 @@ function Fortag(o) {
 	this.json = {};
 }
 
+/** 
+ * PRIVATE
+ */
+
+Fortag.prototype._getTypeaheadValue = function(_$input) {
+	return _$input.length ? 
+		   _$input.typeahead()
+		   		  .data('tagsinput')
+				  .itemsArray : null;
+}
+
+Fortag.prototype._getInputValue = function(_$input) {
+	return _$input.length ?
+		   _$input.val() || null : null;
+}
+
+/** 
+ * PUBLIC
+ */
+
 Fortag.prototype.save = function() {	
-	this.enName = this._$enNameInput.val();
-	this.bgName = this._$bgNameInput.val();
-	this.date = this._$dateInput.val() || null;
-	this.tag = this._$tagInput.val();
-	this.type = this._$typeSelect.val();
-	this.subtype = this._$subtypeSelect.val() || null;
-	this.related = this._$relatedInput.length ? 
-				   this._$relatedInput.typeahead()
-				   					  .data('tagsinput')
-									  .itemsArray : null;
+	this.enName = this._getInputValue(this._$enNameInput);
+	this.bgName = this._getInputValue(this._$bgNameInput);
+	this.date = this._getInputValue(this._$dateInput);
+	this.tag = this._getInputValue(this._$tagInput);
+	this.type = this._getInputValue(this._$typeSelect);
+	this.subtype = this._getInputValue(this._$subtypeSelect);
+	this.related = this._getTypeaheadValue(this._$relatedInput);
 	
 	this.json = {
 		enName: this.enName,
@@ -64,6 +84,17 @@ Fortag.prototype.uploadMainImage = function() {
 	this.main = utils.parseImgIndex($mainInput.val());
 }
 
+Fortag.prototype.validateTag = function() {
+	if (!this.tag) {
+		this._isValid = false;
+		
+		admin.showAlert({message: 'Tаг трябва да е минимум 2 символа.', 
+						 status: 'error'});
+		
+		return false;
+	}
+}
+
 Fortag.prototype.post = function() {
 	var self = this;
 	
@@ -73,11 +104,10 @@ Fortag.prototype.post = function() {
 	 * All other can be updated at any time.
 	 * TODO: Move all stringa to external file.
 	 */
-	 
-	if (this.tag.length < 2) {
-		admin.showAlert({message: 'Tаг трябва да е минимум 2 символа.', 
-						 status: 'error'});
-		
+	
+	this.validateTag();
+	
+	if (!this._isValid) {
 		return false;
 	}
 	
@@ -86,7 +116,7 @@ Fortag.prototype.post = function() {
 	$.ajax({
 		type: "POST",
 		contentType: "application/json; charset=utf-8",
-		url: 'http://localhost/forapi/save.php?',
+		url: this._url,
 		data: JSON.stringify(this.json),
 		dataType: 'json'
 	}).done(function (data, textStatus, jqXHR) {

@@ -24,6 +24,16 @@
             <admin:formItem id="personRelatedInput" label="Свързани игри, комапнии или други" 
             				placeholder="gta-5, rockstar" type="text" />
             <admin:formItem id="personTypeSelect" label="Тип" type="select"/>
+            <admin:formItem id="personSubtypeSelect" label="Подтип" type="select">
+            	<option value="">Без подтип</option>
+            	<option value="director">Режисьор</option>
+                <option value="writer">Сценарист</option>
+                <option value="camera">Оператор</option>
+                <option value="music">Музика</option>
+                <option value="cast">Кастинг</option>
+                <option value="writer">Автор</option>
+                <option value="translator">Преводач</option>
+            </admin:formItem>
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

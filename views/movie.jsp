@@ -16,20 +16,22 @@
                     </label>
                 </div>
                 <div class="file">
-                    <label><span class="clip">Избери</span>
+                    <label>
+                        <span class="clip">Избери</span>
                         <input id="moviePosterInput" type="file" />
                     </label>
                 </div>
             </div>
-            <admin:formItem id="movieEnNameInput" label="Оригинално име на филмът" 
-            				placeholder="Star Wars: The Force Awakens" type="text" />
-            <admin:formItem id="movieBgNameInput" label="Име на филмът на български" 
+            <admin:formItem id="movieBgNameInput" label="Филм" 
             				placeholder="Междузвездни Войни: Силата се Пробужда" type="text" />
+            <admin:formItem id="movieEnNameInput" label="Име на латиница" 
+            				placeholder="Star Wars: The Force Awakens" type="text" />
+            <admin:formItem id="movieTagInput" label="Таг" 
+            				placeholder="star-wars-episode-the-force-awakens" type="text" />
+            <admin:formItem id="movieTypeSelect" label="Тип" type="hidden" value="movies" />
             <admin:formItem id="movieSerieInput" label="Поредица" 
             				placeholder="star-wars" type="text" 
                             autocomplete="off" url="serie" layout="one-col" />
-            <admin:formItem id="movieTagInput" label="Таг" 
-            				placeholder="star-wars-episode-the-force-awakens" type="text" />
             <admin:formItem id="movieStickersInput" label="Стикери" 
             				placeholder="Broadsword, Soccer ball, Female elf face" type="text" />
             <admin:formItem id="movieGenreGroup" label="Жанр" type="group">
@@ -50,7 +52,7 @@
             <admin:formItem id="movieMusicInput" label="Музика" 
             				placeholder="Трент Резнър, Атикъс Рос" type="text" 
                             url="person" layout="one-col" />
-            <admin:formItem id="movieBgDateInput" label="Премиера за България" type="date" layout="two-cols" />
+            <admin:formItem id="movieDateInput" label="Премиера за България" type="date" layout="two-cols" />
             <admin:formItem id="movieWorldDateInput" label="Световна премиера" type="date" layout="two-cols" />
             <admin:formItem id="movieTimeInput" label="Времетраене" 
             				placeholder="149" type="text" layout="two-cols" />

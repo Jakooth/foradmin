@@ -21,7 +21,12 @@
             				placeholder="crytek, hbo, walt-disney-animation-studios" type="text" />
             <admin:formItem id="companyBgNameInput" label="Имe на български" 
             				placeholder="Крайтек, ЕйчБиОу, Уолт Дисни Анимейшън Студиос" type="text" />
-            <admin:formItem id="companyTypeSelect" label="Тип" type="select"/>
+            <admin:formItem id="companyTypeSelect" label="Тип" type="select" />
+            <admin:formItem id="companySubtypeSelect" label="Подтип" type="select">
+            	<option value="">Без подтип</option>
+            	<option value="developer">Разработчик</option>
+                <option value="publisher">Издател</option>
+            </admin:formItem>
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

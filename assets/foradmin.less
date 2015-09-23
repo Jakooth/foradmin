@@ -145,6 +145,10 @@ a:visited {
 	opacity: 0;
 }
 
+img.svg {
+	display: none;
+}
+
 
 
 
@@ -308,21 +312,7 @@ form {
  * SPACING
  */
 
-.hidden i,
-header svg,
-nav svg {
-	margin-right: 10px;
-}
-
-.Main .file,
-.hidden b,
-form .two-cols select,
-form .two-cols input {
-	margin-right: 20px;
-}
-
 [role=option] p,
-.hidden b,
 .hidden,
 form input[type=text],
 form input[type=password],
@@ -367,7 +357,6 @@ h3,
 .hidden,
 .Window h2 span,
 .Add .file,
-.Main .file,
 form input,
 form select,
 form textarea {
@@ -488,6 +477,7 @@ header svg,
 nav svg {
 	width: 64px;
 	height: 64px;
+	margin-right: 10px;
 }
 
 nav li {
@@ -739,6 +729,7 @@ form input[type=time],
 .hidden i {
 	display: inline-block;
 	min-width: 222px;
+	margin-right: 10px;
 }
 
 .hidden b {
@@ -749,11 +740,18 @@ form input[type=time],
 	margin-top: -10px;
 	margin-bottom: -10px;
 	position: relative;
+	margin-right: 20px;
+	padding: 10px;
 }
 
 .two-cols {
 	float: left;
 	clear: none;
+}
+
+.two-cols select,
+.two-cols input {
+	margin-right: 20px;
 }
 
 #articleReviewRegion select {
@@ -1026,7 +1024,8 @@ button.remove {
 #character .Main .file,
 #serie .Main .file,
 #dlc .Main .file,
-#game .Main .file {
+#game .Main .file,
+#band .Main .file {
 	width: 128px;
 	height: 128px;
 }
@@ -1247,6 +1246,8 @@ button.remove {
 	display: inline-block;
 	float: left;
 	background-size: cover;
+	margin-bottom: 20px;
+	margin-right: 20px;
 }
 
 .Main .file:nth-child(1) {

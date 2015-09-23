@@ -34,22 +34,10 @@ Game.prototype.save = function() {
 	 * TODO: In fact we need the platform id and not text values.
 	 */
 	
-	this.platforms = this._$platformGroup.find(':checked').map(function (i, element) {
-		return {value: $(element).val(), 
-				text: $(element).parents('label').find('span').text()};
-	}).get();
-	
-	this.publisher = this._$publisherInput.length ? 
-				 	 this._$publisherInput.typeahead()
-				   				   	  	  .data('tagsinput')
-								  	  	  .itemsArray : null;
-	
-	this.developer = this._$developerInput.length ? 
-				 	 this._$developerInput.typeahead()
-				   				   	  	  .data('tagsinput')
-								  	  	  .itemsArray : null;
-										  
-	this.usDate = this._$usDateInput.val() || null;
+	this.platforms = this._getGroupValue(this._$platformGroup);
+	this.publisher = this._getTypeaheadValue(this._$publisherInput);
+	this.developer = this._getTypeaheadValue(this._$developerInput);
+	this.usDate = this._getInputValue(this._$usDateInput);
 	
 	this.json.platforms = this.platforms;
 	this.json.publisher = this.publisher;

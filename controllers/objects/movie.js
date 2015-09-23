@@ -1,97 +1,62 @@
-function Movie() {
+function Movie(o) {
+	Formain.call(this, o);
 	
 	/** 
 	 * PRIVATE
 	 */
-	 
-	var self = this;
 	
-	var $mainInput = $('#movieMainInput'),
-		$posterInput = $('#moviePosterInput'),
-		$enNameInput = $('#movieEnNameInput'),
-		$bgNameInput = $('#movieBgNameInput'),
-		$serieInput = $('#movieSerieInput'),
-		$tagInput = $('#movieTagInput'),
-		$stickersInput = $('#movieStickersInput'),
-		$genreInput = $('#movieGenreGroup'),
-		$castInput = $('#movieCastInput'),
-		$directorInput = $('#movieDirectorInput'),
-		$writerInput = $('#movieWriterInput'),
-		$cameraInput = $('#movieCameraInput'),
-		$musicInput = $('#movieMusicInput'),
-		$bgDateInput = $('#movieBgDateInput'),
-		$worldDateInput = $('#movieWorldDateInput'),
-		$timeInput = $('#movieTimeInput'),
-		$similarInput = $('#movieSimilarInput');
+	this._$posterInput = $('#' + o + 'PosterInput');
 	
-	
-	
+	this._$castInput = $('#' + o + 'CastInput');
+	this._$directorInput = $('#' + o + 'DirectorInput');
+	this._$writerInput = $('#' + o + 'WriterInput');
+	this._$cameraInput = $('#' + o + 'CameraInput');
+	this._$musicInput = $('#' + o + 'MusicInput');
+	this._$worldDateInput = $('#' + o + 'WorldDateInput');
+	this._$timeInput = $('#' + o + 'TimeInput');
 	
 	/** 
 	 * PUBLIC
-	 * Variables without value are objects.
 	 */
+	 
+	this.poster; 
 
-	this.main = "assets/bwe/movie-tag.jpg";
-	this.poster = "movie-tag-poster.jpg";
-	this.enName = "Title Case String";
-	this.bgName = "Title Case String";
-	this.serie = "object-tag";
-	this.tag = "object-tag";
-	this.stickers;
-	this.genre = [];
 	this.cast;
-	this.directors;
-	this.writers;
+	this.director;
+	this.writer;
 	this.camera;
 	this.music;
-	this.bgDate = new Date();
-	this.worldDate = new Date();
-	this.time = 0;
-	this.similar = "object-tag,object-tag,object-tag";
+	this.worldDate;
+	this.time;
+}
+
+Movie.prototype = Object.create(Formain.prototype);
+Movie.prototype.constructor = Movie;
+
+Movie.prototype.save = function() { 
+	Formain.prototype.save.call(this);
 	
-	/**
-	 * TODO: Validate fields.
-	 */
+	this.cast = this._getTypeaheadValue(this._$castInput);							
+	this.director = this._getTypeaheadValue(this._$directorInput);
+	this.writer = this._getTypeaheadValue(this._$writerInput);
+	this.camera = this._getTypeaheadValue(this._$cameraInput);
+	this.music = this._getTypeaheadValue(this._$musicInput);  
+	this.worldDate = this._getInputValue(this._$worldDateInput);
+	this.time = this._getInputValue(this._$timeInput);
 	
-	this.save = function () {
-		
-		/**
-		 * Images names are made from tag and number.
-		 * Fisrst strip the path, than strip the tag.
-		 * Only store the image index and format.
-		 */
-		
-		self.main = $mainInput.val().split('\\').pop() || 
-					self.main.split('\\').pop();
-					
-		self.poster = $posterInput.val().split('/').pop().split('-').pop() || 
-					  self.poster.split('-').pop();			
-					
-		self.enName = $enNameInput.val();
-		self.bgName = $bgNameInput.val();
-		self.serie = $serieInput.val();
-		self.tag = $tagInput.val();
-		self.stickers = $stickersInput.typeahead().data('tagsinput').itemsArray;
-		self.genre = $genreInput.find(':checked').map(function (i, element) {
-			return {value: $(element).val(), 
-					text: $(element).parents('label').find('span').text()};
-		}).get();
-		self.cast = $castInput.typeahead().data('tagsinput').itemsArray;
-		self.directors = $directorInput.typeahead().data('tagsinput').itemsArray;
-		self.writers = $writerInput.typeahead().data('tagsinput').itemsArray;
-		self.camera = $cameraInput.typeahead().data('tagsinput').itemsArray;
-		self.music = $musicInput.typeahead().data('tagsinput').itemsArray;
-		self.bgDate = new Date($bgDateInput.val());
-		self.worldDate = new Date($worldDateInput.val());
-		self.time = $timeInput.val();
-		self.similar = $similarInput.val();
-	}
-	
-	
-	
-	
-	/** 
-	 * INIT
-	 */
+	this.json.cast = this.cast;
+	this.json.director = this.director;
+	this.json.writer = this.writer;
+	this.json.camera = this.camera;
+	this.json.music = this.music;
+	this.json.worldDate = this.worldDate;
+	this.json.time = this.time;
+}
+
+/**
+ * TODO: The final function will not work like this.
+ */
+
+Game.prototype.uploadPosterImage = function() { 
+	this.poster = utils.parseImgIndex($posterInput.val());
 }

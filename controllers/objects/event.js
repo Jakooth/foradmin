@@ -1,74 +1,34 @@
-function Happening() {
+function Happening(o) {
+	Formain.call(this, o);
 	
 	/** 
 	 * PRIVATE
 	 */
-	 
-	var self = this;
 	
-	var $mainInput = $('#eventMainInput'),
-		$enNameInput = $('#eventEnNameInput'),
-		$artistInput = $('#eventArtistInput'),
-		$tagInput = $('#eventTagInput'),
-		$stickersInput = $('#eventStickersInput'),
-		$genreInput = $('#eventGenreGroup'),
-		$countrySelect = $('#eventCountrySelect'),
-		$cityInput = $('#eventCityInput'),
-		$dateInput = $('#eventDateInput'),
-		$similarInput = $('#eventSimilarInput');
-	
-	
-	
+	this._$artistInput = $('#' + o + 'ArtistInput');
+	this._$endDateInput = $('#' + o + 'EndDateInput');
+	this._$cityInput = $('#' + o + 'CityInput');
 	
 	/** 
 	 * PUBLIC
-	 * Variables without value are objects.
 	 */
+	 
+	this.artists;
+	this.endDate;
+	this.city;
+}
 
-	this.main = "C:/fakepath/object-tag-index.png";
-	this.enName = "Title Case String";
-	this.artist;
-	this.country = "Country";
-	this.city = "City";
-	this.tag = "object-tag";
-	this.stickers;
-	this.genre = [];
-	this.date = new Date();
-	this.similar = "object-tag,object-tag,object-tag";
+Happening.prototype = Object.create(Formain.prototype);
+Happening.prototype.constructor = Happening;
+
+Happening.prototype.save = function() { 
+	Formain.prototype.save.call(this);
 	
-	/**
-	 * TODO: Validate fields.
-	 */
+	this.artists = this._getTypeaheadValue(this._$artistInput);
+	this.endDate = this._getInputValue(this._$endDateInput);
+	this.city = this._getInputValue(this._$cityInput);
 	
-	this.save = function () {
-		
-		/**
-		 * Images names are made from tag and number.
-		 * Fisrst strip the path, than strip the tag.
-		 * Only store the image index and format.
-		 */
-		
-		self.main = $mainInput.val().split('/').pop().split('-').pop() || 
-					self.main.split('-').pop();
-		
-		self.enName = $enNameInput.val();
-		self.artist = $artistInput.typeahead().data('tagsinput').itemsArray;
-		self.country = $countrySelect.find(':selected').text();
-		self.city = $cityInput.val();
-		self.tag = $tagInput.val();
-		self.stickers = $stickersInput.typeahead().data('tagsinput').itemsArray;
-		self.genre = $genreInput.find(':checked').map(function (i, element) {
-			return {value: $(element).val(), 
-					text: $(element).parents('label').find('span').text()};
-		}).get();
-		self.date = new Date($dateInput.val());
-		self.similar = $similarInput.val();
-	}
-	
-	
-	
-	
-	/** 
-	 * INIT
-	 */
+	this.json.artists = this.artists;
+	this.json.endDate = this.endDate;
+	this.json.city = this.city;
 }

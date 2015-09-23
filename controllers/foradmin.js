@@ -409,8 +409,8 @@ function AdminManager() {
 	this.loadOptions($('#characterTypeSelect'), type, 'option');
 	this.loadOptions($('#serieTypeSelect'), type, 'option');
 	
-	initStickersTagInput(stickers, 'stickers', '#movieStickersInput');
 	initTagInput(games, 'games', '#dlcRelatedInput', 1);
+	initTagInput(persons, 'persons', '#bandRelatedInput', 1);
 	
 	/**
 	 * ASIDE
@@ -457,6 +457,7 @@ function AdminManager() {
 	this.loadOptions($('#movieGenreGroup'), movieGenres, 'checkbox');
 	
 	initTagInput(series, 'series', '#movieSerieInput', 1);
+	initStickersTagInput(stickers, 'stickers', '#movieStickersInput');
 	initTagInput(movies, 'movies', '#movieSimilarInput');
 	initTagInput(persons, 'persons', '#movieCastInput');
 	initTagInput(persons, 'persons', '#movieDirectorInput');
@@ -477,7 +478,6 @@ function AdminManager() {
 	initTagInput(companies, 'companies', '#gameDeveloperInput', 1);
 	initTagInput(games, 'games', '#gameSimilarInput');
 	
-	
 	/**
 	 * MUSIC::ALBUM
 	 */
@@ -497,6 +497,7 @@ function AdminManager() {
 	this.loadOptions($('#eventCountrySelect'), countries, 'option');
 	
 	initTagInput(music, 'music', '#eventArtistInput');
+	initTagInput(series, 'series', '#eventSerieInput', 1);
 	initStickersTagInput(stickers, 'stickers', '#eventStickersInput');
 	initTagInput(music, 'music', '#eventSimilarInput');
 	
@@ -870,59 +871,50 @@ function AdminManager() {
 							 .val(utils.formatTag($this.val()));
 	});
 	
-	$('#game').on('click', 'button.save', function(e) {
-		var o = new Game('game');
+	$('#game, #movie, #album, ' + 
+	  '#event, #book, #platform, ' +
+	  '#genre').on('click', 'button.save', function(e) {
+		
+		var id = $(this).parents('section').prop('id'),
+			o;
+			
+		switch (id) {
+			case 'game':
+				var o = new Game(id);
+				
+				break;
+			case 'movie':
+				var o = new Movie(id);
+				
+				break;
+			case 'album':
+				var o = new Album(id);
+				
+				break;
+			case 'event':
+				var o = new Event(id);
+				
+				break;
+			case 'book':
+				var o = new Platform(id);
+				
+				break;
+			case 'platform':
+				var o = new Platform(id);
+				
+				break;
+			case 'genre':
+				var o = new Genre(id);
+				
+				break;	
+		}
 		
 		o.save();
 		o.post();
 	});
 	
-	$('#movie').on('click', 'button.save', function(e) {
-		var o = new Movie();
-		
-		o.save();
-		
-		self.showSectionInWindow('#xml');
-		utils.xml(o, 'movie', '#xmlCodeOutput');	
-		
-		console.log(o);
-	});
-	
-	$('#album').on('click', 'button.save', function(e) {
-		var o = new Album();
-		
-		o.save();
-		
-		self.showSectionInWindow('#xml');
-		utils.xml(o, 'album', '#xmlCodeOutput');	
-		
-		console.log(o);
-	});
-	
-	$('#event').on('click', 'button.save', function(e) {
-		var o = new Happening();
-		
-		o.save();
-		
-		self.showSectionInWindow('#xml');
-		utils.xml(o, 'event', '#xmlCodeOutput');	
-		
-		console.log(o);
-	});
-	
-	$('#book').on('click', 'button.save', function(e) {
-		var o = new Book();
-		
-		o.save();
-		
-		self.showSectionInWindow('#xml');
-		utils.xml(o, 'book', '#xmlCodeOutput');	
-		
-		console.log(o);
-	});
-	
 	$('#company, #person, #character, ' + 
-	  '#serie, #dlc').on('click', 'button.save', function(e) {
+	  '#serie, #dlc, #band').on('click', 'button.save', function(e) {
 		  
 		var o = new Fortag($(this).parents('section').prop('id'));
 		

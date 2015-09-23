@@ -16,11 +16,11 @@
                     </label>
                 </div>
             </div>
-            <admin:formItem id="gameEnNameInput" label="Оригинално име на играта" 
+            <admin:formItem id="gameEnNameInput" label="Игра" 
             				placeholder="Grand Theft Auto 5" type="text" />
             <admin:formItem id="gameTagInput" label="Таг" 
             				placeholder="gta-5" type="text" />
-            <admin:formItem id="gameBgNameInput" label="Име на играта на български" 
+            <admin:formItem id="gameBgNameInput" label="Име на български" 
             				placeholder="Гранд Тефт Ауто 5" type="text" />
             <admin:formItem id="gameTypeSelect" label="Тип" type="hidden" value="games" />
             <admin:formItem id="gameSerieInput" label="Поредица" 
@@ -34,7 +34,7 @@
             <admin:formItem id="gamePlatformGroup" label="Платформа" type="group">
                 <!--AdminManager.js-->
             </admin:formItem>
-            <admin:formItem id="gamePublisherInput" label="Разпространител" 
+            <admin:formItem id="gamePublisherInput" label="Издател" 
             				placeholder="SEGA" type="text" 
                             autocomplete="off" url="company" layout="one-col" />
             <admin:formItem id="gameDeveloperInput" label="Разработчик" 

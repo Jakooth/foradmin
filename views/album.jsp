@@ -8,20 +8,24 @@
             <admin:menuItem label="Добави информация за албума и създай таг." title="Албум" url="album" />
         </h2>
         <form>
-        	<div class="Main" role="group">
+            <div class="Main" role="group">
                 <div class="file">
-                    <label><span class="clip">Избери</span>
+                    <label>
+                        <span class="clip">Избери</span>
                         <input id="albumMainInput" type="file" />
                     </label>
                 </div>
             </div>
-            <admin:formItem id="albumEnNameInput" label="Оригинално име на албума" 
+            <admin:formItem id="albumEnNameInput" label="Албум" 
             				placeholder="Sacrifice To Venus" type="text" />
+            <admin:formItem id="albumTagInput" label="Таг" 
+            				placeholder="sacrifice-to-venus" type="text" />
+            <admin:formItem id="albumBgNameInput" label="Име на български" 
+            				placeholder="" type="text" />
+            <admin:formItem id="albumTypeSelect" label="Тип" type="hidden" value="music" />
             <admin:formItem id="albumArtistInput" label="Изпълнител" 
             				placeholder="Emil Bulls" type="text" 
                             autocomplete="off" url="person" layout="one-col" />
-            <admin:formItem id="albumTagInput" label="Таг" 
-            				placeholder="sacrifice-to-venus" type="text" />
             <admin:formItem id="albumStickersInput" label="Стикери" 
             				placeholder="Broadsword, Soccer ball, Female elf face" type="text" />
             <admin:formItem id="albumGenreGroup" label="Жанр" type="group">
