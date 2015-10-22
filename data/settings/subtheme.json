@@ -1,10 +1,10 @@
-[ { "text" : "lighten",
-    "value" : "FFFFFF"
-  },
-  { "text" : "darken",
-    "value" : "000000"
-  },
-  { "text" : "tuborg",
-    "value" : "33CC33"
-  }
-]
+{ "tags" : [ { "name" : "lighten",
+        "tag" : "FFFFFF"
+      },
+      { "name" : "darken",
+        "tag" : "000000"
+      },
+      { "name" : "tuborg",
+        "tag" : "33CC33"
+      }
+    ] }

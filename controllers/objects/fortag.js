@@ -4,7 +4,7 @@ function Fortag(o) {
 	 * PRIVATE
 	 */
 	
-	this._url = "http://localhost/forapi/save.php";
+	this._url = 'http://localhost/forapi/save.php';
 	this._isValid = true;
 	
 	this._$mainInput = $('#' + o + 'MainInput');
@@ -55,7 +55,7 @@ Fortag.prototype._getInputValue = function(_$input) {
  * PUBLIC
  */
 
-Fortag.prototype.save = function() {	
+Fortag.prototype.save = function() {
 	this.enName = this._getInputValue(this._$enNameInput);
 	this.bgName = this._getInputValue(this._$bgNameInput);
 	this.date = this._getInputValue(this._$dateInput);

@@ -33,6 +33,9 @@
                 <li>
                     <admin:menuItem label="action, adventure, open-mmo" title="Жанр" url="genre" />
                 </li>
+                <li>
+                    <admin:menuItem label="broadsword, soccer-ball, female-elf-face" title="Стикер" url="sticker" />
+                </li>
             </ul>
         </nav>
     </section>

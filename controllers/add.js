@@ -6,7 +6,7 @@ function AddManager() {
 	 
 	var self = this;
 	
-	var gamePlatforms = 'data/platforms.json';
+	var platforms = 'http://localhost/forapi/get.php?object=platform';
 	
 	
 	
@@ -134,9 +134,14 @@ function AddManager() {
 				e.editor.setReadOnly(false);
 			});
 			
+			/**
+			 * TODO: Now author is used instead option,
+			 * because from MySQL we get en_name and not name.
+			 * Do something to deal with this issue.
+			 */
 			admin.loadOptions($layout.find('.insideLayout .settings select:eq(1)'), 
-							  'data/authors.json', 
-							  'option');
+							  'http://localhost/forapi/get.php?object=author', 
+							  'author');
 		}).fail(function() {
 			alert("Failed to load layout.");
 		});
@@ -182,7 +187,7 @@ function AddManager() {
 			
 			$(document).scrollTop($appender.offset().top);
 			
-			admin.loadOptions($box.find('.platform:last-of-type select'), gamePlatforms, 'option');
+			admin.loadOptions($box.find('.platform:last-of-type select'), platforms, 'option');
 			utils.convertSVG($box.find('img'));
 		}).fail(function() {
 			alert("Failed to load platforms.");

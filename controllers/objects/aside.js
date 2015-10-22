@@ -4,121 +4,132 @@ function Aside() {
 	 * PRIVATE
 	 */
 	 
-	var self = this;
+	this._o = 'aside';
+	this._url = 'http://localhost/forapi/save_aside.php';
+	this._isValid = true;
 	
-	var $aside = $('#aside'),
-		$tagsInput = $('#publishTagsInput'),
-		$dateInput = $('#publishDateInput'),
-		$urlInput = $('#publishUrlInput'),
-		$timeInput = $('#publishTimeInput'),
-		$issueInput = $('#publishIssueInput'),
-		$typeInput = $('#asideTypeSelect'),
-		$titleInput = $('#asideTitleInput'),
-		$subtitleInput = $('#asideSubtitleInput'),
-		$authorsInput = $('#asideAuthorsInput'),
-		$mainInput = $('#asideMainInput');
+	this._$shot = $('#' + this._o + 'MainShotInput');
 	
+	this._$typeInput = $('#' + this._o + 'TypeSelect');
+	this._$subtypeInput = $('#' + this._o + 'SubtypeSelect');
+	this._$titleInput = $('#' + this._o + 'TitleInput');
+	this._$subtitleInput = $('#' + this._o + 'SubtitleInput');
+	this._$authorInput = $('#' + this._o + 'AuthorInput');
 	
-	
+	this._$tagsInput = $('#publishTagsInput');
+	this._$siteInput = $('#publishSiteInput');
+	this._$urlInput = $('#publishUrlInput');
+	this._$dateInput = $('#publishDateInput');
+	this._$issueInput = $('#publishIssueDateInput');
+	this._$previewInput = $('#publishPreviewInput');
+	this._$prioritySelect = $('#publishPriorityInput');
 	
 	/** 
 	 * PUBLIC
 	 */
-	
-	/**
-	 * Publish
-	 */
 
-	this.prime = "object-tag";
-	this.tags = "";
-	this.site = "forplay";
-	this.url = "prime-tag";
-	this.date = new Date();
-	this.issue = "issue-tag";
-	
-	/**
-	 * Subject
-	 */
+	this.shot_img;
+	this.layouts = [];
 	
 	this.type;
-	this.subtype = {'tag': 'caret',
-					 'bg': 'каре'};
-	this.title = "Title Case String";
-	this.subtitle = "Title Case String";
-	this.authors = "Author,Author,Author";
-	this.center;
+	this.subtype;
+	this.title;
+	this.subtitle;
+	this.author;
 	
-	/**
-	 * Cover
-	 */
+	this.prime;
+	this.tags;
+	this.site;
+	this.url;
+	this.date;
+	this.issue;
+	this.preview;
+	this.priority;
 	
-	this.main = "game-tag-index.jpg"; 
+	this.json = {};
+}
+
+/** 
+ * PRIVATE
+ */
+
+Aside.prototype._getTypeaheadValue = function(_$input) {
+	Fortag.prototype._getTypeaheadValue.call(this, _$input);
+}
+
+Aside.prototype._getInputValue = function(_$input) {
+	Fortag.prototype._getInputValue.call(this, _$input);
+}
+
+/** 
+ * PUBLIC
+ */
+
+Aside.prototype.save = function() {
+	this.type = this._getInputValue(this._$typeInput);
+	this.subtype = this._getInputValue(this._$subtypeInput);
+	this.title = this._getInputValue(this._$titleInput);
+	this.subtitle = this._getInputValue(this._$subtitleInput);
+	this.author = this._getTypeaheadValue(this._$authorInput);
 	
-	/**
-	 * TODO: Validate fields.
-	 */
+	this.json = {
+		type: this.type,
+		subtype: this.subtype,
+		title: this.title,
+		subtitle: this.subtitle,
+		author: this.author
+	};
+}
+
+Aside.prototype.publish = function() {
+	this.tags = this._getTypeaheadValue(this._$tagsInput);
+	this.prime = this.tags ? this.tags[0] : this.tags;
+	this.site = this._getInputValue(this._$siteInput);
+	this.url = this._getInputValue(this._$urlInput);
+	this.date = this._getInputValue(this._$dateInput);
+	this.issue = this._getInputValue(this._$issueInput);
+	this.preview = this._getInputValue(this._$previewInput);
+	this.priority = this._getInputValue(this._$priorityInput);
 	
-	this.save = function () {
-		self.type = {'tag': $typeInput.val(),
-					 'bg': $typeInput.find(':selected').text()};
-		self.title = $titleInput.val();
-		self.subtitle = $subtitleInput.val();
-		self.authors = $authorsInput.parents('label').find('.tag').map(function (i, element) {
-			return $(element).text();
-		}).get().join(",");
+	this.json.tags = this.tags;
+	this.json.prime = this.prime;
+	this.json.site = this.site;
+	this.json.url = this.url;
+	this.json.date = this.date;
+	this.json.issue = this.issue;
+	this.json.preview = this.preview;
+	this.json.priority = this.priority;
+}
+
+Aside.prototype.post = function() {
+	var self = this;
 		
-		/**
-		 * Images names are made from tag and number.
-		 * Fisrst strip the path, than strip the tag.
-		 * Store the image index and format.
-		 * Also store the tag in case the prime tag is different.
-		 */
-		 
-		self.main = {tag: $mainInput.val().substring($mainInput.val().lastIndexOf('\\') + 1, 
-													 $mainInput.val().lastIndexOf('-')), 
-					 index: $mainInput.val().split('\\').pop().split('-').pop()}
-		
-		/**
-		 * Always clear the array before pushing new elements.
-		 */
-		
-		self.center = CKEDITOR.instances['textLayout_aside'].getData().replace(/\n/g, '');
-		
-		self.url = self.title.toLowerCase().replace(/[:?\.,!]|– |- /g, '');
-		self.url = self.url.replace(/ /g, '-');
-		
-		$urlInput.val(self.url);
-		$urlInput.parents('label').find('span').contents().last().replaceWith(self.url);
+	if (!this._isValid) {
+		return false;
 	}
-	 
-	this.publish = function () {
-		self.save();
-		
-		/**
-		 * In the input tags are stored in the sequence you add them,
-		 * but we want them in the order they appear in the UI.
-		 * Thus we return the SPAN elements and join the text in array.
-		 * The result is === to the input value.
-		 */
-		
-		self.prime = $tagsInput.parents('label').find('.tag').eq(0).data().item;
-		self.tags = $tagsInput.parents('label').find('.tag').map(function (i, element) {
-			return $(element).text();
-		}).get().join(",");
-		
-		if (self.type.tag == 'games') {
-			self.site = 'forplay';
+	
+	admin.showAlert({message: 'Записвам...', status: 'loading'});
+	
+	$.ajax({
+		type: "POST",
+		contentType: "application/json; charset=utf-8",
+		url: this._url,
+		data: JSON.stringify(this.json),
+		dataType: 'json'
+	}).done(function (data, textStatus, jqXHR) {
+		if (!data.events.mysql.connection) {
+			admin.showAlert({message: data.events.mysql.error, status: 'error'});
+		} else if (!data.events.mysql.result) {
+			admin.showAlert({message: data.events.mysql.error, status: 'error'});
 		} else {
-			self.site = 'forlife';
+			admin.showAlert({message: self.json.object
+										  .charAt(0).toUpperCase() + 
+									  self.json.object
+									  	  .slice(1) + ' saved', status: 'success'});
 		}
-		
-		self.date = new Date($dateInput.val() + ' ' + $timeInput.val());
-		self.issue = $issueInput.val();
-		
-		return self;
-	}
+	}).fail(function (data, textStatus, jqXHR) {
+		console.log(data);
+	});
 	
-	/** 
-	 * INIT
-	 */
+	return true;
 }

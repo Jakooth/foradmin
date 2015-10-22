@@ -6,7 +6,7 @@ span.twitter-typeahead input {
 	border: 1px solid #D9E021;
 }
 
-span.twitter-typeahead .tt-dropdown-menu {
+span.twitter-typeahead .tt-menu {
 	position: absolute;
 	top: 100%;
 	left: 0;
@@ -22,7 +22,7 @@ span.twitter-typeahead span {
 	margin-bottom: 0;
 }
 
-span.twitter-typeahead .tt-suggestion > p {
+span.twitter-typeahead .tt-suggestion {
 	display: block;
 	padding: 20px;
 	clear: both;
@@ -30,15 +30,15 @@ span.twitter-typeahead .tt-suggestion > p {
 	width: 100%;
 }
 
-span.twitter-typeahead .tt-suggestion > p.sticker {
+span.twitter-typeahead .tt-suggestion.sticker {
 	background-size: 64px 64px;
 	background-position: left;
 	background-repeat: no-repeat;
 	padding-left: 84px;
 }
 
-span.twitter-typeahead .tt-suggestion > p:hover,
-span.twitter-typeahead .tt-suggestion > p:focus {
+span.twitter-typeahead .tt-suggestion:hover,
+span.twitter-typeahead .tt-suggestion:focus {
 	color: #FFF;
 	text-decoration: none;
 	background-color: #C7B299;

@@ -12,17 +12,18 @@ function AdminManager() {
 	var hype = 'data/settings/hype.json';
 	var theme = 'data/settings/theme.json';
 	var subtheme = 'data/settings/subtheme.json';
-	var gameGenres = 'data/gamegenres.json';
-	var musicGenres = 'data/musicgenres.json';
-	var gamePlatforms = 'data/platforms.json';
-	var movieGenres = 'data/moviegenres.json';
-	var bookGenres = 'data/bookgenres.json';
+	var gameGenres = 'http://localhost/forapi/get.php?object=genre&type=games';
+	var musicGenres = 'http://localhost/forapi/get.php?object=genre&type=music';
+	var platforms = 'http://localhost/forapi/get.php?object=platform';
+	var movieGenres = 'http://localhost/forapi/get.php?object=genre&type=movies';
+	var bookGenres = 'http://localhost/forapi/get.php?object=genre&type=books';
 	var countries = 'data/settings/countries.json';
 	
 	var bloodhound = function(data, key) {
 		return new Bloodhound({
-			datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text', 'value'),
+			datumTokenizer: Bloodhound.tokenizers.obj.whitespace('en_name', 'tag'),
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
+			initialize: false,
 			
 			/**
 			 * Append some random numuber, to makes sure
@@ -33,26 +34,39 @@ function AdminManager() {
 			 * chrome://settings/cookies#cont
 			 */
 			 
-			prefetch: data + '?v=' + Math.round(Math.random() * 100000)
+			prefetch: {url: data, transform: function(data) {
+				return data.tags;
+			}}
 		});
+	}
+	
+	var parseBloodhound = function(data) {
+		return data.tags;
 	}
 	
 	var initTypeAhead = function(data, 
 								 text, 
 								 input, 
 								 displayKey) {
-		data.initialize();
- 
-		$(input).typeahead({
-			hint: true,
-			highlight: true,
-			minLength: 1
-		}, {
-		  	itemValue: 'value',
-  			itemText: displayKey || 'text',
-			name: text,
-		  	displayKey: displayKey || 'text',
-		  	source: data.ttAdapter()
+		
+		promise = data.initialize(true);
+		
+		promise.done(function() {
+			$(input).typeahead({
+				hint: true,
+				highlight: true,
+				minLength: 1
+			}, {
+				itemValue: 'tag',
+				itemText: displayKey || 'en_name',
+				name: text,
+				displayKey: displayKey || 'en_name',
+				source: data.ttAdapter()
+			});
+		}).fail(function() {
+			/**
+			 * TODO: Fail logic.
+			 */
 		});
 	}
 	
@@ -61,68 +75,101 @@ function AdminManager() {
 								input, 
 								maxTags, 
 								displayKey) {
-		data.initialize();
 		
-		$(input).tagsinput({
-			maxTags: maxTags || null,
-			itemValue: 'value',
-  			itemText: displayKey || 'text',
-			typeaheadjs: [{
-      			hint: true,
-				highlight: true
-			}, {
-				name: text,
-				displayKey: displayKey || 'text', 
-				source: data.ttAdapter()
-			}],
-			freeInput: false
-		});
+		promise = data.initialize(true);
+		
+		promise.done(function() {
+			$(input).tagsinput({
+				maxTags: maxTags || null,
+				itemValue: 'tag',
+				itemText: displayKey || 'en_name',
+				typeaheadjs: [{
+					hint: true,
+					highlight: true
+				}, {
+					name: text,
+					displayKey: displayKey || 'en_name', 
+					source: data.ttAdapter()
+				}],
+				freeInput: false
+			});
+		}).fail(function() {
+			/**
+			 * TODO: Fail logic.
+			 */
+		});	
 	}
+	
+	/**
+	 * TODO: Everything is the same like the @initTagInput, but
+	 * there is a template renderer function.
+	 * Try to move this function as an argument or something.
+	 */
 	
 	var initStickersTagInput = function(data, 
 								text, 
 								input, 
 								maxTags, 
 								displayKey) {
-		data.initialize();
 		
-		$(input).tagsinput({
-			maxTags: maxTags || null,
-			itemValue: 'value',
-  			itemText: displayKey || 'text',
-			typeaheadjs: [{
-      			hint: true,
-				highlight: true
-			}, {
-				name: text,
-				displayKey: displayKey || 'text', 
-				source: data.ttAdapter(),
-				templates: {
-					suggestion: function(data) {
-						return $.templates('<p class="sticker" style="background-image: ' + 
-										   'url(../assets/icons/' + 
-										   '{{:lib}}/' + 
-										   '{{:subtype}}/svg/000000/transparent/' + 
-										   '{{:value}}.svg)">{{:text}}</p></div>').render(data);
+		promise = data.initialize(true);
+		
+		promise.done(function() {
+			$(input).tagsinput({
+				maxTags: maxTags || null,
+				itemValue: 'tag',
+				itemText: displayKey || 'name',
+				typeaheadjs: [{
+					hint: true,
+					highlight: true
+				}, {
+					name: text,
+					displayKey: displayKey || 'name', 
+					source: data.ttAdapter(),
+					templates: {
+						suggestion: function(data) {
+							return $.templates('<div class="sticker" style="background-image: ' + 
+											   'url(../assets/icons/' + 
+											   '{{:lib}}/' + 
+											   '{{:subtype}}/svg/000000/transparent/' + 
+											   '{{:tag}}.svg)">{{:name}}</div>').render(data);
+						}
 					}
-				}
-			}],
-			freeInput: false
+				}],
+				freeInput: false
+			});				 
+		}).fail(function() {
+			/**
+			 * TODO: Fail logic.
+			 */
 		});
 	}
 
+	var games = bloodhound('http://localhost/forapi/get.php?object=game');
+	var stickers = bloodhound('http://localhost/forapi/get.php?object=sticker');
+	var companies = bloodhound('http://localhost/forapi/get.php?object=company');
+	var issues = bloodhound('http://localhost/forapi/get.php?object=issue');
+	var series = bloodhound('http://localhost/forapi/get.php?object=serie');
+	var movies = bloodhound('http://localhost/forapi/get.php?object=movie');
+	var authors = bloodhound('http://localhost/forapi/get.php?object=author');
+	var characters = bloodhound('http://localhost/forapi/get.php?object=character');
+	var persons = bloodhound('http://localhost/forapi/get.php?object=person');
+	var music = bloodhound('http://localhost/forapi/get.php?object=music');
+	var books = bloodhound('http://localhost/forapi/get.php?object=book');
 	
-	var games = bloodhound('data/objects/games.json');
-	var stickers = bloodhound('data/stickers.json');
-	var companies = bloodhound('data/objects/companies.json');
-	var issues = bloodhound('data/issues.json');
-	var series = bloodhound('data/objects/series.json');
-	var movies = bloodhound('data/objects/movies.json');
-	var authors = bloodhound('data/authors.json');
-	var characters = bloodhound('data/objects/characters.json');
-	var persons = bloodhound('data/objects/persons.json');
-	var music = bloodhound('data/objects/music.json');
-	var books = bloodhound('data/objects/books.json');
+	/**
+	 * Clear cache and reinitalize tag input.
+	 * The goal it to update typeahead data, after adding new tag.
+	 * TODO: Make this function with arguments.
+	 */
+	
+	this.updateTypeahead = function() {		
+		games.clearPrefetchCache();
+		
+		$("#gameSimilarInput").tagsinput('destroy');
+		
+		initTagInput(games, 'games', '#gameSimilarInput');
+	}
 	
 	/**
 	 * Merging all tags into a single data source.
@@ -251,8 +298,22 @@ function AdminManager() {
 			var tmpls = $.templates({
 					tmpl: tmpl[0]
 				}),
-				html = $.templates.tmpl.render(data[0]);
+				html,
+				json;
 			
+			/**
+			 * Data from PHP need to be parsed first.
+			 * Otherwise tags are available as property in a json file.
+			 */
+			
+			if (!data[0].tags) {
+				json = JSON.parse(data[0]).tags;
+			} else {
+				json = data[0].tags;
+			}
+			
+			html = $.templates.tmpl.render(json, {getId: utils.getObjectPropertyByIndex});
+				
 			target.append(html);
 		}).fail(function() {
 			alert("Failed to load options.");
@@ -427,7 +488,7 @@ function AdminManager() {
 	this.loadOptions($('#articleSubtypeSelect'), subtype, 'option');
 	this.loadOptions($('#articleHypeSelect'), hype, 'option');
 	this.loadOptions($('#articleTypeSelect'), type, 'option');
-	this.loadOptions($('#articleVersionTestedSelect'), gamePlatforms, 'option');
+	this.loadOptions($('#articleVersionTestedSelect'), platforms, 'option');
 	this.loadOptions($('#articleThemeSelect'), theme, 'option');
 	this.loadOptions($('#articleSubthemeSelect'), subtheme, 'option');
 	
@@ -470,7 +531,7 @@ function AdminManager() {
 	 */
 	
 	this.loadOptions($('#gameGenreGroup'), gameGenres, 'checkbox');
-	this.loadOptions($('#gamePlatformGroup'), gamePlatforms, 'checkbox');
+	this.loadOptions($('#gamePlatformGroup'), platforms, 'checkbox');
 	
 	initTagInput(series, 'series', '#gameSerieInput', 1);
 	initStickersTagInput(stickers, 'stickers', '#gameStickersInput');
@@ -789,7 +850,7 @@ function AdminManager() {
 	});
 	
 	$('#article').on('click', 'button.save, button.publish', function(e) {
-		var a = new Article();
+		var a = new Review();
 		
 		a.save();
 		
@@ -852,7 +913,7 @@ function AdminManager() {
 	 */
 	
 	$('#aside').on('click', 'button.save, button.publish', function(e) {
-		var a = new Aside();
+		var a = new Caret();
 		
 		a.save();
 		
@@ -863,7 +924,6 @@ function AdminManager() {
 		console.log(window.admin.publishTarget);
 	});
 	
-	
 	$('main').on('keyup', '[id*=EnNameInput]',  function(e) {
 		var $this = $(this);												 
 														 
@@ -871,9 +931,40 @@ function AdminManager() {
 							 .val(utils.formatTag($this.val()));
 	});
 	
+	$('main').on('change', '[type=hidden]',  function(e) {
+		var $this = $(this);												 
+														 
+		$this.next('span').find('b').text($this.val());
+	});
+	
+	$('main').on('change', '[id*=sticker]',  function(e) {
+		var $this = $(this);
+		
+		var tag = $('#stickerTagInput').val(),
+			lib = $('#stickerLibInput').val(),
+			subtype = $('#stickerSubtypeSelect').val();
+														 
+		$this.parents('section').find('.Main .file')
+			 .css('background-image', 
+				  'url(../assets/icons/' + 
+				   lib + '/' + 
+				   subtype + '/svg/000000/transparent/' + 
+				   tag + '.svg)');
+	});
+	
+	$('main').on('change', '#stickerMainInput',  function(e) {
+		var $this = $(this);
+		
+		var tag = utils.parseImg($this.val()),
+			enName = utils.parseStickerName(tag);
+		
+		$('#stickerTagInput').val(tag);
+		$('#stickerEnNameInput').val(enName);
+	});
+	
 	$('#game, #movie, #album, ' + 
 	  '#event, #book, #platform, ' +
-	  '#genre').on('click', 'button.save', function(e) {
+	  '#genre, #sticker').on('click', 'button.save', function(e) {
 		
 		var id = $(this).parents('section').prop('id'),
 			o;
@@ -905,6 +996,10 @@ function AdminManager() {
 				break;
 			case 'genre':
 				var o = new Genre(id);
+				
+				break;
+			case 'sticker':
+				var o = new Sticker(id);
 				
 				break;	
 		}

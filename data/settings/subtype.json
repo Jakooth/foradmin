@@ -1,13 +1,13 @@
-[ { "text" : "ревю",
-    "value" : "review"
-  },
-  { "text" : "мнение",
-    "value" : "feature"
-  },
-  { "text" : "новина",
-    "value" : "news"
-  },
-  { "text" : "видео ревю",
-    "value" : "video"
-  }
-]
+{ "tags" : [ { "name" : "ревю",
+        "tag" : "review"
+      },
+      { "name" : "мнение",
+        "tag" : "feature"
+      },
+      { "name" : "новина",
+        "tag" : "news"
+      },
+      { "name" : "видео ревю",
+        "tag" : "video"
+      }
+    ] }

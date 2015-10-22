@@ -1,4 +1,4 @@
-function Article() {
+function Review() {
 	
 	/** 
 	 * PRIVATE

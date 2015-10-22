@@ -63,27 +63,30 @@
     <script src="controllers/objects/layout.js?v=1.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/objects/article.js?v=1.0.0">
-                <!--script-->
-            </script>                   
-	<script src="controllers/objects/quote.js?v=1.0.0">
-                <!--script-->
-            </script>
     <script src="controllers/objects/aside.js?v=1.0.0">
                 <!--script-->
-            </script> 
-	<script src="controllers/objects/fortag.js?v=1.0.0">
+            </script>
+	<script src="controllers/objects/review.js?v=1.0.0">
                 <!--script-->
-            </script> 
-	<script src="controllers/objects/formain.js?v=1.0.0">
+            </script>
+    <script src="controllers/objects/quote.js?v=1.0.0">
+                <!--script-->
+            </script>
+    <script src="controllers/objects/caret.js?v=1.0.0">
+                <!--script-->
+            </script>
+    <script src="controllers/objects/fortag.js?v=1.0.0">
+                <!--script-->
+            </script>
+    <script src="controllers/objects/formain.js?v=1.0.0">
                 <!--script-->
             </script>
     <script src="controllers/objects/game.js?v=1.0.0">
                 <!--script-->
-            </script> 
+            </script>
     <script src="controllers/objects/movie.js?v=1.0.0">
                 <!--script-->
-            </script>    
+            </script>
     <script src="controllers/objects/album.js?v=1.0.0">
                 <!--script-->
             </script>
@@ -92,14 +95,17 @@
             </script>
     <script src="controllers/objects/book.js?v=1.0.0">
                 <!--script-->
-            </script>                                 
-	<script src="controllers/objects/platform.js?v=1.0.0">
+            </script>
+    <script src="controllers/objects/platform.js?v=1.0.0">
                 <!--script-->
             </script>
     <script src="controllers/objects/genre.js?v=1.0.0">
                 <!--script-->
-            </script>         
-	<script>$(document).ready(function() { 
+            </script>
+    <script src="controllers/objects/sticker.js?v=1.0.0">
+                <!--script-->
+            </script>
+    <script>$(document).ready(function() { 
 				window.utils = new UtilsManager(); 
 				window.admin = new AdminManager(); 
 				window.add = new AddManager(); });</script>
@@ -200,12 +206,14 @@
         <jsp:include page="views/publish.jsp" />
         <jsp:include page="views/xml.jsp" />
         <jsp:include page="views/url.jsp" />
+        <jsp:include page="views/sticker.jsp" />
     </main>
     <footer>
         <p>&amp;copy; Copyright 2015 <a href="http://forplay.bg?video=castle-design">Castle
                 Design Ltd.</a> </p>
-        <p>Тази страница се придържа към <a href="http://www.mandate376.eu/">Европейските
+        <p>Тази страница се придържа към <a href="http://www.cencenelec.eu/News/Press_Releases/Pages/PR-2014-03.aspx">Европейските
                 Изисквания за Достъпност на Обществени Продукти и Услуги.</a> </p>
+        <p>Икони за кориците благодарение на <a href="http://game-icons.net/">Game-icons.net.</a> </p>
     </footer>
     <div class="Overlay">
         <!--foradmin.js-->

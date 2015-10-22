@@ -1,25 +1,25 @@
-[ { "text" : "цитат",
-    "value" : "aside,quote"
-  },
-  { "text" : "каре",
-    "value" : "aside,caret"
-  },
-  { "text" : "игра",
-    "value" : "games,game"
-  },
-  { "text" : "филм",
-    "value" : "movies,movie"
-  },
-  { "text" : "албум",
-    "value" : "music,album"
-  },
-  { "text" : "книга",
-    "value" : "books,book"
-  },
-  { "text" : "картинка",
-    "value" : "aside,image"
-  },
-  { "text" : "реклама",
-    "value" : "aside,adv"
-  }
-]
+{ "tags" : [ { "name" : "цитат",
+        "tag" : "aside,quote"
+      },
+      { "name" : "каре",
+        "tag" : "aside,caret"
+      },
+      { "name" : "игра",
+        "tag" : "games,game"
+      },
+      { "name" : "филм",
+        "tag" : "movies,movie"
+      },
+      { "name" : "албум",
+        "tag" : "music,album"
+      },
+      { "name" : "книга",
+        "tag" : "books,book"
+      },
+      { "name" : "картинка",
+        "tag" : "aside,image"
+      },
+      { "name" : "реклама",
+        "tag" : "aside,adv"
+      }
+    ] }
