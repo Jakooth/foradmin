@@ -269,8 +269,8 @@ function Review() {
 			
 			$layouts.each(function () {
 				self.layouts.push(new Layout($(this)
-											  .find('.center-col:visible')
-											  .attr('id')));
+											 .find('.center-col:visible')
+											 .attr('id')));
 			});
 		}
 		

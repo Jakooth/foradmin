@@ -826,6 +826,7 @@ form input[type=time],
 	left: 18%;
 	right: 18%;
 	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 22000;
 }
 
 .Window.Alert div[role=toolbar] {
@@ -837,6 +838,7 @@ form input[type=time],
 }
 
 .Window.Alert p {
+	width: 60%;
 	padding: 20px;
 	font-size: 14pt;
 	color: @light;
@@ -852,6 +854,13 @@ form input[type=time],
 
 .Window.Alert .error {
 	background-color: @red;	
+}
+
+.Window.Alert .warning {
+	background-color: none;
+	border-bottom: 128px solid @yellow;
+    border-left: 64px solid transparent;
+    border-right: 64px solid transparent;
 }
 
 .Window.Alert .success {

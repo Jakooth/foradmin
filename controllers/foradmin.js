@@ -19,17 +19,15 @@ function AdminManager() {
 	var bookGenres = 'http://localhost/forapi/get.php?object=genre&type=books';
 	var countries = 'data/settings/countries.json';
 	
-	var bloodhound = function(data, key) {
+	var bloodhound = function(data, nameField) {
+		var nameField = nameField || 'en_name';
+		
 		return new Bloodhound({
-			datumTokenizer: Bloodhound.tokenizers.obj.whitespace('en_name', 'tag'),
+			datumTokenizer: Bloodhound.tokenizers.obj.whitespace(nameField, 'tag'),
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			initialize: false,
 			
 			/**
-			 * Append some random numuber, to makes sure
-			 * the data source is not cached.
-			 * TODO: Remove this in the final version,
-			 * otherwise it will slow down performance.
 			 * Local storage DB ca be cleared from here in Chrome:
 			 * chrome://settings/cookies#cont
 			 */
@@ -49,7 +47,7 @@ function AdminManager() {
 								 input, 
 								 displayKey) {
 		
-		promise = data.initialize(true);
+		var promise = data.initialize(true);
 		
 		promise.done(function() {
 			$(input).typeahead({
@@ -76,7 +74,7 @@ function AdminManager() {
 								maxTags, 
 								displayKey) {
 		
-		promise = data.initialize(true);
+		var promise = data.initialize(true);
 		
 		promise.done(function() {
 			$(input).tagsinput({
@@ -112,7 +110,7 @@ function AdminManager() {
 								maxTags, 
 								displayKey) {
 		
-		promise = data.initialize(true);
+		var promise = data.initialize(true);
 		
 		promise.done(function() {
 			$(input).tagsinput({
@@ -148,7 +146,7 @@ function AdminManager() {
 	var games = bloodhound('http://localhost/forapi/get.php?object=game');
 	var stickers = bloodhound('http://localhost/forapi/get.php?object=sticker');
 	var companies = bloodhound('http://localhost/forapi/get.php?object=company');
-	var issues = bloodhound('http://localhost/forapi/get.php?object=issue');
+	var issues = bloodhound('http://localhost/forapi/get.php?object=issue', 'name');
 	var series = bloodhound('http://localhost/forapi/get.php?object=serie');
 	var movies = bloodhound('http://localhost/forapi/get.php?object=movie');
 	var authors = bloodhound('http://localhost/forapi/get.php?object=author');
@@ -160,12 +158,28 @@ function AdminManager() {
 	/**
 	 * Clear cache and reinitalize tag input.
 	 * The goal it to update typeahead data, after adding new tag.
-	 * TODO: Make this function with arguments.
 	 */
 	
 	this.updateTypeahead = function() {		
 		games.clearPrefetchCache();
+		stickers.clearPrefetchCache();
+		companies.clearPrefetchCache();
+		issues.clearPrefetchCache();
+		series.clearPrefetchCache();
+		movies.clearPrefetchCache();
+		authors.clearPrefetchCache();
+		characters.clearPrefetchCache();
+		persons.clearPrefetchCache();
+		music.clearPrefetchCache();
+		books.clearPrefetchCache();
 		
+		/**
+		 * TODO: List all inputs to update.
+		 * Everything is in the init part.
+		 * The other option is to update based on arguments:
+		 * data source and input;
+		 */
+		 
 		$("#gameSimilarInput").tagsinput('destroy');
 		
 		initTagInput(games, 'games', '#gameSimilarInput');
@@ -383,7 +397,7 @@ function AdminManager() {
 			self.showOverlay();
 			
 			$('body').append(html);
-			$('.Window :tabbable').eq(1).focus();
+			$('[role=dialog] :tabbable').eq(1).focus();
 			$(window).scrollTop(0);
 		}).fail(function() {
 			alert("Failed to load window.");
@@ -391,7 +405,7 @@ function AdminManager() {
 	}
 	
 	this.showAlert = function(message) {
-		var $alert = $('.Alert');
+		var $alert = $('[role=alertdialog]');
 		
 		/**
 		 * Allow only once instance of an alert.
@@ -425,10 +439,27 @@ function AdminManager() {
 	}
 	
 	this.hideSectionInWindow = function($view) {
-		$('main').append($view.hide());
-		$('.Window').remove();
 		
-		self.hideOverlay();
+		/**
+		 * Alerts do not have associated view section.
+		 */
+		 
+		if ($view.length <= 0) {
+			$('[role=alertdialog]').remove();
+		} else {
+			$('main').append($view.hide());
+			$('[role=dialog]').remove();
+		}
+		
+		/**
+		 * There is a case where we validate a dialog.
+		 * Hide the alert, but keep the overlay,
+		 * if a dialog is still open.
+		 */
+		
+		if ($('[role=dialog]:visible').length <= 0) {
+			self.hideOverlay();
+		}
 	}
 	
 	this.addBreadcrumb = function($section) {
@@ -493,7 +524,7 @@ function AdminManager() {
 	this.loadOptions($('#articleSubthemeSelect'), subtheme, 'option');
 	
 	initTagInput(authors, 'authors', '#articleAuthorsInput');
-	initTagInput(issues, 'issues', '#publishIssueInput', 1, 'value');
+	initTagInput(issues, 'issues', '#publishIssueInput', 1, 'name');
 	initTagsTagInput();
 	initTagsBWEInputs();
 	
@@ -645,11 +676,23 @@ function AdminManager() {
 	 * Windows
 	 */
 	
-	$('body').on('click', '.Window button', function(e) {
-		self.hideSectionInWindow($(this).parents('section'));
+	$('body').on('click', '[role*=dialog] button', function(e) {
+		var $this = $(this);													
+		
+		/**
+		 * Do not hide the dialog if there is validation message.
+		 * Hide it if this is an alert or cancel button.
+		 */
+		 
+		if (window.admin.publishTarget._isValid || 
+			$this.parents('[role=alertdialog]').length > 0 ||
+			$this.hasClass('cancel')) {
+			
+			self.hideSectionInWindow($this.parents('section'));
+		}
 	});
 	
-	$('body').on('click', '.Window h2 a', function(e) {
+	$('body').on('click', '[role=dialog] h2 a', function(e) {
 		e.preventDefault();
 	});
 	
@@ -658,12 +701,7 @@ function AdminManager() {
 		self.showSectionInWindow($(this).attr('href'));
 	});
 	
-	$('section:not(#publish)').on('click', 'button.publish', function(e) {
-		e.preventDefault();
-		self.showSectionInWindow('#publish');
-	});
-	
-	$('body').on('click', '.Window #search button.ok', function(e) {
+	$('body').on('click', '[role=dialog] #search button.ok', function(e) {
 		var img = $('#search input:checked').parents('label').find('img').attr('src');														 
 		window.admin.selectTarget.focus();
 		window.admin.selectTarget.find('input').val(img);
@@ -850,11 +888,15 @@ function AdminManager() {
 	});
 	
 	$('#article').on('click', 'button.save, button.publish', function(e) {
+		e.preventDefault();
+		
 		var a = new Review();
 		
 		a.save();
 		
 		window.admin.publishTarget = a;
+		
+		self.showSectionInWindow('#publish');
 		
 		/**
 		 * By default all news with video go with priority.
@@ -864,7 +906,11 @@ function AdminManager() {
 			$('#publishPrioritySelect').val('video').change();
 		}
 		
-		$('#publishPrioritySelect').prop('disabled', false);
+		$('#publishPrioritySelect [value=aside]').prop('disabled', true);
+		$('#publishPrioritySelect [value=cover]').prop('disabled', false);
+		$('#publishPrioritySelect [value=video]').prop('disabled', false);
+		$('#publishPrioritySelect [value=review]').prop('disabled', false);
+		$('#publishPrioritySelect [value=feature]').prop('disabled', false);
 		
 		console.log(window.admin.publishTarget);
 	});
@@ -872,25 +918,22 @@ function AdminManager() {
 	$('#publish').on('click', 'button.publish', function(e) {
 		var isArticle = $('#article').is(':visible');
 		
-		window.admin.publishTarget.publish();
-		
 		if (isArticle) {
+			window.admin.publishTarget.publish();
 			window.admin.publishTarget.hypeToString();
-		}
-		
-		self.showSection('#xml');
-		
-		if (isArticle) {
+			
+			self.showSection('#xml');
+			
 			utils.xml(window.admin.publishTarget, 'article', '#xmlCodeOutput');	
 		} else {
-			utils.xml(window.admin.publishTarget, 'aside', '#xmlCodeOutput');	
+			window.admin.publishTarget.publish();
 		}
 		
 		console.log(window.admin.publishTarget);
 	});
 	
 	$('#publish').on('change', '#publishTagsInput', function(e) {
-		window.admin.publishTarget.setUrl();													  
+		window.admin.publishTarget._setPrimeAndUrl();													  
 															  
 		$('#publishUrlInput').parents('label').find('span')
 							 .contents().last()
@@ -907,22 +950,32 @@ function AdminManager() {
 		
 		console.log(o);
 	});
-	
-	/**
-	 * Objects
-	 */
-	
+
 	$('#aside').on('click', 'button.save, button.publish', function(e) {
-		var a = new Caret();
+		e.preventDefault();
+		
+		var a = new Aside();
 		
 		a.save();
 		
 		window.admin.publishTarget = a;
+		
+		if (!a._isValid) return false;
+		
+		self.showSectionInWindow('#publish');
 
-		$('#publishPrioritySelect').prop('disabled', true);
+		$('#publishPrioritySelect [value=aside]').prop('disabled', false);
+		$('#publishPrioritySelect [value=cover]').prop('disabled', true);
+		$('#publishPrioritySelect [value=video]').prop('disabled', true);
+		$('#publishPrioritySelect [value=review]').prop('disabled', true);
+		$('#publishPrioritySelect [value=feature]').prop('disabled', true);
 		
 		console.log(window.admin.publishTarget);
 	});
+
+	/**
+	 * Objects
+	 */
 	
 	$('main').on('keyup', '[id*=EnNameInput]',  function(e) {
 		var $this = $(this);												 

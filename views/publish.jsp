@@ -23,6 +23,7 @@
             <admin:formItem id="publishPrioritySelect" label="Приоритет" type="select">
                 <option value="">Без приоритет</option>
                 <option value="cover">корица</option>
+                <option value="aside">каре</option>
                 <option value="video">видео</option>
                 <option value="review">ревю</option>
                 <option value="feature">мнение</option>

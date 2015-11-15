@@ -10,15 +10,16 @@
         <form>
             <h3>Тема</h3>
             <admin:formItem id="asideTypeSelect" label="Раздел" type="select" />
+            <admin:formItem id="asideSubtypeSelect" label="Подтип" type="hidden" value="aside" />
             <admin:formItem id="asideTitleInput" label="Заглавие" 
             				placeholder="Grand Theft Auto 5" type="text" />
             <admin:formItem id="asideSubtitleInput" label="Подзаглавие" 
-            				placeholder="Grand Theft Auto 5" type="text" />
+            				placeholder="Песен за Сам и Дан Хаузър..." type="text" />
             <admin:formItem id="asideAuthorsInput" label="Автори" 
             				placeholder="Snake, doomy" type="text" />
             <h3>Основна картинка</h3>
             <div class="Main" role="group">
-            	<div class="file">
+                <div class="file">
                     <input aria-label="Избери" 
                     	   id="asideMainInput" type="file" />
                 </div>

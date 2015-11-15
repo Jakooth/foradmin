@@ -51,6 +51,9 @@
     <script src="jslib/ckeditor/ckeditor.js">
                 <!--script-->
             </script>
+    <script src="jslib/he.js">
+                <!--script-->
+            </script>
     <script src="../controllers/utils.js?v=1.5.1">
                 <!--script-->
             </script>
@@ -60,25 +63,25 @@
     <script src="controllers/add.js?v=1.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/objects/layout.js?v=1.0.0">
+    <script src="controllers/objects/fortag.js?v=1.0.0">
+                <!--script-->
+            </script>
+    <script src="controllers/objects/formain.js?v=1.0.0">
+                <!--script-->
+            </script>
+	<script src="controllers/objects/layout.js?v=1.0.0">
                 <!--script-->
             </script>
     <script src="controllers/objects/aside.js?v=1.0.0">
                 <!--script-->
             </script>
-	<script src="controllers/objects/review.js?v=1.0.0">
+    <script src="controllers/objects/review.js?v=1.0.0">
                 <!--script-->
             </script>
     <script src="controllers/objects/quote.js?v=1.0.0">
                 <!--script-->
             </script>
     <script src="controllers/objects/caret.js?v=1.0.0">
-                <!--script-->
-            </script>
-    <script src="controllers/objects/fortag.js?v=1.0.0">
-                <!--script-->
-            </script>
-    <script src="controllers/objects/formain.js?v=1.0.0">
                 <!--script-->
             </script>
     <script src="controllers/objects/game.js?v=1.0.0">

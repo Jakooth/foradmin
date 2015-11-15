@@ -85,6 +85,8 @@ Fortag.prototype.uploadMainImage = function() {
 }
 
 Fortag.prototype.validateTag = function() {
+	this._isValid = true;
+	
 	if (!this.tag) {
 		this._isValid = false;
 		
@@ -102,7 +104,7 @@ Fortag.prototype.post = function() {
 	 * The only require field is TAG.
 	 * Minimum two characters are required for a tag.
 	 * All other can be updated at any time.
-	 * TODO: Move all stringa to external file.
+	 * TODO: Move all strings to external file.
 	 */
 	
 	this.validateTag();
