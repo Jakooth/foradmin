@@ -154,6 +154,7 @@ function AdminManager() {
 	var persons = bloodhound('http://localhost/forapi/get.php?object=person');
 	var music = bloodhound('http://localhost/forapi/get.php?object=music');
 	var books = bloodhound('http://localhost/forapi/get.php?object=book');
+	var tags = bloodhound('http://localhost/forapi/get.php');
 	
 	/**
 	 * Clear cache and reinitalize tag input.
@@ -172,6 +173,7 @@ function AdminManager() {
 		persons.clearPrefetchCache();
 		music.clearPrefetchCache();
 		books.clearPrefetchCache();
+		tags.clearPrefetchCache();
 		
 		/**
 		 * TODO: List all inputs to update.
@@ -181,8 +183,10 @@ function AdminManager() {
 		 */
 		 
 		$("#gameSimilarInput").tagsinput('destroy');
+		$("#publishTagsInput").tagsinput('destroy');
 		
 		initTagInput(games, 'games', '#gameSimilarInput');
+		initTagInput(tags, 'tags', '#publishTagsInput');
 	}
 	
 	/**
@@ -229,8 +233,12 @@ function AdminManager() {
 			
 			self.allTags.initialize();
 			
-			$('#publishTagsInput, ' + 
-			  '#personRelatedInput, ' +
+			/**
+			 * TODO: Now use the API to pick from all tags.
+			 * Thus move the selectors below.
+			 */
+			
+			$('#personRelatedInput, ' +
 			  '#imagesTagInput, ' + 
 			  '#searchTagInput, ' + 
 			  '#characterRelatedInput').tagsinput({
@@ -254,6 +262,7 @@ function AdminManager() {
 	
 	/**
 	 * Merging games and movie for better, worse and equal.
+	 * TODO: Now use the API to pick from all  tags.
 	 */
 	
 	var initTagsBWEInputs = function() {
@@ -299,7 +308,7 @@ function AdminManager() {
 	 * PUBLIC
 	 */
 	
-	this.allTags;
+	this.allTag;
 	this.bweTags;
 	this.selectTarget = null;
 	this.publishTarget = null;
@@ -525,6 +534,8 @@ function AdminManager() {
 	
 	initTagInput(authors, 'authors', '#articleAuthorsInput');
 	initTagInput(issues, 'issues', '#publishIssueInput', 1, 'name');
+	initTagInput(tags, 'tags', '#publishTagsInput');
+	
 	initTagsTagInput();
 	initTagsBWEInputs();
 	
@@ -926,7 +937,7 @@ function AdminManager() {
 			
 			utils.xml(window.admin.publishTarget, 'article', '#xmlCodeOutput');	
 		} else {
-			window.admin.publishTarget.publish();
+			window.admin.publishTarget.post();
 		}
 		
 		console.log(window.admin.publishTarget);

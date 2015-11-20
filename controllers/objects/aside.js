@@ -64,6 +64,7 @@ Aside.prototype._getInputValue = function(_$input) {
 }
 
 Aside.prototype._getLayoutData = function(id) {
+	
 	/**
 	 * TODO: Escape htmls using he.js.
 	 */
@@ -105,6 +106,7 @@ Aside.prototype._setPrimeAndUrl = function() {
 	 * The problem is tags input data will not five tags in order.
 	 * We need the firrst one to set the url.
 	 */
+	 
 	var $tags = this._$tagsInput.parents('label').find('.tag');
 		
 	if ($tags.length > 0) {
@@ -131,6 +133,7 @@ Aside.prototype.validateContent = function() {
 	
 	/**
 	 * TODO: Validate length match the the varchar field im the DB.
+	 * Note DB will throw error anyway.
 	 */
 	if (!this.title) {
 		this._isValid = false;
@@ -162,24 +165,11 @@ Aside.prototype.validateContent = function() {
 
 Aside.prototype.validatePublishSettings = function() {
 	this._isValid = true;
-	
-	/**
-	 * TODO: Validate tag, prime and url.
-	 */
 	 
 	if (this.tags.length <= 0) {
 		this._isValid = false;
 		
 		admin.showAlert({message: 'Изберете поне един таг.', 
-						 status: 'error'});
-		
-		return false;
-	}
-	
-	if (this.issue.length <= 0) {
-		this._isValid = false;
-		
-		admin.showAlert({message: 'Изберете брой.', 
 						 status: 'error'});
 		
 		return false;
@@ -225,7 +215,7 @@ Aside.prototype.save = function() {
 		title: this.title,
 		subtitle: this.subtitle,
 		author: this.author,
-		shot: this.shot_img,
+		shot_img: this.shot_img,
 		preview: this.preview
 	};
 	
@@ -246,11 +236,9 @@ Aside.prototype.publish = function() {
 	this.tags = this._getTypeaheadValue(this._$tagsInput);
 	this.site = this._getSiteValue();
 	
-	/**
-	 * TODO: This is date and time and not just date.
-	 */
 	this.date = new Date(this._getInputValue(this._$dateInput) + ' ' + 
 						 this._getInputValue(this._$timeInput));
+	
 	this.issue = this._getTypeaheadValue(this._$issueInput);
 	this.priority = this._getInputValue(this._$prioritySelect);
 	
@@ -288,9 +276,9 @@ Aside.prototype.post = function() {
 		} else if (!data.events.mysql.result) {
 			admin.showAlert({message: data.events.mysql.error, status: 'error'});
 		} else {
-			admin.showAlert({message: self.json.object
+			admin.showAlert({message: self._o
 										  .charAt(0).toUpperCase() + 
-									  self.json.object
+									  self._o
 									  	  .slice(1) + ' saved', status: 'success'});
 		}
 	}).fail(function (data, textStatus, jqXHR) {

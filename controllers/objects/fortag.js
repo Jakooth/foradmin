@@ -43,6 +43,9 @@ Fortag.prototype._getTypeaheadValue = function(_$input) {
 	return _$input.length ? 
 		   _$input.typeahead()
 		   		  .data('tagsinput')
+				  .itemsArray.length <= 0 ? null : 
+		   _$input.typeahead()
+		   		  .data('tagsinput')
 				  .itemsArray : null;
 }
 
