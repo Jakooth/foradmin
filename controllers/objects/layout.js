@@ -20,13 +20,13 @@ function Layout(id) {
 	 */
 	
 	this.id = id;
-	this.subtype = "text";
+	this.subtype = "t";
 	this.type = "text";
 	this.center;
-	this.left = false;
-	this.right = false;
+	this.left = null;
+	this.right = null;
 	this.imgs = [];
-	this.ratio = false;
+	this.ratio = '16-9';
 	
 	this.setCenter = function() {
 		self.center = CKEDITOR.instances[self.id].getData().replace(/\n/g, '');
@@ -79,24 +79,31 @@ function Layout(id) {
 				$ratio = $this.find('input[type=checkbox]'),
 				$video  = $this.find('input[type=text]'),
 				$tracklist = $this.find('select'),
-				$settings = false,
-				$author = false
-				$valign = false;	
+				$settings = null,
+				$author = null
+				$valign = null;	
 				
 			var img = $img.val(),
 				id = Math.round(Math.random() * 100000),
 				alt = $p.length == 0 ? "" : $p.html().replace(/br/g, 'br /'),
-				ratio = $ratio.is(':checked') ? $ratio.val() : false,
-				center = false,
-				author = false,
-				valign = false;
+				ratio = $ratio.is(':checked') ? $ratio.val() : '16-9',
+				center = null,
+				author = null,
+				align = null,
+				valign = null
+				tracklist = null;
 				
 			if (self.type == 'inside') {
 				$settings = $('#' + self.id).find('.settings');
 				$author = $settings.find('select').eq(1);
 				$valign = $settings.find('select').eq(0);
 				
-				valign = $valign.val();
+				/**
+				 * To save the layout in the DB we need align and valign
+				 * as separate values.
+				 */
+				align = $valign.val().split(' ')[1];
+				valign = $valign.val().split(' ')[0];
 				author = $author.val() == "" ? "" : $author.find(':selected').text();
 				center = CKEDITOR.instances[self.id.replace('insideLayout', 
 															'insideLayoutText')]
@@ -108,19 +115,34 @@ function Layout(id) {
 				}
 			}	
 			
+			if ($tracklist.length == 1) {
+				
+				/**
+				 * Simply confirm there is a tracklist. 
+				 * The link is derived from the prime tag.
+				 */
+				 
+				if ($tracklist.val()) { 
+					tracklist = true;
+					align = $tracklist.val().split(' ')[1];
+					valign = $tracklist.val().split(' ')[0]; 
+				}
+			}
+			
 			self.ratio = ratio;
 			self.imgs.push({tag: img.substring(img.lastIndexOf('\\') + 1, 
 											   img.lastIndexOf('-')), 
 							index: img.split('\\').pop().split('-').pop(), 
-							pointer: $p.data('pointer'),
+							pointer: $p.data('pointer') || '',
 							video: $video.val(),
 							player: id,
 							alt: alt,
 							ratio: ratio,
 							center: center,
 							author: author,
+							align: align,
 							valign: valign,
-							tracklist: $tracklist.val()});
+							tracklist: tracklist});
 		});
 	}
 }

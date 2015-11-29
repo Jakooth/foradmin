@@ -75,7 +75,7 @@
     <script src="controllers/objects/aside.js?v=1.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/objects/review.js?v=1.0.0">
+    <script src="controllers/objects/article.js?v=1.0.0">
                 <!--script-->
             </script>
     <script src="controllers/objects/quote.js?v=1.0.0">
@@ -124,8 +124,8 @@
             <button role="link" class="search" type="button">Търсене</button>
             <button role="link" class="logout" type="button">Изход</button>
         </div>
-        <nav aria-label="Създаване на обекти">
-            <h2>Създаване на обекти</h2>
+        <nav aria-label="Създаване на тагове">
+            <h2>Създаване на тагове</h2>
             <ul>
                 <li>
                     <admin:menuItem label="Игри" url="games"

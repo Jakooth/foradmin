@@ -497,6 +497,20 @@ function AdminManager() {
 		$('.breadcrumb li').remove();
 	}
 	
+	this.setDefaults = function() {
+		$('#articleTypeSelect').val('games').change();
+		$('#articleSubtypeSelect').val('news').change();
+		$('#articleVideoTechSelect').val('').change();
+		$('#articleAudioTechSelect').val('').change();
+		$('#articleBgHSelect').val('center').change();
+		$('#articleBgVSelect').val('top').change();
+		$('#articleThemeSelect').val('').change();
+		$('#articleSubthemeSelect').val('FFFFFF').change();
+		$('#publishDateInput').val(utils.today());
+		$('#publishTimeInput').val(utils.now());
+		$('#publishPrioritySelect').val('');
+	}
+	
 	
 	
 	
@@ -639,24 +653,25 @@ function AdminManager() {
 		
 		self.showSection(window.location.hash);
 		
-		/**
-		 * Default input values.
-		 */
+		$('body').trigger({
+			type: 'sectionshow',
+			section: window.location.hash.split('#')[1]
+		});
 		
-		$('#articleTypeSelect').val('games').change();
-		$('#articleSubtypeSelect').val('news').change();
-		$('#articleVideoTechSelect').val('').change();
-		$('#articleAudioTechSelect').val('').change();
-		$('#articleBgHSelect').val('center').change();
-		$('#articleBgVSelect').val('top').change();
-		$('#articleThemeSelect').val('').change();
-		$('#articleSubthemeSelect').val('FFFFFF').change();
-		$('#publishDateInput').val(utils.today());
-		$('#publishTimeInput').val(utils.now());
+		self.setDefaults();
 	});
 	
 	$('body').on('click', 'nav a:not(.active), header a:not(.active)', function(e) {
-		self.showSection($(this).attr('href'), $(this).parents().hasClass('breadcrumb'));
+		$this = $(this);																		
+																				
+		self.showSection($this.attr('href'), $this.parents().hasClass('breadcrumb'));
+		
+		$('body').trigger({
+			type: 'sectionshow',
+			section: $this.attr('href').split('#')[1]
+		});
+		
+		self.setDefaults();
 	});
 	
 	/**
@@ -898,14 +913,38 @@ function AdminManager() {
 		$('#article').removeClass().addClass(t1);
 	});
 	
-	$('#article').on('click', 'button.save, button.publish', function(e) {
+	$('#aside').on('click', 'button.save, button.publish', function(e) {
 		e.preventDefault();
 		
-		var a = new Review();
+		var a = new Aside('aside');
 		
 		a.save();
 		
 		window.admin.publishTarget = a;
+		
+		if (!a._isValid) return false;
+		
+		self.showSectionInWindow('#publish');
+
+		$('#publishPrioritySelect [value=aside]').prop('disabled', false);
+		$('#publishPrioritySelect [value=cover]').prop('disabled', true);
+		$('#publishPrioritySelect [value=video]').prop('disabled', true);
+		$('#publishPrioritySelect [value=review]').prop('disabled', true);
+		$('#publishPrioritySelect [value=feature]').prop('disabled', true);
+		
+		console.log(window.admin.publishTarget);
+	});
+	
+	$('#article').on('click', 'button.save, button.publish', function(e) {
+		e.preventDefault();
+		
+		var a = new Article('article');
+		
+		a.save();
+		
+		window.admin.publishTarget = a;
+		
+		if (!a._isValid) return false;
 		
 		self.showSectionInWindow('#publish');
 		
@@ -913,7 +952,7 @@ function AdminManager() {
 		 * By default all news with video go with priority.
 		 */
 		
-		if (a.video) {
+		if (a.videoUrl) {
 			$('#publishPrioritySelect').val('video').change();
 		}
 		
@@ -929,13 +968,13 @@ function AdminManager() {
 	$('#publish').on('click', 'button.publish', function(e) {
 		var isArticle = $('#article').is(':visible');
 		
+		/**
+		 * There is no longer difference between the two.
+		 * Keeping this code just in case.
+		 */
+		
 		if (isArticle) {
-			window.admin.publishTarget.publish();
-			window.admin.publishTarget.hypeToString();
-			
-			self.showSection('#xml');
-			
-			utils.xml(window.admin.publishTarget, 'article', '#xmlCodeOutput');	
+			window.admin.publishTarget.post();	
 		} else {
 			window.admin.publishTarget.post();
 		}
@@ -960,28 +999,6 @@ function AdminManager() {
 		utils.xml(o, 'quote', '#xmlCodeOutput');	
 		
 		console.log(o);
-	});
-
-	$('#aside').on('click', 'button.save, button.publish', function(e) {
-		e.preventDefault();
-		
-		var a = new Aside();
-		
-		a.save();
-		
-		window.admin.publishTarget = a;
-		
-		if (!a._isValid) return false;
-		
-		self.showSectionInWindow('#publish');
-
-		$('#publishPrioritySelect [value=aside]').prop('disabled', false);
-		$('#publishPrioritySelect [value=cover]').prop('disabled', true);
-		$('#publishPrioritySelect [value=video]').prop('disabled', true);
-		$('#publishPrioritySelect [value=review]').prop('disabled', true);
-		$('#publishPrioritySelect [value=feature]').prop('disabled', true);
-		
-		console.log(window.admin.publishTarget);
 	});
 
 	/**
@@ -1019,7 +1036,7 @@ function AdminManager() {
 	$('main').on('change', '#stickerMainInput',  function(e) {
 		var $this = $(this);
 		
-		var tag = utils.parseImg($this.val()),
+		var tag = utils.parseSticker($this.val()),
 			enName = utils.parseStickerName(tag);
 		
 		$('#stickerTagInput').val(tag);

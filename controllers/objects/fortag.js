@@ -50,7 +50,7 @@ Fortag.prototype._getTypeaheadValue = function(_$input) {
 }
 
 Fortag.prototype._getInputValue = function(_$input) {
-	return _$input.length ?
+	return _$input.length && _$input.is(':visible') ?
 		   _$input.val() || null : null;
 }
 

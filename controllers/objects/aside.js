@@ -1,16 +1,16 @@
-function Aside() {
+function Aside(o) {
 	
 	/** 
 	 * PRIVATE
 	 */
 	 
-	this._o = 'aside';
-	this._url = 'http://localhost/forapi/save_aside.php';
+	this._o = o;
+	this._url = 'http://localhost/forapi/save_article.php';
 	this._isValid = true;
-	this._bestLength = 300;
-	this._layoutSelector = 'textLayout_' + this._o;
+	this._bestPreviewLength = 300;
 	
-	this._$shotInput = $('#' + this._o + 'MainInput');
+	this._$this = $('#' + this._o);
+	this._$shotInput = $('#' + this._o + 'ShotInput');
 	
 	this._$typeInput = $('#' + this._o + 'TypeSelect');
 	this._$subtypeInput = $('#' + this._o + 'SubtypeSelect');
@@ -30,7 +30,7 @@ function Aside() {
 	 * PUBLIC
 	 */
 
-	this.shot_img;
+	this.shot;
 	this.center;
 	
 	this.type;
@@ -49,6 +49,7 @@ function Aside() {
 	this.priority;
 	
 	this.json = {};
+	this.layouts = [];
 }
 
 /** 
@@ -63,18 +64,13 @@ Aside.prototype._getInputValue = function(_$input) {
 	return Fortag.prototype._getInputValue.call(this, _$input);
 }
 
-Aside.prototype._getLayoutData = function(id) {
-	
-	/**
-	 * TODO: Escape htmls using he.js.
-	 */
-	 
-	return CKEDITOR.instances[id].getData().replace(/\n/g, '');
-}
-
 Aside.prototype._getImageValue = function(_$input) {
 	return _$input.length ?
-		   utils.parseImgIndex(_$input.val()) || null : null;
+		   utils.parseImg(_$input.val()) || null : null;
+}
+
+Aside.prototype._escapeLayoutData = function(data) {
+	return data.replace(/\n/g, '');
 }
 
 Aside.prototype._getSiteValue = function() {
@@ -85,14 +81,34 @@ Aside.prototype._getSiteValue = function() {
 	}
 }
 
-Aside.prototype._getPreviewText = function(id) {
-	var preview = null;
+Aside.prototype._getLayouts = function() {
+	var layout = 'textLayout_' + this._o;
+	
+	this.layouts = [];
 	
 	/**
-	 * Try doing it with filter instead DIV wrapper and find.
+	 * TODO: Escape htmls using he.js.
 	 */
-	preview = $('<div>' + this._getLayoutData(id) + '</div>')
-			  .find('> p')
+	 
+	this.layouts.push({center: this._escapeLayoutData(CKEDITOR
+						  		   .instances[layout].getData()),
+					   imgs: [],
+					   left: null,
+					   right: null,
+					   type: 'text',
+					   subtype: 't',
+					   ratio: '16-9'});
+	
+	return this.layouts;
+}
+
+Aside.prototype._getPreviewText = function() {
+	var layout = 'textLayout_' + this._o,
+		preview = null;
+	
+	preview = $(this._escapeLayoutData(CKEDITOR
+					.instances[layout].getData()))
+			  .filter('p')
 			  .map(function(i, element) { 
 							return $(element).text(); 
 			  }).get().join(' ');
@@ -114,8 +130,8 @@ Aside.prototype._setPrimeAndUrl = function() {
 		this.json.prime = this.prime;
 	}
 		
-	if (this.subtype.tag == 'review' || this.subtype.tag == 'video') {
-		this.url = this.prime.value;
+	if (this.subtype == 'review' || this.subtype == 'video') {
+		this.url = this.prime.tag;
 	} else {
 		this.url = utils.formatTag(this.title);
 	}
@@ -144,7 +160,7 @@ Aside.prototype.validateContent = function() {
 		return false;
 	}
 	
-	if (this.author.length <= 0) {
+	if (!this.author) {
 		this._isValid = false;
 		
 		admin.showAlert({message: 'Изберете автор. Използвайте Forplay за анонимно.', 
@@ -153,7 +169,7 @@ Aside.prototype.validateContent = function() {
 		return false;
 	}
 	
-	if (!this.shot_img) {
+	if (!this.shot) {
 		this._isValid = false;
 		
 		admin.showAlert({message: 'Изберете основна картинка.', 
@@ -165,8 +181,8 @@ Aside.prototype.validateContent = function() {
 
 Aside.prototype.validatePublishSettings = function() {
 	this._isValid = true;
-	 
-	if (this.tags.length <= 0) {
+	
+	if (!this.tags) {
 		this._isValid = false;
 		
 		admin.showAlert({message: 'Изберете поне един таг.', 
@@ -183,10 +199,10 @@ Aside.prototype.validateBestPractices = function() {
 	
 	this._isValid = true;
 	
-	if (l <= this._bestLength) {
+	if (l <= this._bestPreviewLength) {
 		
 		admin.showAlert({message: 'Препоръчително e текста плюс заглавието и подзаглавието, ' + 
-								  'дa са общо минимум ' + this._bestLength + ' символа, ' + 
+								  'дa са общо минимум ' + this._bestPreviewLength + ' символа, ' + 
 								  'за да излгежда добре статията на началната страница.  ' + 
 								  'В момента те са ' + l, 
 						 status: 'warning'});
@@ -197,7 +213,6 @@ Aside.prototype.validateBestPractices = function() {
 	}
 }
 
-
 Aside.prototype.save = function() {
 	this.type = this._getInputValue(this._$typeInput);
 	this.subtype = this._getInputValue(this._$subtypeInput);
@@ -205,9 +220,16 @@ Aside.prototype.save = function() {
 	this.subtitle = this._getInputValue(this._$subtitleInput);
 	this.author = this._getTypeaheadValue(this._$authorInput);
 	
-	this.shot_img = this._getImageValue(this._$shotInput);
-	this.center = this._getLayoutData(this._layoutSelector);
-	this.preview = this._getPreviewText(this._layoutSelector);
+	this.shot = this._getImageValue(this._$shotInput);
+	
+	/**
+	 * This function will push layouts to the @this.layouts array.
+	 * For this reason there is no need to set it second time.
+	 */
+	 
+	this._getLayouts();
+	
+	this.preview = this._getPreviewText();
 	
 	this.json = {
 		type: this.type,
@@ -215,8 +237,9 @@ Aside.prototype.save = function() {
 		title: this.title,
 		subtitle: this.subtitle,
 		author: this.author,
-		shot_img: this.shot_img,
-		preview: this.preview
+		shot: this.shot,
+		preview: this.preview,
+		layouts: this.layouts
 	};
 	
 	this.validateContent();
@@ -242,8 +265,6 @@ Aside.prototype.publish = function() {
 	this.issue = this._getTypeaheadValue(this._$issueInput);
 	this.priority = this._getInputValue(this._$prioritySelect);
 	
-	this._setPrimeAndUrl();
-	
 	this.json.tags = this.tags;
 	this.json.site = this.site;
 	this.json.date = this.date;
@@ -255,6 +276,8 @@ Aside.prototype.publish = function() {
 	if (!this._isValid) {
 		return false;
 	}
+	
+	this._setPrimeAndUrl();
 }
 
 Aside.prototype.post = function() {

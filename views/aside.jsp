@@ -21,7 +21,7 @@
             <div class="Main" role="group">
                 <div class="file">
                     <input aria-label="Избери" 
-                    	   id="asideMainInput" type="file" />
+                    	   id="asideShotInput" type="file" />
                 </div>
             </div>
             <h3>Съдържание</h3>

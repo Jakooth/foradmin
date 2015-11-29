@@ -81,15 +81,15 @@
             <div class="Main" role="group">
             	<div class="file">
                 	<input aria-label="Избери" 
-                    	   id="articleMainWideInput" type="file" />
+                    	   id="articleWideInput" type="file" />
                 </div>
                 <div class="file">
                 	<input aria-label="Избери" 
-                    	   id="articleMainShotInput" type="file" />
+                    	   id="articleShotInput" type="file" />
                 </div>
                 <div class="file">
                 	<input aria-label="Избери" 
-                    	   id="articleMainCaretInput" type="file" />
+                    	   id="articleCaretInput" type="file" />
                 </div>
             </div>
             <h3>Съдържание</h3>
