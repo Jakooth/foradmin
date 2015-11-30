@@ -69,8 +69,15 @@ Aside.prototype._getImageValue = function(_$input) {
 		   utils.parseImg(_$input.val()) || null : null;
 }
 
-Aside.prototype._escapeLayoutData = function(data) {
-	return data.replace(/\n/g, '');
+Aside.prototype._escapeValue = function(data) {
+	
+	/**
+	 * There is an error if you simple return quoted string.
+	 * For this reason we return string object to string.
+	 */
+	
+	return new String(Fortag.prototype._escapeValue
+									  .call(this, data)).toString();
 }
 
 Aside.prototype._getSiteValue = function() {
@@ -85,12 +92,8 @@ Aside.prototype._getLayouts = function() {
 	var layout = 'textLayout_' + this._o;
 	
 	this.layouts = [];
-	
-	/**
-	 * TODO: Escape htmls using he.js.
-	 */
 	 
-	this.layouts.push({center: this._escapeLayoutData(CKEDITOR
+	this.layouts.push({center: this._escapeValue(CKEDITOR
 						  		   .instances[layout].getData()),
 					   imgs: [],
 					   left: null,
@@ -106,12 +109,13 @@ Aside.prototype._getPreviewText = function() {
 	var layout = 'textLayout_' + this._o,
 		preview = null;
 	
-	preview = $(this._escapeLayoutData(CKEDITOR
-					.instances[layout].getData()))
+	preview = $(CKEDITOR.instances[layout].getData())
 			  .filter('p')
 			  .map(function(i, element) { 
 							return $(element).text(); 
 			  }).get().join(' ');
+			  
+	preview = this._escapeValue(preview);		  
 	
 	return preview;
 }

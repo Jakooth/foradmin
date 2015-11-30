@@ -12,6 +12,17 @@ function Layout(id) {
 	var $left = $layout.find('.left-col');
 	var $right = $layout.find('.right-col');
 	
+	var _escapeValue = function(data) {
+		
+		/**
+		 * There is an error if you simple return quoted string.
+		 * For this reason we return string object to string.
+		 */
+		
+		return new String(Aside.prototype._escapeValue
+						  				 .call(this, data)).toString();
+	}
+	
 	
 	
 	
@@ -29,7 +40,8 @@ function Layout(id) {
 	this.ratio = '16-9';
 	
 	this.setCenter = function() {
-		self.center = CKEDITOR.instances[self.id].getData().replace(/\n/g, '');
+		self.center = _escapeValue(CKEDITOR.instances[self.id]
+												.getData());
 	}
 	
 	this.setAside = function() {
@@ -102,16 +114,17 @@ function Layout(id) {
 				 * To save the layout in the DB we need align and valign
 				 * as separate values.
 				 */
+				 
 				align = $valign.val().split(' ')[1];
 				valign = $valign.val().split(' ')[0];
 				author = $author.val() == "" ? "" : $author.find(':selected').text();
-				center = CKEDITOR.instances[self.id.replace('insideLayout', 
+				center = _escapeValue(CKEDITOR.instances[self.id
+												   .replace('insideLayout', 
 															'insideLayoutText')]
-												   .getData()
-												   .replace(/\n/g, '');
+												   .getData());
 				
 				if (self.subtype == "i3" && index < 2) {
-					center = false;
+					center = null;
 				}
 			}	
 			

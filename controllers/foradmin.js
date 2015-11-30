@@ -176,129 +176,94 @@ function AdminManager() {
 		tags.clearPrefetchCache();
 		
 		/**
-		 * TODO: List all inputs to update.
-		 * Everything is in the init part.
-		 * The other option is to update based on arguments:
-		 * data source and input;
+		 * TODO: Try to simplify this process.
 		 */
 		 
-		$("#gameSimilarInput").tagsinput('destroy');
-		$("#publishTagsInput").tagsinput('destroy');
+		$("#bookArtistInput").tagsinput('destroy');
+		$("#bookTranslatorInput").tagsinput('destroy');
+		$("#bookSerieInput").tagsinput('destroy');
+		$("#bookStickersInput").tagsinput('destroy');
+		$("#bookSimilarInput").tagsinput('destroy');
 		
+		$("#eventArtistInput").tagsinput('destroy');
+		$("#eventSerieInput").tagsinput('destroy');
+		$("#eventStickersInput").tagsinput('destroy');
+		$("#eventSimilarInput").tagsinput('destroy');
+		$("#albumArtistInput").tagsinput('destroy');
+		$("#albumStickersInput").tagsinput('destroy');
+		$("#albumSimilarInput").tagsinput('destroy');
+		
+		$("#gameSerieInput").tagsinput('destroy');
+		$("#gameStickersInput").tagsinput('destroy');
+		$("#gamePublisherInput").tagsinput('destroy');
+		$("#gameDeveloperInput").tagsinput('destroy');
+		$("#gameSimilarInput").tagsinput('destroy');
+		
+		$("#movieSerieInput").tagsinput('destroy');
+		$("#movieStickersInput").tagsinput('destroy');
+		$("#movieSimilarInput").tagsinput('destroy');
+		$("#movieCastInput").tagsinput('destroy');
+		$("#movieDirectorInput").tagsinput('destroy');
+		$("#movieWriterInput").tagsinput('destroy');
+		$("#movieCameraInput").tagsinput('destroy');
+		$("#movieMusicInput").tagsinput('destroy');
+		
+		$("#articleAuthorsInput").tagsinput('destroy');
+		$("#publishIssueInput").tagsinput('destroy');
+		$("#publishTagsInput").tagsinput('destroy');
+		$("#articleBetterInput").tagsinput('destroy');
+		$("#articleWorseInput").tagsinput('destroy');
+		$("#articleEqualInput").tagsinput('destroy');
+		$("#asideAuthorsInput").tagsinput('destroy');
+		$("#imagesTagInput").tagsinput('destroy');
+		$("#searchTagInput").tagsinput('destroy');
+		$("#personRelatedInput").tagsinput('destroy');
+		$("#characterRelatedInput").tagsinput('destroy');
+		$("#dlcRelatedInput").tagsinput('destroy');
+		$("#bandRelatedInput").tagsinput('destroy');
+		
+		initTagInput(persons, 'persons', '#bookArtistInput');
+		initTagInput(persons, 'persons', '#bookTranslatorInput');
+		initTagInput(series, 'series', '#bookSerieInput', 1);
+		initStickersTagInput(stickers, 'stickers', '#bookStickersInput');
+		initTagInput(books, 'books', '#bookSimilarInput');
+		
+		initTagInput(music, 'music', '#eventArtistInput');
+		initTagInput(series, 'series', '#eventSerieInput', 1);
+		initStickersTagInput(stickers, 'stickers', '#eventStickersInput');
+		initTagInput(music, 'music', '#eventSimilarInput');
+		initTagInput(music, 'music', '#albumArtistInput');
+		initStickersTagInput(stickers, 'stickers', '#albumStickersInput');
+		initTagInput(music, 'music', '#albumSimilarInput');
+		
+		initTagInput(series, 'series', '#gameSerieInput', 1);
+		initStickersTagInput(stickers, 'stickers', '#gameStickersInput');
+		initTagInput(companies, 'companies', '#gamePublisherInput', 1);
+		initTagInput(companies, 'companies', '#gameDeveloperInput', 1);
 		initTagInput(games, 'games', '#gameSimilarInput');
+		
+		initTagInput(series, 'series', '#movieSerieInput', 1);
+		initStickersTagInput(stickers, 'stickers', '#movieStickersInput');
+		initTagInput(movies, 'movies', '#movieSimilarInput');
+		initTagInput(persons, 'persons', '#movieCastInput');
+		initTagInput(persons, 'persons', '#movieDirectorInput');
+		initTagInput(persons, 'persons', '#movieWriterInput');
+		initTagInput(persons, 'persons', '#movieCameraInput');
+		initTagInput(persons, 'persons', '#movieMusicInput');
+		
+		initTagInput(authors, 'authors', '#articleAuthorsInput');
+		initTagInput(issues, 'issues', '#publishIssueInput', 1, 'name');
 		initTagInput(tags, 'tags', '#publishTagsInput');
-	}
-	
-	/**
-	 * Merging all tags into a single data source.
-	 * This is in several places, where tags can be from multiple sources.
-	 */
-	
-	var initTagsTagInput = function() {
-		var d1 = $.get('data/objects/movies.json'),
-			d2 = $.get('data/objects/games.json'),
-			d3 = $.get('data/objects/companies.json'),
-			d4 = $.get('data/objects/characters.json'),
-			d5 = $.get('data/objects/music.json'),
-			d6 = $.get('data/objects/series.json'),
-			d7 = $.get('data/objects/persons.json'),
-			d8 = $.get('data/objects/books.json');
-			
-		$.when(d1, 
-			   d2, 
-			   d3, 
-			   d4, 
-			   d5, 
-			   d6,
-			   d7,
-			   d8).done(function(data1, 
-								 data2, 
-								 data3,
-								 data4,
-								 data5,
-								 data6,
-								 data7,
-								 data8) {
-			self.allTags = new Bloodhound({
-				datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text', 'value'),
-				queryTokenizer: Bloodhound.tokenizers.whitespace,
-				local: data1[0].concat(data2[0])
-							   .concat(data3[0])
-							   .concat(data4[0])
-							   .concat(data5[0])
-							   .concat(data6[0])
-							   .concat(data7[0])
-							   .concat(data8[0])
-			});
-			
-			self.allTags.initialize();
-			
-			/**
-			 * TODO: Now use the API to pick from all tags.
-			 * Thus move the selectors below.
-			 */
-			
-			$('#personRelatedInput, ' +
-			  '#imagesTagInput, ' + 
-			  '#searchTagInput, ' + 
-			  '#characterRelatedInput').tagsinput({
-				maxTags: null,
-				itemValue: 'value',
-				itemText: 'value',			 
-				typeaheadjs: [{
-					hint: true,
-					highlight: true
-				}, {
-					name: 'allTags',
-					displayKey: 'value', 
-					source: self.allTags.ttAdapter()
-				}],
-				freeInput: false
-			});
-		}).fail(function() {
-			alert("Failed to load tags.");
-		});
-	}
-	
-	/**
-	 * Merging games and movie for better, worse and equal.
-	 * TODO: Now use the API to pick from all  tags.
-	 */
-	
-	var initTagsBWEInputs = function() {
-		var d1 = $.get('data/objects/movies.json'),
-			d2 = $.get('data/objects/games.json');
-			
-		$.when(d1, 
-			   d2).done(function(data1, 
-								 data2) {
-			self.bweTags = new Bloodhound({
-				datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text', 'value'),
-				queryTokenizer: Bloodhound.tokenizers.whitespace,
-				local: data1[0].concat(data2[0])
-			});
-			
-			self.bweTags.initialize();
-			
-			$('#articleBetterInput, ' +
-			  '#articleWorseInput, ' +
-			  '#articleEqualInput').tagsinput({
-				maxTags: 1,
-				itemValue: 'value',
-				itemText: 'value',			 
-				typeaheadjs: [{
-					hint: true,
-					highlight: true
-				}, {
-					name: 'bweTags',
-					displayKey: 'value', 
-					source: self.bweTags.ttAdapter()
-				}],
-				freeInput: false
-			});
-		}).fail(function() {
-			alert("Failed to load tags.");
-		});
+		initTagInput(tags, 'tags', '#articleBetterInput', 1);
+		initTagInput(tags, 'tags', '#articleWorseInput', 1);
+		initTagInput(tags, 'tags', '#articleEqualInput', 1);
+		initTagInput(authors, 'authors', '#asideAuthorsInput');
+		initTagInput(tags, 'tags', '#imagesTagInput');
+		initTagInput(tags, 'tags', '#searchTagInput');
+		initTagInput(tags, 'tags', '#personRelatedInput');
+		initTagInput(tags, 'tags', '#characterRelatedInput');
+		initTagInput(games, 'games', '#dlcRelatedInput', 1);
+		initTagInput(persons, 'persons', '#bandRelatedInput', 1);
 	}
 	
 	
@@ -308,8 +273,6 @@ function AdminManager() {
 	 * PUBLIC
 	 */
 	
-	this.allTag;
-	this.bweTags;
 	this.selectTarget = null;
 	this.publishTarget = null;
 	
@@ -524,6 +487,10 @@ function AdminManager() {
 	this.loadOptions($('#characterTypeSelect'), type, 'option');
 	this.loadOptions($('#serieTypeSelect'), type, 'option');
 	
+	initTagInput(tags, 'tags', '#imagesTagInput');
+	initTagInput(tags, 'tags', '#searchTagInput');
+	initTagInput(tags, 'tags', '#personRelatedInput');
+	initTagInput(tags, 'tags', '#characterRelatedInput');
 	initTagInput(games, 'games', '#dlcRelatedInput', 1);
 	initTagInput(persons, 'persons', '#bandRelatedInput', 1);
 	
@@ -549,9 +516,9 @@ function AdminManager() {
 	initTagInput(authors, 'authors', '#articleAuthorsInput');
 	initTagInput(issues, 'issues', '#publishIssueInput', 1, 'name');
 	initTagInput(tags, 'tags', '#publishTagsInput');
-	
-	initTagsTagInput();
-	initTagsBWEInputs();
+	initTagInput(tags, 'tags', '#articleBetterInput', 1);
+	initTagInput(tags, 'tags', '#articleWorseInput', 1);
+	initTagInput(tags, 'tags', '#articleEqualInput', 1);
 	
 	/**
 	 * URL & SEARCH

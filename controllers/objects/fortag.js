@@ -39,6 +39,37 @@ function Fortag(o) {
  * PRIVATE
  */
 
+Fortag.prototype._escapeValue = function(data) {
+	
+	/**
+	 * First remove any new lines. 
+	 * The spacing betweem paragrpahs is done with styles.
+	 */
+	 
+	var s = data.replace(/\n/g, '');
+	
+	/**
+	 * Next decode to ensure there are no extre coded characters.
+	 */
+	
+	s = he.decode(s);
+	
+	/**
+	 * Finaly escape HTML and special characters.
+	 * Note ecode will also conver cyrilic characters to HTML entities
+	 * and escape will just escape special characters.
+	 */
+	
+	s = he.escape(s);
+	
+	/**
+	 * There is an error if you simple return quoted string.
+	 * For this reason we return string object to string.
+	 */
+	
+	return new String(s).toString();
+}
+
 Fortag.prototype._getTypeaheadValue = function(_$input) {
 	return _$input.length ? 
 		   _$input.typeahead()
@@ -51,7 +82,7 @@ Fortag.prototype._getTypeaheadValue = function(_$input) {
 
 Fortag.prototype._getInputValue = function(_$input) {
 	return _$input.length && _$input.is(':visible') ?
-		   _$input.val() || null : null;
+		   this._escapeValue(_$input.val()) || null : null;
 }
 
 /** 
