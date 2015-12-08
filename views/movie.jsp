@@ -35,7 +35,7 @@
             <admin:formItem id="movieStickersInput" label="Стикери" 
             				placeholder="Broadsword, Soccer ball, Female elf face" type="text" />
             <admin:formItem id="movieGenreGroup" label="Жанр" type="group">
-                <!--AdminManager.js-->
+                <!--AdminManager-->
             </admin:formItem>
             <admin:formItem id="movieCastInput" label="Кастинг" 
             				placeholder="Бен Афлек, Розамунд Пайк, Нийл Патрик Харис, Тайлър Пери, Кери Куун, Ким Дикенс" type="text"
@@ -59,6 +59,9 @@
             <admin:formItem id="movieSimilarInput" label="Подобни" 
             				placeholder="turks-in-space, Пазители на Галктиката" 
                             type="text" autocomplete="off" />
+        	<h3>Скрити стойности</h3>
+            <admin:formItem id="movieTypeSelect" label="Тип" type="hidden" value="movies" />
+            <admin:formItem id="movieSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

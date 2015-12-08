@@ -22,17 +22,16 @@
             				placeholder="gta-5" type="text" />
             <admin:formItem id="gameBgNameInput" label="Име на български" 
             				placeholder="Гранд Тефт Ауто 5" type="text" />
-            <admin:formItem id="gameTypeSelect" label="Тип" type="hidden" value="games" />
             <admin:formItem id="gameSerieInput" label="Поредица" 
             				placeholder="gta, halo" type="text" 
                             autocomplete="off" url="serie" layout="one-col" />
             <admin:formItem id="gameStickersInput" label="Стикери" 
             				placeholder="Broadsword, Soccer ball, Female elf face" type="text" />
             <admin:formItem id="gameGenreGroup" label="Жанр" type="group">
-                <!--AdminManager.js-->
+                <!--AdminManager-->
             </admin:formItem>
             <admin:formItem id="gamePlatformGroup" label="Платформа" type="group">
-                <!--AdminManager.js-->
+                <!--AdminManager-->
             </admin:formItem>
             <admin:formItem id="gamePublisherInput" label="Издател" 
             				placeholder="SEGA" type="text" 
@@ -48,6 +47,9 @@
             <div class="Add Box">
                 <button class="add" type="button">Добави обложка</button>
             </div>
+            <h3>Скрити стойности</h3>
+            <admin:formItem id="gameTypeSelect" label="Тип" type="hidden" value="games" />
+            <admin:formItem id="gameSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

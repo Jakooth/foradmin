@@ -12,10 +12,6 @@
         <form>
             <admin:formItem id="publishTagsInput" label="Тагове" 
             				placeholder="gta-5, sam-houser, rockstar" type="text" />
-            <admin:formItem id="publishSiteInput" label="Страница"
-            				placeholder="forplay, forlife" type="hidden" />
-            <admin:formItem id="publishUrlInput" label="Адрес"
-            				placeholder="the-title-to-lower-case" type="hidden" />
             <admin:formItem id="publishDateInput" label="Дата на публикуване" 
             				type="date" layout="two-cols" />
             <admin:formItem id="publishTimeInput" label="Час на публикуване" 
@@ -31,6 +27,11 @@
             <admin:formItem id="publishIssueInput" label="Брой" 
             				placeholder="Брой 1 - Презереждане" type="text" 
                             autocomplete="off" />
+        	<h3>Скрити стойности</h3>
+            <admin:formItem id="publishSiteInput" label="Страница"
+            				placeholder="forplay, forlife" type="hidden" />
+            <admin:formItem id="publishUrlInput" label="Адрес"
+            				placeholder="the-title-to-lower-case" type="hidden" />
         </form>
         <div role="toolbar">
             <button class="publish" type="button">Публикувай</button>

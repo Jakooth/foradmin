@@ -10,7 +10,6 @@
         <form>
             <h3>Тема</h3>
             <admin:formItem id="asideTypeSelect" label="Раздел" type="select" />
-            <admin:formItem id="asideSubtypeSelect" label="Подтип" type="hidden" value="aside" />
             <admin:formItem id="asideTitleInput" label="Заглавие" 
             				placeholder="Grand Theft Auto 5" type="text" />
             <admin:formItem id="asideSubtitleInput" label="Подзаглавие" 
@@ -41,6 +40,9 @@
                         .</p>
                 </div>
             </div>
+            <h3>Скрити стойности</h3>
+            <admin:formItem id="asideSubtypeSelect" label="Подтип" type="hidden" value="aside" />
+            <admin:formItem id="asideSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="publish" type="button">Публикувай</button>

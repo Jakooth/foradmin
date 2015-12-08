@@ -50,6 +50,8 @@
                 <option value="abstract">abstract</option>
                 <option value="deviations">deviations</option>
             </admin:formItem>
+            <h3>Скрити стойности</h3>
+            <admin:formItem id="stickerSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

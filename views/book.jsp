@@ -22,7 +22,6 @@
             				placeholder="Villa Triste" type="text" />
             <admin:formItem id="bookTagInput" label="Таг" 
             				placeholder="villa-triste" type="text" />
-            <admin:formItem id="bookTypeSelect" label="Тип" type="hidden" value="books" />
             <admin:formItem id="bookSerieInput" label="Поредица" 
             				placeholder="a-song-of-ice-and-fire, Discworld" type="text" 
                             autocomplete="off" url="serie" layout="one-col" />
@@ -35,7 +34,7 @@
             <admin:formItem id="bookStickersInput" label="Стикери" 
             				placeholder="Broadsword, Soccer ball, Female elf face" type="text" />
             <admin:formItem id="bookGenreGroup" label="Жанр" type="group">
-                <!--AdminManager.js-->
+                <!--AdminManager-->
             </admin:formItem>
             <admin:formItem id="bookCountrySelect" label="Държава" 
             				type="select" layout="two-cols" />
@@ -44,6 +43,9 @@
             <admin:formItem id="bookSimilarInput" label="Подобни" 
             				placeholder="The Golden Hour, the-last-telegram" 
                             type="text" autocomplete="off" />
+        	<h3>Скрити стойности</h3>
+            <admin:formItem id="bookTypeSelect" label="Тип" type="hidden" value="books" />
+            <admin:formItem id="bookSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

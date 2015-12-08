@@ -24,7 +24,9 @@
             				placeholder="Краун ъф дъ Ейвъри Кинг" type="text" />
             <admin:formItem id="dlcRelatedInput" label="Свързана игра" 
             				placeholder="dark-souls-2" type="text" />
-        	<admin:formItem id="dlcTypeSelect" label="Тип" type="hidden" value="games" />
+            <h3>Скрити стойности</h3>
+            <admin:formItem id="dlcTypeSelect" label="Тип" type="hidden" value="games" />
+            <admin:formItem id="dlcSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

@@ -13,6 +13,8 @@
             <admin:formItem id="genreTagInput" label="Таг" 
             				placeholder="tps, adventure, mmo, drama, comedy, animation, rock, deep-house, dream-pop, novel, fantasy, crime, science-fiction" type="text" />
         	<admin:formItem id="genreTypeSelect" label="Тип" type="select"/>
+            <h3>Скрити стойности</h3>
+            <admin:formItem id="genreSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

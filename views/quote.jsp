@@ -15,6 +15,8 @@
             				placeholder="minsk-and-boo-run, joker-and-batman-dancing-with-the-devil, duke-nukem-time-to-kick-ass" type="text" />
         	<admin:formItem id="quoteSaysInput" label="Цитат" type="area" 
             				placeholder="" />
+        	<h3>Скрити стойности</h3>
+            <admin:formItem id="quoteSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

@@ -22,14 +22,13 @@
             				placeholder="sacrifice-to-venus" type="text" />
             <admin:formItem id="albumBgNameInput" label="Име на български" 
             				placeholder="" type="text" />
-            <admin:formItem id="albumTypeSelect" label="Тип" type="hidden" value="music" />
             <admin:formItem id="albumArtistInput" label="Изпълнител" 
             				placeholder="Emil Bulls" type="text" 
                             autocomplete="off" url="person" layout="one-col" />
             <admin:formItem id="albumStickersInput" label="Стикери" 
             				placeholder="Broadsword, Soccer ball, Female elf face" type="text" />
             <admin:formItem id="albumGenreGroup" label="Жанр" type="group">
-                <!--AdminManager.js-->
+                <!--AdminManager-->
             </admin:formItem>
             <admin:formItem id="albumCountrySelect" label="Държава" 
             				type="select" layout="two-cols" />
@@ -42,6 +41,9 @@
             <div class="Add Track">
                 <button class="add" type="button">Добави трак</button>
             </div>
+            <h3>Скрити стойности</h3>
+            <admin:formItem id="albumTypeSelect" label="Тип" type="hidden" value="music" />
+            <admin:formItem id="albumSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

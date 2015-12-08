@@ -23,6 +23,8 @@
             <admin:formItem id="serieBgNameInput" label="Имe на български" 
             				placeholder="Гранд Тефт Ауто, Хейло, Батман, Песен за Огън и Лед, Истории от Света на Диска" type="text" />
             <admin:formItem id="serieTypeSelect" label="Тип" type="select"/>
+            <h3>Скрити стойности</h3>
+            <admin:formItem id="serieSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

@@ -25,6 +25,8 @@
             <admin:formItem id="characterRelatedInput" label="Свързани игри, комапнии или други" 
             				placeholder="halo, bungie" type="text" />
             <admin:formItem id="characterTypeSelect" label="Тип" type="select"/>
+            <h3>Скрити стойности</h3>
+            <admin:formItem id="characterSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

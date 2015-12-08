@@ -742,6 +742,7 @@ form input[type=time],
 	position: relative;
 	margin-right: 20px;
 	padding: 10px;
+	min-width: 200px;
 }
 
 .two-cols {
@@ -758,7 +759,13 @@ form input[type=time],
 	margin-right: 0;
 }
 
-#search .two-cols:nth-child(2n + 1),
+/**
+ * This is the search auto complete.
+ */
+#search .two-cols:first-of-type {
+	margin-right: 20px;
+}
+
 #articleReviewRegion .two-cols:nth-child(2n + 1) {
 	clear: both;
 	margin-right: 20px;

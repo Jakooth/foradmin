@@ -96,6 +96,8 @@
             <div class="Add Content" role="region">
                 <button class="add" type="button">Добави съдържание</button>
             </div>
+            <h3>Скрити стойности</h3>
+            <admin:formItem id="articleSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="publish" type="button">Публикувай</button>

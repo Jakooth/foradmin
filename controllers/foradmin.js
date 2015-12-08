@@ -472,6 +472,14 @@ function AdminManager() {
 		$('#publishDateInput').val(utils.today());
 		$('#publishTimeInput').val(utils.now());
 		$('#publishPrioritySelect').val('');
+		
+		var $hidden = $('[type=hidden]');
+		
+		$hidden.each(function(index, hidden) {
+			var $this = $(hidden);
+			
+			$this.parents('label').find('b').text($this.val() || 'hidden');
+		});
 	}
 	
 	
@@ -525,7 +533,8 @@ function AdminManager() {
 	 */
 	
 	this.loadOptions($('#urlTypeSelect'), type, 'option');
-	this.loadOptions($('#searchObjectSelect'), objects, 'option');
+	this.loadOptions($('#searchTypeSelect'), type, 'option');
+	this.loadOptions($('#searchSubtypeSelect'), subtype, 'option');
 	this.loadOptions($('#urlOjbectSelect'), objects, 'option');
 	
 	/**
@@ -628,6 +637,12 @@ function AdminManager() {
 		self.setDefaults();
 	});
 	
+	$('body').on('change', '[type=hidden]', function(e) {
+		var $this = $(this);
+			
+		$this.parents('label').find('b').text($this.val());
+	});
+	
 	$('body').on('click', 'nav a:not(.active), header a:not(.active)', function(e) {
 		$this = $(this);																		
 																				
@@ -677,8 +692,22 @@ function AdminManager() {
 		 * Hide it if this is an alert or cancel button.
 		 */
 		 
-		if (window.admin.publishTarget._isValid || 
-			$this.parents('[role=alertdialog]').length > 0 ||
+		if (window.admin.publishTarget) {
+			if (window.admin.publishTarget._isValid || 
+				$this.parents('[role=alertdialog]').length > 0 ||
+				$this.hasClass('cancel')) {
+				
+				self.hideSectionInWindow($this.parents('section'));
+			} else {
+				return false;
+			}
+		}
+		
+		/**
+		 * First case is only for publish section.
+		 */
+		 
+		if ($this.parents('[role=alertdialog]').length > 0 ||
 			$this.hasClass('cancel')) {
 			
 			self.hideSectionInWindow($this.parents('section'));
@@ -952,7 +981,7 @@ function AdminManager() {
 	$('#publish').on('change', '#publishTagsInput', function(e) {
 		window.admin.publishTarget._setPrimeAndUrl();													  
 															  
-		$('#publishUrlInput').parents('label').find('span')
+		$('#publishUrlInput').parents('label').find('b')
 							 .contents().last()
 							 .replaceWith(window.admin.publishTarget.url);
 	});

@@ -12,6 +12,8 @@
             				placeholder="Xbox 360, PlayStation 4, Android" type="text" />
             <admin:formItem id="platformTagInput" label="Таг" 
             				placeholder="360, ps4, android" type="text" />
+        	<h3>Скрити стойности</h3>
+            <admin:formItem id="platformSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />                   
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

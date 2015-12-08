@@ -6,6 +6,8 @@ function Fortag(o) {
 	
 	this._url = 'http://localhost/forapi/save.php';
 	this._isValid = true;
+	this._saveId;
+	this._saveRelated;
 	
 	this._$mainInput = $('#' + o + 'MainInput');
 	
@@ -17,9 +19,12 @@ function Fortag(o) {
 	this._$subtypeSelect = $('#' + o + 'SubtypeSelect');
 	this._$relatedInput = $('#' + o + 'RelatedInput');
 	
+	this._$saveIdInput = $('#' + o + 'SaveIdInput');
+	this._$saveRelatedInput = $('#' + o + 'SaveRelatedInput');
+	
 	/** 
 	 * PUBLIC
-	 */
+	 */ 
 
 	this.main;
 	
@@ -38,6 +43,11 @@ function Fortag(o) {
 /** 
  * PRIVATE
  */
+
+Fortag.prototype._updateAfterSave = function(data) {
+	this._$saveIdInput.val(data.saveId).change();
+	this._$saveRelatedInput.val(data.saveRelated.join(',')).change();	
+}
 
 Fortag.prototype._escapeValue = function(data) {
 	
@@ -80,9 +90,23 @@ Fortag.prototype._getTypeaheadValue = function(_$input) {
 				  .itemsArray : null;
 }
 
+/**
+ * @return only valuse for visible inputs.
+ * Note that inputs of type hidden are considered visible, 
+ * but read only.
+ */
+
 Fortag.prototype._getInputValue = function(_$input) {
-	return _$input.length && _$input.is(':visible') ?
+	return _$input.length && _$input.is(':visible, [type=hidden]') ?
 		   this._escapeValue(_$input.val()) || null : null;
+}
+
+Fortag.prototype._getInputValueAsArray = function(_$input) {
+	var s = this._getInputValue(_$input);
+	
+	if (s) return s.split(',');
+	
+	return s;
 }
 
 /** 
@@ -98,6 +122,9 @@ Fortag.prototype.save = function() {
 	this.subtype = this._getInputValue(this._$subtypeSelect);
 	this.related = this._getTypeaheadValue(this._$relatedInput);
 	
+	this._saveId = this._getInputValue(this._$saveIdInput);
+	this._saveRelated = this._getInputValueAsArray(this._$saveRelatedInput);
+	
 	this.json = {
 		enName: this.enName,
 		bgName: this.bgName,
@@ -106,7 +133,9 @@ Fortag.prototype.save = function() {
 		type: this.type,
 		subtype: this.subtype,
 		object: this.object,
-		related: this.related
+		related: this.related,
+		_saveId: this._saveId,
+		_saveRelated: this._saveRelated
 	};
 }
 
@@ -161,10 +190,25 @@ Fortag.prototype.post = function() {
 		} else if (!data.events.mysql.result) {
 			admin.showAlert({message: data.events.mysql.error, status: 'error'});
 		} else {
+			var s;
+			
+			switch (data.events.mysql.operation) {
+				case 'insert':
+					s = 'е записан успешно.';
+					
+					break;
+				case 'update':
+					s = 'е обновен успешно.';
+					
+					break;	
+			}
+			
 			admin.showAlert({message: self.json.object
 										  .charAt(0).toUpperCase() + 
 									  self.json.object
-									  	  .slice(1) + ' saved', status: 'success'});
+									  	  .slice(1) + ' ' + s, status: 'success'});
+		
+			self._updateAfterSave(data.operation);
 		}
 	}).fail(function (data, textStatus, jqXHR) {
 		console.log(data);

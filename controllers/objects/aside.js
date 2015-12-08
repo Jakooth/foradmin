@@ -47,6 +47,7 @@ function Aside(o) {
 	this.issue;
 	this.preview;
 	this.priority;
+	this.object = o;
 	
 	this.json = {};
 	this.layouts = [];
@@ -81,11 +82,17 @@ Aside.prototype._escapeValue = function(data) {
 }
 
 Aside.prototype._getSiteValue = function() {
+	var s;
+
 	if (this.type == 'games') {
-		return 'forplay';
+		s = 'forplay';
 	} else {
-		return 'forlife';
+		s = 'forlife';
 	}
+	
+	this._$siteInput.val(s).change();
+	
+	return s;
 }
 
 Aside.prototype._getLayouts = function() {
@@ -140,7 +147,7 @@ Aside.prototype._setPrimeAndUrl = function() {
 		this.url = utils.formatTag(this.title);
 	}
 	
-	this._$urlInput.val(this.url);
+	this._$urlInput.val(this.url).change();
 	this.json.url = this.url;
 }
 
@@ -225,6 +232,7 @@ Aside.prototype.save = function() {
 	this.author = this._getTypeaheadValue(this._$authorInput);
 	
 	this.shot = this._getImageValue(this._$shotInput);
+	this.site = this._getSiteValue();
 	
 	/**
 	 * This function will push layouts to the @this.layouts array.
@@ -243,7 +251,8 @@ Aside.prototype.save = function() {
 		author: this.author,
 		shot: this.shot,
 		preview: this.preview,
-		layouts: this.layouts
+		layouts: this.layouts,
+		object: this.object
 	};
 	
 	this.validateContent();
@@ -261,7 +270,6 @@ Aside.prototype.save = function() {
 
 Aside.prototype.publish = function() {
 	this.tags = this._getTypeaheadValue(this._$tagsInput);
-	this.site = this._getSiteValue();
 	
 	this.date = new Date(this._getInputValue(this._$dateInput) + ' ' + 
 						 this._getInputValue(this._$timeInput));
