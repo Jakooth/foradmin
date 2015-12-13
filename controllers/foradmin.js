@@ -28,7 +28,7 @@ function AdminManager() {
 			initialize: false,
 			
 			/**
-			 * Local storage DB ca be cleared from here in Chrome:
+			 * Local storage DB can be cleared from here in Chrome:
 			 * chrome://settings/cookies#cont
 			 */
 			 
@@ -38,8 +38,55 @@ function AdminManager() {
 		});
 	}
 	
-	var parseBloodhound = function(data) {
-		return data.tags;
+	this._bloodhound = function(data, nameField) {
+		return bloodhound(data, nameField);
+	}
+	
+	var _createObject = function(id) {
+		var o;
+		
+		switch (id) {
+			case 'game':
+				o = new Game(id);
+				
+				break;
+			case 'movie':
+				o = new Movie(id);
+				
+				break;
+			case 'album':
+				o = new Album(id);
+				
+				break;
+			case 'event':
+				o = new Event(id);
+				
+				break;
+			case 'book':
+				o = new Platform(id);
+				
+				break;
+			case 'platform':
+				o = new Platform(id);
+				
+				break;
+			case 'genre':
+				o = new Genre(id);
+				
+				break;
+			case 'sticker':
+				o = new Sticker(id);
+				
+				break;
+			default:
+				o = new Fortag(id);
+		}
+		
+		return o;
+	}
+	
+	this._createObject = function(id) {
+		return _createObject(id);
 	}
 	
 	var initTypeAhead = function(data, 
@@ -66,6 +113,15 @@ function AdminManager() {
 			 * TODO: Fail logic.
 			 */
 		});
+	}
+	
+	this._initTagInput = function(data, 
+								  text, 
+								  input, 
+								  maxTags, 
+								  displayKey) {
+								  
+		initTagInput(data, text, input, maxTags, displayKey);
 	}
 	
 	var initTagInput = function(data, 
@@ -216,7 +272,6 @@ function AdminManager() {
 		$("#articleEqualInput").tagsinput('destroy');
 		$("#asideAuthorsInput").tagsinput('destroy');
 		$("#imagesTagInput").tagsinput('destroy');
-		$("#searchTagInput").tagsinput('destroy');
 		$("#personRelatedInput").tagsinput('destroy');
 		$("#characterRelatedInput").tagsinput('destroy');
 		$("#dlcRelatedInput").tagsinput('destroy');
@@ -259,7 +314,6 @@ function AdminManager() {
 		initTagInput(tags, 'tags', '#articleEqualInput', 1);
 		initTagInput(authors, 'authors', '#asideAuthorsInput');
 		initTagInput(tags, 'tags', '#imagesTagInput');
-		initTagInput(tags, 'tags', '#searchTagInput');
 		initTagInput(tags, 'tags', '#personRelatedInput');
 		initTagInput(tags, 'tags', '#characterRelatedInput');
 		initTagInput(games, 'games', '#dlcRelatedInput', 1);
@@ -350,6 +404,11 @@ function AdminManager() {
 				add.initAsideTextEditor();
 			}
 		}
+		
+		$('body').trigger({
+			type: 'sectionshow',
+			section: section.split('#')[1]
+		});
 	}
 	
 	this.showOverlay = function() {
@@ -444,7 +503,7 @@ function AdminManager() {
 				$('.breadcrumb a').removeClass('active');
 				
 				$section.find('h2 a').clone().addClass('active').appendTo(html);
-				$('.breadcrumb').append(html);
+				$('.breadcrumb ul').append(html);
 			}).fail(function() {
 				alert("Failed to load window.");
 			});
@@ -496,7 +555,6 @@ function AdminManager() {
 	this.loadOptions($('#serieTypeSelect'), type, 'option');
 	
 	initTagInput(tags, 'tags', '#imagesTagInput');
-	initTagInput(tags, 'tags', '#searchTagInput');
 	initTagInput(tags, 'tags', '#personRelatedInput');
 	initTagInput(tags, 'tags', '#characterRelatedInput');
 	initTagInput(games, 'games', '#dlcRelatedInput', 1);
@@ -533,8 +591,6 @@ function AdminManager() {
 	 */
 	
 	this.loadOptions($('#urlTypeSelect'), type, 'option');
-	this.loadOptions($('#searchTypeSelect'), type, 'option');
-	this.loadOptions($('#searchSubtypeSelect'), subtype, 'option');
 	this.loadOptions($('#urlOjbectSelect'), objects, 'option');
 	
 	/**
@@ -629,11 +685,6 @@ function AdminManager() {
 		
 		self.showSection(window.location.hash);
 		
-		$('body').trigger({
-			type: 'sectionshow',
-			section: window.location.hash.split('#')[1]
-		});
-		
 		self.setDefaults();
 	});
 	
@@ -648,21 +699,12 @@ function AdminManager() {
 																				
 		self.showSection($this.attr('href'), $this.parents().hasClass('breadcrumb'));
 		
-		$('body').trigger({
-			type: 'sectionshow',
-			section: $this.attr('href').split('#')[1]
-		});
-		
 		self.setDefaults();
 	});
 	
 	/**
 	 * Header
 	 */
-	
-	$('header').on('click', 'button.search', function(e) {
-		self.showSection('#search');
-	});
 	
 	$('header').on('click', 'button.logout', function(e) {
 		window.location.href = "login.html";
@@ -721,13 +763,6 @@ function AdminManager() {
 	$('form').on('click', '.create', function(e) {
 		e.preventDefault();
 		self.showSectionInWindow($(this).attr('href'));
-	});
-	
-	$('body').on('click', '[role=dialog] #search button.ok', function(e) {
-		var img = $('#search input:checked').parents('label').find('img').attr('src');														 
-		window.admin.selectTarget.focus();
-		window.admin.selectTarget.find('input').val(img);
-		window.admin.selectTarget.css('background-image', 'url(' + img + ')');
 	});
 	 
 	/**
@@ -1044,42 +1079,7 @@ function AdminManager() {
 	  '#genre, #sticker').on('click', 'button.save', function(e) {
 		
 		var id = $(this).parents('section').prop('id'),
-			o;
-			
-		switch (id) {
-			case 'game':
-				var o = new Game(id);
-				
-				break;
-			case 'movie':
-				var o = new Movie(id);
-				
-				break;
-			case 'album':
-				var o = new Album(id);
-				
-				break;
-			case 'event':
-				var o = new Event(id);
-				
-				break;
-			case 'book':
-				var o = new Platform(id);
-				
-				break;
-			case 'platform':
-				var o = new Platform(id);
-				
-				break;
-			case 'genre':
-				var o = new Genre(id);
-				
-				break;
-			case 'sticker':
-				var o = new Sticker(id);
-				
-				break;	
-		}
+			o = _createObject(id);
 		
 		o.save();
 		o.post();
@@ -1088,7 +1088,8 @@ function AdminManager() {
 	$('#company, #person, #character, ' + 
 	  '#serie, #dlc, #band').on('click', 'button.save', function(e) {
 		  
-		var o = new Fortag($(this).parents('section').prop('id'));
+		var id = $(this).parents('section').prop('id'),
+			o = _createObject(id);
 		
 		o.save();
 		o.post();

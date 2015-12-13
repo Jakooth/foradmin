@@ -293,7 +293,9 @@ function AddManager() {
 	$('body').on('sectionshow', function (e) {
 		switch (e.section) {
 			case 'article':
-				$appender = $('#article .Content > button.add');
+				var $appender = $('#article .Content > button.add');
+				
+				if ($('#article .Content .layout').length > 0) return false;
 				
 				self.addLayout($appender);
 				

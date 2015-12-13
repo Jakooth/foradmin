@@ -1,11 +1,13 @@
-<li class="news" role="option" data-type="новина">
-    <label> <span>Линдзи Лоън съди авторите на Grand Theft Auto V, но в крайна
-            сметка яде бахора, като дърта пача.</span>
+<li class="{{:object}}" 
+	role="option"
+    data-table="{{:table}}"
+	data-object="{{:object}}" 
+    data-tag="{{:tag}}">{{if object == 'img'}}
+    <label> <img src="../assets/articles/{{:tag}}/{{:tag}}" 
+                 alt="{{:tag}}" />
         <input name="searchChoice" type="radio" />
-    </label>
-</li>
-<li class="img" role="option" data-type="картинка">
-    <label> <img src="../assets/articles/gta-5/gta-5-01.jpg" alt="Без коментар." /> <span class="clip">gta-5-01.jpg</span>
+    </label>{{else}}
+    <label> <span>{{:en_name}}</span>
         <input name="searchChoice" type="radio" />
-    </label>
+    </label>{{/if}}
 </li>

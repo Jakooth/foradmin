@@ -11,27 +11,27 @@
         <form>
             <admin:formItem id="searchTagInput" label="Таг" 
             				placeholder="gta-5, sam-houser, rockstar" 
-                            type="search" autocomplete="off" layout="two-cols" />
-            <admin:formItem id="searchObjectSelect" label="Категория" 
-            				type="select" layout="two-cols">
-                <option value="">Всички</option>
-                <option value="tag">Таг</option>
-                <option value="article">Статия</option>
-                <option value="aside">Каре</option>
-                <option disabled="img" value="for_imgs">Картинка</option>
-                <option disabled="quote" value="for_articles">Цитат</option>
+                            type="search" autocomplete="off" />
+            <admin:formItem id="searchTableSelect" label="Категория" 
+            				type="select">
+                <option value="">Всички категории</option>
+                <option value="tags">таг</option>
+                <option value="articles">статия</option>
+                <option disabled="disabled" value="imgs">картинка</option>
             </admin:formItem>
             <admin:formItem id="searchTypeSelect" label="Тип" 
-            				type="select" layout="two-cols">
-                <option value="">Всички</option>
+            				type="select">
+                <option value="">Всички типове</option>
             </admin:formItem>
             <admin:formItem id="searchSubtypeSelect" label="Подтип" 
-            				type="select" layout="two-cols">
-                <option value="">Всички</option>
+            				type="select">
+                <option value="">Всички подтипове</option>
+                <option value="aside">каре</option>
+                <option disabled="disabled" value="quote">цитат</option>
             </admin:formItem>
             <h3 class="clip">Резултати</h3>
             <ul role="listbox">
-                <!--AddManager-->
+                <!--AdminManager-->
             </ul>
         </form>
         <div role="toolbar">

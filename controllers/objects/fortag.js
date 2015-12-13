@@ -5,6 +5,7 @@ function Fortag(o) {
 	 */
 	
 	this._url = 'http://localhost/forapi/save.php';
+	this._get = 'http://localhost/forapi/get.php';
 	this._isValid = true;
 	this._saveId;
 	this._saveRelated;
@@ -158,6 +159,20 @@ Fortag.prototype.validateTag = function() {
 		
 		return false;
 	}
+}
+
+Fortag.prototype.resetData = function() {
+}
+
+Fortag.prototype.setData = function(data) {
+	var get = $.get(this._get + '?tag=' + data.tag + 
+								'&object=' + data.object);
+						   
+	$.when(get).done(function(data) {
+		console.log(data);
+	}).fail(function(data) {
+		console.log(data);
+	});					   
 }
 
 Fortag.prototype.post = function() {

@@ -7,7 +7,17 @@
 @import "../../assets/mixins.less";
 
 /**
- * Color on hover and focus must be one for all styles.
+ * Admin settings.
+ */
+ 
+@unit: 5px;
+@bg: #E6E6E6;
+@prime: #D9E021;
+@secondary: #C7B299;
+@hover: @cyan;
+
+/**
+ * Prime colors.
  */
 
 @dark: #000000;
@@ -31,6 +41,11 @@
 @brown: #795548;
 @grey: #9E9E9E;
 @blue-grey: #607D8B;
+
+/**
+ * Secondary colors.
+ */
+
 @better: @green;
 @worse: @red;
 @equal: @grey;
@@ -38,7 +53,8 @@
 @feature: @lime;
 @news: @deep-orange;
 @video: @blue;
-@hover: @cyan;
+@tag: @grey;
+
 
 
 
@@ -75,22 +91,22 @@ label {
 }
 
 ::-webkit-input-placeholder {
-   color: #D9E021;
+   color: @prime;
    font-size: 12pt;
 }
 
 :-moz-placeholder {
-   color: #D9E021; 
+   color: @prime; 
    font-size: 12pt;
 }
 
 ::-moz-placeholder {
-   color: #D9E021;
+   color: @prime;
    font-size: 12pt;
 }
 
 :-ms-input-placeholder {  
-   color: #D9E021;
+   color: @prime;
    font-size: 12pt;
 }
 
@@ -185,17 +201,17 @@ h2 a:hover,
 nav a:focus,
 nav a:hover {
 	cursor: pointer;
-	background-color: #C7B299;
+	background-color: @secondary;
 	outline: none;
 }
 
-.breadcrumb a:hover:after,
-.breadcrumb a:focus:after,
-main h2 a:hover:after,
-main h2 a:focus:after,
-header.compact h1 a:hover:after,
-header.compact h1 a:focus:after {
-	border-color: transparent transparent transparent #C7B299;
+.breadcrumb a:hover::after,
+.breadcrumb a:focus::after,
+main h2 a:hover::after,
+main h2 a:focus::after,
+header.compact h1 a:hover::after,
+header.compact h1 a:focus::after {
+	border-color: transparent transparent transparent @secondary;
 }
 
 
@@ -217,7 +233,7 @@ h3 {
 }
 
 a:focus {
-	outline: 2px solid #D9E021;
+	outline: 2px solid @prime;
 }
 
 header h2,
@@ -227,12 +243,12 @@ a:hover,
 a:visited,
 .breadcrumb a span,
 h2 a span {
-	color: #D9E021;
+	color: @prime;
 }
 
 .select-svg path,
 svg path {
-	fill: #D9E021;
+	fill: @prime;
 }
 
 .create svg path,
@@ -259,7 +275,6 @@ nav li a:visited {
 	color: #FFF;
 }
 
-[role=option] label,
 select.header,
 body,
 header a,
@@ -271,14 +286,14 @@ nav li a {
 	background-color: rgba(102, 102, 102, 0.7);
 }
 
-.breadcrumb a:after,
-header.compact h1 a:after {
+.breadcrumb a::after,
+header.compact h1 a::after {
 	border-color: transparent transparent transparent #666666;
 }
 
-.breadcrumb a.active:after,
-main h2.active a:after {
-	border-color: transparent transparent transparent #C7B299;
+.breadcrumb a.active::after,
+main h2.active a::after {
+	border-color: transparent transparent transparent @secondary;
 }
 
 button {
@@ -293,12 +308,7 @@ a.create,
 .file,
 .Add > button:last-child,
 button:first-child {
-	background-color: #D9E021;
-}
-
-[role=option] img,
-form {
-	background-color: #E6E6E6;
+	background-color: @prime;
 }
 
 
@@ -312,13 +322,12 @@ form {
  * SPACING
  */
 
-[role=option] p,
 .hidden,
 form input[type=text],
 form input[type=password],
 header a,
 nav li a {
-	padding: 10px;
+	padding: @unit * 2;
 }
 
 header h2,
@@ -326,21 +335,20 @@ header h2,
 .Add button.add,
 .Add button.remove,
 select.header,
-form,
 .breadcrumb a, 
 main h2 a,
 [role=toolbar] button,
 footer {
-	padding: 20px;
+	padding: @unit * 4;
 }
 
 .breadcrumb a,
 main h2 a {
-	padding-bottom: 10px;
+	padding-bottom: @unit * 2;
 }
 
 form label span {
-	margin-bottom: 10px;
+	margin-bottom: @unit * 2;
 }
 
 #images li:first-child,
@@ -360,7 +368,7 @@ h3,
 form input,
 form select,
 form textarea {
-	margin-bottom: 20px;
+	margin-bottom: @unit * 4;
 }
 
 .track {
@@ -388,7 +396,7 @@ form textarea {
 
 .track .two-cols:nth-child(2), 
 .select-subtitle {
-	padding-left: 20px;
+	padding-left: @unit * 4;
 } 
 
 .track label span {
@@ -397,7 +405,7 @@ form textarea {
 
 section#login h2,
 h3 {
-	margin-top: 40px;
+	margin-top: @unit * 8;
 }
 
 
@@ -606,9 +614,9 @@ header.compact {
 	z-index: 100;
 }
 
-header.compact h1 a:after,
-.breadcrumb a:after,
-main h2 a:after {
+header.compact h1 a::after,
+.breadcrumb a::after,
+main h2 a::after {
 	content: "";
 	position: absolute;
 	z-index: 100;
@@ -635,6 +643,8 @@ form {
 	float: left;
 	clear: both;
 	width: 100%;
+	background-color: @bg;
+	padding: @unit * 4;
 }
 
 button.search,
@@ -664,6 +674,10 @@ form label span {
 
 form label {
 	clear: both;
+}
+
+form label > .twitter-typeahead {
+	display: none !important;
 }
 
 [role=group],
@@ -973,8 +987,8 @@ button.select {
 	background-size: cover;
 }
 
-.file:after,
-button.select:after {
+.file::after,
+button.select::after {
 	content: "";
 	position: absolute;
 	width: 64px;
@@ -1078,6 +1092,10 @@ button.remove {
 	width: 320px;
 }
 
+[role=option] p {
+	padding: @unit * 2;
+}
+
 [role=option] input {
 	position: absolute;
 	left: 10px;
@@ -1105,6 +1123,7 @@ button.remove {
 [role=option] img {
 	display: block;
 	width: 100%;
+	background-color: @bg;
 }
 
 [role=option] label span {
@@ -1124,7 +1143,7 @@ button.remove {
 	position: absolute;
 }
 
-[role=option]:after {	
+[role=option]::after {	
 	position: absolute;
 	bottom: 0;
 	right: 0;
@@ -1136,26 +1155,34 @@ button.remove {
 	padding: 0 20px;
 	color: #FFF;
 	font-weight: bold;
+	content: attr(data-object) "";
 }
 
-[role=option].review:after {
-	background-color: #6666CC;
-	content: attr(data-type) "";
+[role=option],
+[role=option]::after {
+	background-color: fade(@tag, 100%);
 }
 
-[role=option].news:after {
-	background-color: #FF6600;
-	content: attr(data-type) "";
+[role=option]:hover,
+[role=option]:hover::after {
+	background-color: fade(@hover, 80%) !important;
 }
 
-[role=option].object:after,
-[role=option].aside:after {
-	content: attr(data-type) "";
+[role=option].review,
+[role=option].review::after {
+	background-color: fade(@review, 100%);
 }
 
-[role=option].feature:after {
-	background-color: #99CC00;
-	content: attr(data-type) "";
+[role=option].aside,
+[role=option].aside::after,
+[role=option].news,
+[role=option].news::after {
+	background-color: fade(@news, 100%);
+}
+
+[role=option].feature,
+[role=option].feature::after {
+	background-color: fade(@feature, 100%);
 }
 
 .file input[type=file] {
@@ -1181,7 +1208,7 @@ button.remove {
 	background-color: rgba(217, 224, 33, 0.7);
 }
 
-.Content .layout:first-of-type .left-col:after {
+.Content .layout:first-of-type .left-col::after {
 	content: "";
 	position: absolute;
 	width: 128px;
@@ -1199,7 +1226,7 @@ button.remove {
 	pointer-events: none;
 }
 
-.Content .layout:first-of-type .left-col button:after {
+.Content .layout:first-of-type .left-col button::after {
 	background: none;
 }
 
@@ -1338,10 +1365,10 @@ button.remove {
 	background-position: center center;
 }
 
-#article .Main .file:nth-child(1):after,
-#article .Main .file:nth-child(2):after,
-.Cover .file:after,
-.sublayout .file:after {
+#article .Main .file:nth-child(1)::after,
+#article .Main .file:nth-child(2)::after,
+.Cover .file::after,
+.sublayout .file::after {
 	background-image: url(../../assets/icons/iconmonstr/iconmonstr-picture-icon.svg);
 }
 
@@ -1893,7 +1920,7 @@ button.remove {
 	cursor: pointer;
 }
 
-.cke_editable_inline:after {
+.cke_editable_inline::after {
 	content: "";
 	position: absolute;
 	width: 128px;
@@ -1915,12 +1942,83 @@ button.remove {
 }
 
 .cke_editable_inline.cke_focus:before,
-.cke_editable_inline.cke_focus:after {
+.cke_editable_inline.cke_focus::after {
 	display: none;
 }
 
 
 
+
+
+
+
+
+/**
+ * SEARCH
+ */
+
+#search form {
+	padding: 0;
+}
+
+#search form > label,
+#search form > button {
+	display: block;
+	float: left;
+	width: 15%;
+	margin: 0;
+	top: auto;
+	clear: none;
+}
+
+#search form > label:first-child {
+	width: 40%;
+}
+
+#search [role=toolbar] {
+	display: none;
+}
+
+#search form > button {
+	float: right;
+}
+
+#search form > label select {
+	margin: 0;
+	min-width: 100%;
+	border: none;
+}
+
+#search .bootstrap-tagsinput {
+	border: none;
+	margin: 0;
+	height: 84px;
+}
+
+#search .bootstrap-tagsinput input,
+#search form > label select,
+#search form > button {
+	height: 84px;
+}
+
+/**
+ * This is some strange bug.
+ * After you press a button with action,
+ * a typeahead will be created.
+ * Absolutely uknown why?
+ */
+
+#search form > label > span {
+	display: none;
+}
+
+#search [role=listbox] {
+	width: 100%;
+}
+
+#search [role=option] {
+	width: 20%;
+}
 
 
 

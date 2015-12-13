@@ -20,7 +20,7 @@
     <title>Foradmin</title>
     <link rel="stylesheet" type="text/css" href="assets/bootstrap-tagsinput.css" />
     <link rel="stylesheet" type="text/css" href="assets/typeaheadjs.css" />
-    <link rel="stylesheet" type="text/css" href="assets/foradmin.css" />
+    <link rel="stylesheet/less" type="text/css" href="assets/foradmin.less" />
     <script src="../jslib/jquery-2.1.4.min.js">
                 <!--script-->
             </script>
@@ -32,23 +32,17 @@
 		</script>
     <script src="../jslib/jsrender.min.js">
                 <!--script-->
-            </script>
-    <script src="jslib/angular.min.js">
+            </script>    
+    <script src="../jslib/less-1.4.1.min.js">
                 <!--script-->
             </script>
-    <script src="jslib/bootstrap.min.js">
+    <script src="jslib/typeahead.bundle.min.js">
                 <!--script-->
             </script>
-    <script src="jslib/bootstrap-tagsinput.min.js">
+	<script src="jslib/bootstrap-tagsinput.min.js">
                 <!--script-->
             </script>
-    <script src="jslib/bootstrap-tagsinput-angular.min.js">
-                <!--script-->
-            </script>
-    <script src="jslib/typeahead.bundle.js">
-                <!--script-->
-            </script>
-    <script src="jslib/ckeditor/ckeditor.js">
+	<script src="jslib/ckeditor/ckeditor.js">
                 <!--script-->
             </script>
     <script src="jslib/he.js">
@@ -63,6 +57,9 @@
     <script src="controllers/add.js?v=1.0.0">
                 <!--script-->
             </script>
+    <script src="controllers/search.js?v=1.0.0">
+                <!--script-->
+            </script>        
     <script src="controllers/objects/fortag.js?v=1.0.0">
                 <!--script-->
             </script>
@@ -111,7 +108,8 @@
     <script>$(document).ready(function() { 
 				window.utils = new UtilsManager(); 
 				window.admin = new AdminManager(); 
-				window.add = new AddManager(); });</script>
+				window.add = new AddManager();
+				window.query = new SearchManager(); });</script>
     </head>
     <body>
     <header id="main">
@@ -122,7 +120,7 @@
         </h1>
         <div role="toolbar">
             <button role="link" class="search" type="button">Търсене</button>
-            <button role="link" class="logout" type="button">Изход</button>
+            <button role="link" class="logout" type="button">Излез</button>
         </div>
         <nav aria-label="Създаване на тагове">
             <h2>Създаване на тагове</h2>
