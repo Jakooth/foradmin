@@ -40,12 +40,13 @@
             				type="select" layout="two-cols" />
             <admin:formItem id="bookDateInput" label="Дата на издаване" 
             				type="date" layout="two-cols" />
-            <admin:formItem id="bookSimilarInput" label="Подобни" 
+            <admin:formItem id="bookRelatedInput" label="Подобни" 
             				placeholder="The Golden Hour, the-last-telegram" 
                             type="text" autocomplete="off" />
         	<h3>Скрити стойности</h3>
             <admin:formItem id="bookTypeSelect" label="Тип" type="hidden" value="books" />
             <admin:formItem id="bookSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
+            <admin:formItem id="bookSaveRelatedInput" label="Свързани" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

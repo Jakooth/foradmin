@@ -27,6 +27,7 @@
             <h3>Скрити стойности</h3>
             <admin:formItem id="dlcTypeSelect" label="Тип" type="hidden" value="games" />
             <admin:formItem id="dlcSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
+            <admin:formItem id="dlcSaveRelatedInput" label="Свързани" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

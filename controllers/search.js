@@ -161,7 +161,7 @@ function SearchManager() {
 		var o = admin._createObject($this.data('object'));
 		
 		admin.showSection('#' + $this.data('object'));
-		o.setData({tag: $this.data('tag'),
+		o.setData({tag: $this.data('id'),
 				   object: $this.data('object')});
 	});
 	

@@ -41,7 +41,7 @@
                             autocomplete="off" url="company" layout="one-col" />
             <admin:formItem id="gameDateInput" label="Премиера за Европа" type="date" layout="two-cols" />
             <admin:formItem id="gameUsDateInput" label="Премиера за САЩ" type="date" layout="two-cols" />
-            <admin:formItem id="gameSimilarInput" label="Подобни" 
+            <admin:formItem id="gameRelatedInput" label="Подобни" 
             				placeholder="saints-row, mafia, Red Dead Redemption, Crackdown" 
                             type="text" autocomplete="off" />
             <div class="Add Box">
@@ -50,6 +50,7 @@
             <h3>Скрити стойности</h3>
             <admin:formItem id="gameTypeSelect" label="Тип" type="hidden" value="games" />
             <admin:formItem id="gameSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
+            <admin:formItem id="gameSaveRelatedInput" label="Свързани" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

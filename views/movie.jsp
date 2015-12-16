@@ -56,12 +56,13 @@
             <admin:formItem id="movieWorldDateInput" label="Световна премиера" type="date" layout="two-cols" />
             <admin:formItem id="movieTimeInput" label="Времетраене" 
             				placeholder="149" type="text" layout="two-cols" />
-            <admin:formItem id="movieSimilarInput" label="Подобни" 
+            <admin:formItem id="movieRelatedInput" label="Подобни" 
             				placeholder="turks-in-space, Пазители на Галктиката" 
                             type="text" autocomplete="off" />
         	<h3>Скрити стойности</h3>
             <admin:formItem id="movieTypeSelect" label="Тип" type="hidden" value="movies" />
             <admin:formItem id="movieSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
+            <admin:formItem id="movieSaveRelatedInput" label="Свързани" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

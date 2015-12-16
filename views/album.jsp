@@ -34,7 +34,7 @@
             				type="select" layout="two-cols" />
             <admin:formItem id="albumDateInput" label="Дата на издаване" 
             				type="date" layout="two-cols" />
-            <admin:formItem id="albumSimilarInput" label="Подобни" 
+            <admin:formItem id="albumRelatedInput" label="Подобни" 
             				placeholder="" 
                             type="text" autocomplete="off" />
             <h3>Траклист</h3>
@@ -44,6 +44,7 @@
             <h3>Скрити стойности</h3>
             <admin:formItem id="albumTypeSelect" label="Тип" type="hidden" value="music" />
             <admin:formItem id="albumSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
+            <admin:formItem id="albumSaveRelatedInput" label="Свързани" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

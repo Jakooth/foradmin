@@ -17,7 +17,7 @@ function AdminManager() {
 	var platforms = 'http://localhost/forapi/get.php?object=platform';
 	var movieGenres = 'http://localhost/forapi/get.php?object=genre&type=movies';
 	var bookGenres = 'http://localhost/forapi/get.php?object=genre&type=books';
-	var countries = 'data/settings/countries.json';
+	var countries = 'http://localhost/forapi/get.php?object=country';
 	
 	var bloodhound = function(data, nameField) {
 		var nameField = nameField || 'en_name';
@@ -59,7 +59,7 @@ function AdminManager() {
 				
 				break;
 			case 'event':
-				o = new Event(id);
+				o = new Happening(id);
 				
 				break;
 			case 'book':
@@ -208,12 +208,12 @@ function AdminManager() {
 	var authors = bloodhound('http://localhost/forapi/get.php?object=author');
 	var characters = bloodhound('http://localhost/forapi/get.php?object=character');
 	var persons = bloodhound('http://localhost/forapi/get.php?object=person');
-	var music = bloodhound('http://localhost/forapi/get.php?object=music');
+	var music = bloodhound('http://localhost/forapi/get.php?type=music');
 	var books = bloodhound('http://localhost/forapi/get.php?object=book');
 	var tags = bloodhound('http://localhost/forapi/get.php');
 	
 	/**
-	 * Clear cache and reinitalize tag input.
+	 * Clear cache and reinitialize tag input.
 	 * The goal it to update typeahead data, after adding new tag.
 	 */
 	
@@ -239,25 +239,25 @@ function AdminManager() {
 		$("#bookTranslatorInput").tagsinput('destroy');
 		$("#bookSerieInput").tagsinput('destroy');
 		$("#bookStickersInput").tagsinput('destroy');
-		$("#bookSimilarInput").tagsinput('destroy');
+		$("#bookRelatedInput").tagsinput('destroy');
 		
 		$("#eventArtistInput").tagsinput('destroy');
 		$("#eventSerieInput").tagsinput('destroy');
 		$("#eventStickersInput").tagsinput('destroy');
-		$("#eventSimilarInput").tagsinput('destroy');
+		$("#eventRelatedInput").tagsinput('destroy');
 		$("#albumArtistInput").tagsinput('destroy');
 		$("#albumStickersInput").tagsinput('destroy');
-		$("#albumSimilarInput").tagsinput('destroy');
+		$("#albumRelatedInput").tagsinput('destroy');
 		
 		$("#gameSerieInput").tagsinput('destroy');
 		$("#gameStickersInput").tagsinput('destroy');
 		$("#gamePublisherInput").tagsinput('destroy');
 		$("#gameDeveloperInput").tagsinput('destroy');
-		$("#gameSimilarInput").tagsinput('destroy');
+		$("#gameRelatedInput").tagsinput('destroy');
 		
 		$("#movieSerieInput").tagsinput('destroy');
 		$("#movieStickersInput").tagsinput('destroy');
-		$("#movieSimilarInput").tagsinput('destroy');
+		$("#movieRelatedInput").tagsinput('destroy');
 		$("#movieCastInput").tagsinput('destroy');
 		$("#movieDirectorInput").tagsinput('destroy');
 		$("#movieWriterInput").tagsinput('destroy');
@@ -281,25 +281,25 @@ function AdminManager() {
 		initTagInput(persons, 'persons', '#bookTranslatorInput');
 		initTagInput(series, 'series', '#bookSerieInput', 1);
 		initStickersTagInput(stickers, 'stickers', '#bookStickersInput');
-		initTagInput(books, 'books', '#bookSimilarInput');
+		initTagInput(books, 'books', '#bookRelatedInput');
 		
 		initTagInput(music, 'music', '#eventArtistInput');
 		initTagInput(series, 'series', '#eventSerieInput', 1);
 		initStickersTagInput(stickers, 'stickers', '#eventStickersInput');
-		initTagInput(music, 'music', '#eventSimilarInput');
+		initTagInput(music, 'music', '#eventRelatedInput');
 		initTagInput(music, 'music', '#albumArtistInput');
 		initStickersTagInput(stickers, 'stickers', '#albumStickersInput');
-		initTagInput(music, 'music', '#albumSimilarInput');
+		initTagInput(music, 'music', '#albumRelatedInput');
 		
 		initTagInput(series, 'series', '#gameSerieInput', 1);
 		initStickersTagInput(stickers, 'stickers', '#gameStickersInput');
 		initTagInput(companies, 'companies', '#gamePublisherInput', 1);
 		initTagInput(companies, 'companies', '#gameDeveloperInput', 1);
-		initTagInput(games, 'games', '#gameSimilarInput');
+		initTagInput(games, 'games', '#gameRelatedInput');
 		
 		initTagInput(series, 'series', '#movieSerieInput', 1);
 		initStickersTagInput(stickers, 'stickers', '#movieStickersInput');
-		initTagInput(movies, 'movies', '#movieSimilarInput');
+		initTagInput(movies, 'movies', '#movieRelatedInput');
 		initTagInput(persons, 'persons', '#movieCastInput');
 		initTagInput(persons, 'persons', '#movieDirectorInput');
 		initTagInput(persons, 'persons', '#movieWriterInput');
@@ -607,7 +607,7 @@ function AdminManager() {
 	
 	initTagInput(series, 'series', '#movieSerieInput', 1);
 	initStickersTagInput(stickers, 'stickers', '#movieStickersInput');
-	initTagInput(movies, 'movies', '#movieSimilarInput');
+	initTagInput(movies, 'movies', '#movieRelatedInput');
 	initTagInput(persons, 'persons', '#movieCastInput');
 	initTagInput(persons, 'persons', '#movieDirectorInput');
 	initTagInput(persons, 'persons', '#movieWriterInput');
@@ -625,7 +625,7 @@ function AdminManager() {
 	initStickersTagInput(stickers, 'stickers', '#gameStickersInput');
 	initTagInput(companies, 'companies', '#gamePublisherInput', 1);
 	initTagInput(companies, 'companies', '#gameDeveloperInput', 1);
-	initTagInput(games, 'games', '#gameSimilarInput');
+	initTagInput(games, 'games', '#gameRelatedInput');
 	
 	/**
 	 * MUSIC::ALBUM
@@ -636,7 +636,7 @@ function AdminManager() {
 	
 	initTagInput(music, 'music', '#albumArtistInput');
 	initStickersTagInput(stickers, 'stickers', '#albumStickersInput');
-	initTagInput(music, 'music', '#albumSimilarInput');
+	initTagInput(music, 'music', '#albumRelatedInput');
 	
 	/**
 	 * MUSIC::EVENT
@@ -648,7 +648,7 @@ function AdminManager() {
 	initTagInput(music, 'music', '#eventArtistInput');
 	initTagInput(series, 'series', '#eventSerieInput', 1);
 	initStickersTagInput(stickers, 'stickers', '#eventStickersInput');
-	initTagInput(music, 'music', '#eventSimilarInput');
+	initTagInput(music, 'music', '#eventRelatedInput');
 	
 	/**
 	 * BOOKS::BOOK
@@ -661,7 +661,7 @@ function AdminManager() {
 	initTagInput(persons, 'persons', '#bookTranslatorInput');
 	initTagInput(series, 'series', '#bookSerieInput', 1);
 	initStickersTagInput(stickers, 'stickers', '#bookStickersInput');
-	initTagInput(books, 'books', '#bookSimilarInput');
+	initTagInput(books, 'books', '#bookRelatedInput');
 	
 	
 	

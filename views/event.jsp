@@ -42,12 +42,13 @@
             <admin:formItem id="eventCityInput" label="Град" 
             				placeholder="София, Каварна" 
                             type="text" layout="two-cols" />
-            <admin:formItem id="eventSimilarInput" label="Подобни" 
+            <admin:formItem id="eventRelatedInput" label="Подобни" 
             				placeholder="" 
                             type="text" autocomplete="off" />
         	<h3>Скрити стойности</h3>
             <admin:formItem id="eventTypeSelect" label="Тип" type="hidden" value="music" />
             <admin:formItem id="eventSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
+            <admin:formItem id="eventSaveRelatedInput" label="Свързани" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

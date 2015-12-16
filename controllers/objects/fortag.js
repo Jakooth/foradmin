@@ -54,20 +54,20 @@ Fortag.prototype._escapeValue = function(data) {
 	
 	/**
 	 * First remove any new lines. 
-	 * The spacing betweem paragrpahs is done with styles.
+	 * The spacing between paragraphs is done with styles.
 	 */
 	 
 	var s = data.replace(/\n/g, '');
 	
 	/**
-	 * Next decode to ensure there are no extre coded characters.
+	 * Next decode to ensure there are no extra coded characters.
 	 */
 	
 	s = he.decode(s);
 	
 	/**
-	 * Finaly escape HTML and special characters.
-	 * Note ecode will also conver cyrilic characters to HTML entities
+	 * Finally escape HTML and special characters.
+	 * Note encode will also convert cyrilic characters to HTML entities
 	 * and escape will just escape special characters.
 	 */
 	
@@ -81,6 +81,22 @@ Fortag.prototype._escapeValue = function(data) {
 	return new String(s).toString();
 }
 
+/**
+ * Associate tag with a form field.
+ */
+ 
+Fortag.prototype._setRelatedType = function(itemsArray, subtype) {
+	if (!itemsArray) return null;
+
+	var tags = itemsArray; 
+	
+	tags.forEach(function(tag, index, arr) {
+		tag.subtype = subtype;
+	});
+	
+	return tags;
+}
+
 Fortag.prototype._getTypeaheadValue = function(_$input) {
 	return _$input.length ? 
 		   _$input.typeahead()
@@ -92,7 +108,7 @@ Fortag.prototype._getTypeaheadValue = function(_$input) {
 }
 
 /**
- * @return only valuse for visible inputs.
+ * @return only values for visible inputs.
  * Note that inputs of type hidden are considered visible, 
  * but read only.
  */
@@ -102,12 +118,45 @@ Fortag.prototype._getInputValue = function(_$input) {
 		   this._escapeValue(_$input.val()) || null : null;
 }
 
+Fortag.prototype._setInputValue = function(_$input, data) {
+	_$input.length && data ? _$input.val(data) : null;
+	
+	if (_$input.is('[type=hidden]')) {
+		_$input.change();
+	}
+}
+
+Fortag.prototype._setTagsinputValue = function(_$input, data) {
+	var self = this;
+	
+	_$input.tagsinput('removeAll');
+	
+	if (_$input.length && data) {
+		data.forEach(function(tag, index, arr) {
+			_$input.tagsinput('add', tag);
+		});
+	}
+}
+
 Fortag.prototype._getInputValueAsArray = function(_$input) {
 	var s = this._getInputValue(_$input);
 	
 	if (s) return s.split(',');
 	
 	return s;
+}
+
+Fortag.prototype._setInputValueAsString = function(_$input, data) {
+	var self = this,
+		tags = new Array();
+	
+	if (_$input.length && data) {
+		data.forEach(function(tag, index, arr) {
+			tags.push(tag.tag_id);
+		});
+	}
+	
+	_$input.val(tags.join(',')).change();
 }
 
 /** 
@@ -122,6 +171,8 @@ Fortag.prototype.save = function() {
 	this.type = this._getInputValue(this._$typeSelect);
 	this.subtype = this._getInputValue(this._$subtypeSelect);
 	this.related = this._getTypeaheadValue(this._$relatedInput);
+	
+	this._setRelatedType(this.related, 'relation');
 	
 	this._saveId = this._getInputValue(this._$saveIdInput);
 	this._saveRelated = this._getInputValueAsArray(this._$saveRelatedInput);
@@ -161,15 +212,29 @@ Fortag.prototype.validateTag = function() {
 	}
 }
 
-Fortag.prototype.resetData = function() {
+Fortag.prototype.updateData = function(data) {
+	this._setInputValue(this._$enNameInput, data.en_name || null);
+	this._setInputValue(this._$bgNameInput, data.bg_name || null);
+	this._setInputValue(this._$dateInput, data.date || null);
+	this._setInputValue(this._$tagInput, data.tag || null);
+	this._setInputValue(this._$typeSelect, data.type || null);
+	this._setInputValue(this._$subtypeSelect, data.subtype || null);
+	this._setTagsinputValue(this._$relatedInput, data.related || null);
+		
+	this._setInputValue(this._$saveIdInput, data.tag_id || null);
+	this._setInputValueAsString(this._$saveRelatedInput, data.related || null);
 }
 
-Fortag.prototype.setData = function(data) {
-	var get = $.get(this._get + '?tag=' + data.tag + 
-								'&object=' + data.object);
+Fortag.prototype.setData = function(result) {
+	var self = this;
+
+	var get = $.get(this._get + '?tag=' + result.tag + 
+								'&object=' + result.object);
 						   
 	$.when(get).done(function(data) {
-		console.log(data);
+		var data = data.length ? JSON.parse(data) : data;
+		
+		self.updateData(data.tags[0]);
 	}).fail(function(data) {
 		console.log(data);
 	});					   
