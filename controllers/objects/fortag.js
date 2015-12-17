@@ -9,6 +9,7 @@ function Fortag(o) {
 	this._isValid = true;
 	this._saveId;
 	this._saveRelated;
+	this._saveRelatedArray = new Array();
 	
 	this._$mainInput = $('#' + o + 'MainInput');
 	
@@ -97,6 +98,12 @@ Fortag.prototype._setRelatedType = function(itemsArray, subtype) {
 	return tags;
 }
 
+Fortag.prototype._setRelatedValueType = function(item, subtype) {
+	if (!item) return null;
+	
+	return new Array({tag_id: item, subtype: subtype});
+}
+
 Fortag.prototype._getTypeaheadValue = function(_$input) {
 	return _$input.length ? 
 		   _$input.typeahead()
@@ -126,14 +133,26 @@ Fortag.prototype._setInputValue = function(_$input, data) {
 	}
 }
 
-Fortag.prototype._setTagsinputValue = function(_$input, data) {
+/**
+ * Because all related tags come in one array,
+ * we set all tags inputs with a single method.
+ * For this simple object there is no choice, but only related.
+ */
+Fortag.prototype._setTagsinputValue = function(data) {
 	var self = this;
 	
-	_$input.tagsinput('removeAll');
-	
-	if (_$input.length && data) {
+	if (data) {
 		data.forEach(function(tag, index, arr) {
-			_$input.tagsinput('add', tag);
+			switch (tag.related_subtype) {
+				case 'relation':
+				case null:
+					if (!self._$relatedInput.length) return false;
+					
+					self._$relatedInput.tagsinput('add', tag);
+					self._saveRelatedArray.push(tag.tag_id);
+					
+					break;
+			}
 		});
 	}
 }
@@ -146,17 +165,8 @@ Fortag.prototype._getInputValueAsArray = function(_$input) {
 	return s;
 }
 
-Fortag.prototype._setInputValueAsString = function(_$input, data) {
-	var self = this,
-		tags = new Array();
-	
-	if (_$input.length && data) {
-		data.forEach(function(tag, index, arr) {
-			tags.push(tag.tag_id);
-		});
-	}
-	
-	_$input.val(tags.join(',')).change();
+Fortag.prototype._setInputValueAsString = function(_$input, data) {	
+	_$input.val(data.join(',')).change();
 }
 
 /** 
@@ -212,21 +222,36 @@ Fortag.prototype.validateTag = function() {
 	}
 }
 
+Fortag.prototype.resetData = function() {
+	if (this._$enNameInput.length) this._$enNameInput.val(null);
+	if (this._$bgNameInput.length) this._$bgNameInput.val(null);
+	if (this._$dateInput.length) this._$dateInput.val(null);
+	if (this._$tagInput.length) this._$tagInput.val(null);
+	if (this._$typeSelect.length) this._$typeSelect.val(this._$typeSelect.find('option:first').val());
+	if (this._$subtypeSelect.length) this._$subtypeSelect.val(this._$subtypeSelect.find('option:first').val());
+	if (this._$relatedInput.length) this._$relatedInput.tagsinput('removeAll');
+}
+
 Fortag.prototype.updateData = function(data) {
+	this.resetData();
+
 	this._setInputValue(this._$enNameInput, data.en_name || null);
 	this._setInputValue(this._$bgNameInput, data.bg_name || null);
 	this._setInputValue(this._$dateInput, data.date || null);
 	this._setInputValue(this._$tagInput, data.tag || null);
 	this._setInputValue(this._$typeSelect, data.type || null);
 	this._setInputValue(this._$subtypeSelect, data.subtype || null);
-	this._setTagsinputValue(this._$relatedInput, data.related || null);
+	
+	this._setTagsinputValue(data.related || null);
 		
 	this._setInputValue(this._$saveIdInput, data.tag_id || null);
-	this._setInputValueAsString(this._$saveRelatedInput, data.related || null);
+	this._setInputValueAsString(this._$saveRelatedInput, this._saveRelatedArray);
 }
 
 Fortag.prototype.setData = function(result) {
 	var self = this;
+	
+	admin.showAlert({message: 'Отварям...', status: 'loading'});
 
 	var get = $.get(this._get + '?tag=' + result.tag + 
 								'&object=' + result.object);
@@ -235,6 +260,8 @@ Fortag.prototype.setData = function(result) {
 		var data = data.length ? JSON.parse(data) : data;
 		
 		self.updateData(data.tags[0]);
+		
+		admin.hideAlert();
 	}).fail(function(data) {
 		console.log(data);
 	});					   

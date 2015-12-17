@@ -27,22 +27,79 @@ function Game(o) {
 Game.prototype = Object.create(Formain.prototype);
 Game.prototype.constructor = Game;
 
+/** 
+ * PRIVATE
+ */
+
+Game.prototype._setTagsinputValue = function(data) {
+	Formain.prototype._setTagsinputValue.call(this, data);
+	
+	var self = this;
+	
+	if (data) {
+		data.forEach(function(tag, index, arr) {
+			switch (tag.related_subtype) {
+				case 'publisher':
+					if (!self._$publisherInput.length) return false;
+					
+					self._$publisherInput.tagsinput('add', tag);
+					self._saveRelatedArray.push(tag.tag_id);
+					
+					break;
+				case 'developer':
+					if (!self._$developerInput.length) return false;
+					
+					self._$developerInput.tagsinput('add', tag);
+					self._saveRelatedArray.push(tag.tag_id);
+					
+					break;
+				case 'platform':
+					if (!self._$platformGroup.length) return false;
+					
+					self._$platformGroup.find('[data-id=' + tag.platform_id + ']').prop('checked', true);
+					self._saveRelatedArray.push(tag.platform_id);
+					
+					break;
+			}
+		});
+	}
+}
+
+/** 
+ * PUBLIC
+ */
+
 Game.prototype.save = function() { 
 	Formain.prototype.save.call(this);
-	
-	/**
-	 * TODO: In fact we need the platform id and not text values.
-	 */
 	
 	this.platforms = this._getGroupValue(this._$platformGroup);
 	this.publisher = this._getTypeaheadValue(this._$publisherInput);
 	this.developer = this._getTypeaheadValue(this._$developerInput);
 	this.usDate = this._getInputValue(this._$usDateInput);
 	
+	this._setRelatedType(this.publisher, 'publisher');
+	this._setRelatedType(this.developer, 'developer');
+	this._setRelatedType(this.platforms, 'platform');
+	
 	this.json.platforms = this.platforms;
 	this.json.publisher = this.publisher;
 	this.json.developer = this.developer;
 	this.json.usDate = this.usDate;
+}
+
+Game.prototype.resetData = function() {
+	Formain.prototype.resetData.call(this);
+	
+	if (this._$usDateInput.length) this._$usDateInput.val(null);
+	if (this._$publisherInput.length) this._$publisherInput.tagsinput('removeAll');
+	if (this._$developerInput.length) this._$developerInput.tagsinput('removeAll');
+	if (this._$platformGroup.length) this._$platformGroup.find('[type=checkbox]').prop('checked', false);
+}
+
+Game.prototype.updateData = function(data) {
+	Fortag.prototype.updateData.call(this, data);
+
+	this._setInputValue(this._$usDateInput, data.us_date || null);
 }
 
 /**

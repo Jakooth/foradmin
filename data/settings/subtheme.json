@@ -1,10 +1,10 @@
-{ "tags" : [ { "name" : "lighten",
-        "tag" : "FFFFFF"
+{ "tags" : [ { "tag" : "FFFFFF",
+        "name" : "lighten"
       },
-      { "name" : "darken",
-        "tag" : "000000"
+      { "tag" : "000000",
+        "name" : "darken"
       },
-      { "name" : "tuborg",
-        "tag" : "33CC33"
+      { "tag" : "33CC33",
+        "name" : "tuborg"
       }
     ] }

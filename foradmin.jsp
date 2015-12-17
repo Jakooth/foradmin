@@ -20,7 +20,7 @@
     <title>Foradmin</title>
     <link rel="stylesheet" type="text/css" href="assets/bootstrap-tagsinput.css" />
     <link rel="stylesheet" type="text/css" href="assets/typeaheadjs.css" />
-    <link rel="stylesheet/less" type="text/css" href="assets/foradmin.less" />
+    <link rel="stylesheet" type="text/css" href="assets/foradmin.css" />
     <script src="../jslib/jquery-2.1.4.min.js">
                 <!--script-->
             </script>

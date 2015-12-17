@@ -1,16 +1,16 @@
-{ "tags" : [ { "name" : "игри",
-        "tag" : "games"
+{ "tags" : [ { "tag" : "games",
+        "name" : "игри"
       },
-      { "name" : "филми",
-        "tag" : "movies"
+      { "tag" : "movies",
+        "name" : "филми"
       },
-      { "name" : "книги",
-        "tag" : "books"
+      { "tag" : "books",
+        "name" : "книги"
       },
-      { "name" : "музика",
-        "tag" : "music"
+      { "tag" : "music",
+        "name" : "музика"
       },
-      { "name" : "настолни игри",
-        "tag" : "boards"
+      { "tag" : "boards",
+        "name" : "настолни игри"
       }
     ] }

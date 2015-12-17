@@ -469,6 +469,12 @@ function AdminManager() {
 		});
 	}
 	
+	this.hideAlert = function() {
+		$('[role=alertdialog]').remove();
+		
+		self.hideOverlay();
+	}
+	
 	this.hideSectionInWindow = function($view) {
 		
 		/**

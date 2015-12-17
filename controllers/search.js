@@ -77,6 +77,8 @@ function SearchManager() {
 				$(searchList).find('[role=option]').remove();				
 				$(searchList).append(html);
 			}
+			
+			admin.hideAlert();
 		}).fail(function(resultData) {
 			var data = resultData[0].length ? JSON.parse(resultData[0]) : resultData[0];
 			
@@ -108,6 +110,8 @@ function SearchManager() {
 			data: JSON.stringify(this.json),
 			dataType: 'json'
 		});
+		
+		admin.showAlert({message: 'Търся...', status: 'loading'});
 		
 		_renderSearchResult(searchRequest);
 	}
@@ -147,11 +151,17 @@ function SearchManager() {
 	 
 	$body.on('sectionshow', function(e) {
 		if (e.section == 'search') {
+			admin.showAlert({message: 'Търся...', status: 'loading'});
+			
 			_renderSearchResult();
 		}
 	});
 	
 	$body.on('click', '#search button.search', function(e) {
+		_doSearch();
+	});
+	
+	$body.on('change', searchTagInput, function(e) {
 		_doSearch();
 	});
 	
@@ -161,6 +171,7 @@ function SearchManager() {
 		var o = admin._createObject($this.data('object'));
 		
 		admin.showSection('#' + $this.data('object'));
+		
 		o.setData({tag: $this.data('id'),
 				   object: $this.data('object')});
 	});
