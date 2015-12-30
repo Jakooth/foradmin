@@ -35,6 +35,8 @@
             				placeholder="Песен за Сам и Дан Хаузър..." type="text" />
             <admin:formItem id="articleAuthorsInput" label="Автори" 
             				placeholder="Snake, doomy" type="text" />
+            <admin:formItem id="articleTagsInput" label="Тагове" 
+            				placeholder="gta-5, sam-houser, rockstar" type="text" />
             <div id="articleReviewRegion" role="region">
                 <admin:formItem id="articleHypeSelect" label="Оценка" type="select" layout="two-cols" />
                 <admin:formItem id="articleVersionTestedSelect" label="Тествана версия" type="select" layout="two-cols" />
@@ -98,6 +100,7 @@
             </div>
             <h3>Скрити стойности</h3>
             <admin:formItem id="articleSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
+            <admin:formItem id="articleSaveAuthorsInput" label="Автори" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="publish" type="button">Публикувай</button>

@@ -16,6 +16,8 @@
             				placeholder="Песен за Сам и Дан Хаузър..." type="text" />
             <admin:formItem id="asideAuthorsInput" label="Автори" 
             				placeholder="Snake, doomy" type="text" />
+            <admin:formItem id="asideTagsInput" label="Тагове" 
+            				placeholder="gta-5, sam-houser, rockstar" type="text" />                
             <h3>Основна картинка</h3>
             <div class="Main" role="group">
                 <div class="file">
@@ -42,7 +44,9 @@
             </div>
             <h3>Скрити стойности</h3>
             <admin:formItem id="asideSubtypeSelect" label="Подтип" type="hidden" value="aside" />
+            <admin:formItem id="asideSaveShotInput" label="Каринка шот" type="hidden" value="" />
             <admin:formItem id="asideSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
+            <admin:formItem id="asideSaveAuthorsInput" label="Автори" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="publish" type="button">Публикувай</button>

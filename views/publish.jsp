@@ -10,8 +10,6 @@
                             url="publish" />
         </h2>
         <form>
-            <admin:formItem id="publishTagsInput" label="Тагове" 
-            				placeholder="gta-5, sam-houser, rockstar" type="text" />
             <admin:formItem id="publishDateInput" label="Дата на публикуване" 
             				type="date" layout="two-cols" />
             <admin:formItem id="publishTimeInput" label="Час на публикуване" 
