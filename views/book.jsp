@@ -25,7 +25,7 @@
             <admin:formItem id="bookSerieInput" label="Поредица" 
             				placeholder="a-song-of-ice-and-fire, Discworld" type="text" 
                             autocomplete="off" url="serie" layout="one-col" />
-            <admin:formItem id="bookArtistInput" label="Автор" 
+            <admin:formItem id="bookAuthorInput" label="Автор" 
             				placeholder="Патрик Модиано" type="text" 
                             autocomplete="off" url="person" layout="one-col" />
             <admin:formItem id="bookTranslatorInput" label="Преводач" 

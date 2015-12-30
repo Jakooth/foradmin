@@ -9,11 +9,7 @@ function AddManager() {
 	var platforms = 'http://localhost/forapi/get.php?object=platform';
 	
 	
-	
-	
-	
-	
-	
+
 	
 	/** 
 	 * PUBLIC
@@ -198,20 +194,22 @@ function AddManager() {
 		$appender.parents('.platform').remove();
 	}
 	
-	this.addTrack = function($appender) {
-		var d1 = $.get('renderers/track.html');
+	this.addTrack = function($appender, data) {
+		var self = this;
+		
+		var getTrack = $.get('renderers/track.html');
 			
-		$.when(d1).done(function(data1) {
-			var html = data1;
+		$.when(getTrack).done(function(trackHtmlData) {
+			var tmpls = $.templates({
+					trackTemplate: trackHtmlData
+				}),
+				html = $.templates.trackTemplate.render(data);
 			
-			var $box = $appender.parents('.Track'),
-				$last;
+			var $tracklist = $appender.parents('.Tracklist');
 			
 			$appender.before(html);
 			
-			$last = $appender.prev();
-			$last.data('index', $last.index() + 1);
-			$last.attr('data-index', $last.data('index'))
+			self.updateTrackOrder($tracklist);
 			
 			$(document).scrollTop($appender.offset().top);
 		}).fail(function() {
@@ -220,7 +218,22 @@ function AddManager() {
 	}
 	
 	this.removeTrack = function($appender) {
+		var $tracklist = $appender.parents('.Tracklist');
+		
 		$appender.parents('.track').remove();
+		
+		this.updateTrackOrder($tracklist);
+	}
+	
+	this.updateTrackOrder = function($tracklist) {
+		var $tracks = $tracklist.find('.track');
+			
+		$tracks.each(function(index, track) {
+			var $track = $(track);
+			
+			$track.data('index', $track.index() + 1);
+			$track.attr('data-index', $track.data('index'));
+		});	
 	}
 	
 	this.removeLayout = function($appender) {
@@ -455,11 +468,11 @@ function AddManager() {
 	 * MUSIC:ALBUM
 	 */
 	
-	$('.Track').on('click', 'button.add', function(e) {
-		self.addTrack($(this));
+	$('.Tracklist').on('click', 'button.add', function(e) {
+		self.addTrack($(this), {name: '', data: '', order: ''});
 	});
 	
-	$('.Track').on('click', 'button.remove', function(e) {
+	$('.Tracklist').on('click', 'button.remove', function(e) {
 		self.removeTrack($(this));
 	});
 }

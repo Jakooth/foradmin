@@ -27,26 +27,20 @@ Sticker.prototype.save = function() {
 	this.json.lib = this.lib;
 }
 
+Sticker.prototype.resetData = function() {
+	Fortag.prototype.resetData.call(this);
+	
+	if (this._$libInput.length) this._$libInput.val(null);
+}
+
+Sticker.prototype.updateData = function(data) {
+	Fortag.prototype.updateData.call(this, data);
+
+	this._setInputValue(this._$libInput, data.lib || null);
+}
+
 Sticker.prototype.validateTag = function() { 
 	Fortag.prototype.validateTag.call(this);
-	
-	if (!this._$mainInput.prop('files').length == 1) {
-		this._isValid = false;
-		
-		admin.showAlert({message: 'Трябва да изберете стикер.', 
-						 status: 'error'});
-		
-		return false;
-	}
-	
-	if (!this._$mainInput.prop('files')[0].type.match('image.svg')) {
-		this._isValid = false;
-		
-		admin.showAlert({message: 'Стикера трябва да е в SVG формат.', 
-						 status: 'error'});
-		
-		return false;
-	}
 	
 	if (!this.enName) {
 		this._isValid = false;

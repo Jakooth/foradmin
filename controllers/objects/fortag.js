@@ -47,8 +47,8 @@ function Fortag(o) {
  */
 
 Fortag.prototype._updateAfterSave = function(data) {
-	this._$saveIdInput.val(data.saveId).change();
-	this._$saveRelatedInput.val(data.saveRelated.join(',')).change();	
+	if (data.saveId) this._$saveIdInput.val(data.saveId).change();
+	if (data.saveRelated) this._$saveRelatedInput.val(data.saveRelated.join(',')).change();	
 }
 
 Fortag.prototype._escapeValue = function(data) {
@@ -68,7 +68,7 @@ Fortag.prototype._escapeValue = function(data) {
 	
 	/**
 	 * Finally escape HTML and special characters.
-	 * Note encode will also convert cyrilic characters to HTML entities
+	 * Note encode will also convert Cyrillic characters to HTML entities
 	 * and escape will just escape special characters.
 	 */
 	
@@ -82,6 +82,10 @@ Fortag.prototype._escapeValue = function(data) {
 	return new String(s).toString();
 }
 
+Fortag.prototype._unescapeValue = function(data) {
+	return he.unescape(data);
+}
+
 /**
  * Associate tag with a form field.
  */
@@ -89,10 +93,20 @@ Fortag.prototype._escapeValue = function(data) {
 Fortag.prototype._setRelatedType = function(itemsArray, subtype) {
 	if (!itemsArray) return null;
 
-	var tags = itemsArray; 
+	var tags = new Array(); 
 	
-	tags.forEach(function(tag, index, arr) {
-		tag.subtype = subtype;
+	itemsArray.forEach(function(tag, index, arr) {
+		
+		/**
+		 * These objects in itemsArray are references in memory.
+		 * So we need to clone it first and send back the new array.
+		 * Otherwise it is a problem, if you have on tag in two fields.
+		 * For example the same writer and director.
+		 */
+		var tempTag = jQuery.extend(true, {}, tag);
+	
+		tags.push(tempTag);
+		tags[tags.length - 1].subtype = subtype;
 	});
 	
 	return tags;
@@ -120,17 +134,17 @@ Fortag.prototype._getTypeaheadValue = function(_$input) {
  * but read only.
  */
 
-Fortag.prototype._getInputValue = function(_$input) {
-	return _$input.length && _$input.is(':visible, [type=hidden]') ?
+Fortag.prototype._getInputValue = function(_$input, includeHidden) {
+	var hidden = includeHidden ? ':hidden, ' : '';
+
+	return _$input.length && _$input.is(hidden + ':visible, [type=hidden]') ?
 		   this._escapeValue(_$input.val()) || null : null;
 }
 
 Fortag.prototype._setInputValue = function(_$input, data) {
 	_$input.length && data ? _$input.val(data) : null;
 	
-	if (_$input.is('[type=hidden]')) {
-		_$input.change();
-	}
+	_$input.change();
 }
 
 /**
@@ -158,7 +172,7 @@ Fortag.prototype._setTagsinputValue = function(data) {
 }
 
 Fortag.prototype._getInputValueAsArray = function(_$input) {
-	var s = this._getInputValue(_$input);
+	var s = this._getInputValue(_$input, true);
 	
 	if (s) return s.split(',');
 	
@@ -182,7 +196,7 @@ Fortag.prototype.save = function() {
 	this.subtype = this._getInputValue(this._$subtypeSelect);
 	this.related = this._getTypeaheadValue(this._$relatedInput);
 	
-	this._setRelatedType(this.related, 'relation');
+	this.related = this._setRelatedType(this.related, 'relation');
 	
 	this._saveId = this._getInputValue(this._$saveIdInput);
 	this._saveRelated = this._getInputValueAsArray(this._$saveRelatedInput);
@@ -230,6 +244,11 @@ Fortag.prototype.resetData = function() {
 	if (this._$typeSelect.length) this._$typeSelect.val(this._$typeSelect.find('option:first').val());
 	if (this._$subtypeSelect.length) this._$subtypeSelect.val(this._$subtypeSelect.find('option:first').val());
 	if (this._$relatedInput.length) this._$relatedInput.tagsinput('removeAll');
+	
+	if (this._$mainInput.length) this._$mainInput.parents('.file').css('background-image', 'none');
+	
+	if (this._$saveIdInput.length) this._$saveIdInput.val(null);
+	if (this._$saveRelatedInput.length) this._$saveRelatedInput.val(null);
 }
 
 Fortag.prototype.updateData = function(data) {
@@ -259,9 +278,15 @@ Fortag.prototype.setData = function(result) {
 	$.when(get).done(function(data) {
 		var data = data.length ? JSON.parse(data) : data;
 		
-		self.updateData(data.tags[0]);
-		
-		admin.hideAlert();
+		if (!data.events.mysql.connection) {
+			admin.showAlert({message: data.events.mysql.error, status: 'error'});
+		} else if (!data.events.mysql.result) {
+			admin.showAlert({message: data.events.mysql.error, status: 'error'});
+		} else {
+			self.updateData(data.tags[0]);
+			
+			admin.hideAlert();
+		}	
 	}).fail(function(data) {
 		console.log(data);
 	});					   

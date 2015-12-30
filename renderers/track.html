@@ -1,12 +1,14 @@
-<div class="track" data-index="">
+<div class="track" data-index="{{:order}}">
     <div class="two-cols">
         <label><span>Трак:</span>
-            <input placeholder="Pants Down" type="text">
+            <input placeholder="Pants Down" 
+            	   type="text" value="{{:name}}" />
         </label>
     </div>
     <div class="two-cols">
         <label><span>Видео:</span>
-            <input placeholder="https://www.youtube.com/watch?v=TpK5gCHUexY" type="text">
+            <input placeholder="https://www.youtube.com/watch?v=TpK5gCHUexY" 
+            	   type="text" value="{{:video}}"  />
         </label>
     </div>
     <button class="remove" type="button"><span class="clip">Изтрий</span></button>

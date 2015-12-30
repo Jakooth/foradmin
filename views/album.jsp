@@ -38,13 +38,14 @@
             				placeholder="" 
                             type="text" autocomplete="off" />
             <h3>Траклист</h3>
-            <div class="Add Track">
+            <div class="Add Tracklist">
                 <button class="add" type="button">Добави трак</button>
             </div>
             <h3>Скрити стойности</h3>
             <admin:formItem id="albumTypeSelect" label="Тип" type="hidden" value="music" />
             <admin:formItem id="albumSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
             <admin:formItem id="albumSaveRelatedInput" label="Свързани" type="hidden" value="" />
+            <admin:formItem id="albumSaveTracksInput" label="Тракове" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

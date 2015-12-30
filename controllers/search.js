@@ -151,9 +151,7 @@ function SearchManager() {
 	 
 	$body.on('sectionshow', function(e) {
 		if (e.section == 'search') {
-			admin.showAlert({message: 'Търся...', status: 'loading'});
-			
-			_renderSearchResult();
+			_doSearch();
 		}
 	});
 	
@@ -167,10 +165,30 @@ function SearchManager() {
 	
 	$body.on('dblclick', '#search [role=option]', function(e) {
 		var $this = $(this);
-
-		var o = admin._createObject($this.data('object'));
 		
-		admin.showSection('#' + $this.data('object'));
+		var o, oType;
+		
+		switch ($this.data('object')) {
+			case 'review':
+			case 'feature':
+			case 'news':
+			case 'video':
+				oType = 'article';
+				
+				break;
+			case 'aside':
+				oType = 'aside';
+				
+				break;
+			default:
+				oType = $this.data('object');
+				
+				break;
+		}
+		
+		o = admin._createObject(oType);
+		
+		admin.showSection('#' + oType);
 		
 		o.setData({tag: $this.data('id'),
 				   object: $this.data('object')});

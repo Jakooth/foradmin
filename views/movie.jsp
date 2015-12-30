@@ -28,7 +28,6 @@
             				placeholder="Star Wars: The Force Awakens" type="text" />
             <admin:formItem id="movieTagInput" label="Таг" 
             				placeholder="star-wars-episode-the-force-awakens" type="text" />
-            <admin:formItem id="movieTypeSelect" label="Тип" type="hidden" value="movies" />
             <admin:formItem id="movieSerieInput" label="Поредица" 
             				placeholder="star-wars" type="text" 
                             autocomplete="off" url="serie" layout="one-col" />

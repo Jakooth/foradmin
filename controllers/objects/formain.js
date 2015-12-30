@@ -26,7 +26,7 @@ Formain.prototype.constructor = Formain;
 /** 
  * PRIVATE
  */
- 
+  
 Formain.prototype._setTagsinputValue = function(data) {
 	Fortag.prototype._setTagsinputValue.call(this, data);
 	
@@ -88,9 +88,9 @@ Formain.prototype.save = function() {
 	this.genres  =  this._getGroupValue(this._$genreGroup);
 	this.country = this._getInputValue(this._$countrySelect);
 	
-	this._setRelatedType(this.serie, 'serie');
-	this._setRelatedType(this.stickers, 'sticker');
-	this._setRelatedType(this.genres, 'genre');
+	this.serie = this._setRelatedType(this.serie, 'serie');
+	this.stickers = this._setRelatedType(this.stickers, 'sticker');
+	this.genres = this._setRelatedType(this.genres, 'genre');
 	
 	this.country = this._setRelatedValueType(this.country, 'country');
 			   

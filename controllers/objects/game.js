@@ -77,14 +77,20 @@ Game.prototype.save = function() {
 	this.developer = this._getTypeaheadValue(this._$developerInput);
 	this.usDate = this._getInputValue(this._$usDateInput);
 	
-	this._setRelatedType(this.publisher, 'publisher');
-	this._setRelatedType(this.developer, 'developer');
-	this._setRelatedType(this.platforms, 'platform');
+	this.publisher = this._setRelatedType(this.publisher, 'publisher');
+	this.developer = this._setRelatedType(this.developer, 'developer');
+	this.platforms = this._setRelatedType(this.platforms, 'platform');
 	
 	this.json.platforms = this.platforms;
 	this.json.publisher = this.publisher;
 	this.json.developer = this.developer;
 	this.json.usDate = this.usDate;
+	
+	/**
+	 * Override in case of null values.
+	 * Very rare case, but just in case.
+	 */ 
+	this.json.type = 'games';
 }
 
 Game.prototype.resetData = function() {

@@ -34,6 +34,6 @@ function LoginManager() {
 	});
 	
 	$('#login').on('click', 'button.login', function (e) {
-		window.location.href = "foradmin.html#main";
+		window.location.href = "foradmin.jsp#main";
 	});
 }

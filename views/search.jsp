@@ -17,6 +17,9 @@
                 <option value="">Всички категории</option>
                 <option value="tags">таг</option>
                 <option value="articles">статия</option>
+                <option value="genres">жанр</option>
+                <option value="platforms">платформа</option>
+                <option value="stickers">стикери</option>
                 <option disabled="disabled" value="imgs">картинка</option>
             </admin:formItem>
             <admin:formItem id="searchTypeSelect" label="Тип" 

@@ -63,7 +63,7 @@ function AdminManager() {
 				
 				break;
 			case 'book':
-				o = new Platform(id);
+				o = new Book(id);
 				
 				break;
 			case 'platform':
@@ -78,8 +78,18 @@ function AdminManager() {
 				o = new Sticker(id);
 				
 				break;
+			case 'article':
+				o = new Article(id);
+				
+				break;
+			case 'aside':
+				o = new Aside(id);
+				
+				break;
 			default:
 				o = new Fortag(id);
+				
+				break;
 		}
 		
 		return o;
@@ -143,7 +153,21 @@ function AdminManager() {
 				}, {
 					name: text,
 					displayKey: displayKey || 'en_name', 
-					source: data.ttAdapter()
+					source: data.ttAdapter(),
+					templates: {
+						suggestion: function(data) {
+							if (data.lib) {
+								return $.templates('<div class="sticker" style="background-image: ' + 
+												   'url(../assets/icons/' + 
+												   '{{:lib}}/' + 
+												   '{{:subtype}}/svg/000000/transparent/' + 
+												   '{{:tag}}.svg)">{{:en_name}}</div>').render(data);
+							} else {
+								return $.templates('<div>{{:en_name}} '  +  
+												   '{{if object}}({{:object}}){{/if}}</div>').render(data);		   
+							}
+						}
+					}
 				}],
 				freeInput: false
 			});
@@ -152,51 +176,6 @@ function AdminManager() {
 			 * TODO: Fail logic.
 			 */
 		});	
-	}
-	
-	/**
-	 * TODO: Everything is the same like the @initTagInput, but
-	 * there is a template renderer function.
-	 * Try to move this function as an argument or something.
-	 */
-	
-	var initStickersTagInput = function(data, 
-								text, 
-								input, 
-								maxTags, 
-								displayKey) {
-		
-		var promise = data.initialize(true);
-		
-		promise.done(function() {
-			$(input).tagsinput({
-				maxTags: maxTags || null,
-				itemValue: 'tag',
-				itemText: displayKey || 'name',
-				typeaheadjs: [{
-					hint: true,
-					highlight: true
-				}, {
-					name: text,
-					displayKey: displayKey || 'name', 
-					source: data.ttAdapter(),
-					templates: {
-						suggestion: function(data) {
-							return $.templates('<div class="sticker" style="background-image: ' + 
-											   'url(../assets/icons/' + 
-											   '{{:lib}}/' + 
-											   '{{:subtype}}/svg/000000/transparent/' + 
-											   '{{:tag}}.svg)">{{:name}}</div>').render(data);
-						}
-					}
-				}],
-				freeInput: false
-			});				 
-		}).fail(function() {
-			/**
-			 * TODO: Fail logic.
-			 */
-		});
 	}
 
 	var games = bloodhound('http://localhost/forapi/get.php?object=game');
@@ -235,7 +214,7 @@ function AdminManager() {
 		 * TODO: Try to simplify this process.
 		 */
 		 
-		$("#bookArtistInput").tagsinput('destroy');
+		$("#bookAuthorInput").tagsinput('destroy');
 		$("#bookTranslatorInput").tagsinput('destroy');
 		$("#bookSerieInput").tagsinput('destroy');
 		$("#bookStickersInput").tagsinput('destroy');
@@ -266,7 +245,8 @@ function AdminManager() {
 		
 		$("#articleAuthorsInput").tagsinput('destroy');
 		$("#publishIssueInput").tagsinput('destroy');
-		$("#publishTagsInput").tagsinput('destroy');
+		$("#asideTagsInput").tagsinput('destroy');
+		$("#articleTagsInput").tagsinput('destroy');
 		$("#articleBetterInput").tagsinput('destroy');
 		$("#articleWorseInput").tagsinput('destroy');
 		$("#articleEqualInput").tagsinput('destroy');
@@ -277,28 +257,28 @@ function AdminManager() {
 		$("#dlcRelatedInput").tagsinput('destroy');
 		$("#bandRelatedInput").tagsinput('destroy');
 		
-		initTagInput(persons, 'persons', '#bookArtistInput');
+		initTagInput(persons, 'persons', '#bookAuthorInput');
 		initTagInput(persons, 'persons', '#bookTranslatorInput');
 		initTagInput(series, 'series', '#bookSerieInput', 1);
-		initStickersTagInput(stickers, 'stickers', '#bookStickersInput');
+		initTagInput(stickers, 'stickers', '#bookStickersInput');
 		initTagInput(books, 'books', '#bookRelatedInput');
 		
 		initTagInput(music, 'music', '#eventArtistInput');
 		initTagInput(series, 'series', '#eventSerieInput', 1);
-		initStickersTagInput(stickers, 'stickers', '#eventStickersInput');
+		initTagInput(stickers, 'stickers', '#eventStickersInput');
 		initTagInput(music, 'music', '#eventRelatedInput');
 		initTagInput(music, 'music', '#albumArtistInput');
-		initStickersTagInput(stickers, 'stickers', '#albumStickersInput');
+		initTagInput(stickers, 'stickers', '#albumStickersInput');
 		initTagInput(music, 'music', '#albumRelatedInput');
 		
 		initTagInput(series, 'series', '#gameSerieInput', 1);
-		initStickersTagInput(stickers, 'stickers', '#gameStickersInput');
+		initTagInput(stickers, 'stickers', '#gameStickersInput');
 		initTagInput(companies, 'companies', '#gamePublisherInput', 1);
 		initTagInput(companies, 'companies', '#gameDeveloperInput', 1);
 		initTagInput(games, 'games', '#gameRelatedInput');
 		
 		initTagInput(series, 'series', '#movieSerieInput', 1);
-		initStickersTagInput(stickers, 'stickers', '#movieStickersInput');
+		initTagInput(stickers, 'stickers', '#movieStickersInput');
 		initTagInput(movies, 'movies', '#movieRelatedInput');
 		initTagInput(persons, 'persons', '#movieCastInput');
 		initTagInput(persons, 'persons', '#movieDirectorInput');
@@ -308,7 +288,8 @@ function AdminManager() {
 		
 		initTagInput(authors, 'authors', '#articleAuthorsInput');
 		initTagInput(issues, 'issues', '#publishIssueInput', 1, 'name');
-		initTagInput(tags, 'tags', '#publishTagsInput');
+		initTagInput(tags, 'tags', '#asideTagsInput');
+		initTagInput(tags, 'tags', '#articleTagsInput');
 		initTagInput(tags, 'tags', '#articleBetterInput', 1);
 		initTagInput(tags, 'tags', '#articleWorseInput', 1);
 		initTagInput(tags, 'tags', '#articleEqualInput', 1);
@@ -564,7 +545,7 @@ function AdminManager() {
 	initTagInput(tags, 'tags', '#personRelatedInput');
 	initTagInput(tags, 'tags', '#characterRelatedInput');
 	initTagInput(games, 'games', '#dlcRelatedInput', 1);
-	initTagInput(persons, 'persons', '#bandRelatedInput', 1);
+	initTagInput(persons, 'persons', '#bandRelatedInput');
 	
 	/**
 	 * ASIDE
@@ -587,7 +568,8 @@ function AdminManager() {
 	
 	initTagInput(authors, 'authors', '#articleAuthorsInput');
 	initTagInput(issues, 'issues', '#publishIssueInput', 1, 'name');
-	initTagInput(tags, 'tags', '#publishTagsInput');
+	initTagInput(tags, 'tags', '#asideTagsInput');
+	initTagInput(tags, 'tags', '#articleTagsInput');
 	initTagInput(tags, 'tags', '#articleBetterInput', 1);
 	initTagInput(tags, 'tags', '#articleWorseInput', 1);
 	initTagInput(tags, 'tags', '#articleEqualInput', 1);
@@ -612,7 +594,7 @@ function AdminManager() {
 	this.loadOptions($('#movieGenreGroup'), movieGenres, 'checkbox');
 	
 	initTagInput(series, 'series', '#movieSerieInput', 1);
-	initStickersTagInput(stickers, 'stickers', '#movieStickersInput');
+	initTagInput(stickers, 'stickers', '#movieStickersInput');
 	initTagInput(movies, 'movies', '#movieRelatedInput');
 	initTagInput(persons, 'persons', '#movieCastInput');
 	initTagInput(persons, 'persons', '#movieDirectorInput');
@@ -628,7 +610,7 @@ function AdminManager() {
 	this.loadOptions($('#gamePlatformGroup'), platforms, 'checkbox');
 	
 	initTagInput(series, 'series', '#gameSerieInput', 1);
-	initStickersTagInput(stickers, 'stickers', '#gameStickersInput');
+	initTagInput(stickers, 'stickers', '#gameStickersInput');
 	initTagInput(companies, 'companies', '#gamePublisherInput', 1);
 	initTagInput(companies, 'companies', '#gameDeveloperInput', 1);
 	initTagInput(games, 'games', '#gameRelatedInput');
@@ -641,7 +623,7 @@ function AdminManager() {
 	this.loadOptions($('#albumCountrySelect'), countries, 'option');
 	
 	initTagInput(music, 'music', '#albumArtistInput');
-	initStickersTagInput(stickers, 'stickers', '#albumStickersInput');
+	initTagInput(stickers, 'stickers', '#albumStickersInput');
 	initTagInput(music, 'music', '#albumRelatedInput');
 	
 	/**
@@ -653,7 +635,7 @@ function AdminManager() {
 	
 	initTagInput(music, 'music', '#eventArtistInput');
 	initTagInput(series, 'series', '#eventSerieInput', 1);
-	initStickersTagInput(stickers, 'stickers', '#eventStickersInput');
+	initTagInput(stickers, 'stickers', '#eventStickersInput');
 	initTagInput(music, 'music', '#eventRelatedInput');
 	
 	/**
@@ -663,10 +645,10 @@ function AdminManager() {
 	this.loadOptions($('#bookGenreGroup'), bookGenres, 'checkbox');
 	this.loadOptions($('#bookCountrySelect'), countries, 'option');
 	
-	initTagInput(persons, 'persons', '#bookArtistInput');
+	initTagInput(persons, 'persons', '#bookAuthorInput');
 	initTagInput(persons, 'persons', '#bookTranslatorInput');
 	initTagInput(series, 'series', '#bookSerieInput', 1);
-	initStickersTagInput(stickers, 'stickers', '#bookStickersInput');
+	initTagInput(stickers, 'stickers', '#bookStickersInput');
 	initTagInput(books, 'books', '#bookRelatedInput');
 	
 	
@@ -694,6 +676,12 @@ function AdminManager() {
 		self.setDefaults();
 	});
 	
+	$('body').on('sectionshow', function(e) {
+		var o = _createObject(e.section);
+		
+		o.resetData();
+	});
+	
 	$('body').on('change', '[type=hidden]', function(e) {
 		var $this = $(this);
 			
@@ -713,7 +701,7 @@ function AdminManager() {
 	 */
 	
 	$('header').on('click', 'button.logout', function(e) {
-		window.location.href = "login.html";
+		window.location.href = "login.jsp";
 	});
 	
 	/**
@@ -1019,14 +1007,6 @@ function AdminManager() {
 		console.log(window.admin.publishTarget);
 	});
 	
-	$('#publish').on('change', '#publishTagsInput', function(e) {
-		window.admin.publishTarget._setPrimeAndUrl();													  
-															  
-		$('#publishUrlInput').parents('label').find('b')
-							 .contents().last()
-							 .replaceWith(window.admin.publishTarget.url);
-	});
-	
 	$('#quote').on('click', 'button.save', function(e) {
 		var o = new Quote();
 		
@@ -1061,6 +1041,8 @@ function AdminManager() {
 		var tag = $('#stickerTagInput').val(),
 			lib = $('#stickerLibInput').val(),
 			subtype = $('#stickerSubtypeSelect').val();
+		
+		if (!tag || !lib || !subtype) return false;
 														 
 		$this.parents('section').find('.Main .file')
 			 .css('background-image', 
