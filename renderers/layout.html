@@ -1,4 +1,10 @@
-<div class="layout">
+<div class="layout"
+	 data-id="{{:layout_id}}"
+	 data-type="{{:type}}"
+     data-subtype="{{:subtype}}"
+     data-ratio="{{:ratio}}"
+     data-order="{{:order}}"
+     data-saveimgs="{{:~saveImgs}}">
     <select aria-label="Тип оформление" class="header">
         <option value="text">Текст</option>
         <option value="img">Картинки</option>
@@ -11,24 +17,13 @@
     <p class="select-subtitle">Избери тип оформление.</p>
     <div role="group">
         <div class="inline-col left-col" 
-        	 data-type="" 
-             data-object="" 
-             data-url=""
-             data-valign="">
+             data-object="{{:left_object}}" 
+             data-url="{{:left}}"
+             data-valign="{{:left_valign}}">
             <button class="select" type="button"><span class="clip">Добави игра,
             каре, цитат, статия или реклама</span></button>
         </div>
-        <div class="center-col textLayout" contenteditable="true">
-            <p>Натиснете тук, за да редактирате текста, използвайки само параграфи, <strong>болд</strong>, <em>италик</em> и <a href="#" target="_blank">връзки</a>.
-                Този едитор поддържа и стандартни функции, като копи, пейст,
-                ънду и реду.</p>
-            <blockquote>
-                <p>За да оградите параграф, като цитат, използвайте бутона с
-                    кавичките.</p>
-            </blockquote>
-            <h3>Може да използвате и хединг 3</h3>
-            <p>За да редактирата съдържанието директно в HTML използвайте бутона <em>Source</em>.</p>
-        </div>
+        <div class="center-col textLayout" contenteditable="true">{{:center}}</div>
         <div class="center-col imgLayout">
             <select aria-label="Оформление на картинките" class="header">
                 <option value="z0">голяма</option>
@@ -47,7 +42,7 @@
                  role="presentation" />
             <p class="select-subtitle">Избери позициониране на картинките.</p>
             <div class="sublayout z0Sublayout">
-            	<div class="img-proxy">
+                <div class="img-proxy">
                     <div class="file"> <img alt="" 
                     						role="presentation" 
                                             src="../assets/helpers/16-9.png" />
@@ -61,7 +56,7 @@
                 </div>
             </div>
             <div class="sublayout z1Sublayout">
-            	<div class="img-proxy">
+                <div class="img-proxy">
                     <div class="file"> <img alt="" 
                     						role="presentation" 
                                             src="../assets/helpers/16-9.png" />
@@ -73,7 +68,7 @@
                         <input placeholder="Видео" aria-label="Видео" type="text" />
                     </div>
                 </div>
-           	</div>
+            </div>
             <div class="sublayout a1Sublayout">
                 <div class="img-proxy">
                     <div class="file"> <img alt="" 
@@ -252,7 +247,7 @@
                 </div>
             </div>
             <div class="sublayout f1Sublayout">
-            	<div class="img-proxy">
+                <div class="img-proxy">
                     <div class="file"> <img alt="" 
                     						role="presentation" 
                                             src="../assets/helpers/16-9.png" />
@@ -261,7 +256,7 @@
                     <div class="settings">
                         <input placeholder="Видео" aria-label="Видео" type="text" />
                     </div>
-                </div>	
+                </div>
             </div>
             <div class="sublayout f3Sublayout">
                 <div class="img-proxy">
@@ -312,7 +307,7 @@
                 </div>
             </div>
             <div class="sublayout i3Sublayout">
-            	<div class="img-proxy">
+                <div class="img-proxy">
                     <div class="file"> <img alt="" 
                     						role="presentation" 
                                             src="../assets/helpers/16-9.png" />
@@ -393,10 +388,9 @@
             </div>
         </div>
         <div class="inline-col right-col"
-        	 data-type="" 
-             data-object="" 
-             data-url=""
-             data-valign="">
+             data-object="{{:right_object}}" 
+             data-url="{{:right}}"
+             data-valign="{{:right_valign}}">
             <button class="select" type="button"><span class="clip">Добави каре,
             цитат, статия или реклама</span></button>
         </div>

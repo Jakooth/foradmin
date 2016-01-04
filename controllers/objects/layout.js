@@ -38,23 +38,22 @@ function Layout(id) {
 	this.right = null;
 	this.imgs = [];
 	this.ratio = '16-9';
+	this._saveImgs = 0;
 	
 	this.setCenter = function() {
 		self.center = _escapeValue(CKEDITOR.instances[self.id]
-												.getData());
+										   .getData());
 	}
 	
 	this.setAside = function() {
-		if ($left.data('type').length > 0) {
-			self.left = {type: $left.data('type'), 
-						 object: $left.data('object'), 
+		if ($left.data('object').length > 0) {
+			self.left = {object: $left.data('object'), 
 						 valign: $left.data('valign'), 
 						 url: $left.data('url')};
 		}
 		
-		if ($right.data('type').length > 0) {
-			self.right = {type: $right.data('type'), 
-						  object: $right.data('object'), 
+		if ($right.data('object').length > 0) {
+			self.right = {object: $right.data('object'), 
 						  valign: $right.data('valign'), 
 						  url: $right.data('url')};
 		}
@@ -85,6 +84,8 @@ function Layout(id) {
 		this.setSubtype();
 		
 		$imgs.each(function (index, value) {
+			self.saveImgs++;
+		
 			var $this = $(value),
 				$p = $this.find('p'),
 				$img = $this.find('input[type=file]'),
@@ -95,7 +96,7 @@ function Layout(id) {
 				$author = null
 				$valign = null;	
 				
-			var img = $img.val(),
+			var img = $img.val() || $img.data('img'),
 				id = Math.round(Math.random() * 100000),
 				alt = $p.length == 0 ? "" : $p.html().replace(/br/g, 'br /'),
 				ratio = $ratio.is(':checked') ? $ratio.val() : '16-9',
@@ -119,9 +120,9 @@ function Layout(id) {
 				valign = $valign.val().split(' ')[0];
 				author = $author.val() == "" ? "" : $author.find(':selected').text();
 				center = _escapeValue(CKEDITOR.instances[self.id
-												   .replace('insideLayout', 
-															'insideLayoutText')]
-												   .getData());
+											  .replace('insideLayout', 
+													   'insideLayoutText')]
+											  .getData());
 				
 				if (self.subtype == "i3" && index < 2) {
 					center = null;
@@ -143,13 +144,12 @@ function Layout(id) {
 			}
 			
 			self.ratio = ratio;
-			self.imgs.push({tag: img.substring(img.lastIndexOf('\\') + 1, 
-											   img.lastIndexOf('-')), 
-							index: img.split('\\').pop().split('-').pop(), 
+			self.imgs.push({tag: utils.parseImgTag(img), 
+							index: utils.parseImgIndex(img), 
 							pointer: $p.data('pointer') || '',
 							video: $video.val(),
 							player: id,
-							alt: alt,
+							alt: _escapeValue(alt),
 							ratio: ratio,
 							center: center,
 							author: author,

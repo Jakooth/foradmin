@@ -1,6 +1,10 @@
 function Article(o) {
 	Aside.call(this, o);
 	
+	this._saveWide;
+	this._saveCaret;
+	this._saveCover;
+	
 	this._$wideInput = $('#' + this._o + 'WideInput');
 	this._$caretInput = $('#' + this._o + 'CaretInput');
 	
@@ -24,6 +28,10 @@ function Article(o) {
 	this._$coverValignInput = $('#' + this._o + 'BgVSelect');
 	this._$themeInput = $('#' + this._o + 'ThemeSelect');
 	this._$subthemeInput = $('#' + this._o + 'SubthemeSelect');
+	
+	this._$saveWideInput = $('#' + this._o + 'SaveWideInput');
+	this._$saveCaretInput = $('#' + this._o + 'SaveCaretInput');
+	this._$saveCoverInput = $('#' + this._o + 'SaveCoverInput');
 	
 	
 
@@ -80,7 +88,41 @@ Article.prototype._getLayouts = function(id) {
 	}
 
 	return this.layouts;
-} 
+}
+
+Article.prototype._resetLayouts = function(isUpdate) {
+	var $layouts = this._$this.find('.layout'),
+		$appender = $('#article .Content button.add');
+	
+	if ($layouts.length) {
+		$layouts.remove();
+	}
+	
+	if (!isUpdate) {
+		add.addLayout($appender);
+	}
+}
+
+Article.prototype._setLayouts = function(layouts) {
+	var self = this;
+	
+	var $layouts = this._$this.find('.layout'),
+		$appender = $('#article .Content button.add');
+	
+	if ($layouts.length) {
+		$layouts.remove();
+	}
+	
+	if (layouts) {
+		layouts.forEach(function(layout, index, arr) {
+			layout.center = layout.center ? self._unescapeValue(layout.center) : null;
+		
+			add.addLayout($appender, {data: layout, object: self});
+			
+			self._saveLayoutsArray.push(layout.layout_id);
+		});
+	}
+}
 
 Article.prototype._getPreviewText = function(id) {
 	var preview = null;
@@ -152,7 +194,7 @@ Article.prototype.validateBestPractices = function() {
 	var $imgs = $('#article .Content  .sublayout .img-proxy:visible .file input');
 	
 	$imgs.each(function(index, img) {
-		img = self._getInputValue($(img));
+		img = self._getInputValue($(img)) || $(img).data('img');
 		
 		if (!img) {
 			this._isValid = true;
@@ -196,6 +238,10 @@ Article.prototype.save = function() {
 	this.hype = this._getInputValue(this._$hypeSelect);
 	this.platform = this._getInputValue(this._$versionTestedSelect);
 	
+	this._wideShot = this._getInputValue(this._$saveWideInput);
+	this._caretShot = this._getInputValue(this._$saveCaretInput);
+	this._coverShot = this._getInputValue(this._$saveCoverInput);
+	
 	/**
 	 * Better, worse and equal can accept just one tag.
 	 */
@@ -212,6 +258,15 @@ Article.prototype.save = function() {
 	this.coverValign = this._getInputValue(this._$coverValignInput);
 	this.theme = this._getInputValue(this._$themeInput);
 	this.subtheme = this._getInputValue(this._$subthemeInput);
+	
+	/**
+	 * If there is image selection always use it.
+	 * Otherwise take the last saved image.
+	 */
+	
+	this.wide = this.wide || this._saveWide;
+	this.caret = this.caret || this._saveCaret;
+	this.cover = this.cover || this._saveCover;
 			   
 	this.json.wide = this.wide;
 	this.json.caret = this.caret;
@@ -236,5 +291,77 @@ Article.prototype.save = function() {
 	this.json.coverValign = this.coverValign;
 	this.json.theme = this.theme;
 	this.json.subtheme = this.subtheme;
-} 
+}
+
+Article.prototype.resetData = function(isUpdate) {
+	Aside.prototype.resetData.call(this, isUpdate);
+		
+	if (this._$videoTechSelect.length) this._$videoTechSelect.val('youtube');
+	if (this._$audioTechSelect.length) this._$audioTechSelect.val('mixcloud');
+	if (this._$videoUrlInput.length) this._$videoUrlInput.val(null);
+	if (this._$audioFrameInput.length) this._$audioFrameInput.val(null);
+	if (this._$audioUrlInput.length) this._$audioUrlInput.val(null);
+	if (this._$hypeSelect.length) this._$hypeSelect.val(70);
+	if (this._$versionTestedSelect.length) this._$versionTestedSelect.val(1);
+	
+	if (this._$betterInput.length) this._$betterInput.tagsinput('removeAll');
+	if (this._$worseInput.length) this._$worseInput.tagsinput('removeAll');
+	if (this._$equalInput.length) this._$equalInput.tagsinput('removeAll');
+	if (this._$betterTextInput.length) this._$betterTextInput.val(null);
+	if (this._$worseTextInput.length) this._$worseTextInput.val(null);
+	if (this._$equalTextInput.length) this._$equalTextInput.val(null);
+	
+	if (this._$coverAlignInput.length) this._$coverAlignInput.val(null);
+	if (this._$coverValignInput.length) this._$coverValignInput.val(null);
+	if (this._$themeInput.length) this._$themeInput.val(null);
+	if (this._$subthemeInput.length) this._$subthemeInput.val(null);
+	
+	if (this._$wideInput.length) this._$wideInput.val(null);
+	if (this._$caretInput.length) this._$caretInput.val(null);
+	if (this._$coverInput.length) this._$coverInput.val(null);
+	
+	if (this._$saveWideInput.length) this._$saveWideInput.val(null);
+	if (this._$saveCaretInput.length) this._$saveCaretInput.val(null);
+	if (this._$saveCoverInput.length) this._$saveCoverInput.val(null);
+	
+	/**
+	 * Remove image backgrounds.
+	 */
+	
+	this._setImgValue(this._$wideInput, null);
+	this._setImgValue(this._$caretInput, null);
+	this._setImgValue(this._$coverInput, null);
+}
+
+Article.prototype.updateData = function(data) {
+	Aside.prototype.updateData.call(this, data);
+	
+	this._setInputValue(this._$videoTechSelect, data.vide_tech || 'youtube');
+	this._setInputValue(this._$audioTechSelect, data.audio_tech || 'mixcloud');
+	this._setInputValue(this._$videoUrlInput, data.video_url || null);
+	this._setInputValue(this._$audioFrameInput, data.audio_frame || null);
+	this._setInputValue(this._$audioUrlInput, data.audio_url || null);
+	this._setInputValue(this._$hypeSelect, data.hype || 70);
+	this._setInputValue(this._$versionTestedSelect, data.platform || 1);
+	
+	this._setTagsinputValue(this._$betterInput, data.better || null);
+	this._setTagsinputValue(this._$worseInput, data.worse || null);
+	this._setTagsinputValue(this._$equalInput, data.equal || null);
+	this._setInputValue(this._$betterTextInput, data.better_text || null);
+	this._setInputValue(this._$worseTextInput, data.worse_text || null);
+	this._setInputValue(this._$equalTextInput, data.equal_text || null);
+	
+	this._setInputValue(this._$coverAlignInput, data.cover_align || null);
+	this._setInputValue(this._$coverValignInput, data.cover_valign || null);
+	this._setInputValue(this._$themeInput, data.theme || null);
+	this._setInputValue(this._$subthemeInput, data.subtheme || null);
+	
+	this._setImgValue(this._$wideInput, data.wide_img || null);
+	this._setImgValue(this._$caretInput, data.caret_img || null);
+	this._setImgValue(this._$coverInput, data.cover_img || null);
+	
+	this._setInputValue(this._$saveWideInput, data.wide_img || null);
+	this._setInputValue(this._$saveCaretInput, data.caret_img || null);
+	this._setInputValue(this._$saveCoverInput, data.cover_img || null);
+}
 

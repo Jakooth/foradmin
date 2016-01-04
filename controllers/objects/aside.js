@@ -11,6 +11,9 @@ function Aside(o) {
 	this._saveId;
 	this._saveShot;
 	this._saveAuthors;
+	this._saveTags;
+	this._saveLayouts;
+	this._saveLayoutsArray = new Array();
 	this._bestPreviewLength = 300;
 	
 	this._$this = $('#' + this._o);
@@ -33,6 +36,8 @@ function Aside(o) {
 	this._$saveIdInput = $('#' + this._o + 'SaveIdInput');
 	this._$saveShotInput = $('#' + this._o + 'SaveShotInput');
 	this._$saveAuthorsInput = $('#' + this._o + 'SaveAuthorsInput');
+	this._$saveTagsInput = $('#' + this._o + 'SaveTagsInput');
+	this._$saveLayoutsInput = $('#' + this._o + 'SaveLayoutsInput');
 	
 	/** 
 	 * PUBLIC
@@ -68,6 +73,8 @@ function Aside(o) {
 Aside.prototype._updateAfterSave = function(data) {
 	if (data.saveId) this._$saveIdInput.val(data.saveId).change();
 	if (data.saveAuthors) this._$saveAuthorsInput.val(data.saveAuthors.join(',')).change();
+	if (data.saveTags) this._$saveTagsInput.val(data.saveTags.join(',')).change();
+	if (data.saveLayouts) this._$saveLayoutsInput.val(data.saveLayouts.join(',')).change();
 } 
 
 Aside.prototype._getTypeaheadValue = function(_$input) {
@@ -188,12 +195,24 @@ Aside.prototype._getLayouts = function() {
 	return this.layouts;
 }
 
+/**
+ * TODO: Set some preview text variable to reset to.
+ */
+ 
+Aside.prototype._resetLayouts = function() {
+	var layout = 'textLayout_' + this._o;
+	
+	CKEDITOR.instances[layout].setData('');
+}
+
 Aside.prototype._setLayouts = function(data) {
 	var layout = 'textLayout_' + this._o;
 	
 	if (data) {
 		CKEDITOR.instances[layout]
 				.setData(this._unescapeValue(data[0].center));
+	
+		this._saveLayoutsArray.push(data[0].layout_id);
 	}
 }
 
@@ -215,7 +234,7 @@ Aside.prototype._getPreviewText = function() {
 Aside.prototype._setPrimeAndUrl = function() {
 	
 	/**
-	 * The problhisem is tags input data will not give tags in order.
+	 * The problem is tags input data will not give tags in order.
 	 * We need the first one to set the url.
 	 */
 	 
@@ -230,7 +249,6 @@ Aside.prototype._setPrimeAndUrl = function() {
 		
 	if ($tags.length > 0) {
 		this.prime = $tags.eq(0).data().item;
-		this.json.prime = this.prime;
 	}
 		
 	if (this.subtype == 'review' || this.subtype == 'video') {
@@ -240,7 +258,6 @@ Aside.prototype._setPrimeAndUrl = function() {
 	}
 	
 	this._$urlInput.val(this.url).change();
-	this.json.url = this.url;
 }
 
 
@@ -289,6 +306,24 @@ Aside.prototype.validateContent = function() {
 		this._isValid = false;
 		
 		admin.showAlert({message: 'Изберете поне един таг.', 
+						 status: 'error'});
+		
+		return false;
+	}
+	
+	if (!this.url) {
+		this._isValid = false;
+		
+		admin.showAlert({message: 'Невалиден адрес на статията. Питай бат Ваньо.', 
+						 status: 'error'});
+		
+		return false;
+	}
+	
+	if (!this.prime) {
+		this._isValid = false;
+		
+		admin.showAlert({message: 'Невалиден основен таг. Питай бат Ваньо.', 
 						 status: 'error'});
 		
 		return false;
@@ -346,7 +381,12 @@ Aside.prototype.save = function() {
 	this._saveAuthors = this._getTypeaheadValueByKey(
 						this._getTypeaheadValue(
 						this._$authorInput), 'author_id');
-	
+	this._saveTags = this._getTypeaheadValueByKey(
+					 this._getTypeaheadValue(
+					 this._$authorInput), 'tag_id');
+	this._saveLayouts = this._getInputValueAsArray(
+						this._$saveLayoutsInput);				 
+						
 	/**
 	 * If there is image selection always use it.
 	 * Otherwise take the last saved image.
@@ -355,6 +395,10 @@ Aside.prototype.save = function() {
 	this.shot = this.shot || this._saveShot;
 	
 	this.json = {
+		url: this.url,
+		prime: this.prime,
+		tags: this.tags,
+		site: this.site,
 		type: this.type,
 		subtype: this.subtype,
 		title: this.title,
@@ -365,7 +409,9 @@ Aside.prototype.save = function() {
 		layouts: this.layouts,
 		object: this.object,
 		_saveId: this._saveId,
-		_saveAuthors: this._saveAuthors
+		_saveAuthors: this._saveAuthors,
+		_saveTags: this._saveTags,
+		_saveLayouts: this._saveLayouts
 	};
 	
 	this.validateContent();
@@ -388,8 +434,6 @@ Aside.prototype.publish = function() {
 	this.issue = this._getTypeaheadValue(this._$issueInput);
 	this.priority = this._getInputValue(this._$prioritySelect);
 	
-	this.json.tags = this.tags;
-	this.json.site = this.site;
 	this.json.date = this.date;
 	this.json.issue = this.issue;
 	this.json.priority = this.priority;
@@ -401,9 +445,15 @@ Aside.prototype.publish = function() {
 	}
 }
 
-Aside.prototype.resetData = function() {
-	if (this._$typeInput.length) this._$typeInput.val(null);
-	if (this._$subtypeInput.length) this._$subtypeInput.val(null);
+/**
+ * @isUpdate indicates if this is an update or new object.
+ * For example for articles there a new layout is added
+ * automatically for new items, but not for updates.
+ */
+
+Aside.prototype.resetData = function(isUpdate) {
+	if (this._$typeInput.length) this._$typeInput.val(this._$typeInput.find('option:first').val());
+	if (this._$subtypeInput.length) this._$subtypeInput.val('aside');
 	if (this._$titleInput.length) this._$titleInput.val(null);
 	if (this._$subtitleInput.length) this._$subtitleInput.val(null);
 	if (this._$shotInput.length) this._$shotInput.val(null);	
@@ -415,18 +465,27 @@ Aside.prototype.resetData = function() {
 	if (this._$tagsInput.length) this._$tagsInput.tagsinput('removeAll');
 	if (this._$issueInput.length) this._$issueInput.tagsinput('removeAll');
 	
+	this._resetLayouts(isUpdate);
+	
 	if (this._$saveIdInput.length) this._$saveIdInput.val(null);
 	if (this._$saveShotInput.length) this._$saveShotInput.val(null);
 	if (this._$saveAuthorsInput.length) this._$saveAuthorsInput.val(null);
+	if (this._$saveTagsInput.length) this._$saveTagsInput.val(null);
+	if (this._$saveLayoutsInput.length) this._$saveLayoutsInput.val(null);
+									 this._$saveLayoutsArray = new Array();
 	
-	this._setLayouts('');
+	/**
+	 * Remove image backgrounds.
+	 */
+	
+	this._setImgValue(this._$shotInput, null);
 }
 
 Aside.prototype.updateData = function(data) {
-	this.resetData();
+	this.resetData(true);
 	
 	this._setInputValue(this._$typeInput, data.type || null);
-	this._setInputValue(this._$subtypeInput, data.subtype || null);
+	this._setInputValue(this._$subtypeInput, data.subtype || 'aside');
 	this._setInputValue(this._$titleInput, data.title || null);
 	this._setInputValue(this._$subtitleInput, data.subtitle || null);
 	this._setImgValue(this._$shotInput, data.shot_img || null);
@@ -444,6 +503,9 @@ Aside.prototype.updateData = function(data) {
 	this._setInputValue(this._$saveShotInput, data.shot_img || null);
 	this._setInputValueAsString(this._$saveAuthorsInput, 
 								this._getTypeaheadValueByKey(data.authors, 'author_id'));
+	this._setInputValueAsString(this._$saveTagsInput, 
+								this._getTypeaheadValueByKey(data.tags, 'tag_id'));
+	this._setInputValueAsString(this._$saveLayoutsInput, this._saveLayoutsArray);							
 }
 
 Aside.prototype.setData = function(result) {

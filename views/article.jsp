@@ -100,7 +100,13 @@
             </div>
             <h3>Скрити стойности</h3>
             <admin:formItem id="articleSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
+            <admin:formItem id="articleSaveShotInput" label="Картинка шот" type="hidden" value="" />
+            <admin:formItem id="articleSaveWideInput" label="Картинка широка" type="hidden" value="" />
+            <admin:formItem id="articleSaveCaretInput" label="Картинка каре" type="hidden" value="" />
+            <admin:formItem id="articleSaveCoverInput" label="Корица" type="hidden" value="" />
             <admin:formItem id="articleSaveAuthorsInput" label="Автори" type="hidden" value="" />
+            <admin:formItem id="articleSaveTagsInput" label="Тагове" type="hidden" value="" />
+            <admin:formItem id="articleSaveLayoutsInput" label="Шаблони" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="publish" type="button">Публикувай</button>

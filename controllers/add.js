@@ -44,24 +44,76 @@ function AddManager() {
 		}
 	}
 	
-	this.addLayout = function($appender) {
-		var d1 = $.get('renderers/layout.html');
+	this.addLayout = function($appender, data, isNew) {
+		var getLayout = $.get('renderers/layout.html');
 			
-		$.when(d1).done(function(data1) {
-			var html = data1,
-				id = Math.round(Math.random() * 100000); 
-			
+		$.when(getLayout).done(function(layoutHtmlData) {
+			var tmpls = $.templates({
+					layoutTemplate: layoutHtmlData
+				}),
+				html = data ? $.templates.layoutTemplate
+									     .render(data.data, {saveImgs: data.data.imgs ? 
+											     data.data.imgs.length : 0}) : 
+							  $.templates.layoutTemplate
+										 .render({layout_id: null}),
+				id = data ? data.data.layout_id : Math.round(Math.random() * 100000),
+				insideAuthor = false;
+				
+			var $layout,
+				$layouts;
+			 
 			$appender.before(html);
 			
-			var $layout = $appender.prev();
+			if (data) {
+				$layout = $('.Content:visible').find(
+							'.layout[data-id=' + data.data.layout_id + ']');
+			} else {
+				$layout = $appender.prev();
+			}
 			
+			/**
+			 * Insert before previous ID, if not the first.
+			 * The problem is we load layouts asynchronously
+			 * and the order is not guaranteed.
+			 */
+			
+			$layouts = $('.Content:visible .layout').sort(function (a, b) {
+				var contentA = parseInt($(a).attr('data-order'));
+				var contentB = parseInt($(b).attr('data-order'));
+				
+				return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+			});
+			
+			$('.Content:visible .layout').remove();
+			
+			$appender.before($layouts);
+			
+			/**
+			 * Convert SVGs.
+			 */
+			 
 			utils.convertSVG($layout.find('img.svg'));
+			
+			/**
+			 * Set IDs.
+			 */
+			
 			$layout.find('.textLayout').attr('id',  'textLayout_' + id);
 			$layout.find('.imgLayout').attr('id',  'imgLayout_' + id);
 			$layout.find('.insideLayout').attr('id',  'insideLayout_' + id);
 			$layout.find('.insideLayoutText').attr('id',  'insideLayoutText_' + id);
 			
-			$(document).scrollTop($appender.offset().top);
+			/**
+			 * Scroll to to the new layout when adding.
+			 */
+			
+			if (isNew) {
+				$(document).scrollTop($layout.offset().top - 168);
+			}
+			
+			/**
+			 * Initialize editors.
+			 */
 			
 			var textEditor = CKEDITOR.inline('textLayout_' + id, {
 				extraPlugins: 'sourcedialog',
@@ -119,8 +171,58 @@ function AddManager() {
 				]
 			});
 			
-			self.hideLayouts($layout);
-			self.showLayout($layout, 'text');
+			/**
+			 * Set select values.
+			 * This is only if we update with data from SQL.
+			 */
+			
+			if (data) {
+				$layout.find('> select:eq(0)')
+					   .val(data.data.type).change();
+				$layout.find('.center-col:visible > select:eq(0)')
+					   .val(data.data.subtype).change();
+				$layout.find('.center-col:visible .img-proxy [type=checkbox]')
+					   .prop('checked', data.data.ratio == '16-10' ? true : false);
+						
+				/**
+				 * Set imgs one by one.
+				 * We do not use renderer, because there are various layouts.
+				 * To avoid some redundant functions we pass reference to the object.
+				 */
+				 
+				if (data.data.imgs) {
+					data.data.imgs.forEach(function(img, index, arr) {
+						var $img = $layout.find('.sublayout .img-proxy:nth-of-type(' + (Number(img.order) + 1) + ')'),
+							$file = $img.find('[type=file]'),
+							$video = $img.find('.settings [type=text]:eq(0)'),
+							$alt = $img.find('.settings > p:eq(0)'),
+							$position = $layout.find('.insideLayout .settings select:nth-of-type(1), ' + 
+													 '.sublayout .settings select:nth-of-type(1), ' +
+													 '.tracklist .settings select:nth-of-type(1)');
+						
+						data.object._setImgValue($file, img.tag + '-' + img.index);
+						data.object._setInputValue($video, img.video || null);
+						
+						$file.data('img', img.tag + '-' + img.index);
+						$file.attr('data-img', $file.data('img'))
+						
+						if (img.alt) $alt.html(data.object._unescapeValue(img.alt));
+						if (img.center) CKEDITOR.instances['insideLayoutText_' + data.data.layout_id]
+												.setData(data.object._unescapeValue(img.center));
+						if (img.valign) data.object._setInputValue($position, img.valign + ' ' + img.align);
+						
+						/**
+						 * There is no chance for multiple authors for multiple images.
+						 * This is only for images with caret inside.
+						 */
+						 
+						if (img.author) insideAuthor = img.author;
+					});
+				}
+			} else {
+				self.hideLayouts($layout);
+				self.showLayout($layout, 'text');
+			}
 			
 			textEditor.on('instanceReady', function(e) {	 
 				e.editor.setReadOnly(false);
@@ -129,15 +231,10 @@ function AddManager() {
 			insideEditor.on('instanceReady', function(e) {	 
 				e.editor.setReadOnly(false);
 			});
-			
-			/**
-			 * TODO: Now author is used instead option,
-			 * because from MySQL we get en_name and not name.
-			 * Do something to deal with this issue.
-			 */
+			 
 			admin.loadOptions($layout.find('.insideLayout .settings select:eq(1)'), 
-							  'http://localhost/forapi/get.php?object=author', 
-							  'author');
+										   'http://localhost/forapi/get.php?object=author', 
+										   'option', insideAuthor);
 		}).fail(function() {
 			alert("Failed to load layout.");
 		});
@@ -303,25 +400,12 @@ function AddManager() {
 	 * EVENTS
 	 */
 	
-	$('body').on('sectionshow', function (e) {
-		switch (e.section) {
-			case 'article':
-				var $appender = $('#article .Content > button.add');
-				
-				if ($('#article .Content .layout').length > 0) return false;
-				
-				self.addLayout($appender);
-				
-				break;
-		}
-	});
-	
 	/**
 	 * ARTICLE
 	 */
 	
 	$('.Content').on('click', '> button.add', function(e) {
-		self.addLayout($(this));
+		self.addLayout($(this), false, true);
 	});
 	
 	/**
@@ -351,22 +435,6 @@ function AddManager() {
 		
 		self.hideSublayouts($center);
 		self.showSublayout($center, $this.val());
-		
-		/**
-		 * Default tracklist position.
-		 */
-		
-		if ($this.val() == 'f3') {
-			$center.find('.f3Sublayout select').val('bottom right').change();
-		}
-		
-		/**
-		 * Default text insde image position.
-		 */
-		
-		if ($this.val() == 'i1') {
-			$center.find('.settings select:nth-of-type(1)').val('top center').change();
-		}
 	});
 	
 	/**

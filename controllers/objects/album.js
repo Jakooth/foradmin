@@ -54,6 +54,14 @@ Album.prototype._setTagsinputValue = function(data) {
 	}
 }
 
+Album.prototype._getTracksValue = function(_$input) {
+	return _$input.map(function (i, element) {
+		return {order: i + 1,
+				name: $(element).find('input:eq(0)').val(),  
+				video: $(element).find('input:eq(1)').val()};
+	}).get();
+}
+
 Album.prototype._setTracksValue = function(tracks) {
 	var self = this;
 
@@ -89,14 +97,16 @@ Album.prototype.save = function() {
 	 * Very rare case, but just in case.
 	 */ 
 	 
-	this.json.type = 'album';
+	this.json.type = 'music';
 }
 
 Album.prototype.resetData = function() {
 	Formain.prototype.resetData.call(this);
 	
+	if (this._$saveTracksInput.length) this._$saveTracksInput.val(null);
 	if (this._$artistInput.length) this._$artistInput.tagsinput('removeAll');
 								   this._$trackInput.remove();
+								   this._saveTracksArray = new Array();
 }
 
 Album.prototype.updateData = function(data) {
@@ -105,12 +115,4 @@ Album.prototype.updateData = function(data) {
 	this._setTracksValue(data.tracks || null);
 	
 	this._setInputValueAsString(this._$saveTracksInput, this._saveTracksArray);
-}
-
-Album.prototype._getTracksValue = function(_$input) {
-	return _$input.map(function (i, element) {
-		return {order: i + 1,
-				name: $(element).find('input:eq(0)').val(),  
-				video: $(element).find('input:eq(1)').val()};
-	}).get();
 }

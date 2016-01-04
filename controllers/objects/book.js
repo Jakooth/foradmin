@@ -70,7 +70,7 @@ Book.prototype.save = function() {
 	 * Override in case of null values.
 	 * Very rare case, but just in case.
 	 */ 
-	this.json.type = 'book';
+	this.json.type = 'books';
 }
 
 Book.prototype.resetData = function() {

@@ -44,9 +44,11 @@
             </div>
             <h3>Скрити стойности</h3>
             <admin:formItem id="asideSubtypeSelect" label="Подтип" type="hidden" value="aside" />
-            <admin:formItem id="asideSaveShotInput" label="Каринка шот" type="hidden" value="" />
+            <admin:formItem id="asideSaveShotInput" label="Картинка шот" type="hidden" value="" />
             <admin:formItem id="asideSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
             <admin:formItem id="asideSaveAuthorsInput" label="Автори" type="hidden" value="" />
+            <admin:formItem id="asideSaveTagsInput" label="Тагове" type="hidden" value="" />
+            <admin:formItem id="asideSaveLayoutsInput" label="Шаблони" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="publish" type="button">Публикувай</button>

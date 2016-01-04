@@ -181,7 +181,7 @@ function AdminManager() {
 	var games = bloodhound('http://localhost/forapi/get.php?object=game');
 	var stickers = bloodhound('http://localhost/forapi/get.php?object=sticker');
 	var companies = bloodhound('http://localhost/forapi/get.php?object=company');
-	var issues = bloodhound('http://localhost/forapi/get.php?object=issue', 'name');
+	var issues = bloodhound('http://localhost/forapi/get.php?object=issue');
 	var series = bloodhound('http://localhost/forapi/get.php?object=serie');
 	var movies = bloodhound('http://localhost/forapi/get.php?object=movie');
 	var authors = bloodhound('http://localhost/forapi/get.php?object=author');
@@ -287,7 +287,7 @@ function AdminManager() {
 		initTagInput(persons, 'persons', '#movieMusicInput');
 		
 		initTagInput(authors, 'authors', '#articleAuthorsInput');
-		initTagInput(issues, 'issues', '#publishIssueInput', 1, 'name');
+		initTagInput(issues, 'issues', '#publishIssueInput', 1);
 		initTagInput(tags, 'tags', '#asideTagsInput');
 		initTagInput(tags, 'tags', '#articleTagsInput');
 		initTagInput(tags, 'tags', '#articleBetterInput', 1);
@@ -311,7 +311,7 @@ function AdminManager() {
 	this.selectTarget = null;
 	this.publishTarget = null;
 	
-	this.loadOptions = function(target, data, renderer) {
+	this.loadOptions = function(target, data, renderer, selected) {
 		var tmpl = $.get('renderers/' + renderer + '.html'),
 			data = $.get(data.prefetch ? data.prefetch.url : data);
 		
@@ -321,6 +321,8 @@ function AdminManager() {
 				}),
 				html,
 				json;
+				
+			var $html;
 			
 			/**
 			 * Data from PHP need to be parsed first.
@@ -333,9 +335,13 @@ function AdminManager() {
 				json = data[0].tags;
 			}
 			
-			html = $.templates.tmpl.render(json, {getId: utils.getObjectPropertyByIndex});
+			$html = $($.templates.tmpl.render(json, {getId: utils.getObjectPropertyByIndex}));
+			
+			if (selected) {
+				$html.filter(':contains(' + selected + ')').prop('selected', true);
+			}
 				
-			target.append(html);
+			target.append($html);
 		}).fail(function() {
 			alert("Failed to load options.");
 		});
@@ -567,7 +573,7 @@ function AdminManager() {
 	this.loadOptions($('#articleSubthemeSelect'), subtheme, 'option');
 	
 	initTagInput(authors, 'authors', '#articleAuthorsInput');
-	initTagInput(issues, 'issues', '#publishIssueInput', 1, 'name');
+	initTagInput(issues, 'issues', '#publishIssueInput', 1);
 	initTagInput(tags, 'tags', '#asideTagsInput');
 	initTagInput(tags, 'tags', '#articleTagsInput');
 	initTagInput(tags, 'tags', '#articleBetterInput', 1);

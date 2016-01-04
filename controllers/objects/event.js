@@ -66,7 +66,7 @@ Happening.prototype.save = function() {
 	 * Override in case of null values.
 	 * Very rare case, but just in case.
 	 */ 
-	this.json.type = 'event';
+	this.json.type = 'music';
 }
 
 Happening.prototype.resetData = function() {
