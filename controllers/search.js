@@ -14,17 +14,20 @@ function SearchManager() {
 		searchTagInput = searchSection + 'TagInput',
 		searchTableSelect = searchSection + 'TableSelect',
 		searchTypeSelect = searchSection + 'TypeSelect',
-		searchSubtypeSelect = searchSection + 'SubtypeSelect';
+		searchSubtypeSelect = searchSection + 'SubtypeSelect',
+		searchValignSelect = searchSection + 'ValignSelect';
 	
 	/**
 	 * Default search will return only latest new items.
 	 */
 	 
 	var _query = 'http://localhost/forapi/search.php';
+	var _asideQuery = 'http://localhost/forapi/search.php?table=articles';
 	var _subtype = 'data/settings/subtype.json';
 	var _type = 'data/settings/type.json';
 	
 	var _tags = admin._bloodhound(_query);
+	var _aside = admin._bloodhound(_asideQuery);
 	
 	var _getTypeaheadValue = function(_$input) {
 		return Fortag.prototype._getTypeaheadValue.call(self, _$input);
@@ -115,6 +118,53 @@ function SearchManager() {
 		
 		_renderSearchResult(searchRequest);
 	}
+	
+	var _selectSearch = function() {
+		var $search = $(searchSection + ' input:checked').parents('[role=option]'),
+			$aside = window.admin.selectTarget.parents('.inline-col');
+		
+		var object = $search.data('object'),
+			id = $search.data('id'),
+			url = $search.data('tag'),
+			valign = $(searchValignSelect).val();
+		
+		window.admin.selectTarget.focus();
+		
+		$aside.data('object', object);
+		$aside.attr('data-object', $aside.data('object'));
+		$aside.data('url', url);
+		$aside.attr('data-url', $aside.data('url'));
+		$aside.data('valign', valign);
+		$aside.attr('data-valign', $aside.data('valign'));
+		
+		/**
+		 * Loading the object for preview only.
+		 * If it is a quote show the character images.
+		 */
+		
+		var getAside = $.get('http://localhost/forapi/forplay.php?tag=' + id);
+			
+		$.when(getAside).done(function(getAsideData) {
+			var data = getAsideData.length ? JSON.parse(getAsideData) : getAsideData,
+				aside = data.articles[0];
+			
+			switch (aside.subtype) {
+				case 'quote':
+					window.admin.selectTarget.css('background-image', 
+												  'url(../assets/tags/' + 
+												  aside.shot_img);
+					break;
+				default:
+					window.admin.selectTarget.css('background-image', 
+												  'url(../assets/articles/' + 
+												  utils.parseImgTag(aside.shot_img) + '/' +
+												  aside.shot_img + ')');
+					break;
+			}
+		}).fail(function() {
+			alert("Failed to load aside.");
+		});
+	}
 		
 	
 	
@@ -124,12 +174,18 @@ function SearchManager() {
 	 
 	this.json = {}; 
 	 
-	this.updateSearchTypeahead = function() {
+	this.updateSearchTypeahead = function(articlesOnly) {
 		_tags.clearPrefetchCache();
+		_aside.clearPrefetchCache();
 		
 		$(searchTagInput).tagsinput('destroy');
+		$(searchTagInput).typeahead('destroy');
 		
-		admin._initTagInput(_tags, 'tags', searchTagInput, 1);
+		if (articlesOnly) {
+			admin._initTagInput(_aside, 'tags', searchTagInput, 1);
+		} else {
+			admin._initTagInput(_tags, 'tags', searchTagInput, 1);
+		}
 	}
 	
 	
@@ -150,8 +206,18 @@ function SearchManager() {
 	 */
 	 
 	$body.on('sectionshow', function(e) {
+		var isWindow = e.isWindow || false;
+		
 		if (e.section == 'search') {
+			if (isWindow) {
+				$(searchTableSelect).val('articles');
+			} else {
+				$(searchTableSelect).val(null);
+			}
+		
 			_doSearch();
+			
+			self.updateSearchTypeahead(isWindow);
 		}
 	});
 	
@@ -164,9 +230,21 @@ function SearchManager() {
 	});
 	
 	$body.on('dblclick', '#search [role=option]', function(e) {
-		var $this = $(this);
+		var $this = $(this)
+			$dialog = $this.parents('[role=dialog]');
 		
 		var o, oType;
+		
+		/**
+		 * Prevent opening from dialog view.
+		 * Dialog view is only for selection.
+		 */
+		
+		if ($dialog.length > 0) {
+			_selectSearch();
+			
+			return false;
+		}
 		
 		switch ($this.data('object')) {
 			case 'review':
@@ -175,11 +253,7 @@ function SearchManager() {
 			case 'video':
 				oType = 'article';
 				
-				break;
-			case 'aside':
-				oType = 'aside';
-				
-				break;
+				break;	
 			default:
 				oType = $this.data('object');
 				
@@ -200,16 +274,18 @@ function SearchManager() {
 	});
 	
 	/**
-	 * For prototype purpose only.
+	 * This is the search for left or right part of the layout.
 	 */
 	
-	$body.on('click', '[role=dialog] #search button.ok', function(e) {
-		var img = $(searchSection + ' input:checked').parents('label')
-													 .find('img')
-													 .attr('src');
+	$('#article').on('click', '.select', function(e) {
+		e.preventDefault();
 		
-		window.admin.selectTarget.focus();
-		window.admin.selectTarget.find('input').val(img);
-		window.admin.selectTarget.css('background-image', 'url(' + img + ')');
+		admin.showSectionInWindow(searchSection);
+		
+		window.admin.selectTarget = $(this);
+	});
+	
+	$body.on('click', '[role=dialog] #search button.ok', function(e) {
+		_selectSearch();
 	});
 }

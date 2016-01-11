@@ -72,6 +72,26 @@ Article.prototype.constructor = Article;
  * PRIVATE
  */
  
+Article.prototype._updateAfterSave = function(data) {
+	Aside.prototype._updateAfterSave.call(this, data);
+	
+	this._updateLayouts();
+} 
+
+Article.prototype._updateLayouts = function() {
+	var $layouts = this._$this.find('.layout'),
+		$imgs;
+	
+	$.each($layouts, function(index, layout) {
+		var $layout = $(layout);
+		
+		$imgs = $layout.find('.img-proxy:visible');
+		
+		$layout.data('saveimgs', $imgs.length);
+		$layout.attr('data-imgs', $layout.data('saveimgs'));
+	});
+}
+ 
 Article.prototype._getLayouts = function(id) {
 	var self = this;
 	
@@ -180,14 +200,12 @@ Article.prototype.validateContent = function() {
 		
 		return false;
 	}
-}
-
-Article.prototype.validateBestPractices = function() {
-	Aside.prototype.validateBestPractices.call(this);
 	
 	/**
-	 * Make sure all images are set.
+	 * Make sure all images are set. Unfortunately there is no other way, 
+	 * because the DB requires unique keys made from image tag and index.
 	 */
+	 
 	var self = this,
 		img; 
 	
@@ -197,10 +215,10 @@ Article.prototype.validateBestPractices = function() {
 		img = self._getInputValue($(img)) || $(img).data('img');
 		
 		if (!img) {
-			this._isValid = true;
+			self._isValid = false;
 		
 			admin.showAlert({message: 'Някои картинки не са избрани.', 
-							 status: 'warning'});
+							 status: 'error'});
 			
 			return false;
 		}
@@ -230,28 +248,28 @@ Article.prototype.save = function() {
 	this.wide = this._getImageValue(this._$wideInput);
 	this.caret = this._getImageValue(this._$caretInput);
 	
-	this.videoTech = this._getInputValue(this._$videoTechSelect);
-	this.audioTech = this._getInputValue(this._$audioTechSelect);
-	this.videoUrl = this._getInputValue(this._$videoUrlInput);
-	this.audioFrame = this._getInputValue(this._$audioFrameInput);
-	this.audioUrl = this._getInputValue(this._$audioUrlInput);
-	this.hype = this._getInputValue(this._$hypeSelect);
-	this.platform = this._getInputValue(this._$versionTestedSelect);
+	this.videoTech = this._getInputValue(this._$videoTechSelect, false);
+	this.audioTech = this._getInputValue(this._$audioTechSelect, false);
+	this.videoUrl = this._getInputValue(this._$videoUrlInput, false);
+	this.audioFrame = this._getInputValue(this._$audioFrameInput, false);
+	this.audioUrl = this._getInputValue(this._$audioUrlInput, false);
+	this.hype = this._getInputValue(this._$hypeSelect, false);
+	this.platform = this._getInputValue(this._$versionTestedSelect, false);
 	
-	this._wideShot = this._getInputValue(this._$saveWideInput);
-	this._caretShot = this._getInputValue(this._$saveCaretInput);
-	this._coverShot = this._getInputValue(this._$saveCoverInput);
+	this._saveWide = this._getInputValue(this._$saveWideInput);
+	this._saveCaret = this._getInputValue(this._$saveCaretInput);
+	this._saveCover = this._getInputValue(this._$saveCoverInput);
 	
 	/**
 	 * Better, worse and equal can accept just one tag.
 	 */
 	
-	this.better = this._getTypeaheadValue(this._$betterInput);
-	this.worse = this._getTypeaheadValue(this._$worseInput);
-	this.equal = this._getTypeaheadValue(this._$equalInput);
-	this.betterText = this._getInputValue(this._$betterTextInput);
-	this.worseText = this._getInputValue(this._$worseTextInput);
-	this.equalText = this._getInputValue(this._$equalTextInput);
+	this.better = this._getTypeaheadValue(this._$betterInput, false);
+	this.worse = this._getTypeaheadValue(this._$worseInput, false);
+	this.equal = this._getTypeaheadValue(this._$equalInput, false);
+	this.betterText = this._getInputValue(this._$betterTextInput, false);
+	this.worseText = this._getInputValue(this._$worseTextInput, false);
+	this.equalText = this._getInputValue(this._$equalTextInput, false);
 	
 	this.cover = this._getImageValue(this._$coverInput);
 	this.coverAlign = this._getInputValue(this._$coverAlignInput);

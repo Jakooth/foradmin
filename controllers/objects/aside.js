@@ -77,8 +77,8 @@ Aside.prototype._updateAfterSave = function(data) {
 	if (data.saveLayouts) this._$saveLayoutsInput.val(data.saveLayouts.join(',')).change();
 } 
 
-Aside.prototype._getTypeaheadValue = function(_$input) {
-	return Fortag.prototype._getTypeaheadValue.call(this, _$input);
+Aside.prototype._getTypeaheadValue = function(_$input, includeHidden) {
+	return Fortag.prototype._getTypeaheadValue.call(this, _$input, includeHidden);
 }
 
 Aside.prototype._getTypeaheadValueByKey = function(data, key) {
@@ -105,8 +105,8 @@ Aside.prototype._setTagsinputValue = function(_$input, data) {
 	}
 }
 
-Aside.prototype._getInputValue = function(_$input) {
-	return Fortag.prototype._getInputValue.call(this, _$input);
+Aside.prototype._getInputValue = function(_$input, includeHidden) {
+	return Fortag.prototype._getInputValue.call(this, _$input, includeHidden);
 }
 
 Aside.prototype._setInputValue = function(_$input, data) {
@@ -284,6 +284,24 @@ Aside.prototype.validateContent = function() {
 		return false;
 	}
 	
+	if (!this.type) {
+		this._isValid = false;
+		
+		admin.showAlert({message: 'Невалиден тип. Питай бат Ваньо.', 
+						 status: 'error'});
+		
+		return false;
+	}
+	
+	if (!this.subtype) {
+		this._isValid = false;
+		
+		admin.showAlert({message: 'Невалиден подтип. Питай бат Ваньо.', 
+						 status: 'error'});
+		
+		return false;
+	}
+	
 	if (!this.author) {
 		this._isValid = false;
 		
@@ -378,14 +396,9 @@ Aside.prototype.save = function() {
 	
 	this._saveId = this._getInputValue(this._$saveIdInput);
 	this._saveShot = this._getInputValue(this._$saveShotInput);
-	this._saveAuthors = this._getTypeaheadValueByKey(
-						this._getTypeaheadValue(
-						this._$authorInput), 'author_id');
-	this._saveTags = this._getTypeaheadValueByKey(
-					 this._getTypeaheadValue(
-					 this._$authorInput), 'tag_id');
-	this._saveLayouts = this._getInputValueAsArray(
-						this._$saveLayoutsInput);				 
+	this._saveAuthors = this._getInputValueAsArray(this._$saveAuthorsInput);
+	this._saveTags = this._getInputValueAsArray(this._$saveTagsInput);
+	this._saveLayouts = this._getInputValueAsArray(this._$saveLayoutsInput);				 
 						
 	/**
 	 * If there is image selection always use it.
@@ -453,12 +466,13 @@ Aside.prototype.publish = function() {
 
 Aside.prototype.resetData = function(isUpdate) {
 	if (this._$typeInput.length) this._$typeInput.val(this._$typeInput.find('option:first').val());
-	if (this._$subtypeInput.length) this._$subtypeInput.val('aside');
+	if (this._$subtypeInput.length) this._$subtypeInput.val(this._o);
 	if (this._$titleInput.length) this._$titleInput.val(null);
 	if (this._$subtitleInput.length) this._$subtitleInput.val(null);
 	if (this._$shotInput.length) this._$shotInput.val(null);	
 	if (this._$dateInput.length) this._$dateInput.val(null);
 	if (this._$timeInput.length) this._$timeInput.val(null);
+	if (this._$urlInput.length) this._$urlInput.val(null);
 	if (this._$prioritySelect.length) this._$prioritySelect.val(null);
 	
 	if (this._$authorInput.length) this._$authorInput.tagsinput('removeAll');
@@ -485,13 +499,14 @@ Aside.prototype.updateData = function(data) {
 	this.resetData(true);
 	
 	this._setInputValue(this._$typeInput, data.type || null);
-	this._setInputValue(this._$subtypeInput, data.subtype || 'aside');
+	this._setInputValue(this._$subtypeInput, data.subtype || this._o);
 	this._setInputValue(this._$titleInput, data.title || null);
 	this._setInputValue(this._$subtitleInput, data.subtitle || null);
 	this._setImgValue(this._$shotInput, data.shot_img || null);
 	this._setInputValue(this._$dateInput, data.date ? data.date.split(' ')[0] : null);
 	this._setInputValue(this._$timeInput, data.date ? data.date.split(' ')[1] : null);
 	this._setInputValue(this._$prioritySelect, data.priority || null);
+	this._setInputValue(this._$urlInput, data.url || null);
 	
 	this._setTagsinputValue(this._$authorInput, data.authors || null);
 	this._setTagsinputValue(this._$tagsInput, data.tags || null);

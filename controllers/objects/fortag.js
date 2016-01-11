@@ -118,8 +118,15 @@ Fortag.prototype._setRelatedValueType = function(item, subtype) {
 	return new Array({tag_id: item, subtype: subtype});
 }
 
-Fortag.prototype._getTypeaheadValue = function(_$input) {
-	return _$input.length ? 
+Fortag.prototype._getTypeaheadValue = function(_$input, includeHidden) {
+	var includeHidden = includeHidden === false ? false : true,
+		hidden = includeHidden ? ':hidden, ' : '';
+	
+	/**
+	 * The input is always hidden, but the label is not.
+	 */
+	 
+	return _$input.length && _$input.parents('label').is(hidden + ':visible') ? 
 		   _$input.typeahead()
 		   		  .data('tagsinput')
 				  .itemsArray.length <= 0 ? null : 
@@ -135,7 +142,8 @@ Fortag.prototype._getTypeaheadValue = function(_$input) {
  */
 
 Fortag.prototype._getInputValue = function(_$input, includeHidden) {
-	var hidden = includeHidden ? ':hidden, ' : '';
+	var includeHidden = includeHidden = includeHidden === false ? false : true,
+		hidden = includeHidden ? ':hidden, ' : '';
 
 	return _$input.length && _$input.is(hidden + ':visible, [type=hidden]') ?
 		   this._escapeValue(_$input.val()) || null : null;

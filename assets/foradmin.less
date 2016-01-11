@@ -307,7 +307,7 @@ button.search,
 a.create,
 .file,
 .Add > button:last-child,
-button:first-child {
+button:first-of-type {
 	background-color: @prime;
 }
 
@@ -371,44 +371,6 @@ form textarea {
 	margin-bottom: @unit * 4;
 }
 
-.track {
-	position: relative;
-	float: left;
-	width: 100%;
-}
-
-.track::before {
-	content: attr(data-index) "";
-	display: block;
-	width: 58px;
-	height: 58px;
-	bottom: 21px;
-	position: absolute;
-	margin-left: 1px;
-	font-weight: bold;
-	line-height: 58px;
-	text-align: center;
-}
-
-.track .two-cols:nth-child(1) input {
-	padding-left: 68px;
-}
-
-.track .two-cols:nth-child(2), 
-.select-subtitle {
-	padding-left: @unit * 4;
-} 
-
-.track label span {
-	display: none;
-}
-
-section#login h2,
-h3 {
-	margin-top: @unit * 8;
-}
-
-
 
 
 
@@ -443,6 +405,7 @@ main h3 {
 	float: left;
 	clear: both;
 	width: 100%;
+	margin-top: @unit * 8;
 }
 
 header {
@@ -773,13 +736,6 @@ form input[type=time],
 	margin-right: 0;
 }
 
-/**
- * This is the search auto complete.
- */
-#search .two-cols:first-of-type {
-	margin-right: 20px;
-}
-
 #articleReviewRegion .two-cols:nth-child(2n + 1) {
 	clear: both;
 	margin-right: 20px;
@@ -936,6 +892,7 @@ form input[type=time],
 .select-subtitle {
 	position: absolute;
 	top: 47px;
+	padding-left: @unit * 4;
 } 
 
 .Add button.add,
@@ -1143,7 +1100,7 @@ button.remove {
 	position: absolute;
 }
 
-[role=option]::after {	
+#search [role=option]::after {	
 	position: absolute;
 	bottom: 0;
 	right: 0;
@@ -1266,6 +1223,37 @@ button.remove {
 
 .Content .fullscreen .left-col,
 .Content .fullscreen .right-col {
+	display: none;
+}
+
+.track {
+	position: relative;
+	float: left;
+	width: 100%;
+}
+
+.track::before {
+	content: attr(data-index) "";
+	display: block;
+	width: 58px;
+	height: 58px;
+	bottom: 21px;
+	position: absolute;
+	margin-left: 1px;
+	font-weight: bold;
+	line-height: 58px;
+	text-align: center;
+}
+
+.track .two-cols:nth-child(1) input {
+	padding-left: 68px;
+}
+
+.track .two-cols:nth-child(2) {
+	padding-left: @unit * 4;
+} 
+
+.track label span {
 	display: none;
 }
 
@@ -1975,18 +1963,39 @@ button.remove {
 	clear: none;
 }
 
+/**
+ * This is the search auto complete.
+ */
+ 
+#search .two-cols:first-of-type {
+	margin-right: 20px;
+}
+
 #search form > label:first-child {
 	width: 40%;
+}
+
+[role=dialog] #search form > label:first-child {
+	width: 55%;
+}
+
+[role=dialog] #search form > label:nth-of-type(2) {
+	display: none;
 }
 
 #search [role=toolbar] {
 	display: none;
 }
 
+[role=dialog] #search [role=toolbar] {
+	display: block;
+}
+
 #search form > button {
 	float: right;
 }
 
+#search [role=toolbar] > label select,
 #search form > label select {
 	margin: 0;
 	min-width: 100%;
@@ -2000,6 +2009,7 @@ button.remove {
 }
 
 #search .bootstrap-tagsinput input,
+#search [role=toolbar] > label select,
 #search form > label select,
 #search form > button {
 	height: 84px;
@@ -2012,12 +2022,24 @@ button.remove {
  * Absolutely uknown why?
  */
 
+#search [role=toolbar] > label > span,
 #search form > label > span {
 	display: none;
 }
 
+#search [role=toolbar] > label {
+	float: left;
+	min-width: 320px;
+}
+
 #search [role=listbox] {
 	width: 100%;
+}
+
+[role=dialog] [role=listbox] {
+	height: 360px;
+	overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #search [role=option] {
@@ -2077,6 +2099,7 @@ section#login [role=toolbar] button {
 section#login h2 {
 	margin-left: 0;
 	width: 100%;
+	margin-top: @unit * 8;
 }
 
 

@@ -8,15 +8,18 @@
             <admin:menuItem label="Избери герой, добави текст и създай таг." title="Цитат" url="quote" />
         </h2>
         <form>
-            <admin:formItem id="quoteCharacterInput" label="Герой" 
-            				placeholder="Joker, Minsk, Batman" type="text" 
+            <admin:formItem id="quoteTypeSelect" label="Раздел" type="select" />
+            <admin:formItem id="quoteTitleInput" label="Герой" 
+            				placeholder="Minsk, Batman, Koralsky, doomy" type="text" 
                             autocomplete="off" />
-            <admin:formItem id="quoteUrlInput" label="Адрес" 
-            				placeholder="minsk-and-boo-run, joker-and-batman-dancing-with-the-devil, duke-nukem-time-to-kick-ass" type="text" />
-        	<admin:formItem id="quoteSaysInput" label="Цитат" type="area" 
+            <admin:formItem id="quoteSubtitleInput" label="Заглавие" type="text"
+            				placeholder="Run Boo run, Dancing with the devil, Time to kick ass" />
+        	<admin:formItem id="quotePreviewInput" label="Цитат" type="area" 
             				placeholder="" />
         	<h3>Скрити стойности</h3>
+            <admin:formItem id="quoteSubtypeSelect" label="Подтип" type="hidden" value="quote" />
             <admin:formItem id="quoteSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
+            <admin:formItem id="quoteUrlInput" label="Адрес" type="hidden" value="" />
         </form>
         <div role="toolbar">
             <button class="save" type="button">Запази</button>

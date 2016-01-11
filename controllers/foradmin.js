@@ -86,6 +86,10 @@ function AdminManager() {
 				o = new Aside(id);
 				
 				break;
+			case 'quote':
+				o = new Quote(id);
+				
+				break;	
 			default:
 				o = new Fortag(id);
 				
@@ -130,7 +134,7 @@ function AdminManager() {
 								  input, 
 								  maxTags, 
 								  displayKey) {
-								  
+		
 		initTagInput(data, text, input, maxTags, displayKey);
 	}
 	
@@ -219,6 +223,11 @@ function AdminManager() {
 		$("#bookSerieInput").tagsinput('destroy');
 		$("#bookStickersInput").tagsinput('destroy');
 		$("#bookRelatedInput").tagsinput('destroy');
+		$("#bookAuthorInput").typeahead('destroy');
+		$("#bookTranslatorInput").typeahead('destroy');
+		$("#bookSerieInput").typeahead('destroy');
+		$("#bookStickersInput").typeahead('destroy');
+		$("#bookRelatedInput").typeahead('destroy');
 		
 		$("#eventArtistInput").tagsinput('destroy');
 		$("#eventSerieInput").tagsinput('destroy');
@@ -227,12 +236,24 @@ function AdminManager() {
 		$("#albumArtistInput").tagsinput('destroy');
 		$("#albumStickersInput").tagsinput('destroy');
 		$("#albumRelatedInput").tagsinput('destroy');
+		$("#eventArtistInput").typeahead('destroy');
+		$("#eventSerieInput").typeahead('destroy');
+		$("#eventStickersInput").typeahead('destroy');
+		$("#eventRelatedInput").typeahead('destroy');
+		$("#albumArtistInput").typeahead('destroy');
+		$("#albumStickersInput").typeahead('destroy');
+		$("#albumRelatedInput").typeahead('destroy');
 		
 		$("#gameSerieInput").tagsinput('destroy');
 		$("#gameStickersInput").tagsinput('destroy');
 		$("#gamePublisherInput").tagsinput('destroy');
 		$("#gameDeveloperInput").tagsinput('destroy');
 		$("#gameRelatedInput").tagsinput('destroy');
+		$("#gameSerieInput").typeahead('destroy');
+		$("#gameStickersInput").typeahead('destroy');
+		$("#gamePublisherInput").typeahead('destroy');
+		$("#gameDeveloperInput").typeahead('destroy');
+		$("#gameRelatedInput").typeahead('destroy');
 		
 		$("#movieSerieInput").tagsinput('destroy');
 		$("#movieStickersInput").tagsinput('destroy');
@@ -242,6 +263,14 @@ function AdminManager() {
 		$("#movieWriterInput").tagsinput('destroy');
 		$("#movieCameraInput").tagsinput('destroy');
 		$("#movieMusicInput").tagsinput('destroy');
+		$("#movieSerieInput").typeahead('destroy');
+		$("#movieStickersInput").typeahead('destroy');
+		$("#movieRelatedInput").typeahead('destroy');
+		$("#movieCastInput").typeahead('destroy');
+		$("#movieDirectorInput").typeahead('destroy');
+		$("#movieWriterInput").typeahead('destroy');
+		$("#movieCameraInput").typeahead('destroy');
+		$("#movieMusicInput").typeahead('destroy');
 		
 		$("#articleAuthorsInput").tagsinput('destroy');
 		$("#publishIssueInput").tagsinput('destroy');
@@ -256,6 +285,19 @@ function AdminManager() {
 		$("#characterRelatedInput").tagsinput('destroy');
 		$("#dlcRelatedInput").tagsinput('destroy');
 		$("#bandRelatedInput").tagsinput('destroy');
+		$("#articleAuthorsInput").typeahead('destroy');
+		$("#publishIssueInput").typeahead('destroy');
+		$("#asideTagsInput").typeahead('destroy');
+		$("#articleTagsInput").typeahead('destroy');
+		$("#articleBetterInput").typeahead('destroy');
+		$("#articleWorseInput").typeahead('destroy');
+		$("#articleEqualInput").typeahead('destroy');
+		$("#asideAuthorsInput").typeahead('destroy');
+		$("#imagesTagInput").typeahead('destroy');
+		$("#personRelatedInput").typeahead('destroy');
+		$("#characterRelatedInput").typeahead('destroy');
+		$("#dlcRelatedInput").typeahead('destroy');
+		$("#bandRelatedInput").typeahead('destroy');
 		
 		initTagInput(persons, 'persons', '#bookAuthorInput');
 		initTagInput(persons, 'persons', '#bookTranslatorInput');
@@ -406,17 +448,23 @@ function AdminManager() {
 		$('.Overlay').hide();
 	}
 	
-	this.showSectionInWindow = function(view) {
+	this.showSectionInWindow = function(section) {
 		var get1 = $.get('renderers/window.html');
 			
 		$.when(get1).done(function(data1) {
-			var html = $(data1).append($(view).show());
+			var html = $(data1).append($(section).show());
 			
 			self.showOverlay();
 			
 			$('body').append(html);
 			$('[role=dialog] :tabbable').eq(1).focus();
 			$(window).scrollTop(0);
+			
+			$('body').trigger({
+				type: 'sectionshow',
+				section: section.split('#')[1],
+				isWindow: true
+			});
 		}).fail(function() {
 			alert("Failed to load window.");
 		});
@@ -562,6 +610,12 @@ function AdminManager() {
 	initTagInput(authors, 'authors', '#asideAuthorsInput');
 	
 	/**
+	 * QUOTE
+	 */
+	
+	this.loadOptions($('#quoteTypeSelect'), type, 'option');
+	
+	/**
 	 * ARTICLE
 	 */
 	
@@ -579,19 +633,6 @@ function AdminManager() {
 	initTagInput(tags, 'tags', '#articleBetterInput', 1);
 	initTagInput(tags, 'tags', '#articleWorseInput', 1);
 	initTagInput(tags, 'tags', '#articleEqualInput', 1);
-	
-	/**
-	 * URL & SEARCH
-	 */
-	
-	this.loadOptions($('#urlTypeSelect'), type, 'option');
-	this.loadOptions($('#urlOjbectSelect'), objects, 'option');
-	
-	/**
-	 * QUOTE
-	 */
-	
-	initTagInput(characters, 'characters', '#quoteCharacterInput');
 	
 	/**
 	 * MOVIES::MOVIE
@@ -683,6 +724,8 @@ function AdminManager() {
 	});
 	
 	$('body').on('sectionshow', function(e) {
+		if (e.isWindow) return false;
+	
 		var o = _createObject(e.section);
 		
 		o.resetData();
@@ -768,70 +811,6 @@ function AdminManager() {
 	/**
 	 * Article & Publish
 	 */
-	 
-	$('#article').on('click', '.select', function(e) {
-		e.preventDefault();
-		self.showSectionInWindow('#url');
-		
-		window.admin.selectTarget = $(this);
-	});
-	
-	$('#url').on('click', 'button.save', function(e) {
-		var $objectInput = $('#urlOjbectSelect'),
-			$urlInput = $('#urlUrlInput'),
-			$vInput = $('#urlVSelect'),
-			$col = window.admin.selectTarget.parents('.inline-col');
-		
-		var type = $objectInput.val().split(',')[0],
-			object = $objectInput.val().split(',')[1],
-			url = $urlInput.val().split('\\').pop().split('.')[0],
-			v = $vInput.val();
-		
-		window.admin.selectTarget.focus();
-		
-		$col.data('type', type);
-		$col.attr('data-type', $col.data('type'));
-		$col.data('object', object);
-		$col.attr('data-object', $col.data('object'));
-		$col.data('url', url);
-		$col.attr('data-url', $col.data('url'));
-		$col.data('valign', v);
-		$col.attr('data-valign', $col.data('valign'));
-		
-		/**
-		 * Loading the object for preview only.
-		 * If it is a quote show the character images.
-		 */
-		
-		var d1 = $.get('../data/' + type + '/' + 
-					   				object + '/' + 
-									url + '.xml');
-			
-		$.when(d1).done(function(data1) {
-			var aside = $.xml2json(data1);
-			
-			switch (object) {
-				case 'quote':
-					window.admin.selectTarget.css('background-image', 
-												  'url(../assets/characters/' + 
-												  aside.character.tag + 
-												  '.png)');
-					break;
-				case 'caret':
-					window.admin.selectTarget.css('background-image', 
-												  'url(../assets/articles/' + 
-												  aside.main.tag +
-												  '/' +
-												  aside.main.tag +
-												  '-' +
-												  aside.main +
-												  ')');
-					break;
-			}
-		}).fail(function() {
-			alert("Failed to load aside.");
-		});
-	});
 	
 	$('#article').on('change', '#articleTypeSelect, #articleSubtypeSelect', function(e) {
 		var $reviewRegion = $('#articleReviewRegion'),
@@ -954,8 +933,6 @@ function AdminManager() {
 		window.admin.publishTarget = a;
 		
 		if (!a._isValid) return false;
-		
-		self.showSectionInWindow('#publish');
 
 		$('#publishPrioritySelect [value=aside]').prop('disabled', false);
 		$('#publishPrioritySelect [value=cover]').prop('disabled', true);
@@ -963,11 +940,19 @@ function AdminManager() {
 		$('#publishPrioritySelect [value=review]').prop('disabled', true);
 		$('#publishPrioritySelect [value=feature]').prop('disabled', true);
 		
+		if ($this.hasClass('publish')) {
+			self.showSectionInWindow('#publish');
+		} else {
+			window.admin.publishTarget.post();
+		}
+		
 		console.log(window.admin.publishTarget);
 	});
 	
 	$('#article').on('click', 'button.save, button.publish', function(e) {
 		e.preventDefault();
+		
+		var $this = $(this);
 		
 		var a = new Article('article');
 		
@@ -976,8 +961,6 @@ function AdminManager() {
 		window.admin.publishTarget = a;
 		
 		if (!a._isValid) return false;
-		
-		self.showSectionInWindow('#publish');
 		
 		/**
 		 * By default all news with video go with priority.
@@ -993,19 +976,12 @@ function AdminManager() {
 		$('#publishPrioritySelect [value=review]').prop('disabled', false);
 		$('#publishPrioritySelect [value=feature]').prop('disabled', false);
 		
-		console.log(window.admin.publishTarget);
-	});
-	
-	$('#publish').on('click', 'button.publish', function(e) {
-		var isArticle = $('#article').is(':visible');
-		
 		/**
-		 * There is no longer difference between the two.
-		 * Keeping this code just in case.
+		 * For save directly update and do not show the dialog.
 		 */
 		
-		if (isArticle) {
-			window.admin.publishTarget.post();	
+		if ($this.hasClass('publish')) {
+			self.showSectionInWindow('#publish');
 		} else {
 			window.admin.publishTarget.post();
 		}
@@ -1013,15 +989,30 @@ function AdminManager() {
 		console.log(window.admin.publishTarget);
 	});
 	
+	$('#publish').on('click', 'button.publish', function(e) {
+		window.admin.publishTarget.post();
+		
+		console.log(window.admin.publishTarget);
+	});
+	
 	$('#quote').on('click', 'button.save', function(e) {
-		var o = new Quote();
+		var a = new Quote('quote');
 		
-		o.save();
+		a.save();
 		
-		self.showSectionInWindow('#xml');
-		utils.xml(o, 'quote', '#xmlCodeOutput');	
+		window.admin.publishTarget = a;
 		
-		console.log(o);
+		if (!a._isValid) return false;
+		
+		window.admin.publishTarget.post();
+		
+		console.log(a);
+	});
+	
+	$('#quote').on('keyup', '#quoteSubtitleInput',  function(e) {
+		var $this = $(this);
+		
+		$('#quoteUrlInput').val(utils.formatTag($this.val())).change();
 	});
 
 	/**

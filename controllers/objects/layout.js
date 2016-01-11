@@ -38,7 +38,7 @@ function Layout(id) {
 	this.right = null;
 	this.imgs = [];
 	this.ratio = '16-9';
-	this._saveImgs = 0;
+	this._saveImgs = $layout.data('saveimgs') || 0;
 	
 	this.setCenter = function() {
 		self.center = _escapeValue(CKEDITOR.instances[self.id]
@@ -84,8 +84,6 @@ function Layout(id) {
 		this.setSubtype();
 		
 		$imgs.each(function (index, value) {
-			self.saveImgs++;
-		
 			var $this = $(value),
 				$p = $this.find('p'),
 				$img = $this.find('input[type=file]'),

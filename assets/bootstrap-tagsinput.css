@@ -53,8 +53,8 @@
 	font-weight: bold;
 }
 
-#aside label:nth-of-type(5) .bootstrap-tagsinput .tag:first-child,
-#article .bootstrap-tagsinput:nth-of-type(5) .tag:first-child {
+#aside form > label:nth-of-type(5) .bootstrap-tagsinput .tag:first-child,
+#article form > label:nth-of-type(4) .bootstrap-tagsinput .tag:first-child {
 	background-color: #F90;
 }
 

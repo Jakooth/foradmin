@@ -30,7 +30,7 @@
             				type="select">
                 <option value="">Всички подтипове</option>
                 <option value="aside">каре</option>
-                <option disabled="disabled" value="quote">цитат</option>
+                <option value="quote">цитат</option>
             </admin:formItem>
             <h3 class="clip">Резултати</h3>
             <ul role="listbox">
@@ -38,6 +38,11 @@
             </ul>
         </form>
         <div role="toolbar">
+        	<admin:formItem id="searchValignSelect" label="Позициониране" 
+            				type="select">
+                <option value="top">Горе</option>
+                <option value="bottom">Долу</option>
+            </admin:formItem>
             <button class="ok" type="button">Избери</button>
             <button class="cancel" type="button">Отмени</button>
         </div>
