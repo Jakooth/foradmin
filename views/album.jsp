@@ -48,6 +48,7 @@
             <admin:formItem id="albumSaveTracksInput" label="Тракове" type="hidden" value="" />
         </form>
         <div role="toolbar">
+        	<button class="new" type="button">Нов</button>
             <button class="save" type="button">Запази</button>
             <button class="cancel" type="button">Отмени</button>
         </div>

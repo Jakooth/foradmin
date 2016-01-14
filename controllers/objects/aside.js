@@ -549,7 +549,13 @@ Aside.prototype.setData = function(result) {
 
 Aside.prototype.post = function() {
 	var self = this;
-		
+	
+	/**
+	 * TODO: This approach is no OK for automated save.
+	 * Validation must happen here as well like in Fortag.
+	 * Publishing must called separately like save in foradmin.js 
+	 */
+	 
 	this.publish();
 	
 	admin.showAlert({message: 'Записвам...', status: 'loading'});

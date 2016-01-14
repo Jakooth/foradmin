@@ -49,6 +49,7 @@
             <admin:formItem id="bookSaveRelatedInput" label="Свързани" type="hidden" value="" />
         </form>
         <div role="toolbar">
+        	<button class="new" type="button">Нова</button>
             <button class="save" type="button">Запази</button>
             <button class="cancel" type="button">Отмени</button>
         </div>

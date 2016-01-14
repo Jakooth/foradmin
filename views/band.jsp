@@ -24,12 +24,13 @@
             				placeholder="" type="text" />
             <admin:formItem id="bandRelatedInput" label="Членове" 
             				placeholder="james-hetfield, lars-ulrich, kirk-hammett, robert-trujillo" type="text" />
-            <admin:formItem id="bandTypeSelect" label="Тип" type="hidden" value="music" />
             <h3>Скрити стойности</h3>
+            <admin:formItem id="bandTypeSelect" label="Тип" type="hidden" value="music" />
             <admin:formItem id="bandSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
             <admin:formItem id="bandSaveRelatedInput" label="Свързани" type="hidden" value="" />
         </form>
         <div role="toolbar">
+        	<button class="new" type="button">Нова</button>
             <button class="save" type="button">Запази</button>
             <button class="cancel" type="button">Отмени</button>
         </div>

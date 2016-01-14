@@ -3,7 +3,8 @@
     data-id="{{:tag_id}}"
     data-table="{{:table}}"
 	data-object="{{:object}}" 
-    data-tag="{{:tag}}">{{if object == 'img'}}
+    data-tag="{{:tag}}"{{if object == 'sticker'}}
+    style="background-image: url(../assets/icons/{{:lib}}/{{:subtype}}/svg/000000/transparent/{{:tag}}.svg)"{{/if}}>{{if object == 'img'}}
     <label> <img src="../assets/articles/{{:tag}}/{{:tag}}" 
                  alt="{{:tag}}" />
         <input name="searchChoice" type="radio" />

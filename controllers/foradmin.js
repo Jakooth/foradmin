@@ -6,7 +6,6 @@ function AdminManager() {
 	 
 	var self = this;
 	
-	var objects = 'data/settings/objects.json';
 	var subtype = 'data/settings/subtype.json';
 	var type = 'data/settings/type.json';
 	var hype = 'data/settings/hype.json';
@@ -40,6 +39,86 @@ function AdminManager() {
 	
 	this._bloodhound = function(data, nameField) {
 		return bloodhound(data, nameField);
+	}
+	
+	/** 
+	 * This function will post data from a JSON file.
+	 * Data format can be different so modifications will be required.
+	 */
+	 
+	var _automatedSave = function() {
+
+		/**
+		 * Step 1: Specify the source file.
+		 */
+		 
+		var get = $.get('data/objects/series.json');
+		
+		$.when(get).done(function(getData, textStatus, jqXHR) {
+			var data = Array.isArray(getData) ? getData : JSON.parse(getData),
+				o;
+			
+			$.each(data, function(index, item) {
+			
+				/**
+				 * Step 2: Create the desired object type.
+				 */
+				
+				o = _createObject('serie'); 
+				
+				/**
+				 * Step 3: Modify data, if needed.
+				 */
+				
+				/*
+				var names,
+					enName,
+					bgName;	
+				
+				if (item.object == 'person') {
+					names = item.value.split('-');
+					enName = new Array();
+					bgName = item.text;
+					
+					$.each(names, function(index, name) {
+						enName.push(name.charAt(0).toUpperCase() + name.slice(1));
+					});
+					
+					enName = enName.join(' ');
+				} else {
+					enName = item.text;
+					bgName = null;
+				}
+				*/
+				
+				/**
+				 * Step 4: Map JSON data to object properties.
+				 */
+				
+				o.enName = query._escapeValue(item.text),
+				//o.bgName = bgName ? query._escapeValue(bgName) : null,
+				o.tag = query._escapeValue(item.value),
+				o.type = query._escapeValue(item.type);
+				
+				o.json = {
+					enName: o.enName,
+					//bgName: o.bgName,
+					tag: o.tag,
+					type: o.type,
+					object: o.object
+				};
+				
+				console.log(o);
+				
+				//o.post();
+			});			
+		}).fail(function(data, textStatus, jqXHR) {
+			console.log(data);
+		});
+	}
+	
+	this._automatedSave = function(id) {
+		_automatedSave();
 	}
 	
 	var _createObject = function(id) {
@@ -88,6 +167,18 @@ function AdminManager() {
 				break;
 			case 'quote':
 				o = new Quote(id);
+				
+				break;
+			case 'author':
+				o = new Author(id);
+				
+				break;
+			case 'issue':
+				o = new Issue(id);
+				
+				break;
+			case 'country':
+				o = new Country(id);
 				
 				break;	
 			default:
@@ -167,8 +258,9 @@ function AdminManager() {
 												   '{{:subtype}}/svg/000000/transparent/' + 
 												   '{{:tag}}.svg)">{{:en_name}}</div>').render(data);
 							} else {
-								return $.templates('<div>{{:en_name}} '  +  
-												   '{{if object}}({{:object}}){{/if}}</div>').render(data);		   
+								return $.templates('<div>{{:~unescapeValue(en_name)}} '  +  
+												   '{{if object}}({{:object}}){{/if}}</div>').render(data, {unescapeValue: 
+																									 query._unescapeValue});	   
 							}
 						}
 					}
@@ -745,6 +837,13 @@ function AdminManager() {
 		self.setDefaults();
 	});
 	
+	$('body').on('click', 'button.new', function(e) {
+		var section = $(this).parents('section').prop('id'),
+			o = _createObject(section);
+		
+		o.resetData();
+	});
+	
 	/**
 	 * Header
 	 */
@@ -1071,7 +1170,8 @@ function AdminManager() {
 	});
 	
 	$('#company, #person, #character, ' + 
-	  '#serie, #dlc, #band').on('click', 'button.save', function(e) {
+	  '#serie, #dlc, #band,' + 
+	  '#country, #author, #issue').on('click', 'button.save', function(e) {
 		  
 		var id = $(this).parents('section').prop('id'),
 			o = _createObject(id);

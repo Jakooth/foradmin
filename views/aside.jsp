@@ -51,6 +51,7 @@
             <admin:formItem id="asideSaveLayoutsInput" label="Шаблони" type="hidden" value="" />
         </form>
         <div role="toolbar">
+        	<button class="new" type="button">Ново</button>
             <button class="publish" type="button">Публикувай</button>
             <button class="save" type="button">Запази</button>
             <button class="cancel" type="button">Отмени</button>

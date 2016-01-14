@@ -48,61 +48,70 @@
     <script src="jslib/he.js">
                 <!--script-->
             </script>
-    <script src="../controllers/utils.js?v=1.5.1">
+    <script src="../controllers/utils.js?v=2.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/foradmin.js?v=1.6.1">
+    <script src="controllers/foradmin.js?v=2.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/add.js?v=1.0.0">
+    <script src="controllers/add.js?v=2.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/search.js?v=1.0.0">
+    <script src="controllers/search.js?v=2.0.0">
                 <!--script-->
             </script>        
-    <script src="controllers/objects/fortag.js?v=1.0.0">
+    <script src="controllers/objects/fortag.js?v=2.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/objects/formain.js?v=1.0.0">
+    <script src="controllers/objects/formain.js?v=2.0.0">
                 <!--script-->
             </script>
-	<script src="controllers/objects/layout.js?v=1.0.0">
+	<script src="controllers/objects/layout.js?v=2.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/objects/aside.js?v=1.0.0">
+    <script src="controllers/objects/aside.js?v=2.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/objects/article.js?v=1.0.0">
+    <script src="controllers/objects/article.js?v=2.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/objects/quote.js?v=1.0.0">
+    <script src="controllers/objects/quote.js?v=2.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/objects/game.js?v=1.0.0">
+    <script src="controllers/objects/game.js?v=2.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/objects/movie.js?v=1.0.0">
+    <script src="controllers/objects/movie.js?v=2.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/objects/album.js?v=1.0.0">
+    <script src="controllers/objects/album.js?v=2.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/objects/event.js?v=1.0.0">
+    <script src="controllers/objects/event.js?v=2.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/objects/book.js?v=1.0.0">
+    <script src="controllers/objects/book.js?v=2.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/objects/platform.js?v=1.0.0">
+    <script src="controllers/objects/platform.js?v=2.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/objects/genre.js?v=1.0.0">
+    <script src="controllers/objects/genre.js?v=2.0.0">
                 <!--script-->
             </script>
-    <script src="controllers/objects/sticker.js?v=1.0.0">
+    <script src="controllers/objects/sticker.js?v=2.0.0">
                 <!--script-->
             </script>
-    <script>$(document).ready(function() { 
+    <script src="controllers/objects/author.js?v=2.0.0">
+                <!--script-->
+            </script>
+    <script src="controllers/objects/issue.js?v=2.0.0">
+                <!--script-->
+            </script>
+    <script src="controllers/objects/country.js?v=2.0.0">
+                <!--script-->
+            </script>                
+	<script>$(document).ready(function() { 
 				window.utils = new UtilsManager(); 
 				window.admin = new AdminManager(); 
 				window.add = new AddManager();
@@ -124,19 +133,19 @@
             <ul>
                 <li>
                     <admin:menuItem label="Игри" url="games"
-                    				icon="lorc,battle-axe" />
+                    				icon="delapouite,joystick" />
                 </li>
                 <li>
                     <admin:menuItem label="Кино и Телевизия" url="movies" 
-                    				icon="lorc,shark-jaws" />
+                    				icon="delapouite,clapperboard" />
                 </li>
                 <li>
                     <admin:menuItem label="Музика" url="music" 
-                    				icon="lorc,guitar" />
+                    				icon="lorc,music-spell" />
                 </li>
                 <li>
                     <admin:menuItem label="Книги" url="books" 
-                    				icon="lorc,book-cover" />
+                    				icon="delapouite,bookshelf" />
                 </li>
                 <li>
                     <admin:menuItem label="Настолни Игри" url="boards" 
@@ -149,11 +158,11 @@
             <ul>
                 <li>
                     <admin:menuItem label="Статия" url="article" 
-                    				icon="delapouite,pencil" />
+                    				icon="lorc,papers" />
                 </li>
                 <li>
                     <admin:menuItem label="Картинки" url="images" 
-                    				icon="lorc,mountains" />
+                    				icon="delapouite,photo-camera" />
                 </li>
                 <li>
                     <admin:menuItem label="Каре" url="aside" 
@@ -166,6 +175,14 @@
                 <li>
                     <admin:menuItem label="Цитат" url="quote" 
                     				icon="lorc,conversation" />
+                </li>
+                <li>
+                    <admin:menuItem label="Автор" url="author" 
+                    				icon="lorc,fountain-pen" />
+                </li>
+                <li>
+                    <admin:menuItem label="Брой" url="issue" 
+                    				icon="delapouite,calendar" />
                 </li>
             </ul>
         </nav>
@@ -203,7 +220,9 @@
         <jsp:include page="views/search.jsp" />
         <jsp:include page="views/publish.jsp" />
         <jsp:include page="views/xml.jsp" />
-        <jsp:include page="views/url.jsp" />
+        <jsp:include page="views/author.jsp" />
+        <jsp:include page="views/issue.jsp" />
+        <jsp:include page="views/country.jsp" />
         <jsp:include page="views/sticker.jsp" />
     </main>
     <footer>

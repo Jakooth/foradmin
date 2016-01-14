@@ -52,6 +52,21 @@ function SearchManager() {
 										  .call(this, data)).toString();
 	}
 	
+	this._unescapeValue = function(data) {
+		return _unescapeValue(data);
+	}
+	
+	var _unescapeValue = function(data) {
+	
+		/**
+		 * There is an error if you simple return quoted string.
+		 * For this reason we return string object to string.
+		 */
+		
+		return new String(Fortag.prototype._unescapeValue
+										  .call(this, data)).toString();
+	}
+	
 	var _renderSearchResult = function(data) {
 		var getResult = data || $.get(_query),
 			getRenderer = $.get('renderers/search.html');

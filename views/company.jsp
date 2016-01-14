@@ -26,6 +26,7 @@
             <admin:formItem id="companySaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
         </form>
         <div role="toolbar">
+        	<button class="new" type="button">Нова</button>
             <button class="save" type="button">Запази</button>
             <button class="cancel" type="button">Отмени</button>
         </div>

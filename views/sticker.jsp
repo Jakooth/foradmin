@@ -23,11 +23,15 @@
                 <option value="carl-olsen">carl-olsen</option>
                 <option value="delapouite">delapouite</option>
                 <option value="felbrigg">felbrigg</option>
+                <option value="heavenly-dog">heavenly-dog</option>
+                <option value="irongamer">irongamer</option>
                 <option value="john-colburn">john-colburn</option>
                 <option value="john-redman">john-redman</option>
                 <option value="lorc">lorc</option>
+                <option value="lord-berandas">lord-berandas</option>
                 <option value="priorblue">priorblue</option>
                 <option value="sbed">sbed</option>
+                <option value="various-artists">various-artists</option>
                 <option value="viscious-speed">viscious-speed</option>
                 <option value="willdabeast">willdabeast</option>
             </admin:formItem>
@@ -47,6 +51,7 @@
                 <option value="arrows">arrows</option>
                 <option value="hands">hands</option>
                 <option value="batteries">batteries</option>
+                <option value="public-domain">public-domain</option>
                 <option value="abstract">abstract</option>
                 <option value="deviations">deviations</option>
             </admin:formItem>
@@ -54,6 +59,7 @@
             <admin:formItem id="stickerSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
         </form>
         <div role="toolbar">
+        	<button class="new" type="button">Нов</button>
             <button class="save" type="button">Запази</button>
             <button class="cancel" type="button">Отмени</button>
         </div>

@@ -27,6 +27,9 @@
                 <li>
                     <admin:menuItem label="rock, deep-house, dream-pop" title="Жанр" url="genre" />
                 </li>
+                <li>
+                    <admin:menuItem label="bg, us, gb" title="Държава" url="country" />
+                </li>
             </ul>
         </nav>
     </section>

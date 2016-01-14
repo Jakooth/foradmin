@@ -127,12 +127,8 @@ Fortag.prototype._getTypeaheadValue = function(_$input, includeHidden) {
 	 */
 	 
 	return _$input.length && _$input.parents('label').is(hidden + ':visible') ? 
-		   _$input.typeahead()
-		   		  .data('tagsinput')
-				  .itemsArray.length <= 0 ? null : 
-		   _$input.typeahead()
-		   		  .data('tagsinput')
-				  .itemsArray : null;
+		   _$input.tagsinput()[0].itemsArray.length <= 0 ? null : 
+		   _$input.tagsinput()[0].itemsArray : null;
 }
 
 /**
@@ -255,8 +251,8 @@ Fortag.prototype.resetData = function() {
 	
 	if (this._$mainInput.length) this._$mainInput.parents('.file').css('background-image', 'none');
 	
-	if (this._$saveIdInput.length) this._$saveIdInput.val(null);
-	if (this._$saveRelatedInput.length) this._$saveRelatedInput.val(null);
+	if (this._$saveIdInput.length) this._$saveIdInput.val(null).change();
+	if (this._$saveRelatedInput.length) this._$saveRelatedInput.val(null).change();
 }
 
 Fortag.prototype.updateData = function(data) {

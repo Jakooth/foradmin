@@ -30,6 +30,7 @@
             <admin:formItem id="dlcSaveRelatedInput" label="Свързани" type="hidden" value="" />
         </form>
         <div role="toolbar">
+        	<button class="new" type="button">Ново</button>
             <button class="save" type="button">Запази</button>
             <button class="cancel" type="button">Отмени</button>
         </div>
