@@ -189,17 +189,14 @@ function SearchManager() {
 	 
 	this.json = {}; 
 	 
-	this.updateSearchTypeahead = function(articlesOnly) {
+	this.updateSearchTagsinput = function(articlesOnly) {
 		_tags.clearPrefetchCache();
 		_aside.clearPrefetchCache();
-		
-		$(searchTagInput).tagsinput('destroy');
-		$(searchTagInput).typeahead('destroy');
-		
+
 		if (articlesOnly) {
-			admin._initTagInput(_aside, 'tags', searchTagInput, 1);
+			admin.refreshTagsinput(_aside, searchTagInput);
 		} else {
-			admin._initTagInput(_tags, 'tags', searchTagInput, 1);
+			admin.refreshTagsinput(_tags,  searchTagInput);
 		}
 	}
 	
@@ -232,7 +229,7 @@ function SearchManager() {
 		
 			_doSearch();
 			
-			self.updateSearchTypeahead(isWindow);
+			self.updateSearchTagsinput(isWindow);
 		}
 	});
 	

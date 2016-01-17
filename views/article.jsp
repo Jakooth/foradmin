@@ -49,7 +49,6 @@
             </div>
             <h3>Корица</h3>
             <div class="Cover" role="region">
-                <img class="svg" src="../assets/forplay.svg" alt="Forplay&amp;reg;" />
                 <div class="h-preview">
                     <!--preview-->
                 </div>
@@ -57,6 +56,7 @@
                     <!--preview-->
                 </div>
                 <div class="file">
+                	<img class="svg" src="../assets/forplay.svg" alt="Forplay&amp;reg;" />
                 	<input aria-label="Избери" 
                     	   id="articleCoverInput" type="file" />
                 </div>
@@ -82,6 +82,7 @@
             <h3>Основни картинки</h3>
             <div class="Main" role="group">
             	<div class="file">
+                	<img class="svg" src="../assets/forplay.svg" alt="Forplay&amp;reg;" />
                 	<input aria-label="Избери" 
                     	   id="articleWideInput" type="file" />
                 </div>

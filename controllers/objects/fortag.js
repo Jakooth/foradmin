@@ -46,9 +46,31 @@ function Fortag(o) {
  * PRIVATE
  */
 
-Fortag.prototype._updateAfterSave = function(data) {
+Fortag.prototype._updateAfterSave = function(data, target) {
 	if (data.saveId) this._$saveIdInput.val(data.saveId).change();
-	if (data.saveRelated) this._$saveRelatedInput.val(data.saveRelated.join(',')).change();	
+	if (data.saveRelated) this._$saveRelatedInput.val(data.saveRelated.join(',')).change();
+	
+	/**
+	 * If this is create section in window,
+	 * add tag and close the dialog.
+	 */
+	 
+	if (target) {
+		if (target.dialog.length > 0 && target.target) {
+			this.json.en_name = this.json.enName;
+			this.json.tag_id = data.saveId;
+		
+			target.target.tagsinput('add', this.json);
+			
+			admin.hideSectionInWindow(target.dialog.find('section'));
+		}
+	}
+	
+	/**
+	 * Always update the dialog.
+	 */
+	
+	admin.updateAllTypeahead();
 }
 
 Fortag.prototype._escapeValue = function(data) {
@@ -303,8 +325,9 @@ Fortag.prototype.setData = function(result) {
 	});					   
 }
 
-Fortag.prototype.post = function() {
-	var self = this;
+Fortag.prototype.post = function(target) {
+	var self = this
+		target = target || false;
 	
 	/**
 	 * The only require field is TAG.
@@ -351,7 +374,7 @@ Fortag.prototype.post = function() {
 									  self.json.object
 									  	  .slice(1) + ' ' + s, status: 'success'});
 		
-			self._updateAfterSave(data.operation);
+			self._updateAfterSave(data.operation, target);
 		}
 	}).fail(function (data, textStatus, jqXHR) {
 		console.log(data);

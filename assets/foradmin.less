@@ -322,14 +322,6 @@ button:first-of-type {
  * SPACING
  */
 
-.hidden,
-form input[type=text],
-form input[type=password],
-header a,
-nav li a {
-	padding: @unit * 2;
-}
-
 header h2,
 .coverLayout,
 .Add button.add,
@@ -362,7 +354,6 @@ form > [role=group]:not(.Main),
 #images li,
 section#login h2,
 h3,
-.hidden,
 .Window h2 span,
 .Add .file,
 form input,
@@ -468,6 +459,7 @@ header a {
 	display: block;
 	width: 100%;
 	line-height: 64px;
+	padding: @unit * 2;
 }
 
 nav li a {
@@ -475,6 +467,7 @@ nav li a {
 	width: 100%;
 	height: 100%;
 	line-height: 64px;
+	padding: @unit * 2;
 }
 
 section {
@@ -676,6 +669,7 @@ form input[type=text],
 form input[type=password] {
 	width: 100%;
 	height: 60px;
+	padding: @unit * 2;
 }
 
 form textarea {
@@ -698,6 +692,8 @@ form input[type=time],
 }
 
 .hidden {
+	padding: @unit * 2;
+	margin-bottom: @unit * 4;
 	opacity: 0.5;
 	color: #666;
 	line-height: 40px;
@@ -1312,13 +1308,19 @@ button.remove {
 	height: 540px;
 }
 
-.Cover .svg {
+#article .Cover .svg,
+#article .Main .svg {
 	position: absolute;
 	padding: 20px;
 	z-index: 99;
+	height: 20%;
 }
 
-.Cover:before {
+#article .Main .svg {
+	height: 33.66%;
+}
+
+.Cover::before {
 	content: "";
 	position: absolute;
 	width: 100%;
@@ -1932,11 +1934,11 @@ button.remove {
 	background-repeat: no-repeat;
 }
 
-.cke_editable_inline:hover:before {
+.cke_editable_inline:hover::before {
 	background-color: rgba(199, 178, 153, 0.7);
 }
 
-.cke_editable_inline.cke_focus:before,
+.cke_editable_inline.cke_focus::before,
 .cke_editable_inline.cke_focus::after {
 	display: none;
 }
@@ -2136,11 +2138,12 @@ section#login h2 {
 #createTheme(@theme: ~"grey", @grey);
 #createTheme(@theme: ~"blue-grey", @blue-grey);
 
-.lighten .Cover svg path {
+.lighten .Cover svg path,
+.lighten .Main svg path {
 	fill: #FFFFFF;
 }
 
 .darken .Cover svg path,
-.tuborg .Cover svg path {
+.darken .Main svg path {
 	fill: #000000;
 }
