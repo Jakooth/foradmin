@@ -268,9 +268,19 @@ function AdminManager() {
 				freeInput: false
 			});
 		}).fail(function() {
-			/**
-			 * TODO: Fail logic.
-			 */
+			console.log('Failed to create tagsinput.');
+		});	
+	}
+	
+	var refreshTagsinput = function(data,
+									input) {
+		
+		var promise = data.initialize(true);
+		
+		promise.done(function() {
+			$(input).tagsinput()[0].refresh();
+		}).fail(function() {
+			console.log('Failed to refresh tagsinput.');
 		});	
 	}
 
@@ -811,7 +821,6 @@ function AdminManager() {
 		});
 		
 		self.showSection(window.location.hash);
-		
 		self.setDefaults();
 	});
 	
@@ -831,9 +840,8 @@ function AdminManager() {
 	
 	$('body').on('click', 'nav a:not(.active), header a:not(.active)', function(e) {
 		$this = $(this);																		
-																				
+			
 		self.showSection($this.attr('href'), $this.parents().hasClass('breadcrumb'));
-		
 		self.setDefaults();
 	});
 	

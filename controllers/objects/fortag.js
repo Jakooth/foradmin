@@ -245,8 +245,15 @@ Fortag.prototype.resetData = function() {
 	if (this._$bgNameInput.length) this._$bgNameInput.val(null);
 	if (this._$dateInput.length) this._$dateInput.val(null);
 	if (this._$tagInput.length) this._$tagInput.val(null);
-	if (this._$typeSelect.length) this._$typeSelect.val(this._$typeSelect.find('option:first').val());
-	if (this._$subtypeSelect.length) this._$subtypeSelect.val(this._$subtypeSelect.find('option:first').val());
+	
+	
+	if (this._$typeSelect.length) this._$typeSelect.val(this._$typeSelect.not('[type=hidden]') ? 
+														this._$typeSelect.val() : 
+														this._$typeSelect.find('option:first').val());
+	if (this._$subtypeSelect.length) this._$subtypeSelect.val(this._$subtypeSelect.not('[type=hidden]') ? 
+															  this._$subtypeSelect.val() : 
+															  this._$subtypeSelect.find('option:first').val());
+	
 	if (this._$relatedInput.length) this._$relatedInput.tagsinput('removeAll');
 	
 	if (this._$mainInput.length) this._$mainInput.parents('.file').css('background-image', 'none');

@@ -46,7 +46,7 @@ Formain.prototype._setTagsinputValue = function(data) {
 					if (!self._$stickersInput.length) return false;
 					
 					self._$stickersInput.tagsinput('add', tag);
-					self._saveRelatedArray.push(tag.sticker_id);
+					self._saveRelatedArray.push(tag.tag_id);
 					
 					break;
 				case 'genre':
