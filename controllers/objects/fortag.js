@@ -105,6 +105,9 @@ Fortag.prototype._escapeValue = function(data) {
 }
 
 Fortag.prototype._unescapeValue = function(data) {
+	if (!data) return null;
+	if (Number.isInteger(data)) return data;
+
 	return he.unescape(data);
 }
 

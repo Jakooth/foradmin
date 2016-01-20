@@ -15,6 +15,7 @@ function Aside(o) {
 	this._saveLayouts;
 	this._saveLayoutsArray = new Array();
 	this._bestPreviewLength = 300;
+	this._safePreviewLength = 512;
 	
 	this._$this = $('#' + this._o);
 	this._$shotInput = $('#' + this._o + 'ShotInput');
@@ -225,8 +226,11 @@ Aside.prototype._getPreviewText = function() {
 					    .map(function(i, element) { 
 							return $(element).text(); 
 						}).get().join(' ');
+						
+	preview = preview.slice(0, this._safePreviewLength);
+	preview = preview.slice(0, preview.lastIndexOf(' '));					
 			  
-	preview = this._escapeValue(preview);		  
+	preview = this._escapeValue(preview);	  
 	
 	return preview;
 }

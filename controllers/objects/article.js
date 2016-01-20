@@ -314,8 +314,8 @@ Article.prototype.save = function() {
 Article.prototype.resetData = function(isUpdate) {
 	Aside.prototype.resetData.call(this, isUpdate);
 		
-	if (this._$videoTechSelect.length) this._$videoTechSelect.val('youtube');
-	if (this._$audioTechSelect.length) this._$audioTechSelect.val('mixcloud');
+	if (this._$videoTechSelect.length) this._$videoTechSelect.val(null);
+	if (this._$audioTechSelect.length) this._$audioTechSelect.val(null);
 	if (this._$videoUrlInput.length) this._$videoUrlInput.val(null);
 	if (this._$audioFrameInput.length) this._$audioFrameInput.val(null);
 	if (this._$audioUrlInput.length) this._$audioUrlInput.val(null);
@@ -354,8 +354,8 @@ Article.prototype.resetData = function(isUpdate) {
 Article.prototype.updateData = function(data) {
 	Aside.prototype.updateData.call(this, data);
 	
-	this._setInputValue(this._$videoTechSelect, data.vide_tech || 'youtube');
-	this._setInputValue(this._$audioTechSelect, data.audio_tech || 'mixcloud');
+	this._setInputValue(this._$videoTechSelect, data.video_tech);
+	this._setInputValue(this._$audioTechSelect, data.audio_tech);
 	this._setInputValue(this._$videoUrlInput, data.video_url || null);
 	this._setInputValue(this._$audioFrameInput, data.audio_frame || null);
 	this._setInputValue(this._$audioUrlInput, data.audio_url || null);
