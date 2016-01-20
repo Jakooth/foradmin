@@ -78,7 +78,7 @@ Happening.prototype.resetData = function() {
 }
 
 Happening.prototype.updateData = function(data) {
-	Fortag.prototype.updateData.call(this, data);
+	Formain.prototype.updateData.call(this, data);
 	
 	this._setInputValue(this._$endDateInput, data.end_date || null);
 	this._setInputValue(this._$cityInput, data.city || null);

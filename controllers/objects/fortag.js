@@ -168,10 +168,24 @@ Fortag.prototype._getInputValue = function(_$input, includeHidden) {
 }
 
 Fortag.prototype._setInputValue = function(_$input, data) {
-	_$input.length && data ? _$input.val(data) : null;
+	_$input.length && data ? _$input.val(this._unescapeValue(data)) : null;
 	
 	_$input.change();
 }
+
+Fortag.prototype._setMainImgValue = function(_$input, tag) {
+	if (tag) {
+		if (!_$input.length) return false;
+		
+		_$input.parents('.file')
+			   .css('background-image', 
+					'url(../assets/tags/' + tag + '.jpg');
+	} else {
+		_$input.parents('.file')
+			   .css('background-image', 
+					'none');
+	}
+} 
 
 /**
  * Because all related tags come in one array,
@@ -209,6 +223,17 @@ Fortag.prototype._setInputValueAsString = function(_$input, data) {
 	_$input.val(data.join(',')).change();
 }
 
+/**
+ * TODO: The final function will not work like this.
+ */
+
+Fortag.prototype._uploadMainImg = function() {
+	this.main = utils.parseImgIndex($mainInput.val());
+}
+
+
+
+
 /** 
  * PUBLIC
  */
@@ -241,14 +266,6 @@ Fortag.prototype.save = function() {
 	};
 }
 
-/**
- * TODO: The final function will not work like this.
- */
-
-Fortag.prototype.uploadMainImage = function() {
-	this.main = utils.parseImgIndex($mainInput.val());
-}
-
 Fortag.prototype.validateTag = function() {
 	this._isValid = true;
 	
@@ -278,10 +295,10 @@ Fortag.prototype.resetData = function() {
 	
 	if (this._$relatedInput.length) this._$relatedInput.tagsinput('removeAll');
 	
-	if (this._$mainInput.length) this._$mainInput.parents('.file').css('background-image', 'none');
-	
 	if (this._$saveIdInput.length) this._$saveIdInput.val(null).change();
 	if (this._$saveRelatedInput.length) this._$saveRelatedInput.val(null).change();
+	
+	if (this._$mainInput.length) this._setMainImgValue(this._$mainInput, null);
 }
 
 Fortag.prototype.updateData = function(data) {
@@ -298,6 +315,8 @@ Fortag.prototype.updateData = function(data) {
 		
 	this._setInputValue(this._$saveIdInput, data.tag_id || null);
 	this._setInputValueAsString(this._$saveRelatedInput, this._saveRelatedArray);
+	
+	this._setMainImgValue(this._$mainInput, data.tag || null);
 }
 
 Fortag.prototype.setData = function(result) {

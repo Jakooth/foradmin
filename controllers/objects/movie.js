@@ -5,8 +5,6 @@ function Movie(o) {
 	 * PRIVATE
 	 */
 	
-	this._$posterInput = $('#' + o + 'PosterInput');
-	
 	this._$castInput = $('#' + o + 'CastInput');
 	this._$directorInput = $('#' + o + 'DirectorInput');
 	this._$writerInput = $('#' + o + 'WriterInput');
@@ -18,8 +16,6 @@ function Movie(o) {
 	/** 
 	 * PUBLIC
 	 */
-	 
-	this.poster; 
 
 	this.cast;
 	this.director;
@@ -134,16 +130,10 @@ Movie.prototype.resetData = function() {
 }
 
 Movie.prototype.updateData = function(data) {
-	Fortag.prototype.updateData.call(this, data);
+	Formain.prototype.updateData.call(this, data);
 
 	this._setInputValue(this._$worldDateInput, data.world_date || null);
 	this._setInputValue(this._$timeInput, data.time || null);
-}
-
-/**
- * TODO: The final function will not work like this.
- */
-
-Movie.prototype.uploadPosterImage = function() { 
-	this.poster = utils.parseImgIndex($posterInput.val());
+	
+	this._setPosterImgValue(this._$posterInput, data.tag || null);
 }

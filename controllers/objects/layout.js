@@ -36,7 +36,7 @@ function Layout(id) {
 	this.center;
 	this.left = null;
 	this.right = null;
-	this.imgs = [];
+	this.imgs = new Array();
 	this.ratio = '16-9';
 	this._saveImgs = $layout.data('saveimgs') || 0;
 	
@@ -77,6 +77,8 @@ function Layout(id) {
 	this.setType();
 	
 	if (this.type == 'text') {
+		this.imgs = null;
+		
 		this.setCenter();
 		this.setAside();
 	} else if (this.type == 'img' || 

@@ -152,7 +152,7 @@ Article.prototype._getPreviewText = function(id) {
 	if ($layouts.length) {
 		
 		/**
-		 *  Triple precausion for the type of the first layout.
+		 *  Triple precaution for the type of the first layout.
 		 */
 		 
 		if (this.layouts[0].type != 'text') {
@@ -338,9 +338,9 @@ Article.prototype.resetData = function(isUpdate) {
 	if (this._$caretInput.length) this._$caretInput.val(null);
 	if (this._$coverInput.length) this._$coverInput.val(null);
 	
-	if (this._$saveWideInput.length) this._$saveWideInput.val(null);
-	if (this._$saveCaretInput.length) this._$saveCaretInput.val(null);
-	if (this._$saveCoverInput.length) this._$saveCoverInput.val(null);
+	if (this._$saveWideInput.length) this._$saveWideInput.val(null).change();
+	if (this._$saveCaretInput.length) this._$saveCaretInput.val(null).change();
+	if (this._$saveCoverInput.length) this._$saveCoverInput.val(null).change();
 	
 	/**
 	 * Remove image backgrounds.

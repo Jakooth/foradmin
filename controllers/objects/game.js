@@ -103,7 +103,7 @@ Game.prototype.resetData = function() {
 }
 
 Game.prototype.updateData = function(data) {
-	Fortag.prototype.updateData.call(this, data);
+	Formain.prototype.updateData.call(this, data);
 
 	this._setInputValue(this._$usDateInput, data.us_date || null);
 }

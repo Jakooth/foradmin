@@ -5,6 +5,9 @@ function Formain(o) {
 	 * PRIVATE
 	 */
 	
+	this._$posterInput = $('#' + o + 'PosterInput');
+	this._$coverInput = $('#' + o + 'CoverInput');
+	
 	this._$stickersInput = $('#' + o + 'StickersInput');
 	this._$serieInput = $('#' + o + 'SerieInput');
 	this._$genreGroup = $('#' + o + 'GenreGroup');
@@ -13,6 +16,9 @@ function Formain(o) {
 	/** 
 	 * PUBLIC
 	 */
+	
+	this.poster;
+	this.cover;	
 
 	this.stickers;
 	this.serie;
@@ -76,6 +82,44 @@ Formain.prototype._getGroupValue = function(_$input) {
 	}).get();
 }
 
+/**
+ * TODO: The final function will not work like this.
+ */
+
+Formain.prototype._uploadPosterImg = function() { 
+	this.poster = utils.parseImgIndex($posterInput.val());
+}
+
+Formain.prototype._setPosterImgValue = function(_$input, tag) {
+	if (tag) {
+		if (!_$input.length) return false;
+		
+		_$input.parents('.file')
+			   .css('background-image', 
+					'url(../assets/articles/' + tag + 
+					'/'  + tag + '-poster.jpg');
+	} else {
+		_$input.parents('.file')
+			   .css('background-image', 
+					'none');
+	}
+}
+
+Formain.prototype._setCoverImgValue = function(_$input, tag) {
+	if (tag) {
+		if (!_$input.length) return false;
+		
+		_$input.parents('.file')
+			   .css('background-image', 
+					'url(../assets/articles/' + tag + 
+					'/'  + tag + '-cover.jpg');
+	} else {
+		_$input.parents('.file')
+			   .css('background-image', 
+					'none');
+	}
+} 
+
 /** 
  * PUBLIC
  */
@@ -107,4 +151,14 @@ Formain.prototype.resetData = function() {
 	if (this._$stickersInput.length) this._$stickersInput.tagsinput('removeAll');
 	if (this._$genreGroup.length) this._$genreGroup.find('[type=checkbox]').prop('checked', false);
 	if (this._$countrySelect.length) this._$countrySelect.val(this._$countrySelect.find('option:first').val());
+	
+	if (this._$posterInput.length) this._setPosterImgValue(this._$posterInput, null);
+	if (this._$coverInput.length) this._setCoverImgValue(this._$coverInput, null);
+}
+
+Formain.prototype.updateData = function(data) {
+	Fortag.prototype.updateData.call(this, data);
+	
+	this._setPosterImgValue(this._$posterInput, data.tag || null);
+	this._setCoverImgValue(this._$coverInput, data.tag || null);
 }

@@ -110,7 +110,7 @@ Album.prototype.resetData = function() {
 }
 
 Album.prototype.updateData = function(data) {
-	Fortag.prototype.updateData.call(this, data);
+	Formain.prototype.updateData.call(this, data);
 	
 	this._setTracksValue(data.tracks || null);
 	

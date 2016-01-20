@@ -958,6 +958,8 @@ function AdminManager() {
 	$('#aside').on('click', 'button.save, button.publish', function(e) {
 		e.preventDefault();
 		
+		var $this = $(this);
+		
 		var a = new Aside('aside');
 		
 		a.save();

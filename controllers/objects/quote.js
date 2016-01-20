@@ -28,7 +28,14 @@ Quote.prototype._resetLayouts = function() {
 }
 
 Quote.prototype._setPrimeAndUrl = function() {
-	this.url = this._getInputValue(this._$urlInput);
+	var s = this._getInputValue(this._$previewInput);
+	
+	s = s.slice(0, 128);
+	s = s.slice(0, s.lastIndexOf('-'));
+	
+	this.url = utils.formatTag(s);
+	
+	this._$urlInput.val(this.url).change();
 }
 
 
@@ -48,16 +55,7 @@ Quote.prototype.validateContent = function() {
 	if (!this.title) {
 		this._isValid = false;
 		
-		admin.showAlert({message: 'Напишете герой.', 
-						 status: 'error'});
-		
-		return false;
-	}
-	
-	if (!this.subtitle) {
-		this._isValid = false;
-		
-		admin.showAlert({message: 'Напишете заглавие.', 
+		admin.showAlert({message: 'Изберете герой.', 
 						 status: 'error'});
 		
 		return false;
@@ -102,6 +100,7 @@ Quote.prototype.resetData = function(isUpdate) {
 	Aside.prototype.resetData.call(this, isUpdate);
 
 	if (this._$previewInput.length) this._$previewInput.val(null);
+	if (this._$urlInput.length) this._$urlInput.val(null).change();
 }
 
 Quote.prototype.updateData = function(data) {

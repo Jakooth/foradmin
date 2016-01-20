@@ -15,6 +15,12 @@
                         <input id="bookMainInput" type="file" />
                     </label>
                 </div>
+                <div class="file">
+                    <label>
+                        <span class="clip">Избери</span>
+                        <input id="bookCoverInput" type="file" />
+                    </label>
+                </div>
             </div>
             <admin:formItem id="bookBgNameInput" label="Име на български" 
             				placeholder="Вила Тъга" type="text" />

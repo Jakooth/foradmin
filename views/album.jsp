@@ -15,6 +15,12 @@
                         <input id="albumMainInput" type="file" />
                     </label>
                 </div>
+                <div class="file">
+                    <label>
+                        <span class="clip">Избери</span>
+                        <input id="albumCoverInput" type="file" />
+                    </label>
+                </div>
             </div>
             <admin:formItem id="albumEnNameInput" label="Албум" 
             				placeholder="Sacrifice To Venus" type="text" />

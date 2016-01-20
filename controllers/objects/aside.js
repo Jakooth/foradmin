@@ -185,7 +185,7 @@ Aside.prototype._getLayouts = function() {
 	 
 	this.layouts.push({center: this._escapeValue(CKEDITOR
 						  		   .instances[layout].getData()),
-					   imgs: [],
+					   imgs: null,
 					   left: null,
 					   right: null,
 					   type: 'text',
@@ -481,12 +481,12 @@ Aside.prototype.resetData = function(isUpdate) {
 	
 	this._resetLayouts(isUpdate);
 	
-	if (this._$saveIdInput.length) this._$saveIdInput.val(null);
-	if (this._$saveShotInput.length) this._$saveShotInput.val(null);
-	if (this._$saveAuthorsInput.length) this._$saveAuthorsInput.val(null);
-	if (this._$saveTagsInput.length) this._$saveTagsInput.val(null);
-	if (this._$saveLayoutsInput.length) this._$saveLayoutsInput.val(null);
-									 this._$saveLayoutsArray = new Array();
+	if (this._$saveIdInput.length) this._$saveIdInput.val(null).change();
+	if (this._$saveShotInput.length) this._$saveShotInput.val(null).change();
+	if (this._$saveAuthorsInput.length) this._$saveAuthorsInput.val(null).change();
+	if (this._$saveTagsInput.length) this._$saveTagsInput.val(null).change();
+	if (this._$saveLayoutsInput.length) this._$saveLayoutsInput.val(null).change();
+										this._$saveLayoutsArray = new Array();
 	
 	/**
 	 * Remove image backgrounds.

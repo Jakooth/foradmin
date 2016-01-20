@@ -9,11 +9,9 @@
         </h2>
         <form>
             <admin:formItem id="quoteTypeSelect" label="Раздел" type="select" />
-            <admin:formItem id="quoteTitleInput" label="Герой" 
-            				placeholder="Minsk, Batman, Koralsky, doomy" type="text" 
+            <admin:formItem id="quoteTitleInput" label="Герой или персона" 
+            				placeholder="Minsk, Batman, Koralsky, doomy, Steve Jobs" type="text" 
                             autocomplete="off" />
-            <admin:formItem id="quoteSubtitleInput" label="Заглавие" type="text"
-            				placeholder="Run Boo run, Dancing with the devil, Time to kick ass" />
         	<admin:formItem id="quotePreviewInput" label="Цитат" type="area" 
             				placeholder="" />
         	<h3>Скрити стойности</h3>

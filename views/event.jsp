@@ -15,6 +15,12 @@
                         <input id="eventMainInput" type="file" />
                     </label>
                 </div>
+                <div class="file">
+                    <label>
+                        <span class="clip">Избери</span>
+                        <input id="eventPosterInput" type="file" />
+                    </label>
+                </div>
             </div>
             <admin:formItem id="eventEnNameInput" label="Събитие" 
             				placeholder="Sofia Rocks 2015" type="text" />
