@@ -104,6 +104,10 @@ Fortag.prototype._escapeValue = function(data) {
 	return new String(s).toString();
 }
 
+/**
+ * There is the same in utils.
+ */
+
 Fortag.prototype._unescapeValue = function(data) {
 	if (!data) return null;
 	if (Number.isInteger(data)) return data;

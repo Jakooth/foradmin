@@ -147,7 +147,7 @@ function SearchManager() {
 		
 		$aside.data('object', object);
 		$aside.attr('data-object', $aside.data('object'));
-		$aside.data('url', url);
+		$aside.data('url', id);
 		$aside.attr('data-url', $aside.data('url'));
 		$aside.data('valign', valign);
 		$aside.attr('data-valign', $aside.data('valign'));

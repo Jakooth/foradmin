@@ -88,7 +88,7 @@ Article.prototype._updateLayouts = function() {
 		$imgs = $layout.find('.img-proxy:visible');
 		
 		$layout.data('saveimgs', $imgs.length);
-		$layout.attr('data-imgs', $layout.data('saveimgs'));
+		$layout.attr('data-saveimgs', $layout.data('saveimgs'));
 	});
 }
  
@@ -100,10 +100,16 @@ Article.prototype._getLayouts = function(id) {
 	this.layouts = [];
 	
 	if ($layouts.length) {
-		$layouts.each(function() {
+		$layouts.each(function(index, layout) {
 			self.layouts.push(new Layout($(this)
 										 .find('.center-col:visible')
 										 .attr('id')));
+		
+			if (self.subtype == 'review' && index == 0) {
+				self.layouts[0].left = {object: self.prime.object,
+										url: self.prime.tag_id,
+										valign: 'top'}
+			}
 		});
 	}
 
@@ -225,23 +231,6 @@ Article.prototype.validateContent = function() {
 	});
 }
 
-Article.prototype.hypeToString = function(hype) {
-	var hype = hype || this.hype;
-		s = new String(hype);
-		
-	if (!hype) return null;	
-	
-	this.hype = s.slice(0, s.length - 1) + (
-				s.slice(s.length - 1) == 5 ? '+' : '');
-}
-
-Article.prototype.hypeToNumber = function(hype) {
-	if (!hype) return null;	
-	
-	this.hype = hype.indexOf('+') != -1 ? hype.replace('+', 5) 
-										: hype + "0";
-}
-
 Article.prototype.save = function() { 
 	Aside.prototype.save.call(this);
 	
@@ -313,7 +302,8 @@ Article.prototype.save = function() {
 
 Article.prototype.resetData = function(isUpdate) {
 	Aside.prototype.resetData.call(this, isUpdate);
-		
+	
+	if (this._$subtypeInput.length) this._$subtypeInput.val('news');	
 	if (this._$videoTechSelect.length) this._$videoTechSelect.val(null);
 	if (this._$audioTechSelect.length) this._$audioTechSelect.val(null);
 	if (this._$videoUrlInput.length) this._$videoUrlInput.val(null);
@@ -329,10 +319,10 @@ Article.prototype.resetData = function(isUpdate) {
 	if (this._$worseTextInput.length) this._$worseTextInput.val(null);
 	if (this._$equalTextInput.length) this._$equalTextInput.val(null);
 	
-	if (this._$coverAlignInput.length) this._$coverAlignInput.val(null);
-	if (this._$coverValignInput.length) this._$coverValignInput.val(null);
+	if (this._$coverAlignInput.length) this._$coverAlignInput.val('center');
+	if (this._$coverValignInput.length) this._$coverValignInput.val('top');
 	if (this._$themeInput.length) this._$themeInput.val(null);
-	if (this._$subthemeInput.length) this._$subthemeInput.val(null);
+	if (this._$subthemeInput.length) this._$subthemeInput.val('lighten');
 	
 	if (this._$wideInput.length) this._$wideInput.val(null);
 	if (this._$caretInput.length) this._$caretInput.val(null);

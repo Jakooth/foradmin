@@ -393,8 +393,8 @@ Aside.prototype.save = function() {
 	 * For this reason there is no need to set it second time.
 	 */
 	 
-	this._getLayouts();
 	this._setPrimeAndUrl();
+	this._getLayouts();
 	
 	this.preview = this._getPreviewText();
 	
@@ -474,8 +474,8 @@ Aside.prototype.resetData = function(isUpdate) {
 	if (this._$titleInput.length) this._$titleInput.val(null);
 	if (this._$subtitleInput.length) this._$subtitleInput.val(null);
 	if (this._$shotInput.length) this._$shotInput.val(null);	
-	if (this._$dateInput.length) this._$dateInput.val(null);
-	if (this._$timeInput.length) this._$timeInput.val(null);
+	if (this._$dateInput.length) this._$dateInput.val(utils.today());
+	if (this._$timeInput.length) this._$timeInput.val(utils.now());
 	if (this._$urlInput.length) this._$urlInput.val(null);
 	if (this._$prioritySelect.length) this._$prioritySelect.val(null);
 	

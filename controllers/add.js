@@ -104,6 +104,12 @@ function AddManager() {
 			$layout.find('.insideLayoutText').attr('id',  'insideLayoutText_' + id);
 			
 			/**
+			 * Set defaults.
+			 */
+			
+			$layout.find('select').change();
+			
+			/**
 			 * Scroll to to the new layout when adding.
 			 */
 			
@@ -198,7 +204,7 @@ function AddManager() {
 							$alt = $img.find('.settings > p:eq(0)'),
 							$position = $layout.find('.insideLayout .settings select:nth-of-type(1), ' + 
 													 '.sublayout .settings select:nth-of-type(1), ' +
-													 '.tracklist .settings select:nth-of-type(1)');
+													 '.tracklist select:nth-of-type(1)');
 						
 						data.object._setImgValue($file, img.tag + '-' + img.index);
 						data.object._setInputValue($video, img.video || null);
@@ -461,7 +467,7 @@ function AddManager() {
 	
 	/**
 	 * Tracklist.
-	 */
+	 */ 
 	
 	$('.Content').on('change', '.tracklist select', function(e) {
 		var $this = $(this);

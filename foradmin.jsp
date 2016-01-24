@@ -45,7 +45,7 @@
 	<script src="jslib/ckeditor/ckeditor.js">
                 <!--script-->
             </script>
-    <script src="jslib/he.js">
+    <script src="../jslib/he.js">
                 <!--script-->
             </script>
     <script src="../controllers/utils.js?v=2.0.0">

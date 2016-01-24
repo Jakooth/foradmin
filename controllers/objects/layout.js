@@ -93,8 +93,8 @@ function Layout(id) {
 				$video  = $this.find('input[type=text]'),
 				$tracklist = $this.find('select'),
 				$settings = null,
-				$author = null
-				$valign = null;	
+				$author = null,
+				$valign = null;
 				
 			var img = $img.val() || $img.data('img'),
 				id = Math.round(Math.random() * 100000),
@@ -103,7 +103,7 @@ function Layout(id) {
 				center = null,
 				author = null,
 				align = null,
-				valign = null
+				valign = null,
 				tracklist = null;
 				
 			if (self.type == 'inside') {

@@ -1,7 +1,7 @@
-{ "tags" : [ { "tag" : "FFFFFF",
-        "name" : "lighten"
+{ "tags" : [ { "tag" : "lighten",
+        "name" : "Lighten"
       },
-      { "tag" : "000000",
-        "name" : "darken"
+      { "tag" : "darken",
+        "name" : "Darken"
       }
     ] }

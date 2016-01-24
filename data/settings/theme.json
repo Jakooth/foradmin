@@ -1,55 +1,55 @@
-{ "tags" : [ { "tag" : "F44336",
-        "name" : "red"
+{ "tags" : [ { "tag" : "red",
+        "name" : "Red"
       },
-      { "tag" : "E91E63",
-        "name" : "pink"
+      { "tag" : "pink",
+        "name" : "Pink"
       },
-      { "tag" : "9C27B0",
-        "name" : "purple"
+      { "tag" : "purple",
+        "name" : "Purple"
       },
-      { "tag" : "673AB7",
-        "name" : "deep-purple"
+      { "tag" : "deep-purple",
+        "name" : "Deep-purple"
       },
-      { "tag" : "3F51B5",
-        "name" : "indigo"
+      { "tag" : "indigo",
+        "name" : "Indigo"
       },
-      { "tag" : "2196F3",
-        "name" : "blue"
+      { "tag" : "blue",
+        "name" : "Blue"
       },
-      { "tag" : "00BCD4",
-        "name" : "cyan"
+      { "tag" : "cyan",
+        "name" : "Cyan"
       },
-      { "tag" : "009688",
-        "name" : "teal"
+      { "tag" : "teal",
+        "name" : "Teal"
       },
-      { "tag" : "4CAF50",
-        "name" : "green"
+      { "tag" : "green",
+        "name" : "Green"
       },
-      { "tag" : "8BC34A",
-        "name" : "light-green"
+      { "tag" : "light-green",
+        "name" : "Light-green"
       },
-      { "tag" : "CDDC39",
-        "name" : "lime"
+      { "tag" : "lime",
+        "name" : "Lime"
       },
-      { "tag" : "FFEB3B",
-        "name" : "yellow"
+      { "tag" : "yellow",
+        "name" : "Yellow"
       },
-      { "tag" : "FFC107",
-        "name" : "amber"
+      { "tag" : "amber",
+        "name" : "Amber"
       },
-      { "tag" : "FF9800",
-        "name" : "orange"
+      { "tag" : "orange",
+        "name" : "Orange"
       },
-      { "tag" : "FF5722",
-        "name" : "deep-orange"
+      { "tag" : "deep-orange",
+        "name" : "Deep-orange"
       },
-      { "tag" : "795548",
-        "name" : "brown"
+      { "tag" : "brown",
+        "name" : "Brown"
       },
-      { "tag" : "9E9E9E",
-        "name" : "grey"
+      { "tag" : "grey",
+        "name" : "Grey"
       },
-      { "tag" : "607D8B",
-        "name" : "blue-grey"
+      { "tag" : "blue-grey",
+        "name" : "Blue-grey"
       }
     ] }
