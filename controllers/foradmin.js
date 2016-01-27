@@ -843,6 +843,14 @@ function AdminManager() {
 	/**
 	 * Article & Publish
 	 */
+	 
+	$('#article').on('keydown', '.img-proxy [contenteditable=true]', function(e) {	
+		if (e.keyCode === 13) {
+			document.execCommand('insertHTML', false, '<br /><br />');
+			
+			return false;
+		}
+	});
 	
 	$('#article').on('change', '#articleTypeSelect, #articleSubtypeSelect', function(e) {
 		var $reviewRegion = $('#articleReviewRegion'),

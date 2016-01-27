@@ -66,6 +66,33 @@ function Layout(id) {
 	this.setSubtype = function() {
 		self.subtype = $this.find('> select').val();
 	}
+	
+	this.formatAltText = function(s) {
+		var html = s,
+			spans = new Array(),
+			span;
+		
+		/**
+		 * Need to append the string to a DIV,
+		 * so we can search it for spans.
+		 */
+		var $span = $('<div />').append(html).find('span');
+		
+		if ($span.length > 0) {
+			$.each($span, function(index, span) {
+				span = $(span).html();
+				span = span.replace(/br/g, 'br /');
+				
+				spans.push(span);
+				
+				html = spans.join('<br />');
+			});
+		} else {
+			html = html.replace(/br/g, 'br /');
+		}
+		
+		return html;
+	}
 
 
 	
@@ -98,7 +125,7 @@ function Layout(id) {
 				
 			var img = $img.val() || $img.data('img'),
 				id = Math.round(Math.random() * 100000),
-				alt = $p.length == 0 ? "" : $p.html().replace(/br/g, 'br /'),
+				alt = $p.length == 0 ? "" : self.formatAltText($p.html()),
 				ratio = $ratio.is(':checked') ? $ratio.val() : '16-9',
 				center = null,
 				author = null,
