@@ -797,7 +797,7 @@ function AdminManager() {
 	 * Windows
 	 */
 	
-	$('body').on('click', '[role*=dialog] button', function(e) {
+	$('body').on('click', '[role*=dialog] [role=toolbar] button', function(e) {
 		var $this = $(this);													
 		
 		/**

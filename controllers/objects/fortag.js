@@ -70,7 +70,9 @@ Fortag.prototype._updateAfterSave = function(data, target) {
 	 * Always update the dialog.
 	 */
 	
-	admin.updateAllTypeahead();
+	setTimeout(function() {
+		admin.updateAllTypeahead();
+	}, 600);
 }
 
 Fortag.prototype._escapeValue = function(data) {

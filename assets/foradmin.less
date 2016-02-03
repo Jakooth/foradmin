@@ -1870,8 +1870,6 @@ button.remove {
 	font-family: 'Poiret One', sans-serif;
 	font-size: 24pt;
 	margin: 0;
-	font-weight: normal;
-	font-style: normal;
 	line-height: normal;
 }
 
@@ -2138,4 +2136,23 @@ section#login h2 {
 .darken .Cover svg path,
 .darken .Main svg path {
 	fill: #000000;
+}
+
+
+
+
+/**
+ * REVIEW
+ */
+
+.Content em:nth-child(2n + 1),
+.Content strong:nth-child(2n + 1) {
+	color: @prime;
+	font-weight: bold;
+}
+
+.Content em:nth-child(2n),
+.Content strong:nth-child(2n) {
+	color: @dark;
+	font-weight: bold;
 }

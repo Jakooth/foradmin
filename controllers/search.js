@@ -5,6 +5,8 @@ function SearchManager() {
 	 */
 	 
 	var self = this;
+	var forplayAPI = '/forapi/forplay.php';
+	var fotagsAPI = '/forapi/get.php';
 	
 	var $body =  $('body'),
 		$header = $('header');
@@ -21,8 +23,8 @@ function SearchManager() {
 	 * Default search will return only latest new items.
 	 */
 	 
-	var _query = 'http://localhost/forapi/search.php';
-	var _asideQuery = 'http://localhost/forapi/search.php?table=articles';
+	var _query = '/forapi/search.php';
+	var _asideQuery = '/forapi/search.php?table=articles';
 	var _subtype = 'data/settings/subtype.json';
 	var _type = 'data/settings/type.json';
 	
@@ -141,7 +143,8 @@ function SearchManager() {
 		var object = $search.data('object'),
 			id = $search.data('id'),
 			url = $search.data('tag'),
-			valign = $(searchValignSelect).val();
+			valign = $(searchValignSelect).val(),
+			getAside;
 		
 		window.admin.selectTarget.focus();
 		
@@ -157,11 +160,20 @@ function SearchManager() {
 		 * If it is a quote show the character images.
 		 */
 		
-		var getAside = $.get('http://localhost/forapi/forplay.php?tag=' + id);
+		if (object == 'quote' || 
+			object == 'review' || 
+			object == 'feature' ||
+			object == 'video' || 
+			object == 'aside') {
+			
+			getAside = $.get(encodeURI(forplayAPI + '?tag=' + id));
+		} else {
+			getAside = $.get(encodeURI(fotagsAPI + '?tag=' + id + '&object=' + object));
+		}
 			
 		$.when(getAside).done(function(getAsideData) {
 			var data = getAsideData.length ? JSON.parse(getAsideData) : getAsideData,
-				aside = data.articles[0];
+				aside = data.articles ? data.articles[0] : data.tags[0];
 			
 			switch (aside.subtype) {
 				case 'quote':
@@ -169,12 +181,19 @@ function SearchManager() {
 												  'url(../assets/tags/' + 
 												  aside.shot_img);
 					break;
-				default:
+				case 'review':
+				case 'feature':
+				case 'video':
+				case 'aside':
 					window.admin.selectTarget.css('background-image', 
 												  'url(../assets/articles/' + 
 												  utils.parseImgTag(aside.shot_img) + '/' +
 												  aside.shot_img + ')');
 					break;
+				default:
+					window.admin.selectTarget.css('background-image', 
+												  'url(../assets/tags/' + 
+												  aside.tag + '.jpg');
 			}
 		}).fail(function() {
 			alert("Failed to load aside.");
@@ -229,7 +248,9 @@ function SearchManager() {
 		
 			_doSearch();
 			
-			self.updateSearchTagsinput(isWindow);
+			setTimeout(function() {
+				self.updateSearchTagsinput(isWindow);
+			}, 600);
 		}
 	});
 	

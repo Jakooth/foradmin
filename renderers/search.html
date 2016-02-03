@@ -8,6 +8,9 @@
     <label> <img src="../assets/articles/{{:tag}}/{{:tag}}" 
                  alt="{{:tag}}" />
         <input name="searchChoice" type="radio" />
+    </label>{{else object == 'quote'}}
+    <label> <span><strong>{{:en_name}}</strong> {{:tag}}</span>
+        <input name="searchChoice" type="radio" />
     </label>{{else}}
     <label> <span>{{:en_name}}</span>
         <input name="searchChoice" type="radio" />

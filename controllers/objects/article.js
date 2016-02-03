@@ -303,7 +303,7 @@ Article.prototype.save = function() {
 Article.prototype.resetData = function(isUpdate) {
 	Aside.prototype.resetData.call(this, isUpdate);
 	
-	if (this._$subtypeInput.length) this._$subtypeInput.val('news');	
+	if (this._$subtypeInput.length) this._$subtypeInput.val('news').change();	
 	if (this._$videoTechSelect.length) this._$videoTechSelect.val(null);
 	if (this._$audioTechSelect.length) this._$audioTechSelect.val(null);
 	if (this._$videoUrlInput.length) this._$videoUrlInput.val(null);

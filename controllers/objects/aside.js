@@ -258,7 +258,7 @@ Aside.prototype._setPrimeAndUrl = function() {
 	if (this.subtype == 'review' || this.subtype == 'video') {
 		this.url = this.prime.tag;
 	} else {
-		this.url = utils.formatTag(this.title);
+		this.url = utils.formatTag(this._unescapeValue(this.title));
 	}
 	
 	this._$urlInput.val(this.url).change();

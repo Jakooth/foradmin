@@ -69,6 +69,8 @@ function AddManager() {
 							'.layout[data-id=' + data.data.layout_id + ']');
 			} else {
 				$layout = $appender.prev();
+				$layout.data('order', $('.Content:visible .layout').length - 1);
+				$layout.attr('data-order', $layout.data('order'));
 			}
 			
 			/**
@@ -212,7 +214,8 @@ function AddManager() {
 						$file.data('img', img.tag + '-' + img.index);
 						$file.attr('data-img', $file.data('img'))
 						
-						if (img.alt) $alt.html(data.object._unescapeValue(img.alt));
+						$alt.html(img.alt ? data.object._unescapeValue(img.alt) : '');
+						
 						if (img.center) CKEDITOR.instances['insideLayoutText_' + data.data.layout_id]
 												.setData(data.object._unescapeValue(img.center));
 						if (img.valign) data.object._setInputValue($position, img.valign + ' ' + img.align);

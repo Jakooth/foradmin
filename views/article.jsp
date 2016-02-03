@@ -15,7 +15,7 @@
                 <admin:formItem id="articleVideoTechSelect" label="Видео" type="select" layout="two-cols">
                     <option value="">Без видео</option>
                     <option value="youtube">youtube</option>
-                    <option value="vimeo">vimeo</option>
+                    <option disabled="disabled" value="vimeo">vimeo</option>
                     <option value="html5">forplay</option>
                 </admin:formItem>
                 <admin:formItem id="articleAudioTechSelect" label="Aудио" type="select" layout="two-cols">
