@@ -45,11 +45,12 @@ function AddManager() {
 	}
 	
 	this.addLayout = function($appender, data, isNew) {
-		var getLayout = $.get('renderers/layout.html');
+		var getLayout = $.ajax({url: 'renderers/layout.jsp',
+								dataType: 'html'});
 			
-		$.when(getLayout).done(function(layoutHtmlData) {
+		$.when(getLayout).done(function(layoutHtml) {
 			var tmpls = $.templates({
-					layoutTemplate: layoutHtmlData
+					layoutTemplate: layoutHtml
 				}),
 				html = data ? $.templates.layoutTemplate
 									     .render(data.data, {saveImgs: data.data.imgs ? 
@@ -199,34 +200,58 @@ function AddManager() {
 				 */
 				 
 				if (data.data.imgs) {
-					data.data.imgs.forEach(function(img, index, arr) {
-						var $img = $layout.find('.sublayout .img-proxy:nth-of-type(' + (Number(img.order) + 1) + ')'),
-							$file = $img.find('[type=file]'),
-							$video = $img.find('.settings [type=text]:eq(0)'),
-							$alt = $img.find('.settings > p:eq(0)'),
-							$position = $layout.find('.insideLayout .settings select:nth-of-type(1), ' + 
-													 '.sublayout .settings select:nth-of-type(1), ' +
-													 '.tracklist select:nth-of-type(1)');
-						
-						data.object._setImgValue($file, img.tag + '-' + img.index);
-						data.object._setInputValue($video, img.video || null);
-						
-						$file.data('img', img.tag + '-' + img.index);
-						$file.attr('data-img', $file.data('img'))
-						
-						$alt.html(img.alt ? data.object._unescapeValue(img.alt) : '');
-						
-						if (img.center) CKEDITOR.instances['insideLayoutText_' + data.data.layout_id]
-												.setData(data.object._unescapeValue(img.center));
-						if (img.valign) data.object._setInputValue($position, img.valign + ' ' + img.align);
-						
-						/**
-						 * There is no chance for multiple authors for multiple images.
-						 * This is only for images with caret inside.
-						 */
-						 
-						if (img.author) insideAuthor = img.author;
-					});
+					if (data.data.subtype == 'b2') {
+						data.data.imgs.forEach(function(img, index, arr) {
+							var $sublayout = $layout.find('.sublayout.' + data.data.subtype + 'Sublayout'),
+								$img = $sublayout.find('.img-proxy').last(),
+								$file = $img.find('[type=file]'),
+								$alt = $img.find('> p:eq(0)');	
+							
+							/**
+							 * Do not clone after the last image.
+							 */
+							
+							if (index < data.data.imgs.length - 1) {
+								$img.clone().insertAfter($img);
+							}
+							
+							data.object._setImgValue($file, img.tag + '-' + img.index);
+							
+							$file.data('img', img.tag + '-' + img.index);
+							$file.attr('data-img', $file.data('img'));
+							
+							$alt.html(img.alt ? data.object._unescapeValue(img.alt) : '');
+						});
+					} else {
+						data.data.imgs.forEach(function(img, index, arr) {
+							var $img = $layout.find('.sublayout .img-proxy:nth-of-type(' + (Number(img.order) + 1) + ')'),
+								$file = $img.find('[type=file]'),
+								$video = $img.find('.settings [type=text]:eq(0)'),
+								$alt = $img.find('.settings > p:eq(0)'),
+								$position = $layout.find('.insideLayout .settings select:nth-of-type(1), ' + 
+														 '.sublayout .settings select:nth-of-type(1), ' +
+														 '.tracklist select:nth-of-type(1)');
+							
+							data.object._setImgValue($file, img.tag + '-' + img.index);
+							data.object._setInputValue($video, img.video || null);
+							
+							$file.data('img', img.tag + '-' + img.index);
+							$file.attr('data-img', $file.data('img'));
+							
+							$alt.html(img.alt ? data.object._unescapeValue(img.alt) : '');
+							
+							if (img.center) CKEDITOR.instances['insideLayoutText_' + data.data.layout_id]
+													.setData(data.object._unescapeValue(img.center));
+							if (img.valign) data.object._setInputValue($position, img.valign + ' ' + img.align);
+							
+							/**
+							 * There is no chance for multiple authors for multiple images.
+							 * This is only for images with caret inside.
+							 */
+							 
+							if (img.author) insideAuthor = img.author;
+						});
+					}	
 				}
 			} else {
 				self.hideLayouts($layout);
@@ -453,7 +478,7 @@ function AddManager() {
 	$('.Content').on('click', '.b2Sublayout button.add', function(e) {
 		var $this = $(this),
 			$layout = $this.parents('.sublayout'),
-			$img = $layout.find('.img-proxy').first();
+			$img = $layout.find('.img-proxy').last();
 		
 		$img.clone().insertAfter($img);
 	});

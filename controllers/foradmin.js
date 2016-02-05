@@ -470,10 +470,10 @@ function AdminManager() {
 	}
 	
 	this.showSectionInWindow = function(section, createTarget) {
-		var get1 = $.get('renderers/window.html');
+		var getWindow = $.get('renderers/window.html');
 			
-		$.when(get1).done(function(data1) {
-			var html = $(data1).append($(section).show());
+		$.when(getWindow).done(function(windowHtml) {
+			var html = $(windowHtml).append($(section).show());
 			
 			self.showOverlay();
 			
@@ -631,6 +631,7 @@ function AdminManager() {
 	this.loadOptions($('#asideTypeSelect'), type, 'option');
 	
 	initTagInput(authors, 'authors', '#asideAuthorsInput');
+	initTagInput(tags, 'tags', '#asideTagsInput', 5);
 	
 	/**
 	 * QUOTE
@@ -649,10 +650,9 @@ function AdminManager() {
 	this.loadOptions($('#articleThemeSelect'), theme, 'option');
 	this.loadOptions($('#articleSubthemeSelect'), subtheme, 'option');
 	
-	initTagInput(authors, 'authors', '#articleAuthorsInput');
 	initTagInput(issues, 'issues', '#publishIssueInput', 1);
-	initTagInput(tags, 'tags', '#asideTagsInput');
-	initTagInput(tags, 'tags', '#articleTagsInput');
+	initTagInput(authors, 'authors', '#articleAuthorsInput');
+	initTagInput(tags, 'tags', '#articleTagsInput', 5);
 	initTagInput(tags, 'tags', '#articleBetterInput', 1);
 	initTagInput(tags, 'tags', '#articleWorseInput', 1);
 	initTagInput(tags, 'tags', '#articleEqualInput', 1);
