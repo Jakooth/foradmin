@@ -1,0 +1,9 @@
+Options +FollowSymLinks -MultiViews
+RewriteEngine On
+
+RewriteBase /
+
+# from 	http://forplay.bg/articles/games/news/19/uncharted-4-геймплей 
+# to 	http://forplay.bg/index.html?type=games&subtype=news&id=19&url=uncharted-4-геймплей
+RewriteRule ^articles/([0-9a-zA-Z-]+)/([0-9a-zA-Z-]+)/([0-9]+)/([^/]*)$ index.html?type=$1&subtype=$2&id=$3&url=$4 [NC,QSA,L]
+
