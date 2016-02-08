@@ -1,0 +1,15 @@
+<tr role="option" data-id="{{:log_id}}" data-table="{{:table}}">
+    <td>{{:created}}</td>
+    <td>{{:user_name}}</td>
+    <td>{{:event}}</td>
+    <td>{{:tag}}</td>
+    <td>{{:object}}</td>
+    <td>
+        <button type="button" 
+        		class="ackowledge" 
+                aria-pressed="{{:acknowledged ? true : false}}"> {{if !acknowledged}}<img 
+        		class="svg" 
+                src="../assets/icons/iconmonstr/iconmonstr-check-mark-1.svg" 
+                alt="" role="presentation" />{{/if}} </button>
+    </td>
+</tr>

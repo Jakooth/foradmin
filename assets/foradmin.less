@@ -329,7 +329,6 @@ header h2,
 select.header,
 .breadcrumb a, 
 main h2 a,
-[role=toolbar] button,
 footer {
 	padding: @unit * 4;
 }
@@ -515,6 +514,8 @@ main h2 span {
 	height: 84px;
 	width: auto;
 	float: left;
+	padding: @unit * 4;
+	min-width: 84px;
 }
 
 footer {
@@ -2044,6 +2045,76 @@ button.remove {
 
 
 
+/**
+ * LOG
+ */
+ 
+section#log form {
+	padding: 0;
+} 
+
+section#log [role=listbox] {
+	width: 100%;
+	display: table;
+	float: none;
+	border: none;
+	background: none;
+	border-collapse: collapse;
+}
+
+section#log [role=listbox] thead {
+	display: none;
+}
+
+section#log [role=option] {
+	display: table-row;
+	float: none;
+	border: none;
+	background: none;
+	padding: 0;
+	margin: 0;
+}
+
+section#log th,
+section#log td {
+	height: 84px;
+	padding: 0 @unit * 4;
+	border: none;
+}
+
+section#log th:last-of-type,
+section#log td:last-of-type {
+	padding: 0;
+	width: 84px;
+}
+
+section#log th button,
+section#log td button {
+	height: 84px;
+    width: 84px;
+	float: left;
+}
+
+section#log .svg path {
+	fill: rgba(102, 102, 102, 0.7);
+}
+
+section#log svg {
+	width: 32px;
+	height: 32px;
+}
+
+section#log td button[aria-pressed=true] {
+	background-color: transparent;
+}
+
+section#log td button[aria-pressed=true] svg {
+	display: none;
+}
+
+
+
+
 
 /**
  * LOGIN
@@ -2155,4 +2226,33 @@ section#login h2 {
 .Content strong:nth-child(2n) {
 	color: @dark;
 	font-weight: bold;
+}
+
+
+
+
+/**
+ * MEDIA
+ */
+
+@media only screen and (max-width: 1024px) {
+	section#login {
+		margin-left: 10%;
+		margin-right: 10%;
+		width: 80%;
+	}
+	
+	header nav {
+		width: 100%;
+	}
+	
+	.breadcrumb {
+		display: none;
+	}
+	
+	footer {
+		margin-left: 10%;
+    	margin-right: 10%;
+    	width: 80%;
+	}
 }

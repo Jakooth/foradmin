@@ -18,8 +18,11 @@
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <title>Foradmin Login Page</title>
-            <link rel="stylesheet" type="text/css" href="assets/foradmin.css" />
+            <link rel="stylesheet/less" type="text/css" href="assets/foradmin.less" />
             <script src="../jslib/jquery-2.1.4.min.js">
+                <!--script-->
+            </script>
+            <script src="/jslib/less-1.4.1.min.js">
                 <!--script-->
             </script>
             <script src="../controllers/utils.js?v=1.5.0">

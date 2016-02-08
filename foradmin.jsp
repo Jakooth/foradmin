@@ -20,35 +20,35 @@
     <title>Foradmin</title>
     <link rel="stylesheet" type="text/css" href="assets/bootstrap-tagsinput.css" />
     <link rel="stylesheet" type="text/css" href="assets/typeaheadjs.css" />
-    <link rel="stylesheet" type="text/css" href="assets/foradmin.css" />
-    <script src="../jslib/jquery-2.1.4.min.js">
+    <link rel="stylesheet/less" type="text/css" href="assets/foradmin.less" />
+    <script src="/jslib/jquery-2.1.4.min.js">
                 <!--script-->
             </script>
     <script src="jslib/jquery-ui.min.js">
                 <!--script-->
             </script>
-    <script src="../jslib/jquery.xml2json.js">
+    <script src="/jslib/jquery.xml2json.js">
 			<!--script-->
 		</script>
-    <script src="../jslib/jsrender.min.js">
+    <script src="/jslib/jsrender.min.js">
                 <!--script-->
-            </script>    
-    <script src="../jslib/less-1.4.1.min.js">
+            </script>
+    <script src="/jslib/less-1.4.1.min.js">
                 <!--script-->
             </script>
     <script src="jslib/typeahead.bundle.min.js">
                 <!--script-->
             </script>
-	<script src="jslib/bootstrap-tagsinput.min.js">
+    <script src="jslib/bootstrap-tagsinput.min.js">
                 <!--script-->
             </script>
-	<script src="jslib/ckeditor/ckeditor.js">
+    <script src="jslib/ckeditor/ckeditor.js">
                 <!--script-->
             </script>
-    <script src="../jslib/he.js">
+    <script src="/jslib/he.js">
                 <!--script-->
             </script>
-    <script src="../controllers/utils.js?v=2.0.0">
+    <script src="/controllers/utils.js?v=2.0.0">
                 <!--script-->
             </script>
     <script src="controllers/foradmin.js?v=2.0.0">
@@ -59,14 +59,17 @@
             </script>
     <script src="controllers/search.js?v=2.0.0">
                 <!--script-->
-            </script>        
+            </script>
+    <script src="controllers/log.js?v=2.0.0">
+                <!--script-->
+            </script>
     <script src="controllers/objects/fortag.js?v=2.0.0">
                 <!--script-->
             </script>
     <script src="controllers/objects/formain.js?v=2.0.0">
                 <!--script-->
             </script>
-	<script src="controllers/objects/layout.js?v=2.0.0">
+    <script src="controllers/objects/layout.js?v=2.0.0">
                 <!--script-->
             </script>
     <script src="controllers/objects/aside.js?v=2.0.0">
@@ -110,12 +113,13 @@
             </script>
     <script src="controllers/objects/country.js?v=2.0.0">
                 <!--script-->
-            </script>                
-	<script>$(document).ready(function() { 
+            </script>
+    <script>$(document).ready(function() { 
 				window.utils = new UtilsManager(); 
 				window.admin = new AdminManager(); 
 				window.add = new AddManager();
-				window.query = new SearchManager(); });</script>
+				window.query = new SearchManager();
+				window.activity = new LogManager(); });</script>
     </head>
     <body>
     <header id="main">
@@ -126,6 +130,7 @@
         </h1>
         <div role="toolbar">
             <button role="link" class="search" type="button">Търсене</button>
+            <button role="link" class="log" type="button">Активност</button>
             <button role="link" class="logout" type="button">Излез</button>
         </div>
         <nav aria-label="Създаване на тагове">
@@ -224,6 +229,7 @@
         <jsp:include page="views/issue.jsp" />
         <jsp:include page="views/country.jsp" />
         <jsp:include page="views/sticker.jsp" />
+        <jsp:include page="views/log.jsp" />
     </main>
     <footer>
         <p>&amp;copy; Copyright 2015 <a href="http://forplay.bg?video=castle-design">Castle
