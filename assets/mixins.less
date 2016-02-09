@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+#createTheme (@theme, @color) {	
+	/**
+	 * ADMIN
+	 */
+	
+	.@{theme} .Cover svg path,
+	.@{theme} .Main svg path {
+		fill: @color;
+	}
+	
+	.@{theme} .textLayout blockquote {
+		color: @color;
+	}
+}

@@ -6,7 +6,7 @@ function AddManager() {
 	 
 	var self = this;
 	
-	var platforms = 'http://localhost/forapi/get.php?object=platform';
+	var platforms = '/forapi/get.php?object=platform';
 	
 	
 
@@ -45,7 +45,7 @@ function AddManager() {
 	}
 	
 	this.addLayout = function($appender, data, isNew) {
-		var getLayout = $.ajax({url: 'renderers/layout.jsp',
+		var getLayout = $.ajax({url: 'renderers/layout.html',
 								dataType: 'html'});
 			
 		$.when(getLayout).done(function(layoutHtml) {

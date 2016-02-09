@@ -303,7 +303,7 @@ function SearchManager() {
 	
 	$header.on('click', 'button.search', function(e) {
 		admin.showSection(searchSection);
-		window.location.href = 'foradmin.jsp' + searchSection;
+		window.location.href = 'foradmin.html' + searchSection;
 	});
 	
 	/**

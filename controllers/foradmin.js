@@ -11,12 +11,12 @@ function AdminManager() {
 	var hype = 'data/settings/hype.json';
 	var theme = 'data/settings/theme.json';
 	var subtheme = 'data/settings/subtheme.json';
-	var gameGenres = 'http://localhost/forapi/get.php?object=genre&type=games';
-	var musicGenres = 'http://localhost/forapi/get.php?object=genre&type=music';
-	var platforms = 'http://localhost/forapi/get.php?object=platform';
-	var movieGenres = 'http://localhost/forapi/get.php?object=genre&type=movies';
-	var bookGenres = 'http://localhost/forapi/get.php?object=genre&type=books';
-	var countries = 'http://localhost/forapi/get.php?object=country';
+	var gameGenres = '/forapi/get.php?object=genre&type=games';
+	var musicGenres = '/forapi/get.php?object=genre&type=music';
+	var platforms = '/forapi/get.php?object=platform';
+	var movieGenres = '/forapi/get.php?object=genre&type=movies';
+	var bookGenres = '/forapi/get.php?object=genre&type=books';
+	var countries = '/forapi/get.php?object=country';
 	
 	var bloodhound = function(data, nameField) {
 		var nameField = nameField || 'en_name';
@@ -778,7 +778,7 @@ function AdminManager() {
 	 */
 	
 	$('header').on('click', 'button.logout', function(e) {
-		window.location.href = "login.jsp";
+		window.location.href = "login.html";
 	});
 	
 	/**

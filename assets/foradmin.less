@@ -4,7 +4,7 @@
 
 @charset "utf-8";
 @import url(http://fonts.googleapis.com/css?family=Poiret+One|Open+Sans:300,800&subset=latin,cyrillic);
-@import "../../assets/mixins.less";
+@import "mixins.less";
 
 /**
  * Admin settings.
@@ -410,7 +410,7 @@ header [role=toolbar] {
 }
 
 header [role=toolbar] button {
-	float: none;
+	float: left;
 	margin: 0;
 	top: auto;
 	position: relative;
@@ -516,6 +516,12 @@ main h2 span {
 	float: left;
 	padding: @unit * 4;
 	min-width: 84px;
+}
+
+[role=toolbar] [role=group] {
+	float: right;
+	width: auto;
+	clear: none;
 }
 
 footer {

@@ -142,6 +142,6 @@ function LogManager() {
 	
 	$header.on('click', 'button.log', function(e) {
 		admin.showSection(logSection);
-		window.location.href = 'foradmin.jsp' + logSection;
+		window.location.href = 'foradmin.html' + logSection;
 	});
 }
