@@ -5,7 +5,7 @@ function Issue(o) {
 	 * PRIVATE
 	 */
 	
-	this._url = 'http://localhost/forapi/save_issue.php';
+	this._url = '/forapi/save_issue.php';
 }
 
 Issue.prototype = Object.create(Fortag.prototype);

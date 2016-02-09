@@ -5,7 +5,7 @@ function Platform(o) {
 	 * PRIVATE
 	 */
 	
-	this._url = 'http://localhost/forapi/save_platform.php';
+	this._url = '/forapi/save_platform.php';
 }
 
 Platform.prototype = Object.create(Fortag.prototype);

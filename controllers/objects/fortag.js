@@ -4,8 +4,8 @@ function Fortag(o) {
 	 * PRIVATE
 	 */
 	
-	this._url = 'http://localhost/forapi/save.php';
-	this._get = 'http://localhost/forapi/get.php';
+	this._url = '/forapi/save.php';
+	this._get = '/forapi/get.php';
 	this._isValid = true;
 	this._saveId;
 	this._saveRelated;

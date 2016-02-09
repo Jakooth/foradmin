@@ -5,7 +5,7 @@ function Sticker(o) {
 	 * PRIVATE
 	 */
 	
-	this._url = 'http://localhost/forapi/save_sticker.php';
+	this._url = '/forapi/save_sticker.php';
 	
 	this._$libInput = $('#' + o + 'LibInput');
 	

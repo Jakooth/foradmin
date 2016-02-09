@@ -267,7 +267,7 @@ function AddManager() {
 			});
 			 
 			admin.loadOptions($layout.find('.insideLayout .settings select:eq(1)'), 
-										   'http://localhost/forapi/get.php?object=author', 
+										   '/forapi/get.php?object=author', 
 										   'option', insideAuthor);
 		}).fail(function() {
 			alert("Failed to load layout.");

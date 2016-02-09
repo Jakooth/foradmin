@@ -5,7 +5,7 @@ function Author(o) {
 	 * PRIVATE
 	 */
 	
-	this._url = 'http://localhost/forapi/save_author.php';
+	this._url = '/forapi/save_author.php';
 }
 
 Author.prototype = Object.create(Fortag.prototype);

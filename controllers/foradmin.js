@@ -288,18 +288,18 @@ function AdminManager() {
 	 * Tagsinput data sources.
 	 */
 
-	var games = bloodhound('http://localhost/forapi/get.php?object=game');
-	var stickers = bloodhound('http://localhost/forapi/get.php?object=sticker');
-	var companies = bloodhound('http://localhost/forapi/get.php?object=company');
-	var issues = bloodhound('http://localhost/forapi/get.php?object=issue');
-	var series = bloodhound('http://localhost/forapi/get.php?object=serie');
-	var movies = bloodhound('http://localhost/forapi/get.php?object=movie');
-	var authors = bloodhound('http://localhost/forapi/get.php?object=author');
-	var characters = bloodhound('http://localhost/forapi/get.php?object=character');
-	var persons = bloodhound('http://localhost/forapi/get.php?object=person');
-	var music = bloodhound('http://localhost/forapi/get.php?type=music');
-	var books = bloodhound('http://localhost/forapi/get.php?object=book');
-	var tags = bloodhound('http://localhost/forapi/get.php');
+	var games = bloodhound('/forapi/get.php?object=game');
+	var stickers = bloodhound('/forapi/get.php?object=sticker');
+	var companies = bloodhound('/forapi/get.php?object=company');
+	var issues = bloodhound('/forapi/get.php?object=issue');
+	var series = bloodhound('/forapi/get.php?object=serie');
+	var movies = bloodhound('/forapi/get.php?object=movie');
+	var authors = bloodhound('/forapi/get.php?object=author');
+	var characters = bloodhound('/forapi/get.php?object=character');
+	var persons = bloodhound('/forapi/get.php?object=person');
+	var music = bloodhound('/forapi/get.php?type=music');
+	var books = bloodhound('/forapi/get.php?object=book');
+	var tags = bloodhound('/forapi/get.php');
 	
 	/**
 	 * Clear cache and reinitialize tag input.
