@@ -431,17 +431,8 @@ Aside.prototype.save = function() {
 		_saveLayouts: this._saveLayouts
 	};
 	
-	this.validateContent();
-	
-	if (!this._isValid) {
-		return false;
-	}
-	
-	this.validateBestPractices();
-	
-	if (!this._isValid) {
-		return false;
-	}
+	if (this._isValid) this.validateContent();
+	if (this._isValid) this.validateBestPractices();
 }
 
 Aside.prototype.publish = function() {
@@ -455,11 +446,7 @@ Aside.prototype.publish = function() {
 	this.json.issue = this.issue;
 	this.json.priority = this.priority;
 	
-	this.validatePublishSettings();
-	
-	if (!this._isValid) {
-		return false;
-	}
+	if (this._isValid) this.validatePublishSettings();
 }
 
 /**
@@ -553,14 +540,10 @@ Aside.prototype.setData = function(result) {
 
 Aside.prototype.post = function() {
 	var self = this;
-	
-	/**
-	 * TODO: This approach is no OK for automated save.
-	 * Validation must happen here as well like in Fortag.
-	 * Publishing must called separately like save in foradmin.js 
-	 */
-	 
+		 
 	this.publish();
+	
+	if (!this._isValid) return false;
 	
 	admin.showAlert({message: 'Записвам...', status: 'loading'});
 	

@@ -272,8 +272,7 @@ function AdminManager() {
 		});	
 	}
 	
-	this.refreshTagsinput = function(data,
-									input) {
+	this.refreshTagsinput = function(data, input) {
 		
 		var promise = data.initialize(true);
 		
@@ -990,7 +989,8 @@ function AdminManager() {
 	$('#article').on('click', 'button.save, button.publish', function(e) {
 		e.preventDefault();
 		
-		var $this = $(this);
+		var $this = $(this),
+			$priority = $('#publishPrioritySelect');
 		
 		var a = new Article('article');
 		
@@ -1004,8 +1004,8 @@ function AdminManager() {
 		 * By default all news with video go with priority.
 		 */
 		
-		if (a.videoUrl) {
-			$('#publishPrioritySelect').val('video').change();
+		if (a.videoUrl && $priority.val() == '') {
+			$priority.val('video').change();
 		}
 		
 		$('#publishPrioritySelect [value=aside]').prop('disabled', true);

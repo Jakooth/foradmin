@@ -189,6 +189,8 @@ Article.prototype._getPreviewText = function(id) {
 Article.prototype.validateContent = function() {
 	Aside.prototype.validateContent.call(this);
 	
+	if (!this._isValid) return false;
+	
 	if (this.layouts.length == 0) {
 		this._isValid = false;
 		
@@ -202,6 +204,15 @@ Article.prototype.validateContent = function() {
 		this._isValid = false;
 		
 		admin.showAlert({message: 'Типа оформление на първия шаблон, трябва да е винаги текст.', 
+						 status: 'error'});
+		
+		return false;
+	}
+	
+	if (!this.shot || !this.wide || !this.caret) {
+		this._isValid = false;
+		
+		admin.showAlert({message: 'Изберете основни картинки или изполвайте една и съща за всички.', 
 						 status: 'error'});
 		
 		return false;
@@ -231,8 +242,11 @@ Article.prototype.validateContent = function() {
 	});
 }
 
-Article.prototype.save = function() { 
-	Aside.prototype.save.call(this);
+Article.prototype.save = function() {
+	
+	/**
+	 * Prototype function is called below.
+	 */
 	
 	this.wide = this._getImageValue(this._$wideInput);
 	this.caret = this._getImageValue(this._$caretInput);
@@ -274,6 +288,16 @@ Article.prototype.save = function() {
 	this.wide = this.wide || this._saveWide;
 	this.caret = this.caret || this._saveCaret;
 	this.cover = this.cover || this._saveCover;
+	
+	/**
+	 * Either this or we validate in externally after save.
+	 * Right now this is not a blocker, but will be,
+	 * when there are dependencies on the prototype values.
+	 * One way will be to have method to init variables,
+	 * which can be extended on its own before validation.
+	 */
+	
+	Aside.prototype.save.call(this);
 			   
 	this.json.wide = this.wide;
 	this.json.caret = this.caret;
