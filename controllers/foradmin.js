@@ -237,7 +237,25 @@ function AdminManager() {
 		
 		var promise = data.initialize(true);
 		
-		promise.done(function() {
+		promise.done(function(promise, textStatus, jqXHR) {
+		
+			/**
+			 * Get latest issue.
+			 */
+			 
+			if (text ==  'issues') {
+				var issues = Object.keys(data.index.datums),
+					latest = JSON.parse(issues[issues.length - 1]);
+			
+				$('#publishIssueInput').attr('placeholder', 'Брой ' + 
+															latest.tag + ' ' + 
+															latest.en_name);
+			}
+			
+			/**
+			 * Create the input.
+			 */
+		
 			$(input).tagsinput({
 				maxTags: maxTags || null,
 				itemValue: 'tag',
@@ -656,6 +674,8 @@ function AdminManager() {
 	initTagInput(tags, 'tags', '#articleWorseInput', 1);
 	initTagInput(tags, 'tags', '#articleEqualInput', 1);
 	
+	
+	
 	/**
 	 * MOVIES::MOVIE
 	 */
@@ -842,6 +862,10 @@ function AdminManager() {
 	/**
 	 * Article & Publish
 	 */
+	 
+	$('#publish').on('click', 'button.preview', function(e) {	
+		window.open($(this).data('url'), '_blank');
+	}); 
 	 
 	$('#article').on('keydown', '.img-proxy [contenteditable=true]', function(e) {	
 		if (e.keyCode === 13) {
@@ -1062,6 +1086,12 @@ function AdminManager() {
 														 
 		$this.parents('form').find('[id*=TagInput]')
 							 .val(utils.formatTag($this.val()));
+	});
+	
+	$('body').on('keyup', '[id*=TagInput]',  function(e) {
+		var $this = $(this);												 
+														 
+		$this.val(utils.formatTag($this.val()));
 	});
 	
 	$('body').on('change', '[type=hidden]',  function(e) {

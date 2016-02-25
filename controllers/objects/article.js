@@ -76,6 +76,11 @@ Article.prototype._updateAfterSave = function(data) {
 	Aside.prototype._updateAfterSave.call(this, data);
 	
 	this._updateLayouts();
+	
+	$('#publish button.preview').attr('data-url', '/articles/' + this.type + 
+												  '/' + this.subtype + 
+												  '/' + data.saveId + 
+												  '/' + this.url);
 } 
 
 Article.prototype._updateLayouts = function() {
@@ -395,5 +400,10 @@ Article.prototype.updateData = function(data) {
 	this._setInputValue(this._$saveWideInput, data.wide_img || null);
 	this._setInputValue(this._$saveCaretInput, data.caret_img || null);
 	this._setInputValue(this._$saveCoverInput, data.cover_img || null);
+	
+	$('#publish button.preview').attr('data-url', '/articles/' + data.type + 
+									  '/' + data.subtype + 
+									  '/' + data.article_id + 
+									  '/' + data.url);
 }
 

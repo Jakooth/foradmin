@@ -199,6 +199,45 @@ function SearchManager() {
 			alert("Failed to load aside.");
 		});
 	}
+	
+	this._openSearch = function($opener) {
+		var $this = $opener,
+			$dialog = $opener.parents('[role=dialog]');
+		
+		var o, oType;
+		
+		/**
+		 * Prevent opening from dialog view.
+		 * Dialog view is only for selection.
+		 */
+		
+		if ($dialog.length > 0) {
+			_selectSearch();
+			
+			return false;
+		}
+		
+		switch ($this.data('object')) {
+			case 'review':
+			case 'feature':
+			case 'news':
+			case 'video':
+				oType = 'article';
+				
+				break;	
+			default:
+				oType = $this.data('object');
+				
+				break;
+		}
+		
+		o = admin._createObject(oType);
+		
+		admin.showSection('#' + oType);
+		
+		o.setData({tag: $this.data('id'),
+				   object: $this.data('object')});
+	}
 		
 	
 	
@@ -263,42 +302,7 @@ function SearchManager() {
 	});
 	
 	$body.on('dblclick', '#search [role=option]', function(e) {
-		var $this = $(this)
-			$dialog = $this.parents('[role=dialog]');
-		
-		var o, oType;
-		
-		/**
-		 * Prevent opening from dialog view.
-		 * Dialog view is only for selection.
-		 */
-		
-		if ($dialog.length > 0) {
-			_selectSearch();
-			
-			return false;
-		}
-		
-		switch ($this.data('object')) {
-			case 'review':
-			case 'feature':
-			case 'news':
-			case 'video':
-				oType = 'article';
-				
-				break;	
-			default:
-				oType = $this.data('object');
-				
-				break;
-		}
-		
-		o = admin._createObject(oType);
-		
-		admin.showSection('#' + oType);
-		
-		o.setData({tag: $this.data('id'),
-				   object: $this.data('object')});
+		self._openSearch($(this));
 	});
 	
 	$header.on('click', 'button.search', function(e) {

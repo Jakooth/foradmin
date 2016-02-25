@@ -32,8 +32,11 @@
             				placeholder="the-title-to-lower-case" type="hidden" />
         </form>
         <div role="toolbar">
-            <button class="publish" type="button">Публикувай</button>
-            <button class="cancel" type="button">Отмени</button>
+        	<button class="preview" type="button">Преглед</button>
+            <div role="group">
+                <button class="publish" type="button">Публикувай</button>
+                <button class="cancel" type="button">Отмени</button>
+            </div>
         </div>
     </section>
 </jsp:root>

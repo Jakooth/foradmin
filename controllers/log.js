@@ -6,6 +6,8 @@ function LogManager() {
 	 
 	var self = this;
 	var logAPI = '/forapi/log.php';
+	var forplayAPI = '/forapi/forplay.php';
+	var fotagsAPI = '/forapi/get.php';
 	
 	var $body =  $('body'),
 		$header = $('header');
@@ -69,6 +71,43 @@ function LogManager() {
 		_renderLogResult(logRequest);
 	}
 	
+	this._openLog = function($opener) {
+		var object = $opener.data('object'),
+			tag = $opener.data('tag'),
+			getId;
+			
+		var $opener = $opener;
+	
+		if (object == 'quote' || 
+			object == 'review' || 
+			object == 'news' || 
+			object == 'feature' ||
+			object == 'video' || 
+			object == 'aside') {
+			
+			getId = $.get(encodeURI(forplayAPI + '?url=' + tag + '&subtype=' + object));
+		} else {
+			getId = $.get(encodeURI(fotagsAPI + '?url=' + tag + '&object=' + object));
+		}
+		
+		$.when(getId).done(function(dataId) {
+			var data = dataId.length ? 
+					   JSON.parse(dataId).tags ? 
+							JSON.parse(dataId).tags[0] : 
+							JSON.parse(dataId).articles[0] : 
+					   dataId.tags ? 
+							dataId.tags[0] : 
+							dataId.articles[0];
+							
+			$opener.data('id', data.article_id || data.tag_id);				
+			$opener.attr('data-id', $opener.data('id'));
+			
+			query._openSearch($opener);
+		}).fail(function() {
+			console.log("Failed to load id.");
+		});
+	}
+	
 	
 	
 	
@@ -129,6 +168,15 @@ function LogManager() {
 		_doLog();
 	});
 	
+	$body.on('dblclick', '#log [role=option]', function(e) {
+		
+		/**
+		 * TODO: First query to get the ID.
+		 */
+		 
+		self._openLog($(this));
+	});
+	
 	$body.on('click', '#log [role=option] button', function(e) {
 		var $this = $(this);
 		
@@ -136,7 +184,7 @@ function LogManager() {
 		
 		$this.attr('aria-pressed',  !ariaPressed);
 		
-		self.acknolwledge($this.parents('[role=option]').data('id'),
+		self.acknolwledge($this.parents('[role=option]').data('log'),
 						  !ariaPressed);
 	});
 	
