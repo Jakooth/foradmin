@@ -479,11 +479,11 @@ function AdminManager() {
 	}
 	
 	this.showOverlay = function() {
-		$('.Overlay').show();
+		$('body').attr('aria-busy', true);
 	}
 	
 	this.hideOverlay = function() {
-		$('.Overlay').hide();
+		$('body').attr('aria-busy', false);
 	}
 	
 	this.showSectionInWindow = function(section, createTarget) {
@@ -790,14 +790,6 @@ function AdminManager() {
 			o = _createObject(section);
 		
 		o.resetData();
-	});
-	
-	/**
-	 * Header
-	 */
-	
-	$('header').on('click', 'button.logout', function(e) {
-		window.location.href = "login.html";
 	});
 	
 	/**

@@ -680,6 +680,7 @@ form input {
 	width: 80%;
 }
 
+form input[type=email],
 form input[type=text],
 form input[type=password] {
 	width: 100%;
@@ -767,7 +768,8 @@ form input[type=time],
  * WINDOWS
  */
 
-.Overlay {
+body[aria-busy=true]::before {
+	content: "";
     position: fixed; 
     top: 0;
     left: 0;
@@ -775,7 +777,7 @@ form input[type=time],
     height: 100%;
     background: #000;
     opacity: 0.5;
-	display: none;
+	display: block;
 	z-index: 10000;
 }
 

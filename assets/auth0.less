@@ -1,0 +1,77 @@
+body.a0-lock-open[aria-busy=true]::before {
+ opacity: 0.95;
+ background-color: #666;
+}
+
+body.a0-lock-open .a0-lock-container,
+body.a0-lock-open .a0-lock,
+#a0-lock .a0-signin,
+#a0-lock .a0-popup,
+#a0-lock .a0-overlay,
+#a0-lock .a0-overlay,
+#a0-lock .a0-centrix {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	display: block;
+	background: none;
+	z-index: 20000;
+	top: 0;
+	left: 0;
+}
+
+#a0-lock .a0-panel {
+	display: block;
+	padding: 0;
+	margin-left: 30%;
+	margin-right: 30%;
+	width: 40%;
+	margin-top: 40px;
+	box-shadow: none;
+}
+
+#a0-lock .a0-panel .a0-header { display: none; }
+
+#a0-lock .a0-panel img,
+#a0-lock .a0-panel svg { display: block; }
+
+#a0-lock .a0-panel svg path { fill: rgba(0, 0, 0, 0.5); }
+
+#a0-lock .a0-panel form {
+	background: rgba(0, 0, 0, 0.5);
+	padding: 0;
+}
+
+#a0-lock .a0-panel form label {
+	margin-bottom: 10px;
+	color: #FFF;
+}
+
+#a0-lock .a0-hide,
+#a0-lock .a0-separator { display: none; }
+
+#a0-lock .a0-panel .a0-body-content .a0-emailPassword { padding: 20px; }
+
+#a0-lock .a0-panel .bottom-content {
+	position: relative;
+	float: none;
+	width: 100%;
+	clear: both;
+	height: auto;
+}
+
+#a0-lock .a0-panel .a0-icon,
+#a0-lock .a0-panel .a0-body-content a,
+#a0-lock .a0-panel .bottom-content button {
+	width: 100%;
+	height: 84px;
+	line-height: 44px;
+	text-align: center;
+	float: left;
+	padding: 20px;
+	min-width: 84px;
+	background-color: #d9e021;
+	font-size: 20pt;
+	font-weight: 700;
+	color: #000;
+}

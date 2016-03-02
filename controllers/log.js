@@ -5,7 +5,7 @@ function LogManager() {
 	 */
 	 
 	var self = this;
-	var logAPI = '/forapi/log.php';
+	var logAPI = '/forapi/forsecure/log.php';
 	var forplayAPI = '/forapi/forplay.php';
 	var fotagsAPI = '/forapi/get.php';
 	
@@ -52,7 +52,19 @@ function LogManager() {
 			
 			admin.hideAlert();
 		}).fail(function(resultData) {
-			var data = resultData[0].length ? JSON.parse(resultData[0]) : resultData[0];
+			var data = resultData.length ? JSON.parse(resultData) : resultData;
+			
+			if (resultData.statusText) {
+				admin.showAlert({message: resultData.statusText, status: 'error'});
+				
+				return;
+			}
+			
+			if (!data.events.mysql.connection) {
+				admin.showAlert({message: data.events.mysql.error, status: 'error'});
+			} else if (!data.events.mysql.result) {
+				admin.showAlert({message: data.events.mysql.error, status: 'error'});
+			}
 			
 			console.log(data);
 		});
@@ -144,6 +156,18 @@ function LogManager() {
 			admin.hideAlert();
 		}).fail(function(resultData) {
 			var data = resultData.length ? JSON.parse(resultData) : resultData;
+			
+			if (resultData.statusText) {
+				admin.showAlert({message: resultData.statusText, status: 'error'});
+				
+				return;
+			}
+			
+			if (!data.events.mysql.connection) {
+				admin.showAlert({message: data.events.mysql.error, status: 'error'});
+			} else if (!data.events.mysql.result) {
+				admin.showAlert({message: data.events.mysql.error, status: 'error'});
+			}
 			
 			console.log(data);
 		});

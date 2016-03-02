@@ -16,7 +16,7 @@
             <meta content="charset=utf-8" />
             <meta charset="utf-8" />
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
             <title>Foradmin</title>
             <link rel="stylesheet" type="text/css" href="assets/bootstrap-tagsinput.css" />
             <link rel="stylesheet" type="text/css" href="assets/typeaheadjs.css" />
@@ -28,6 +28,9 @@
                 <!--script-->
             </script>
             <script src="/jslib/jsrender.min.js">
+                <!--script-->
+            </script>
+            <script src="//cdn.auth0.com/js/lock-8.2.min.js">
                 <!--script-->
             </script>
             <script src="jslib/typeahead.bundle.min.js">
@@ -108,10 +111,9 @@
             <script src="controllers/objects/country.js?v=2.0.0">
                 <!--script-->
             </script>
-            <script>$(document).ready(function() { window.utils = new UtilsManager();
-                window.admin = new AdminManager(); window.add = new AddManager();
-                window.query = new SearchManager(); window.activity = new LogManager();
-                });</script>
+            <script src="controllers/INIT.js?v=2.0.0">
+                <!--script-->
+            </script>
         </head>
         <body>
             <header id="main">
@@ -121,9 +123,10 @@
                             clipLabel="clip" />
                 </h1>
                 <div role="toolbar">
-                	<button role="link" class="search" type="button">Търсене</button>
+                    <button role="link" class="search" type="button">Търсене</button>
                     <button role="link" class="log" type="button">Активност</button>
-                	<div role="group">
+                    <div role="group">
+                    	<button role="link" class="login" type="button">Влез</button>
                         <button role="link" class="logout" type="button">Излез</button>
                     </div>
                 </div>
@@ -227,8 +230,8 @@
             </main>
             <footer>
                 <p>&amp;copy; Copyright 2015
-                    <a href="http://forplay.bg/articles/games/news/18/castle-design">Castle Design
-                        Ltd.</a>
+                    <a href="http://forplay.bg/articles/games/news/18/castle-design">Castle
+                        Design Ltd.</a>
                 </p>
                 <p>Тази страница се придържа към
                     <a href="http://www.cencenelec.eu/News/Press_Releases/Pages/PR-2014-03.aspx">Европейските
@@ -238,9 +241,6 @@
                     <a href="http://game-icons.net/">Game-icons.net.</a>
                 </p>
             </footer>
-            <div class="Overlay">
-                <!--foradmin.js-->
-            </div>
         </body>
     </html>
 </jsp:root>

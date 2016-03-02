@@ -5,7 +5,7 @@ function Aside(o) {
 	 */
 	 
 	this._o = o;
-	this._url = '/forapi/save_article.php';
+	this._url = '/forapi/forsecure/save_article.php';
 	this._get = '/forapi/forplay.php';
 	this._isValid = true;
 	this._saveId;

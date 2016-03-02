@@ -12,6 +12,7 @@
 <script src="/jslib/jquery-2.1.4.min.js"></script>
 <script src="jslib/jquery-ui.min.js"></script>
 <script src="/jslib/jsrender.min.js"></script>
+<script src="//cdn.auth0.com/js/lock-8.2.min.js"></script>
 <script src="jslib/typeahead.bundle.min.js"></script>
 <script src="jslib/bootstrap-tagsinput.min.js"></script>
 <script src="jslib/ckeditor/ckeditor.js"></script>
@@ -38,21 +39,34 @@
 <script src="controllers/objects/author.js?v=2.0.0"></script>
 <script src="controllers/objects/issue.js?v=2.0.0"></script>
 <script src="controllers/objects/country.js?v=2.0.0"></script>
-<script>$(document).ready(function() { window.utils = new UtilsManager();
-                window.admin = new AdminManager(); window.add = new AddManager();
-                window.query = new SearchManager(); window.activity = new LogManager();
-                });</script>
+<script src="controllers/INIT.js?v=2.0.0"></script>
+<style type="text/css">
+button.login,
+button.logout {
+	padding-left: 104px;
+	background-position: left top;
+	background-repeat: no-repeat;
+	background-size: auto 100%;
+}
+
+[aria-hidden=true] {
+	display: none !important;
+}
+</style>
 </head>
 <body>
 <header id="main">
     <h1 class="clip"><a href="#main"><img role="presentation" alt="Основно меню" src="../assets/icons/lorc/originals/svg/000000/transparent/magic-portal.svg" class="svg"/><span class="clip">Основно
                 меню</span></a></h1>
     <div role="toolbar">
-    	<button type="button" class="search" role="link">Търсене</button>
+        <button type="button" class="search" role="link">Търсене</button>
         <button type="button" class="log" role="link">Активност</button>
         <div role="group">
-            <button type="button" class="logout" role="link">Излез</button>
-    	</div>
+            <button aria-hidden="false" role="link" 
+            		type="button" class="login">Влез</button>
+            <button aria-hidden="true" role="link" 
+            		type="button" class="logout">Излез</button>
+        </div>
     </div>
     <nav aria-label="Създаване на тагове">
         <h2>Създаване на тагове</h2>
@@ -1415,6 +1429,5 @@
             Изисквания за Достъпност на Обществени Продукти и Услуги.</a></p>
     <p>Икони за кориците благодарение на <a href="http://game-icons.net/">Game-icons.net.</a></p>
 </footer>
-<div class="Overlay"></div>
 </body>
 </html>

@@ -5,7 +5,7 @@ function Country(o) {
 	 * PRIVATE
 	 */
 	
-	this._url = '/forapi/save_country.php';
+	this._url = '/forapi/forsecure/save_country.php';
 }
 
 Country.prototype = Object.create(Fortag.prototype);

@@ -4,7 +4,7 @@ function Fortag(o) {
 	 * PRIVATE
 	 */
 	
-	this._url = '/forapi/save.php';
+	this._url = '/forapi/forsecure/save.php';
 	this._get = '/forapi/get.php';
 	this._isValid = true;
 	this._saveId;

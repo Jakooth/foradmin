@@ -5,7 +5,7 @@ function Genre(o) {
 	 * PRIVATE
 	 */
 	
-	this._url = '/forapi/save_genre.php';
+	this._url = '/forapi/forsecure/save_genre.php';
 }
 
 Genre.prototype = Object.create(Fortag.prototype);
