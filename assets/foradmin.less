@@ -372,6 +372,10 @@ form textarea {
  * LAYOUT
  */
 
+[aria-hidden=true] {
+	display: none !important;
+}
+
 *,
 header h1,
 main h2 {
@@ -2169,6 +2173,14 @@ button.remove {
 /**
  * LOGIN
  */
+
+button.login,
+button.logout {
+	padding-left: 104px;
+	background-position: left top;
+	background-repeat: no-repeat;
+	background-size: auto 100%;
+}
 
 section#login {
 	display: block;
