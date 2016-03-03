@@ -17,7 +17,7 @@
             <meta charset="utf-8" />
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <title>Foradmin Login Page</title>
+            <title>Foradmin</title>
             <link rel="stylesheet" type="text/css" href="assets/foradmin.css" />
             <script src="/jslib/jquery-2.1.4.min.js">
                 <!--script-->
@@ -37,13 +37,8 @@
                     <h1>
                         <img class="svg" src="../assets/forplay.svg" alt="Forplay&amp;reg;" />
                     </h1>
-                    <form>
-                        <h2>Вход</h2>
-                        <admin:formItem id="loginUserID" label="Потребител" type="text" />
-                        <admin:formItem id="loginPassword" label="Парола" type="password" />
-                    </form>
                     <div role="toolbar">
-                        <button class="login" type="button">Влез</button>
+                        <button class="login" type="button">Администрация</button>
                     </div>
                 </section>
             </main>

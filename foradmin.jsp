@@ -60,6 +60,9 @@
             <script src="controllers/log.js?v=2.0.0">
                 <!--script-->
             </script>
+            <script src="controllers/login.js?v=2.0.0">
+                <!--script-->
+            </script>
             <script src="controllers/objects/fortag.js?v=2.0.0">
                 <!--script-->
             </script>

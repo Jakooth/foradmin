@@ -5,11 +5,11 @@
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Foradmin Login Page</title>
+<title>Foradmin</title>
 <link href="assets/foradmin.css" type="text/css" rel="stylesheet"/>
 <script src="/jslib/jquery-2.1.4.min.js"></script>
-<script src="/controllers/utils.js?v=1.5.0"></script>
-<script src="controllers/login.js?v=1.0.0"></script>
+<script src="/controllers/utils.js?v=2.0.0"></script>
+<script src="controllers/login.js?v=2.0.0"></script>
 <script>$(document).ready(function() { window.utils = new UtilsManager();
                 window.login = new LoginManager(); });</script>
 </head>
@@ -17,17 +17,8 @@
 <main>
     <section id="login">
         <h1><img alt="Forplay&amp;reg;" src="../assets/forplay.svg" class="svg"/></h1>
-        <form>
-            <h2>Вход</h2>
-            <label><span>Потребител:</span>
-                <input autocomplete="" type="text" placeholder="" id="loginUserID"/>
-            </label>
-            <label><span>Парола:</span>
-                <input autocomplete="" type="password" placeholder="" id="loginPassword"/>
-            </label>
-        </form>
         <div role="toolbar">
-            <button type="button" class="login">Влез</button>
+            <button type="button" class="login">Администрация</button>
         </div>
     </section>
 </main>
