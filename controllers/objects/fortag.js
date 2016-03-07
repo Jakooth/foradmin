@@ -1,4 +1,10 @@
 function Fortag(o) {
+
+	/** 
+	 * CONSTRUCTOR
+	 */
+
+	var o = $('#fortag').is(':visible') ? 'fortag' : o;
 	
 	/** 
 	 * PRIVATE
@@ -37,7 +43,8 @@ function Fortag(o) {
 	this.type;
 	this.subtype;
 	this.related;
-	this.object = o;
+	this.object = $('#fortag').is(':visible') ? 
+				  $('#fortagObjectSelect').val() : o;
 	
 	this.json = {};
 }
@@ -247,7 +254,7 @@ Fortag.prototype._uploadMainImg = function() {
  * PUBLIC
  */
 
-Fortag.prototype.save = function() {
+Fortag.prototype.save = function() {	
 	this.enName = this._getInputValue(this._$enNameInput);
 	this.bgName = this._getInputValue(this._$bgNameInput);
 	this.date = this._getInputValue(this._$dateInput);

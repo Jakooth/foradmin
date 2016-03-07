@@ -86,6 +86,41 @@
     </nav>
 </header>
 <main>
+    <section id="fortag">
+        <h2><a href="#fortag">Таг<span class="">Добави таг.</span></a></h2>
+        <form>
+            <div class="two-cols">
+                <label><span>Обект:</span>
+                    <select id="fortagObjectSelect">
+                    </select>
+                </label>
+            </div>
+            <div class="two-cols">
+                <label><span>Тип:</span>
+                    <select id="fortagTypeSelect">
+                    </select>
+                </label>
+            </div>
+            <label><span>Име:</span>
+                <input autocomplete="" type="text" placeholder="Crytek, HBO, Walt Disney Animation Studios" id="fortagEnNameInput"/>
+            </label>
+            <label><span>Таг:</span>
+                <input autocomplete="" type="text" placeholder="crytek, hbo, walt-disney-animation-studios" id="fortagTagInput"/>
+            </label>
+            <label><span>Имe на български:</span>
+                <input autocomplete="" type="text" placeholder="Крайтек, ЕйчБиОу, Уолт Дисни Анимейшън Студиос" id="fortagBgNameInput"/>
+            </label>
+            <h3>Скрити стойности</h3>
+            <label>
+                <input value="" type="hidden" id="fortagSaveIdInput"/>
+                <span class="hidden"><i>Идентификатор на записа:</i><b>hidden</b> </span></label>
+        </form>
+        <div role="toolbar">
+            <button type="button" class="new">Нова</button>
+            <button type="button" class="save">Запази</button>
+            <button type="button" class="cancel">Отмени</button>
+        </div>
+    </section>
     <section id="games">
         <h2><a href="#games">Игри<span class="">Създай...</span></a></h2>
         <nav aria-label="Обекти в игри">
@@ -901,6 +936,11 @@
             <label><span>Автори:</span>
                 <input autocomplete="" type="text" placeholder="Snake, doomy" id="articleAuthorsInput"/>
             </label>
+            <div class="one-col">
+                <label><span>Тагове:</span>
+                    <input autocomplete="" type="text" placeholder="gta-5, sam-houser, rockstar" id="articleTagsInput"/>
+                </label>
+                <a class="create" href="#fortag"><img src="../assets/icons/iconmonstr/iconmonstr-plus-2-icon.svg" alt="Създай Тагове" class="svg"/></a></div>
             <label><span>Тагове:</span>
                 <input autocomplete="" type="text" placeholder="gta-5, sam-houser, rockstar" id="articleTagsInput"/>
             </label>
@@ -1056,6 +1096,11 @@
             <label><span>Автори:</span>
                 <input autocomplete="" type="text" placeholder="Snake, doomy" id="asideAuthorsInput"/>
             </label>
+            <div class="one-col">
+                <label><span>Тагове:</span>
+                    <input autocomplete="" type="text" placeholder="gta-5, sam-houser, rockstar" id="asideTagsInput"/>
+                </label>
+                <a class="create" href="#fortag"><img src="../assets/icons/iconmonstr/iconmonstr-plus-2-icon.svg" alt="Създай Тагове" class="svg"/></a></div>
             <label><span>Тагове:</span>
                 <input autocomplete="" type="text" placeholder="gta-5, sam-houser, rockstar" id="asideTagsInput"/>
             </label>

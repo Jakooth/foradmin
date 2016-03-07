@@ -16,8 +16,9 @@
             				placeholder="Песен за Сам и Дан Хаузър..." type="text" />
             <admin:formItem id="asideAuthorsInput" label="Автори" 
             				placeholder="Snake, doomy" type="text" />
-            <admin:formItem id="asideTagsInput" label="Тагове" 
-            				placeholder="gta-5, sam-houser, rockstar" type="text" />                
+            <admin:formItem id="asideTagsInput" label="Тагове"
+            				placeholder="gta-5, sam-houser, rockstar" type="text" 
+                            url="fortag" layout="one-col" />                
             <h3>Основна картинка</h3>
             <div class="Main" role="group">
                 <div class="file">

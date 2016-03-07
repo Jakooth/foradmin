@@ -36,7 +36,8 @@
             <admin:formItem id="articleAuthorsInput" label="Автори" 
             				placeholder="Snake, doomy" type="text" />
             <admin:formItem id="articleTagsInput" label="Тагове" 
-            				placeholder="gta-5, sam-houser, rockstar" type="text" />
+            				placeholder="gta-5, sam-houser, rockstar" type="text" 
+                            url="fortag" layout="one-col" />
             <div id="articleReviewRegion" role="region">
                 <admin:formItem id="articleHypeSelect" label="Оценка" type="select" layout="two-cols" />
                 <admin:formItem id="articleVersionTestedSelect" label="Тествана версия" type="select" layout="two-cols" />

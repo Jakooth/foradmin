@@ -1,4 +1,11 @@
 function Formain(o) {
+	
+	/** 
+	 * CONSTRUCTOR
+	 */
+
+	var o = $('#fortag').is(':visible') ? 'fortag' : o;
+	
 	Fortag.call(this, o);
 	
 	/** 

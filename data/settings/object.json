@@ -1,0 +1,40 @@
+{ "tags" : [ { "tag" : "game",
+        "name" : "Игра"
+      },
+      { "tag" : "movie",
+        "name" : "Филм"
+      },
+      { "tag" : "tv",
+        "name" : "Сериал или Предаване"
+      },
+      { "tag" : "album",
+        "name" : "Албум"
+      },
+      { "tag" : "band",
+        "name" : "Банда"
+      },
+      { "tag" : "event",
+        "name" : "Събитие"
+      },
+      { "tag" : "book",
+        "name" : "Книга"
+      },
+      { "tag" : "board",
+        "name" : "Настолни игра"
+      },
+      { "tag" : "company",
+        "name" : "Компания"
+      },
+      { "tag" : "person",
+        "name" : "Персона, Артист или Автор"
+      },
+      { "tag" : "character",
+        "name" : "Герой"
+      },
+      { "tag" : "serie",
+        "name" : "Поредица"
+      },
+      { "tag" : "dlc",
+        "name" : "DLC"
+      }
+    ] }

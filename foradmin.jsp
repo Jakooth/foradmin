@@ -198,6 +198,7 @@
                 </nav>
             </header>
             <main>
+            	<jsp:include page="views/fortag.jsp" />
                 <jsp:include page="views/games.jsp" />
                 <jsp:include page="views/game.jsp" />
                 <jsp:include page="views/company.jsp" />

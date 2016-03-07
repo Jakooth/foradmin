@@ -8,6 +8,7 @@ function AdminManager() {
 	
 	var subtype = 'data/settings/subtype.json';
 	var type = 'data/settings/type.json';
+	var object = 'data/settings/object.json';
 	var hype = 'data/settings/hype.json';
 	var theme = 'data/settings/theme.json';
 	var subtheme = 'data/settings/subtheme.json';
@@ -601,6 +602,7 @@ function AdminManager() {
 	}
 	
 	this.setDefaults = function() {
+		$('#fortagObjectSelect').val('game').change();
 		$('#articleTypeSelect').val('games').change();
 		$('#articleSubtypeSelect').val('news').change();
 		$('#articleVideoTechSelect').val('').change();
@@ -628,7 +630,9 @@ function AdminManager() {
 	/** 
 	 * INIT
 	 */
-	 
+	
+	this.loadOptions($('#fortagTypeSelect'), type, 'option');
+	this.loadOptions($('#fortagObjectSelect'), object, 'option');
 	this.loadOptions($('#companyTypeSelect'), type, 'option');
 	this.loadOptions($('#genreTypeSelect'), type, 'option');
 	this.loadOptions($('#personTypeSelect'), type, 'option');
@@ -849,6 +853,56 @@ function AdminManager() {
 		
 		self.showSectionInWindow($this.attr('href'), 
 								 $this.parents('div').find('input[id]'));
+	});
+	
+	$('#fortag').on('change', '#fortagObjectSelect', function(e) {
+		var $typeSelect = $('#fortagTypeSelect');
+																
+		if ($(this).val() == "band" || 
+			$(this).val() == "event" || 
+			$(this).val() == "album") {
+			
+			$typeSelect.prop('disabled', true);
+			$typeSelect.val('music');
+			
+			return;
+		}
+		
+		if ($(this).val() == "movie" || 
+			$(this).val() == "tv") {
+			
+			$typeSelect.prop('disabled', true);
+			$typeSelect.val('movies');
+			
+			return;
+		}
+		
+		if ($(this).val() == "game" || 
+			$(this).val() == "dlc") {
+			
+			$typeSelect.prop('disabled', true);
+			$typeSelect.val('games');
+			
+			return;
+		}
+		
+		if ($(this).val() == "book") {
+			
+			$typeSelect.prop('disabled', true);
+			$typeSelect.val('books');
+			
+			return;
+		}
+		
+		if ($(this).val() == "board") {
+			
+			$typeSelect.prop('disabled', true);
+			$typeSelect.val('boards');
+			
+			return;
+		}
+		
+		$typeSelect.prop('disabled', false);
 	});
 	 
 	/**
@@ -1119,14 +1173,25 @@ function AdminManager() {
 		$('#stickerEnNameInput').val(enName);
 	});
 	
+	/**
+	 * TODO: Next two section are now similar and can be merged.
+	 * Not merging to avoid additional testing.
+	 */
+	
 	$('#game, #movie, #album, ' + 
 	  '#event, #book, #platform, ' +
-	  '#genre, #sticker').on('click', 'button.save', function(e) {
+	  '#genre, #sticker, #fortag').on('click', 'button.save', function(e) {
 		
 		var $this = $(this),
 			$dialog = $this.parents('[role=dialog]');
 		
-		var id = $this.parents('section').prop('id'),
+		/**
+		 * If this a fortag we need to pick the object from the drop down.
+		 */
+		 
+		var id = $this.parents('section').prop('id') != 'fortag' ?
+				 $this.parents('section').prop('id') :
+				 $('#fortagObjectSelect').val(),
 			o = _createObject(id);
 		
 		o.save();
@@ -1134,7 +1199,7 @@ function AdminManager() {
 	});
 	
 	$('#company, #person, #character, ' + 
-	  '#serie, #dlc, #band,' + 
+	  '#serie, #dlc, #band' + 
 	  '#country, #author, #issue').on('click', 'button.save', function(e) {
 		
 		var $this = $(this),

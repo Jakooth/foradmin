@@ -1,4 +1,11 @@
 function Book(o) {
+
+	/** 
+	 * CONSTRUCTOR
+	 */
+
+	var o = $('#fortag').is(':visible') ? 'fortag' : o;
+
 	Formain.call(this, o);
 	
 	/** 
