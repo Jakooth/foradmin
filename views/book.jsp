@@ -18,7 +18,7 @@
                 <div class="file">
                     <label>
                         <span class="clip">Избери</span>
-                        <input id="bookCoverInput" type="file" />
+                        <input id="bookCoverInput" type="file" data-subtype="cover" />
                     </label>
                 </div>
             </div>

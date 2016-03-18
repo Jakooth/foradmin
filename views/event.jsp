@@ -18,7 +18,7 @@
                 <div class="file">
                     <label>
                         <span class="clip">Избери</span>
-                        <input id="eventPosterInput" type="file" />
+                        <input id="eventPosterInput" type="file" data-subtype="poster" />
                     </label>
                 </div>
             </div>

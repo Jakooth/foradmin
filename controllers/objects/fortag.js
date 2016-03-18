@@ -264,7 +264,8 @@ Fortag.prototype._uploadImgs = function() {
 		return;
 	}
 
-	var imgData = imgs.createBackgroundImgData(this._$mainInput, this.tag, 'tag');
+	var imgData = imgs.createBackgroundImgData(this._$mainInput, 
+											   this.tag, 'tag');
 	
 	imgs.uploadImgs(imgData);
 }

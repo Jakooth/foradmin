@@ -107,14 +107,6 @@ Formain.prototype._getGroupValue = function(_$input) {
 	}).get();
 }
 
-/**
- * TODO: The final function will not work like this.
- */
-
-Formain.prototype._uploadPosterImg = function() { 
-	this.poster = utils.parseImgIndex($posterInput.val());
-}
-
 Formain.prototype._setPosterImgValue = function(_$input, tag) {
 	if (tag) {
 		if (!_$input.length) return false;
@@ -122,7 +114,7 @@ Formain.prototype._setPosterImgValue = function(_$input, tag) {
 		_$input.parents('.file')
 			   .css('background-image', 
 					'url(../assets/articles/' + tag + 
-					'/'  + tag + '-poster.jpg');
+					'/_extras/'  + tag + '-poster.jpg');
 	} else {
 		_$input.parents('.file')
 			   .css('background-image', 
@@ -137,7 +129,7 @@ Formain.prototype._setCoverImgValue = function(_$input, tag) {
 		_$input.parents('.file')
 			   .css('background-image', 
 					'url(../assets/articles/' + tag + 
-					'/'  + tag + '-cover.jpg');
+					'/_extras/'  + tag + '-cover.jpg');
 	} else {
 		_$input.parents('.file')
 			   .css('background-image', 
@@ -145,25 +137,51 @@ Formain.prototype._setCoverImgValue = function(_$input, tag) {
 	}
 }
 
-Fortag.prototype._uploadImgs = function() {
-	if (this._$mainInput.length <= 0) {
-		this.main = null;
+Formain.prototype._uploadImgs = function() {
+	Fortag.prototype._uploadImgs.call(this);
+	
+	if (this._$posterInput.length <= 0 && this._$coverInput.length <= 0 ) {
+		this.poster = null;
+		this.cover = null;
 		
 		return;
 	}
 	
-	if (!this._$mainInput.val() || 
-		!this._$mainInput.data('new') || 
-		this._$mainInput.data('new') == 'false') {
+	if (this._$posterInput.length <= 0  && this._$coverInput.length > 0 ) {
+		this.poster = null;
 		
-		this.main = null;
-		
-		return;
-	}
+		if (!this._$coverInput.val() || 
+			!this._$coverInput.data('new') || 
+			this._$coverInput.data('new') == 'false') {
+			
+			this.cover = null;
+			
+			return;
+		}
 
-	var imgData = imgs.createBackgroundImgData(this._$mainInput, this.tag, 'tag');
+		var imgData = imgs.createBackgroundImgData(this._$coverInput, 
+												   this.tag, this.object);
+		
+		imgs.uploadImgs(imgData);
+	}
 	
-	imgs.uploadImgs(imgData);
+	if (this._$posterInput.length > 0  && this._$coverInput.length <= 0 ) {
+		this.cover = null;
+		
+		if (!this._$posterInput.val() || 
+			!this._$posterInput.data('new') || 
+			this._$posterInput.data('new') == 'false') {
+			
+			this.poster = null;
+			
+			return;
+		}
+
+		var imgData = imgs.createBackgroundImgData(this._$posterInput, 
+												   this.tag, this.object);
+		
+		imgs.uploadImgs(imgData);
+	}
 }
 
 
