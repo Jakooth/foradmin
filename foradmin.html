@@ -1,4 +1,4 @@
-<!DOCTYPE html SYSTEM "">
+<!DOCTYPE html>
 <html lang="en_US">
 <head>
 <meta content="charset=utf-8"/>
@@ -23,6 +23,7 @@
 <script src="controllers/search.js?v=2.0.0"></script>
 <script src="controllers/log.js?v=2.0.0"></script>
 <script src="controllers/login.js?v=2.0.0"></script>
+<script src="controllers/imgs.js?v=2.0.0"></script>
 <script src="controllers/objects/fortag.js?v=2.0.0"></script>
 <script src="controllers/objects/formain.js?v=2.0.0"></script>
 <script src="controllers/objects/layout.js?v=2.0.0"></script>
@@ -200,7 +201,7 @@
                 <input autocomplete="off" type="text" placeholder="saints-row, mafia, Red Dead Redemption, Crackdown" id="gameRelatedInput"/>
             </label>
             <div class="Add Box">
-                <button type="button" class="add">Добави обложка</button>
+                <!--AddManager-->
             </div>
             <h3>Скрити стойности</h3>
             <label>
@@ -941,9 +942,6 @@
                     <input autocomplete="" type="text" placeholder="gta-5, sam-houser, rockstar" id="articleTagsInput"/>
                 </label>
                 <a class="create" href="#fortag"><img src="../assets/icons/iconmonstr/iconmonstr-plus-2-icon.svg" alt="Създай Тагове" class="svg"/></a></div>
-            <label><span>Тагове:</span>
-                <input autocomplete="" type="text" placeholder="gta-5, sam-houser, rockstar" id="articleTagsInput"/>
-            </label>
             <div role="region" id="articleReviewRegion">
                 <div class="two-cols">
                     <label><span>Оценка:</span>
@@ -1101,9 +1099,6 @@
                     <input autocomplete="" type="text" placeholder="gta-5, sam-houser, rockstar" id="asideTagsInput"/>
                 </label>
                 <a class="create" href="#fortag"><img src="../assets/icons/iconmonstr/iconmonstr-plus-2-icon.svg" alt="Създай Тагове" class="svg"/></a></div>
-            <label><span>Тагове:</span>
-                <input autocomplete="" type="text" placeholder="gta-5, sam-houser, rockstar" id="asideTagsInput"/>
-            </label>
             <h3>Основна картинка</h3>
             <div role="group" class="Main">
                 <div class="file">
@@ -1148,7 +1143,7 @@
         </div>
     </section>
     <section id="images">
-        <h2><a href="#aside">Картинки<span class="">Прикачи картинкии и избери,
+        <h2><a href="#images">Картинки<span class="">Прикачи картинкии и избери,
                     кои да влезнат в галерията.</span></a></h2>
         <form>
             <label><span>Таг:</span>
@@ -1165,7 +1160,7 @@
             </ul>
         </form>
         <div role="toolbar">
-            <button type="button" class="save">Запази</button>
+            <button type="button" class="upload">Качи</button>
             <button type="button" class="cancel">Отмени</button>
         </div>
     </section>
@@ -1173,6 +1168,13 @@
         <h2><a href="#quote">Цитат<span class="">Избери герой, добави текст и
                     създай таг.</span></a></h2>
         <form>
+            <div class="Main" role="group">
+                <div class="file">
+                    <label> <span class="clip">Избери</span>
+                        <input id="quoteMainInput" type="file" />
+                    </label>
+                </div>
+            </div>
             <label><span>Раздел:</span>
                 <select id="quoteTypeSelect">
                 </select>

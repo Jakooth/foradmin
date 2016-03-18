@@ -45,7 +45,7 @@
             				placeholder="saints-row, mafia, Red Dead Redemption, Crackdown" 
                             type="text" autocomplete="off" />
             <div class="Add Box">
-                <button class="add" type="button">Добави обложка</button>
+                <!--AddManager-->
             </div>
             <h3>Скрити стойности</h3>
             <admin:formItem id="gameTypeSelect" label="Тип" type="hidden" value="games" />
@@ -53,7 +53,7 @@
             <admin:formItem id="gameSaveRelatedInput" label="Свързани" type="hidden" value="" />
         </form>
         <div role="toolbar">
-        	<button class="new" type="button">Нова</button>
+            <button class="new" type="button">Нова</button>
             <button class="save" type="button">Запази</button>
             <button class="cancel" type="button">Отмени</button>
         </div>

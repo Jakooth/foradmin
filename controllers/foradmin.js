@@ -975,7 +975,7 @@ function AdminManager() {
 	});
 	
 	$('#article').on('change', '#articleAudioTechSelect', function(e) {
-		var $audioFrameSelect = $('#articleAudioFrameInput').parents('label')
+		var $audioFrameSelect = $('#articleAudioFrameInput').parents('label'),
 			$audioUrlSelect = $('#articleAudioUrlInput').parents('label');
 																
 		if ($(this).val() == "") {

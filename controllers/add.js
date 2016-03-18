@@ -302,27 +302,32 @@ function AddManager() {
 		$appender.find('.sublayout').hide();
 	}
 	
-	this.addPlatform = function($appender) {
-		var d1 = $.get('renderers/box.html');
+	this.addPlatform = function($platform) {
+		var getBox = $.get('renderers/box.html');
 			
-		$.when(d1).done(function(data1) {
-			var html = data1;
+		$.when(getBox).done(function(boxHtmlData) {
+			var tmpls = $.templates({
+					boxTemplate: boxHtmlData
+				}),
+				html = $.templates.boxTemplate.render({
+					label: $platform.attr('aria-label'),
+					subtype: $platform.val(),
+					tag: $('#gameTagInput').val(),
+					id: $platform.data('id')
+				});
 			
-			var $box = $appender.parents('.Box');
+			var $box = $('#game .Add.Box');
 			
-			$appender.before(html)
-			
-			$(document).scrollTop($appender.offset().top);
-			
-			admin.loadOptions($box.find('.platform:last-of-type select'), platforms, 'option');
-			utils.convertSVG($box.find('img'));
+			$box.append(html);
 		}).fail(function() {
 			alert("Failed to load platforms.");
 		});
 	}
 	
-	this.removePlatform = function($appender) {
-		$appender.parents('.platform').remove();
+	this.removePlatform = function($platform) {
+		var $box = $('#game .Add.Box');
+		
+		$box.find('[data-platform=' + $platform.val() + ']').remove();
 	}
 	
 	this.addTrack = function($appender, data) {
@@ -382,38 +387,6 @@ function AddManager() {
 		}
 	}
 	
-	this.addImage = function($input, e) {
-		var d1 = $.get('renderers/image.html');
-		
-		$.when(d1).done(function(data1) {
-			var html = data1, 
-				files = e.target.files, 
-				i, f, reader;
-				
-			var $ul = $input.parents('[role=listbox]');
-			
-			for (i = 0; f = files[i]; i++) {
-				if (!f.type.match('image.*')) {
-					continue;
-				}
-				
-				reader = new FileReader();
-				
-				reader.onload = function(e) {
-					$ul.append(html);
-					$ul.find('[role=option]:last-child img').attr('src', e.target.result);
-				}
-				
-				reader.readAsDataURL(f);
-			}
-		}).fail(function() {
-			alert("Failed to load images.");
-		});
-	}
-	
-	this.removeImage = function($appender) {
-		$appender.parents('[role=option]').remove();
-	}
 	
 	
 	
@@ -537,33 +510,30 @@ function AddManager() {
 	  '#band').on('change', '.file input[type=file]', function(e) {
 		var reader = new FileReader();
 		
-		var $file = $(e.target).parents('.file');
+		var $this = $(e.target),
+			$file = $this.parents('.file');
 				
 		reader.onload = function(e) {
 			$file.css('background-image', 'url(' + e.target.result + ')');
+			$this.data('new', 'true');
+			$this.attr('data-new', $this.data('new'));
 		}
 		
 		reader.readAsDataURL(e.target.files[0]);
-	});
-	
-	$('#images').on('click', 'button.remove', function(e) {
-		self.removeImage($(this));
-	});
-	
-	$('#images').on('change', '.file input[type=file]', function(e) {
-		self.addImage($(this), e);
 	});
 	
 	/**
 	 * GAMES:GAME
 	 */
 	
-	$('.Box').on('click', 'button.add', function(e) {
-		self.addPlatform($(this));
-	});
-	
-	$('.Box').on('click', 'button.remove', function(e) {
-		self.removePlatform($(this));
+	$('#game').on('change', '#gamePlatformGroup [type=checkbox]', function(e) {
+		var $this = $(this);
+		
+		if ($this.prop('checked')) {
+			self.addPlatform($(this));
+		} else {
+			self.removePlatform($(this));
+		}
 	});
 	
 	/**

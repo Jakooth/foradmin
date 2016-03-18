@@ -39,6 +39,24 @@ Formain.prototype.constructor = Formain;
 /** 
  * PRIVATE
  */
+ 
+Formain.prototype._updateAfterSave = function(data) {
+	Fortag.prototype._updateAfterSave.call(this, data);
+	
+	/**
+	 * Cover and poster images are no longer new.
+	 */
+	
+	if (this._$posterInput.length > 0) {
+		this._$posterInput.data('new', 'false');
+		this._$posterInput.attr('data-new', 'false');
+	}
+	
+	if (this._$coverInput.length > 0) {
+		this._$coverInput.data('new', 'false');
+		this._$coverInput.attr('data-new', 'false');
+	}
+}  
   
 Formain.prototype._setTagsinputValue = function(data) {
 	Fortag.prototype._setTagsinputValue.call(this, data);
@@ -125,7 +143,31 @@ Formain.prototype._setCoverImgValue = function(_$input, tag) {
 			   .css('background-image', 
 					'none');
 	}
-} 
+}
+
+Fortag.prototype._uploadImgs = function() {
+	if (this._$mainInput.length <= 0) {
+		this.main = null;
+		
+		return;
+	}
+	
+	if (!this._$mainInput.val() || 
+		!this._$mainInput.data('new') || 
+		this._$mainInput.data('new') == 'false') {
+		
+		this.main = null;
+		
+		return;
+	}
+
+	var imgData = imgs.createBackgroundImgData(this._$mainInput, this.tag, 'tag');
+	
+	imgs.uploadImgs(imgData);
+}
+
+
+
 
 /** 
  * PUBLIC

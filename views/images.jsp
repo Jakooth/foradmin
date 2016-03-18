@@ -24,7 +24,7 @@
             </ul>
         </form>
         <div role="toolbar">
-            <button class="save" type="button">Запази</button>
+            <button class="upload" type="button">Качи</button>
             <button class="cancel" type="button">Отмени</button>
         </div>
     </section>

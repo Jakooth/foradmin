@@ -8,6 +8,14 @@
             <admin:menuItem label="Избери герой, добави текст и създай таг." title="Цитат" url="quote" />
         </h2>
         <form>
+        	<div class="Main" role="group">
+                <div class="file">
+                    <label>
+                        <span class="clip">Избери</span>
+                        <input id="gameMainInput" type="file" />
+                    </label>
+                </div>
+            </div>
             <admin:formItem id="quoteTypeSelect" label="Раздел" type="select" />
             <admin:formItem id="quoteTitleInput" label="Герой или персона" 
             				placeholder="Minsk, Batman, Koralsky, doomy, Steve Jobs" type="text" 

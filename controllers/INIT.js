@@ -4,6 +4,7 @@ $(document).ready(function() {
 	window.add = new AddManager();
     window.query = new SearchManager(); 
 	window.activity = new LogManager();
+	window.imgs = new ImgsManager();
     window.lock = new Auth0Lock('P8wrSYlMVUu5rZDEFGSqFL18tVfgo9Gz',
 								'forplay.eu.auth0.com'); 
 	window.login = new LoginManager();												

@@ -12,7 +12,8 @@ function Game(o) {
 	 * PRIVATE
 	 */
 	
-	this._$boxGroup = $('#' + o + ' .Box select');
+	this._$boxGroup = $('#' + o + ' .Box .platform');
+	this._$boxInput = $('#' + o + ' .Box input');
 	
 	this._$platformGroup = $('#' + o + 'PlatformGroup');
 	this._$publisherInput = $('#' + o + 'PublisherInput');
@@ -23,7 +24,7 @@ function Game(o) {
 	 * PUBLIC
 	 */
 	 
-	this.boxes; 
+	this.boxes = new Array(); 
 
 	this.platforms;
 	this.publisher;
@@ -37,6 +38,19 @@ Game.prototype.constructor = Game;
 /** 
  * PRIVATE
  */
+ 
+Game.prototype._updateAfterSave = function(data) {
+	Fortag.prototype._updateAfterSave.call(this, data);
+	
+	/**
+	 * Box images are no longer new.
+	 */
+	
+	if (this._$boxInput.length > 0) {
+		this._$boxInput.data('new', 'false');
+		this._$boxInput.attr('data-new', 'false');
+	}
+} 
 
 Game.prototype._setTagsinputValue = function(data) {
 	Formain.prototype._setTagsinputValue.call(this, data);
@@ -63,7 +77,10 @@ Game.prototype._setTagsinputValue = function(data) {
 				case 'platform':
 					if (!self._$platformGroup.length) return false;
 					
-					self._$platformGroup.find('[data-id=' + tag.platform_id + ']').prop('checked', true);
+					self._$platformGroup.find('[data-id=' + tag.platform_id + ']')
+										.prop('checked', true)
+										.change();
+					
 					self._saveRelatedArray.push(tag.platform_id);
 					
 					break;
@@ -71,6 +88,46 @@ Game.prototype._setTagsinputValue = function(data) {
 		});
 	}
 }
+
+Game.prototype._uploadImgs = function() {
+	Fortag.prototype._uploadImgs.call(this);
+	
+	var self = this;
+	
+	if (this._$boxInput.length <= 0) {
+		this.boxes = null;
+		
+		return;
+	}
+	
+	this.boxes = this._$boxInput.map(function (i, element) {
+		return {type: $(element).val(),  
+				value: $(element).parents('.platform')
+							  	 .find('[type=file]').val()
+								 .split('/').pop()
+								 .split('-').pop()};
+	}).get();
+	
+	this._$boxInput.each(function(index, box) {
+		var $box = $(box);
+	
+		if (!$box.val() || 
+			!$box.data('new') || 
+			$box.data('new') == 'false') {
+			
+			return true;
+		}
+		
+		self.boxes.push($box.data('subtype'));
+	
+		var imgData = imgs.createBackgroundImgData($(box), self.tag, self.object);
+	
+		imgs.uploadImgs(imgData);
+	});
+}
+
+
+
 
 /** 
  * PUBLIC
@@ -107,24 +164,11 @@ Game.prototype.resetData = function() {
 	if (this._$publisherInput.length) this._$publisherInput.tagsinput('removeAll');
 	if (this._$developerInput.length) this._$developerInput.tagsinput('removeAll');
 	if (this._$platformGroup.length) this._$platformGroup.find('[type=checkbox]').prop('checked', false);
+									 this._$boxGroup.remove();
 }
 
 Game.prototype.updateData = function(data) {
 	Formain.prototype.updateData.call(this, data);
 
 	this._setInputValue(this._$usDateInput, data.us_date || null);
-}
-
-/**
- * TODO: The final function will not work like this.
- */
-
-Game.prototype.uploadBoxImage = function() { 
-	this.boxes = $boxGroup.map(function (i, element) {
-		return {type: $(element).val(),  
-				value: $(element).parents('.platform')
-							  	 .find('[type=file]').val()
-								 .split('/').pop()
-								 .split('-').pop()};
-	}).get();
 }

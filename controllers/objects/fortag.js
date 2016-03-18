@@ -58,6 +58,15 @@ Fortag.prototype._updateAfterSave = function(data, target) {
 	if (data.saveRelated) this._$saveRelatedInput.val(data.saveRelated.join(',')).change();
 	
 	/**
+	 * The main image is no longer new.
+	 */
+	
+	if (this._$mainInput.length > 0) {
+		this._$mainInput.data('new', 'false');
+		this._$mainInput.attr('data-new', 'false');
+	}
+	
+	/**
 	 * If this is create section in window,
 	 * add tag and close the dialog.
 	 */
@@ -74,7 +83,7 @@ Fortag.prototype._updateAfterSave = function(data, target) {
 	}
 	
 	/**
-	 * Always update the dialog.
+	 * Always update all tag inputs.
 	 */
 	
 	setTimeout(function() {
@@ -189,13 +198,13 @@ Fortag.prototype._setInputValue = function(_$input, data) {
 	_$input.change();
 }
 
-Fortag.prototype._setMainImgValue = function(_$input, tag) {
-	if (tag) {
+Fortag.prototype._setMainImgValue = function(_$input, data) {
+	if (data && data.tag) {
 		if (!_$input.length) return false;
 		
 		_$input.parents('.file')
 			   .css('background-image', 
-					'url(../assets/tags/' + tag + '.jpg');
+					'url(../assets/tags/' + data.tag + '.' + data.img);
 	} else {
 		_$input.parents('.file')
 			   .css('background-image', 
@@ -239,12 +248,25 @@ Fortag.prototype._setInputValueAsString = function(_$input, data) {
 	_$input.val(data.join(',')).change();
 }
 
-/**
- * TODO: The final function will not work like this.
- */
+Fortag.prototype._uploadImgs = function() {
+	if (this._$mainInput.length <= 0) {
+		this.main = null;
+		
+		return;
+	}
+	
+	if (!this._$mainInput.val() || 
+		!this._$mainInput.data('new') || 
+		this._$mainInput.data('new') == 'false') {
+		
+		this.main = null;
+		
+		return;
+	}
 
-Fortag.prototype._uploadMainImg = function() {
-	this.main = utils.parseImgIndex($mainInput.val());
+	var imgData = imgs.createBackgroundImgData(this._$mainInput, this.tag, 'tag');
+	
+	imgs.uploadImgs(imgData);
 }
 
 
@@ -262,6 +284,8 @@ Fortag.prototype.save = function() {
 	this.type = this._getInputValue(this._$typeSelect);
 	this.subtype = this._getInputValue(this._$subtypeSelect);
 	this.related = this._getTypeaheadValue(this._$relatedInput);
+	this.main = utils.parseImg(this._getInputValue(this._$mainInput));
+	this.img = this.main ? this.main.split('.').pop() : null;
 	
 	this.related = this._setRelatedType(this.related, 'relation');
 	
@@ -277,6 +301,8 @@ Fortag.prototype.save = function() {
 		subtype: this.subtype,
 		object: this.object,
 		related: this.related,
+		main: this.main,
+		img: this.img,
 		_saveId: this._saveId,
 		_saveRelated: this._saveRelated
 	};
@@ -332,7 +358,7 @@ Fortag.prototype.updateData = function(data) {
 	this._setInputValue(this._$saveIdInput, data.tag_id || null);
 	this._setInputValueAsString(this._$saveRelatedInput, this._saveRelatedArray);
 	
-	this._setMainImgValue(this._$mainInput, data.tag || null);
+	this._setMainImgValue(this._$mainInput, data || null);
 }
 
 Fortag.prototype.setData = function(result) {
@@ -414,6 +440,8 @@ Fortag.prototype.post = function(target) {
 	}).fail(function (data, textStatus, jqXHR) {
 		console.log(data);
 	});
+	
+	this._uploadImgs();
 	
 	return true;
 }

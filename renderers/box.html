@@ -1,11 +1,12 @@
-<div class="platform">
-    <select class="header"></select>
-    <img class="svg select-svg" src="../assets/icons/iconmonstr/iconmonstr-menu-3-icon.svg" alt="icon" role="presentation" />
-    <p class="select-subtitle">Избери обложка за тази платформа.</p>
-    <div class="file">
+<div class="platform" data-platform="{{:subtype}}">
+    <select class="header" disabled="disabled">
+    	<option data-tag="{{:subtype}}" value="{{:id}}">{{:label}}</option>
+    </select>
+    <p class="select-subtitle">Избери обложка за {{:label}}.</p>
+    <div class="file" 
+         style="background-image: url(../assets/articles/{{:tag}}/_extras/{{:tag}}-{{:subtype}}.jpg)">
         <label><span class="clip">Избери</span>
-            <input type="file" />
+            <input type="file" data-subtype="{{:subtype}}" />
         </label>
     </div>
-    <button class="remove" type="button"><span class="clip">Изтрий</span></button>
 </div>

@@ -36,7 +36,7 @@ Album.prototype.constructor = Album;
  */
  
 Album.prototype._updateAfterSave = function(data) {
-	Fortag.prototype._updateAfterSave.call(this, data);
+	Formain.prototype._updateAfterSave.call(this, data);
 	
 	if (data.saveTracks) this._$saveTracksInput.val(data.saveTracks.join(',')).change();
 } 
