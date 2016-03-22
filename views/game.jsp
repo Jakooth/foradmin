@@ -44,6 +44,7 @@
             <admin:formItem id="gameRelatedInput" label="Подобни" 
             				placeholder="saints-row, mafia, Red Dead Redemption, Crackdown" 
                             type="text" autocomplete="off" />
+            <h3>Обложки</h3>
             <div class="Add Box">
                 <!--AddManager-->
             </div>

@@ -370,6 +370,7 @@ function AdminManager() {
 		this.refreshTagsinput(authors, '#articleAuthorsInput');
 		this.refreshTagsinput(issues, '#publishIssueInput');
 		this.refreshTagsinput(tags, '#asideTagsInput');
+		this.refreshTagsinput(tags, '#quoteTagsInput');
 		this.refreshTagsinput(tags, '#articleTagsInput');
 		this.refreshTagsinput(tags, '#articleBetterInput');
 		this.refreshTagsinput(tags, '#articleWorseInput');
@@ -659,6 +660,8 @@ function AdminManager() {
 	 */
 	
 	this.loadOptions($('#quoteTypeSelect'), type, 'option');
+	
+	initTagInput(tags, 'tags', '#quoteTagsInput', 1);
 	
 	/**
 	 * ARTICLE

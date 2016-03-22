@@ -28,7 +28,27 @@ Quote.prototype._resetLayouts = function() {
 }
 
 Quote.prototype._setPrimeAndUrl = function() {
+
+	/**
+	 * The problem is tags input data will not give tags in order.
+	 * We need the first one to set the url.
+	 */
+	 
+	var $tags = this._$tagsInput.parents('label').find('.tag');
+	
+	if ($tags.length <= 0) return false;
+	
+	if ($tags.length > 0) {
+		this.prime = $tags.eq(0).data().item;
+	}
+	
+	/**
+	 * Now preview the URL.
+	 */
+	
 	var s = this._getInputValue(this._$previewInput);
+	
+	if (!s) s = '';
 	
 	s = s.slice(0, 128);
 	s = s.slice(0, s.lastIndexOf('-'));
@@ -52,10 +72,19 @@ Quote.prototype.validateContent = function() {
 	 * Note DB will throw error anyway.
 	 */
 	 
-	if (!this.title) {
+	if (!this._getTypeaheadValue(this._$tagsInput)) {
 		this._isValid = false;
 		
-		admin.showAlert({message: 'Изберете герой.', 
+		admin.showAlert({message: 'Изберете герой или персона.', 
+						 status: 'error'});
+		
+		return false;
+	}
+	
+	if (!this._getTypeaheadValue(this._$tagsInput)[0].en_name) {
+		this._isValid = false;
+		
+		admin.showAlert({message: 'Избераният герой или персона няма име на латинца.', 
 						 status: 'error'});
 		
 		return false;
@@ -89,9 +118,12 @@ Quote.prototype.validateBestPractices = function() {
 }
 
 Quote.prototype.publish = function() {
+	this.title = this._getTypeaheadValue(this._$tagsInput)[0].en_name;
 	this.date = new Date(utils.today() + ' ' + utils.now());
-	this.shot = utils.formatTag(this._$titleInput.val()) + '.jpg';
+	this.shot = this._getTypeaheadValue(this._$tagsInput)[0].tag + '.' + 
+				this._getTypeaheadValue(this._$tagsInput)[0].img;
 	
+	this.json.title = this.title;
 	this.json.date = this.date;
 	this.json.shot = this.shot;
 }

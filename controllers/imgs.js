@@ -8,6 +8,70 @@ function ImgsManager() {
 		
 	var imgsAPI = '/forapi/forsecure/imgs.php';
 	
+	var imagesSection = '#images',
+		imagesList = imagesSection + ' [role=listbox]',
+		imagesTagInput = imagesSection + 'TagInput';
+		
+	var _getTypeaheadValue = function(_$input) {
+		return Fortag.prototype._getTypeaheadValue.call(self, _$input);
+	}	
+	
+	var _getImgsByTag = function() {
+		var imgsRequest = $.get(imgsAPI + '?tag=' + 
+								_getTypeaheadValue($(imagesTagInput))[0].tag);
+		
+		admin.showAlert({message: 'Търся...', status: 'loading'});
+		
+		_renderImgsResult(imgsRequest);
+	}
+	
+	var _renderImgsResult = function(data) {
+		var getResult = data,
+			getRenderer = $.get('renderers/image.html');
+		
+		$.when(getResult, getRenderer).done(function(resultData, renderData) {
+			
+			/**
+			 * Result is either JSON from the GET
+			 * or directly a parsed object from the POST.
+			 */
+			
+			var data = resultData[0].length ? 
+					   JSON.parse(resultData[0]) : 
+					   resultData[0];
+					   
+			/**
+			 * Remove "." and ".." from the result.
+			 */
+			 
+			data = data.imgs.slice(0, data.imgs.length - 2);
+			
+			/**
+			 * And also try to remove the "_extras" folder.
+			 */
+			
+			if (data[data.length - 1] == '_extras') {
+				data = data.slice(0, data.length - 1);
+			}
+			
+			var tmpls = $.templates({
+					imgsTemplate: renderData[0]
+				}),
+				html = $.templates
+						.imgsTemplate
+						.render(data);
+			
+			$(imagesList).find('[role=option][data-new=false]').remove();				
+			$(imagesList).append(html);
+			
+			admin.hideAlert();
+		}).fail(function(resultData) {
+			var data = resultData[0].length ? JSON.parse(resultData[0]) : resultData[0];
+			
+			console.log(data);
+		});
+	}
+	
 	/** 
 	 * PUBLIC
 	 */ 
@@ -189,15 +253,19 @@ function ImgsManager() {
 	 * EVENTS
 	 */
 	
-	$('#images').on('click', 'button.remove', function(e) {
+	$(imagesSection).on('click', 'button.remove', function(e) {
 		self.removeImage($(this));
 	});
 	
-	$('#images').on('change', '.file input[type=file]', function(e) {
+	$(imagesSection).on('change', '.file input[type=file]', function(e) {
 		self.addImage($(this), e);
 	});
 	
-	$('#images').on('click', 'button.upload', function(e) {
+	$(imagesSection).on('click', 'button.upload', function(e) {
 		self.postShots();
+	});
+	
+	$(imagesSection).on('change', imagesTagInput, function(e) {
+		_getImgsByTag();
 	});
 }

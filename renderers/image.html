@@ -1,10 +1,12 @@
 <li class="img" 
 	role="option" 
 	data-mime="" 
-    data-new="">
-    <label> <img role="presentation" alt="" /> <span class="clip">Добави картинката
-            в галерията</span>
-        <input type="checkbox" />
+    data-new="false">
+    <label> <img role="presentation" 
+    			 src="{{if #data}}/assets/articles/risen-3/{{:#data}}{{/if}}"
+                 alt="" /> <span class="clip">Добави картинката в галерията</span>
+        <input type="checkbox" aria-label="Добави в галерията" />
+        <input type="radio" aria-label="Избери" />
     </label>
     <p contenteditable="true">Натиснете тук, за да добавите коментар.</p>
     <button class="remove" type="button"> <span class="clip">Изтрий</span> </button>

@@ -332,24 +332,9 @@ footer {
 	padding: @unit * 4;
 }
 
-.breadcrumb a,
-main h2 a {
-	padding-bottom: @unit * 2;
-}
-
-form label span {
-	margin-bottom: @unit * 2;
-}
-
-#images li:first-child,
-[role=group] label {
-	margin-bottom: 0;
-}
-
 div.settings p,
 form > [role=group]:not(.Main),
 .Cover,
-#images li,
 section#login h2,
 h3,
 .Window h2 span,
@@ -571,6 +556,7 @@ main h2 a {
 	padding-left: 62px;
 	width: auto;
 	line-height: 16pt;
+	padding-bottom: @unit * 2;
 }
 
 .breadcrumb li {
@@ -644,6 +630,7 @@ a.create svg {
 form label,
 form label span {
 	display: block;
+	margin-bottom: @unit * 2;
 }
 
 form label {
@@ -666,6 +653,7 @@ form input {
 }
 
 [role=group] label {
+	margin-bottom: 0;
 	clear: none;
 	float: left;
 	width: 25%;
@@ -696,7 +684,8 @@ form textarea {
 	min-height: 60px;
 }
 
-form input[type=checkbox] {
+form input[type=checkbox],
+form input[type=radio] {
 	width: 24px;
 	height: 24px;
 	margin-right: 6px;
@@ -1044,11 +1033,6 @@ button.remove {
 	background-color: transparent;
 }
 
-#images .file {
-	width: 320px;
-	height: 180px;
-}
-
 [role=listbox] {
 	float: left;
 }
@@ -1072,6 +1056,43 @@ button.remove {
 	top: 10px;
 	width: 32px;
 	height: 32px;
+}
+
+#images .file {
+	width: 320px;
+	height: 180px;
+}
+
+
+
+
+
+
+
+
+/**
+ * IMAGES
+ */
+ 
+#images [type=radio] {
+	display: none;
+} 
+
+[role=dialog] #images li [type=radio] {
+	display: inline;
+}
+
+[role=dialog] #images [role=option] [type=checkbox],
+[role=dialog] #images [role=option] p {
+	display: none;
+}
+
+#images li {
+	margin-bottom: @unit * 4;
+}
+
+#images li:first-child {
+	margin-bottom: 0;
 }
 
 #images li button.remove {

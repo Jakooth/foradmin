@@ -17,7 +17,7 @@
                 </div>
             </div>
             <admin:formItem id="quoteTypeSelect" label="Раздел" type="select" />
-            <admin:formItem id="quoteTitleInput" label="Герой или персона" 
+            <admin:formItem id="quoteTagsInput" label="Герой или персона" 
             				placeholder="Minsk, Batman, Koralsky, doomy, Steve Jobs" type="text" 
                             autocomplete="off" />
         	<admin:formItem id="quotePreviewInput" label="Цитат" type="area" 
@@ -25,6 +25,7 @@
         	<h3>Скрити стойности</h3>
             <admin:formItem id="quoteSubtypeSelect" label="Подтип" type="hidden" value="quote" />
             <admin:formItem id="quoteSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
+            <admin:formItem id="quoteSaveTagsInput" label="Тагове" type="hidden" value="" />
             <admin:formItem id="quoteUrlInput" label="Адрес" type="hidden" value="" />
         </form>
         <div role="toolbar">
