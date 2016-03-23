@@ -390,8 +390,10 @@ function AdminManager() {
 	 * PUBLIC
 	 */
 	
+	this.createTarget = null;
 	this.selectTarget = null;
 	this.publishTarget = null;
+	this.imgTarget = null;
 	
 	this.loadOptions = function(target, data, renderer, selected) {
 		var tmpl = $.get('renderers/' + renderer + '.html'),
@@ -786,7 +788,7 @@ function AdminManager() {
 	});
 	
 	$('body').on('click', 'nav a:not(.active), header a:not(.active)', function(e) {
-		$this = $(this);																		
+		var $this = $(this);																		
 			
 		self.showSection($this.attr('href'), $this.parents().hasClass('breadcrumb'));
 		self.setDefaults();

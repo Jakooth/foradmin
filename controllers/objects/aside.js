@@ -136,6 +136,9 @@ Aside.prototype._setImgValue = function(_$input, data) {
 					'url(../assets/articles/' + 
 					utils.parseImgTag(data) + '/' + 
 					data);
+		
+		_$input.data('img', data);
+		_$input.attr('data-img', _$input.data('img'));
 	} else {
 		_$input.parents('.file')
 			   .css('background-image', 

@@ -503,11 +503,10 @@ function AddManager() {
 		self.removeLayout($(this));
 	});
 	
-	$('#game, #article, #album, ' + 
-	  '#movie, #aside, #eventm, ' + 
+	$('#game, #band, #album, ' + 
+	  '#movie, #eventm, #dlc, ' + 
 	  '#book, #person, #company,' +
-	  '#character, #serie, #dlc, ' +
-	  '#band').on('change', '.file input[type=file]', function(e) {
+	  '#character, #serie').on('change', '.file input[type=file]', function(e) {
 		var reader = new FileReader();
 		
 		var $this = $(e.target),

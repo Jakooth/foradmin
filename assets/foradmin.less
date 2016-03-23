@@ -1074,14 +1074,17 @@ button.remove {
  * IMAGES
  */
  
-#images [type=radio] {
+#images [type=radio],
+#images button.ok {
 	display: none;
 } 
 
-[role=dialog] #images li [type=radio] {
+[role=dialog] #images li [type=radio],
+[role=dialog] #images button.ok {
 	display: inline;
 }
 
+[role=dialog] #images button.upload,
 [role=dialog] #images [role=option] [type=checkbox],
 [role=dialog] #images [role=option] p {
 	display: none;

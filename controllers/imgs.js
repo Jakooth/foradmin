@@ -59,10 +59,16 @@ function ImgsManager() {
 				}),
 				html = $.templates
 						.imgsTemplate
-						.render(data);
+						.render(data, {parseImgTag: utils.parseImgTag});
 			
 			$(imagesList).find('[role=option][data-new=false]').remove();				
 			$(imagesList).append(html);
+			
+			if (window.admin.imgTarget) {
+				$(imagesSection).find('[id="' + window.admin.imgTarget.data('img') + '"] [type=radio]')
+								.prop('checked', true)
+								.focus();
+			}
 			
 			admin.hideAlert();
 		}).fail(function(resultData) {
@@ -71,6 +77,36 @@ function ImgsManager() {
 			console.log(data);
 		});
 	}
+	
+	var _setImgValue = function(_$input, data) {
+		Aside.prototype._setImgValue.call(self, _$input, data);
+	}
+	
+	var _getTypeaheadValue = function(_$input) {
+		return Fortag.prototype._getTypeaheadValue.call(self, _$input);
+	}
+	
+	var _getInputValue = function(_$input) {
+		return Fortag.prototype._getInputValue.call(self, _$input);
+	}
+	
+	this._escapeValue = function(data) {
+		return _escapeValue(data);
+	}
+	
+	var _escapeValue = function(data) {
+	
+		/**
+		 * There is an error if you simple return quoted string.
+		 * For this reason we return string object to string.
+		 */
+		
+		return new String(Fortag.prototype._escapeValue
+										  .call(this, data)).toString();
+	}
+	
+	
+	
 	
 	/** 
 	 * PUBLIC
@@ -257,6 +293,24 @@ function ImgsManager() {
 		self.removeImage($(this));
 	});
 	
+	$('#article, #aside').on('click', '.file input[type=file]', function(e) {
+		e.preventDefault();
+		
+		var $this = $(this);
+		
+		var id = $(this).parents('section').prop('id'),
+			tags = _getTypeaheadValue($('#' + id + 'TagsInput'));
+		
+		admin.showSectionInWindow(imagesSection);
+		
+		if (tags) {
+			$(imagesTagInput).tagsinput('removeAll');
+			$(imagesTagInput).tagsinput('add', tags[0]);
+		}
+		
+		window.admin.imgTarget = $this;
+	});
+	
 	$(imagesSection).on('change', '.file input[type=file]', function(e) {
 		self.addImage($(this), e);
 	});
@@ -265,7 +319,21 @@ function ImgsManager() {
 		self.postShots();
 	});
 	
+	$(imagesSection).on('click', 'button.ok', function(e) {
+		var img = $(imagesSection).find('[name=imgChoice]:checked').val();
+	
+		_setImgValue(window.admin.imgTarget, img);
+		
+		window.admin.imgTarget.data('img', img);
+		window.admin.imgTarget.attr('data-img', window.admin.imgTarget.data('img'));
+		window.admin.imgTarget.focus();
+		
+		admin.hideSectionInWindow($(imagesSection));
+	});
+	
 	$(imagesSection).on('change', imagesTagInput, function(e) {
+		if (!_getInputValue($(this))) return;
+		
 		_getImgsByTag();
 	});
 }

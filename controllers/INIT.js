@@ -11,10 +11,22 @@ $(document).ready(function() {
 	window.userProfile = null; 
 	
 	/**
+	 * @createTarget when opening a window to create a tag. 
+	 * @publishTarget the object, which is saved and we are about to publish. 
+	 * @imgTarget when selecting an image to keep a reference to the input. 
+	 * @selectTarget when selecting aside content. 
+	 */
+	
+	window.admin.createTarget = null;
+	window.admin.publishTarget = null;
+	window.admin.imgTarget = null;
+	window.admin.selectTarget = null;
+	
+	/**
 	 * Require immediate login to enable save and logs. 
 	 */
 	 
-	login.showLock();
+	//login.showLock();
 	
 	/**
 	 * Send the authorization header on all API requests.
