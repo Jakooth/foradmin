@@ -1044,23 +1044,21 @@ button.remove {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 40% 40%;
+	cursor: pointer;
 }
 
 [role=option] p {
 	padding: @unit * 2;
 }
 
-[role=option] input {
+[role=option] [type=radio],
+[role=option] [type=checkbox] {
 	position: absolute;
 	left: 10px;
 	top: 10px;
 	width: 32px;
 	height: 32px;
-}
-
-#images .file {
-	width: 320px;
-	height: 180px;
+	z-index: 1;
 }
 
 
@@ -1073,6 +1071,60 @@ button.remove {
 /**
  * IMAGES
  */
+
+#images [role=listbox] {
+	width: 100%;
+}
+
+/**
+ * This the 16-9 image which will set the size for the LI.
+ * Bigger images will be clipped.
+ */
+
+#images [role=option] > img {
+	position: relative;
+	width: 100%;
+}
+
+#images [role=option]:first-of-type label {
+	position: relative;
+}
+
+#images [role=option] label {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	margin: 0;
+	height: auto;
+	width: 100%;
+	cursor: pointer;
+}
+
+#images [role=option] [role=progressbar] {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 0, 0.8);
+}
+
+#images [role=option][data-new=true] [role=progressbar] {
+	display: block;
+}
+
+#images [role=option][aria-invalid=true] [role=progressbar] {
+	display: block;
+	width: 100%;
+    height: 100%;
+	padding: @unit * 4;
+	padding-top: @unit * 16; 
+	color: @light;
+	text-align: center;
+	background-color: rgba(255, 0, 0, 0.8);
+}
  
 #images [type=radio],
 #images button.ok {
@@ -1084,18 +1136,17 @@ button.remove {
 	display: inline;
 }
 
+#images [role=option] [type=checkbox],
+#images [role=option] p,
 [role=dialog] #images button.upload,
+[role=dialog] #images button.remove,
 [role=dialog] #images [role=option] [type=checkbox],
 [role=dialog] #images [role=option] p {
 	display: none;
 }
 
-#images li {
-	margin-bottom: @unit * 4;
-}
-
-#images li:first-child {
-	margin-bottom: 0;
+[role=dialog] #images [data-new=true] button.remove {
+	display: block;
 }
 
 #images li button.remove {
@@ -1106,18 +1157,23 @@ button.remove {
 	height: 48px;
 	background-size: 32px 32px;
 	min-height: 48px;
+	z-index: 1;
+}
+
+#images [role=option] {
+	width: 25%;
 }
 
 [role=option] label {
 	width: 100%;
 	height: 180px;
 	overflow: hidden;
+	cursor: pointer;
 }
 
 [role=option] img {
 	display: block;
 	width: 100%;
-	background-color: @bg;
 }
 
 [role=option] label span {
@@ -1354,6 +1410,66 @@ button.remove {
 	height: 320px;
 }
 
+#article .Main .file:nth-child(3):hover {
+	background-color: transparent;
+}
+
+#article .Main .file:nth-child(3)::before {
+	&:extend(.file::after);
+	left: 25%;
+	background-image: url(../../assets/icons/iconmonstr/iconmonstr-picture-icon.svg);
+	z-index: 200;
+}
+
+#article .Main .file:nth-child(3)::after {
+	left: 75%;
+	z-index: 200;
+}
+
+#article .Main .file[aria-expanded=false]:nth-child(3)::before {
+	left: 50%;
+}
+
+#article .Main .file[aria-expanded=false]:nth-child(3)::after {
+	background: none;
+}
+
+#article .Main .file:nth-child(3) input:nth-of-type(1) {
+	width: 50%;
+	left: 0;
+	height: 100%;
+}
+
+#article .Main .file[aria-expanded=false]:nth-child(3) input:nth-of-type(1) {
+	width: 100%;
+}
+
+#article .Main .file:nth-child(3) input:nth-of-type(2) {
+	width: 50%;
+	left: 50%;
+	height: 100%;
+}
+
+#article .Main .file:nth-child(3) input::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 100;
+    background-color: transparent;
+}
+
+#article .Main .file:nth-child(3) input:hover {
+	opacity: 1;
+}
+
+#article .Main .file:nth-child(3) input:hover::after {
+	background-color: @secondary;
+}
+
 #aside .Main .file,
 .Cover {
 	clear: both;
@@ -1416,6 +1532,7 @@ button.remove {
 	background-position: center center;
 }
 
+#aside .Main .file::after,
 #article .Main .file:nth-child(1)::after,
 #article .Main .file:nth-child(2)::after,
 .Cover .file::after,
@@ -2006,10 +2123,12 @@ button.remove {
  * SEARCH
  */
 
+#images form,
 #search form {
 	padding: 0;
 }
 
+#images form label,
 #search form > label,
 #search form > button {
 	display: block;
@@ -2030,6 +2149,10 @@ button.remove {
 
 #search form > label:first-child {
 	width: 40%;
+}
+
+#images form > label:first-child {
+	width: 100%;
 }
 
 [role=dialog] #search form > label:first-child {
@@ -2076,12 +2199,14 @@ button.remove {
 	border: none;
 }
 
+#images .bootstrap-tagsinput,
 #search .bootstrap-tagsinput {
 	border: none;
 	margin: 0;
 	height: 84px;
 }
 
+#images .bootstrap-tagsinput input,
 #search .bootstrap-tagsinput input,
 #search [role=toolbar] > label select,
 #search form > label select,
@@ -2096,6 +2221,7 @@ button.remove {
  * Absolutely uknown why?
  */
 
+#images form > label > span,
 #search [role=toolbar] > label > span,
 #search form > label > span {
 	display: none;

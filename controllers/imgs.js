@@ -70,6 +70,13 @@ function ImgsManager() {
 								.focus();
 			}
 			
+			/**
+			 * Update new images with the selected tag
+			 * and recalculate the index.
+			 */
+			
+			_setNewImgsTag();
+			
 			admin.hideAlert();
 		}).fail(function(resultData) {
 			var data = resultData[0].length ? JSON.parse(resultData[0]) : resultData[0];
@@ -90,8 +97,54 @@ function ImgsManager() {
 		return Fortag.prototype._getInputValue.call(self, _$input);
 	}
 	
+	var _getLastIndex = function(notNew) {
+		var $lastImg = $(imagesSection + ' [role=option]:nth-of-type(2)');
+		
+		if (notNew) {
+			$lastImg = $(imagesSection + ' [role=option]:not([data-new=true]):eq(1)');
+		}
+		
+		var index = $lastImg.length > 0 ? 
+					Number(utils.parseImgIndex($lastImg.prop('id')).split('.')[0]) : 0;
+		
+		index ++;
+		
+		return index;
+	}
+	
 	this._escapeValue = function(data) {
 		return _escapeValue(data);
+	}
+	
+	this._updateUpload = function(img, self, e) {
+		var	progress = Math.ceil(((e.loaded) / e.total) * 100);
+		
+		if (progress > 100) {
+			progress == 100;
+		}
+		
+		img.target.find('[role=progressbar]').css('width', 100 - progress + '%');
+	}
+	
+	var _setNewImgsTag = function() {
+		var imgs = $(imagesSection).find('.img[data-new=true]'),
+			imgIndex = _getLastIndex(true);
+		
+		$.each(imgs, function(index, img) {
+			var $img = $(img);
+			
+			var tag = _getTypeaheadValue($(imagesTagInput))[0].tag;
+			
+			if (imgIndex <= 9) {
+				imgIndex = '0' + imgIndex;
+			}
+			
+			$img.prop('id', tag + '-' + imgIndex + '.jpg');
+			$img.find('[type=radio]').prop('value', tag + '-' + imgIndex + '.jpg');
+			$img.find('[type=checkbox]').prop('value', tag + '-' + imgIndex + '.jpg');
+
+			imgIndex ++;
+		});
 	}
 	
 	var _escapeValue = function(data) {
@@ -116,7 +169,9 @@ function ImgsManager() {
 		var imgGet = $.get('renderers/image.html');
 		
 		$.when(imgGet).done(function(imgHtml) {
-			var html = imgHtml, 
+			var tmpls = $.templates({
+					imgsTemplate: imgHtml
+				}),
 				files = e.target.files;
 				
 			var $ul = $input.parents('[role=listbox]'),
@@ -132,14 +187,42 @@ function ImgsManager() {
 				reader = new FileReader();
 				
 				reader.onload = function(e) {
-					$ul.append(html);
+				
+					/**
+					 * Guess the index by looking at the last image.
+					 * There is a small changes this will change after upload,
+					 * but is not critical, because can be updated.
+					 * The wrong image will be displayed immediately.
+					 */
 					
-					$li = $ul.find('[role=option]:last-child');
-					$img = $li.find('img');
+					var $lastImg = $(imagesSection + ' [role=option]:nth-of-type(2)');
+					
+					var tag = utils.parseImgTag($lastImg.prop('id'));
+						imgIndex = _getLastIndex();
+						
+					if (imgIndex <= 9) {
+						imgIndex = '0' + imgIndex;
+					}	
+					
+					var data = [tag + '-' + imgIndex + '.jpg'],
+						html = $.templates
+								.imgsTemplate
+								.render(data, {parseImgTag: utils.parseImgTag});
+				
+					if ($lastImg.length > 0) {
+						$lastImg.before(html);
+					} else {
+						$ul.append(html);
+					}
+					
+					$li = $ul.find('[role=option]:nth-of-type(2)');
+					$img = $li.find('label img');
 					
 					$img.attr('src', e.target.result);
 					$li.data('new', 'true');
 					$li.attr('data-new', $li.data('new'));
+					
+					$li.find('[type=radio]:visible').prop('checked', true).focus();
 				}
 				
 				reader.readAsDataURL(f);
@@ -150,11 +233,30 @@ function ImgsManager() {
 	}
 	
 	this.removeImage = function($appender) {
-		$appender.parents('[role=option]').remove();
+		var $option = $appender.parents('[role=option]');
+		
+		if ($option.data('new') == 'true') {
+			$option.remove();
+		} else {
+			var img = {
+				tag: utils.parseImgTag($option.prop('id')),
+				img: $option.prop('id')
+			}
+			
+			var searchRequest = $.ajax({
+				type: "DELETE",
+				contentType: "application/json; charset=utf-8",
+				url: imgsAPI,
+				data: JSON.stringify(img),
+				dataType: 'json'
+			});
+			
+			$option.remove();
+		}
 	}
 	
 	this.createImgsData = function() {
-		var imgs = $('#images').find('.img[data-new=true]'),
+		var imgs = $(imagesSection).find('.img[data-new=true]'),
 			arr = new Array();
 		
 		$.each(imgs, function(index, img) {
@@ -164,7 +266,7 @@ function ImgsManager() {
 				src: $img.find('img').prop('src'),
 				target: $img,
 				alt: $img.find('p').text(),
-				path: $('#imagesTagInput').tagsinput()[0].itemsArray[0].tag,
+				path: $(imagesTagInput).tagsinput()[0].itemsArray[0].tag,
 				type: 'shot',
 				isGallery: $img.find('input').prop('checked')
 			});
@@ -227,15 +329,42 @@ function ImgsManager() {
 			
 			var xhr = new XMLHttpRequest();
 			
+			xhr.upload.addEventListener('progress', 
+				self._updateUpload.bind(null, img, self), 
+			false);
+			
+			xhr.onloadend = function(e) {
+				var response = JSON.parse(e.target.response);
+			
+				img.target.data('new', 'false');
+				img.target.attr('data-new', 'false');
+				
+				if (response.events.upload) {
+					img.target.attr('aria-invalid', 'true');
+					img.target.find('[role=progressbar]')
+							  .css('width', '')
+							  .text(response.events.upload.error);
+						
+					return;
+				}
+				
+				if (window.admin.imgTarget) {
+					var imgChoice = $(imagesSection).find('[name=imgChoice]:checked').val();
+					
+					if (imgChoice.indexOf(img.path) != -1) {
+						_setImgValue(window.admin.imgTarget, imgChoice);
+						
+						window.admin.imgTarget.data('img', imgChoice);
+						window.admin.imgTarget.attr('data-img', window.admin.imgTarget.data('img'));
+						window.admin.imgTarget.focus();
+					}
+				}
+			};
+			
 			xhr.open("POST", imgsAPI);
 			xhr.setRequestHeader('Authorization',  
 							     'Bearer ' + localStorage.getItem('userToken')); 
 			xhr.send(imgForm);
-			
-			/**
-			 * TODO: On success set the data-new attribute to false;
-			 * TODO: Error check for over 2MB.
-			 */
 		});
 	}
 	
@@ -267,11 +396,23 @@ function ImgsManager() {
     }
 	
 	this.postShots = function() {
-	
-		/**
-		 * TODO: Validate tag input is empty.
-		 * TODO: Validate images are not selected.
-		 */
+		var tag = _getTypeaheadValue($(imagesTagInput)),
+			imgs = $(imagesSection).find('.img[data-new=true]'),
+			isDialog = $('#images').parents('[role=dialog]').length > 0 ? true : false;
+			
+		if (!tag) {
+			admin.showAlert({message: 'Изберете таг, към който да прикачите картинки.', 
+							 status: 'error'});
+			
+			return false;
+		}
+
+		if (imgs.length <= 0 && !isDialog) {
+			admin.showAlert({message: 'Не са избрани картинки за качване.', 
+							 status: 'error'});
+			
+			return false;
+		}
 		
 		var imgData = self.createImgsData();
 		
@@ -293,10 +434,27 @@ function ImgsManager() {
 		self.removeImage($(this));
 	});
 	
+	$(imagesSection).on('click', '[role=option]', function(e) {
+		$(this).find('[type=radio]').prop('checked', true).change();
+	});
+	
 	$('#article, #aside').on('click', '.file input[type=file]', function(e) {
-		e.preventDefault();
+		var $this = $(this),
+			$that = $('#articleCaretUpload');
 		
-		var $this = $(this);
+		/**
+		 * Right side of the caret will upload a new image.
+		 * Rest the new indicator, if another image is selected.
+		 */
+		
+		if ($this.prop('id') == 'articleCaretUpload') {
+			return;
+		} else {
+			$that.data('new', 'false');
+			$that.attr('data-new', 'false');
+			
+			e.preventDefault();
+		}
 		
 		var id = $(this).parents('section').prop('id'),
 			tags = _getTypeaheadValue($('#' + id + 'TagsInput'));
@@ -311,28 +469,56 @@ function ImgsManager() {
 		window.admin.imgTarget = $this;
 	});
 	
+	$('#article').on('change', '#articleCaretUpload', function(e) {
+		var $this = $(this);
+		
+		/**
+		 * Guarantee there is a selected tag,
+		 * before uploading a caret.
+		 */
+		
+		var $tags = $('#articleTagsInput').parents('label').find('.tag');
+	
+		if ($tags.length <= 0) {
+			e.preventDefault();
+			
+			admin.showAlert({message: 'Трябва да изберте основен таг, преди да качите картинка за кара или да използвате вече качена.', 
+						 status: 'error'});
+						 
+			return;
+		}
+		
+		add.addImage(e);
+	});
+	
 	$(imagesSection).on('change', '.file input[type=file]', function(e) {
 		self.addImage($(this), e);
 	});
 	
-	$(imagesSection).on('click', 'button.upload', function(e) {
+	$(imagesSection).on('click', 'button.upload, button.ok', function(e) {
 		self.postShots();
 	});
 	
 	$(imagesSection).on('click', 'button.ok', function(e) {
-		var img = $(imagesSection).find('[name=imgChoice]:checked').val();
-	
-		_setImgValue(window.admin.imgTarget, img);
+		var $imgChoice = $(imagesSection).find('[role=option]:not([data-new=true]) [name=imgChoice]:checked');
 		
-		window.admin.imgTarget.data('img', img);
-		window.admin.imgTarget.attr('data-img', window.admin.imgTarget.data('img'));
-		window.admin.imgTarget.focus();
+		if ($imgChoice.length > 0) {
+			_setImgValue(window.admin.imgTarget, $imgChoice.val());
+				
+			window.admin.imgTarget.data('img', $imgChoice.val());
+			window.admin.imgTarget.attr('data-img', window.admin.imgTarget.data('img'));
+			window.admin.imgTarget.focus();
+		}
 		
 		admin.hideSectionInWindow($(imagesSection));
 	});
 	
 	$(imagesSection).on('change', imagesTagInput, function(e) {
-		if (!_getInputValue($(this))) return;
+		if (!_getInputValue($(this))) {
+			$(imagesList).find('.img[role=option]:not([data-new=true])').remove();
+			
+			return;
+		}
 		
 		_getImgsByTag();
 	});

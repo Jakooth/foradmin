@@ -44,6 +44,21 @@ function AddManager() {
 		}
 	}
 	
+	this.addImage = function(e) {
+		var reader = new FileReader();
+		
+		var $this = $(e.target),
+			$file = $this.parents('.file');
+				
+		reader.onload = function(e) {
+			$file.css('background-image', 'url(' + e.target.result + ')');
+			$this.data('new', 'true');
+			$this.attr('data-new', $this.data('new'));
+		}
+		
+		reader.readAsDataURL(e.target.files[0]);
+	}
+	
 	this.addLayout = function($appender, data, isNew) {
 		var getLayout = $.ajax({url: 'renderers/layout.html',
 								dataType: 'html'});
@@ -507,18 +522,8 @@ function AddManager() {
 	  '#movie, #eventm, #dlc, ' + 
 	  '#book, #person, #company,' +
 	  '#character, #serie').on('change', '.file input[type=file]', function(e) {
-		var reader = new FileReader();
-		
-		var $this = $(e.target),
-			$file = $this.parents('.file');
-				
-		reader.onload = function(e) {
-			$file.css('background-image', 'url(' + e.target.result + ')');
-			$this.data('new', 'true');
-			$this.attr('data-new', $this.data('new'));
-		}
-		
-		reader.readAsDataURL(e.target.files[0]);
+	  
+		self.addImage(e);
 	});
 	
 	/**

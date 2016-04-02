@@ -94,6 +94,8 @@
                 <div class="file">
                 	<input aria-label="Избери" 
                     	   id="articleCaretInput" type="file" />
+                	<input aria-label="Избери" 
+                    	   id="articleCaretUpload" type="file" />
                 </div>
             </div>
             <h3>Съдържание</h3>

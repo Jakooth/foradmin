@@ -123,7 +123,7 @@ function Layout(id) {
 				$author = null,
 				$valign = null;
 				
-			var img = $img.val() || $img.data('img'),
+			var img = $img.data('img'),
 				id = Math.round(Math.random() * 100000),
 				alt = $p.length == 0 ? "" : self.formatAltText($p.html()),
 				ratio = $ratio.is(':checked') ? $ratio.val() : '16-9',

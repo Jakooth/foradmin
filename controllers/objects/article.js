@@ -7,6 +7,7 @@ function Article(o) {
 	
 	this._$wideInput = $('#' + this._o + 'WideInput');
 	this._$caretInput = $('#' + this._o + 'CaretInput');
+	this._$caretUpload = $('#' + this._o + 'CaretUpload');
 	
 	this._$videoTechSelect = $('#' + this._o + 'VideoTechSelect');
 	this._$audioTechSelect = $('#' + this._o + 'AudioTechSelect');
@@ -184,6 +185,30 @@ Article.prototype._getPreviewText = function(id) {
 	return preview;
 }
 
+Article.prototype._uploadCaret = function() {
+	if (this._$caretUpload.length <= 0) {
+		return this._getImageValue(this._$caretInput);
+	}
+	
+	if (!this._$caretUpload.val() || 
+		!this._$caretUpload.data('new') || 
+		this._$caretUpload.data('new') == 'false') {
+		
+		return this._getImageValue(this._$caretInput);
+	}
+	
+	var $tags = this._$tagsInput.parents('label').find('.tag');
+
+	var imgData = imgs.createBackgroundImgData(this._$caretUpload, 
+											   $tags.eq(0).data().item.tag, 'caret');
+	
+	imgs.uploadImgs(imgData);
+	
+	return $tags.eq(0).data().item.tag + 
+		   '-caret.' + 
+		   this._$caretUpload.val().split('.').pop(); 
+}
+
 
 
 
@@ -254,7 +279,7 @@ Article.prototype.save = function() {
 	 */
 	
 	this.wide = this._getImageValue(this._$wideInput);
-	this.caret = this._getImageValue(this._$caretInput);
+	this.caret = this._uploadCaret();
 	
 	this.videoTech = this._getInputValue(this._$videoTechSelect, false);
 	this.audioTech = this._getInputValue(this._$audioTechSelect, false);

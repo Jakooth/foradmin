@@ -931,7 +931,8 @@ function AdminManager() {
 			$aVRegion = $('#articleAVRegion'),
 			$audioTechSelect = $('#articleAudioTechSelect').parents('label'),
 			$gameRegion = $('#articleReviewRegion').children(':gt(0)'),
-			$versionTested = $('#articleVersionTestedSelect').parents('.two-cols');
+			$versionTested = $('#articleVersionTestedSelect').parents('.two-cols'),
+			$caretUpload = $('#articleCaretUpload');
 		
 		var type = $('#articleTypeSelect').val(),
 			subtype = $('#articleSubtypeSelect').val(); 
@@ -942,6 +943,8 @@ function AdminManager() {
 		$reviewRegion.hide();
 		$gameRegion.hide();
 		$versionTested.hide();
+		$caretUpload.show();
+		$caretUpload.parents('.file').attr('aria-expanded', true);
 		
 		if ((subtype == 'review' || subtype == 'video') && type == 'games') {
 			$reviewRegion.show();
@@ -962,6 +965,8 @@ function AdminManager() {
 		if (subtype == "news") {
 			$aVRegion.show();
 			$audioTechSelect.show();
+			$caretUpload.hide();
+			$caretUpload.parents('.file').attr('aria-expanded', false);
 		}
 		
 		if (subtype == "video") {

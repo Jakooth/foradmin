@@ -1038,7 +1038,8 @@
                     <input type="file" id="articleShotInput" aria-label="Избери"/>
                 </div>
                 <div class="file">
-                    <input type="file" id="articleCaretInput" aria-label="Избери"/>
+                    <input aria-label="Избери" id="articleCaretInput" type="file"/>
+                	<input aria-label="Избери" id="articleCaretUpload" type="file"/>
                 </div>
             </div>
             <h3>Съдържание</h3>
@@ -1155,13 +1156,13 @@
                     <div class="file">
                         <label><span class="clip">Избери</span>
                             <input multiple="multiple" type="file"/>
-                        </label>
+                            <img alt="" role="presentation" src="/assets/helpers/16-9.png" /> </label>
                     </div>
                 </li>
             </ul>
         </form>
         <div role="toolbar">
-        	<button type="button" class="ok">Избери</button>
+            <button type="button" class="ok">Избери</button>
             <button type="button" class="upload">Качи</button>
             <button type="button" class="cancel">Отмени</button>
         </div>

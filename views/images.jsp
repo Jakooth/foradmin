@@ -20,6 +20,7 @@
                             <input type="file" multiple="multiple" />
                         </label>
                     </div>
+                    <img alt="" role="presentation" src="/assets/helpers/16-9.png" />
                 </li>
             </ul>
         </form>

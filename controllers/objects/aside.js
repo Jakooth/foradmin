@@ -124,17 +124,21 @@ Aside.prototype._setInputValueAsString = function(_$input, data) {
 
 Aside.prototype._getImageValue = function(_$input) {
 	return _$input.length ?
-		   utils.parseImg(_$input.val()) || null : null;
+		   _$input.data('img') || null : null;
 }
 
 Aside.prototype._setImgValue = function(_$input, data) {
+	var extras = '';
+	
 	if (data) {
 		if (!_$input.length) return false;
+		
+		if (data.indexOf('-caret') >= 0) extras = '_extras/';
 		
 		_$input.parents('.file')
 			   .css('background-image', 
 					'url(../assets/articles/' + 
-					utils.parseImgTag(data) + '/' + 
+					utils.parseImgTag(data) + '/' + extras + 
 					data);
 		
 		_$input.data('img', data);
@@ -381,6 +385,8 @@ Aside.prototype.validateBestPractices = function() {
 }
 
 Aside.prototype.save = function() {
+	this._isValid = true;
+
 	this.type = this._getInputValue(this._$typeInput);
 	this.subtype = this._getInputValue(this._$subtypeInput);
 	this.title = this._getInputValue(this._$titleInput);
