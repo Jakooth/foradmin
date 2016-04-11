@@ -10,13 +10,13 @@
         <form>
             <h3>Тема</h3>
             <admin:formItem id="articleTypeSelect" label="Раздел" type="select" layout="two-cols" />
-            <admin:formItem id="articleSubtypeSelect" label="Тип" type="select" layout="two-cols" />
+            <admin:formItem id="articleSubtypeSelect" label="Новина или статия" type="select" layout="two-cols" />
             <div id="articleAVRegion" role="region">
                 <admin:formItem id="articleVideoTechSelect" label="Видео" type="select" layout="two-cols">
                     <option value="">Без видео</option>
                     <option value="youtube">youtube</option>
                     <option disabled="disabled" value="vimeo">vimeo</option>
-                    <option value="html5">forplay</option>
+                    <option value="html5">mp4</option>
                 </admin:formItem>
                 <admin:formItem id="articleAudioTechSelect" label="Aудио" type="select" layout="two-cols">
                     <option value="">Без аудио</option>

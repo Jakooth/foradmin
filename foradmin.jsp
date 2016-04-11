@@ -165,7 +165,7 @@
                     <h2>Добавяне на информация</h2>
                     <ul>
                         <li>
-                            <admin:menuItem label="Статия" url="article" 
+                            <admin:menuItem label="Новини и Статии" url="article" 
                     				icon="lorc,papers" />
                         </li>
                         <li>
@@ -181,7 +181,7 @@
                     				icon="delapouite,piggy-bank" />
                         </li>
                         <li>
-                            <admin:menuItem label="Цитат" url="quote" 
+                            <admin:menuItem label="Цитати и факти" url="quote" 
                     				icon="lorc,conversation" />
                         </li>
                         <li>

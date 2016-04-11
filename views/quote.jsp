@@ -5,22 +5,14 @@
             xmlns:admin="urn:jsptagdir:/WEB-INF/tags/foradmin">
     <section id="quote">
         <h2>
-            <admin:menuItem label="Избери герой, добави текст и създай таг." title="Цитат" url="quote" />
+            <admin:menuItem label="Избери раздел, таг и добави текст." title="Цитати и факти" url="quote" />
         </h2>
         <form>
-        	<div class="Main" role="group">
-                <div class="file">
-                    <label>
-                        <span class="clip">Избери</span>
-                        <input id="gameMainInput" type="file" />
-                    </label>
-                </div>
-            </div>
             <admin:formItem id="quoteTypeSelect" label="Раздел" type="select" />
-            <admin:formItem id="quoteTagsInput" label="Герой или персона" 
-            				placeholder="Minsk, Batman, Koralsky, doomy, Steve Jobs" type="text" 
+            <admin:formItem id="quoteTagsInput" label="Таг" 
+            				placeholder="Minsk, Batman, Koralsky, doomy, SEGA, Steve Jobs" type="text" 
                             autocomplete="off" />
-        	<admin:formItem id="quotePreviewInput" label="Цитат" type="area" 
+        	<admin:formItem id="quotePreviewInput" label="Цитат или факт" type="area" 
             				placeholder="" />
         	<h3>Скрити стойности</h3>
             <admin:formItem id="quoteSubtypeSelect" label="Подтип" type="hidden" value="quote" />

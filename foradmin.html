@@ -72,11 +72,13 @@
     <nav aria-label="Добавяне на информация">
         <h2>Добавяне на информация</h2>
         <ul>
-            <li><a href="#article"><img role="presentation" alt="Статия" src="../assets/icons/lorc/originals/svg/000000/transparent/papers.svg" class="svg"/><span class="">Статия</span></a></li>
+            <li><a href="#article"><img role="presentation" alt="Статия" src="../assets/icons/lorc/originals/svg/000000/transparent/papers.svg" class="svg"/><span class="">Новини
+                        и Статии</span></a></li>
             <li><a href="#images"><img role="presentation" alt="Картинки" src="../assets/icons/delapouite/originals/svg/000000/transparent/photo-camera.svg" class="svg"/><span class="">Картинки</span></a></li>
             <li><a href="#aside"><img role="presentation" alt="Каре" src="../assets/icons/lorc/originals/svg/000000/transparent/checkbox-tree.svg" class="svg"/><span class="">Каре</span></a></li>
             <li><a href="#advert"><img role="presentation" alt="Реклама" src="../assets/icons/delapouite/originals/svg/000000/transparent/piggy-bank.svg" class="svg"/><span class="">Реклама</span></a></li>
-            <li><a href="#quote"><img role="presentation" alt="Цитат" src="../assets/icons/lorc/originals/svg/000000/transparent/conversation.svg" class="svg"/><span class="">Цитат</span></a></li>
+            <li><a href="#quote"><img role="presentation" alt="Цитат" src="../assets/icons/lorc/originals/svg/000000/transparent/conversation.svg" class="svg"/><span class="">Цитати
+                        и факти</span></a></li>
             <li><a href="#author"><img role="presentation" alt="Автор" src="../assets/icons/lorc/originals/svg/000000/transparent/fountain-pen.svg" class="svg"/><span class="">Автор</span></a></li>
             <li><a href="#issue"><img role="presentation" alt="Брой" src="../assets/icons/delapouite/originals/svg/000000/transparent/calendar.svg" class="svg"/><span class="">Брой</span></a></li>
         </ul>
@@ -895,7 +897,7 @@
                 </label>
             </div>
             <div class="two-cols">
-                <label><span>Тип:</span>
+                <label><span>Новина или статия:</span>
                     <select id="articleSubtypeSelect">
                     </select>
                 </label>
@@ -907,7 +909,7 @@
                             <option value="">Без видео</option>
                             <option value="youtube">youtube</option>
                             <option value="vimeo" disabled="disabled">vimeo</option>
-                            <option value="html5">forplay</option>
+                            <option value="html5">mp4</option>
                         </select>
                     </label>
                 </div>
@@ -1039,7 +1041,7 @@
                 </div>
                 <div class="file">
                     <input aria-label="Избери" id="articleCaretInput" type="file"/>
-                	<input aria-label="Избери" id="articleCaretUpload" type="file"/>
+                    <input aria-label="Избери" id="articleCaretUpload" type="file"/>
                 </div>
             </div>
             <h3>Съдържание</h3>
@@ -1168,24 +1170,17 @@
         </div>
     </section>
     <section id="quote">
-        <h2><a href="#quote">Цитат<span class="">Избери герой, добави текст и
-                    създай таг.</span></a></h2>
+        <h2><a href="#quote">Цитати и факти<span class="">Избери раздел, таг
+                    и добави текст.</span></a></h2>
         <form>
-            <div class="Main" role="group">
-                <div class="file">
-                    <label> <span class="clip">Избери</span>
-                        <input id="quoteMainInput" type="file" />
-                    </label>
-                </div>
-            </div>
             <label><span>Раздел:</span>
                 <select id="quoteTypeSelect">
                 </select>
             </label>
-            <label><span>Герой или персона:</span>
-                <input autocomplete="off" type="text" placeholder="Minsk, Batman, Koralsky, doomy, Steve Jobs" id="quoteTagsInput"/>
+            <label><span>Таг:</span>
+                <input autocomplete="off" type="text" placeholder="Minsk, Batman, Koralsky, doomy, SEGA, Steve Jobs" id="quoteTagsInput"/>
             </label>
-            <label><span>Цитат:</span>
+            <label><span>Цитат или факт:</span>
                 <textarea placeholder="" id="quotePreviewInput"></textarea>
             </label>
             <h3>Скрити стойности</h3>

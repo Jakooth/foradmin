@@ -1325,6 +1325,36 @@ button.remove {
 	bottom: 0;
 }
 
+.Content .left-col[data-object=aside]::after,
+.Content .left-col[data-object=quote]::after,
+.Content .right-col[data-object=aside]::after,
+.Content .right-col[data-object=quote]::after {
+	content: attr(data-object);
+    display: block;
+    position: absolute;
+    left: 0;
+    padding: 20px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    pointer-events: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20pt;
+    color: white;
+    line-height: 100pt;
+}
+
+.Content .left-col[data-object=aside]::after,
+.Content .right-col[data-object=aside]::after {
+	background-color: fade(@orange, 70%);
+}
+
+.Content .left-col[data-object=quote]::after,
+.Content .right-col[data-object=quote]::after {
+	background-color: fade(@grey, 70%);
+}
+
 .Content .fullscreen .center-col  {
 	width: 100%;
 	margin-left: 0;
@@ -2054,16 +2084,14 @@ button.remove {
 
 .textLayout h2 {
 	font-size: 30pt;
-	color: white;
-	text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-	text-transform: uppercase;
+	color: fade(@grey, 50%);
 	text-transform: uppercase;
     display: block;
     margin: 0;
     width: 100%;
     clear: both;
     padding: 20px;
-    line-height: 60pt;
+    line-height: normal;
 }
 
 .insideLayoutText ol {
