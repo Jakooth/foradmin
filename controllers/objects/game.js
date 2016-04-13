@@ -39,8 +39,8 @@ Game.prototype.constructor = Game;
  * PRIVATE
  */
  
-Game.prototype._updateAfterSave = function(data) {
-	Fortag.prototype._updateAfterSave.call(this, data);
+Game.prototype._updateAfterSave = function(data, target) {
+	Fortag.prototype._updateAfterSave.call(this, data, target);
 	
 	/**
 	 * Box images are no longer new.

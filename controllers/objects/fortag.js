@@ -388,7 +388,7 @@ Fortag.prototype.setData = function(result) {
 }
 
 Fortag.prototype.post = function(target) {
-	var self = this
+	var self = this,
 		target = target || false;
 	
 	/**

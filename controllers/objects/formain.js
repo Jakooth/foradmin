@@ -40,8 +40,8 @@ Formain.prototype.constructor = Formain;
  * PRIVATE
  */
  
-Formain.prototype._updateAfterSave = function(data) {
-	Fortag.prototype._updateAfterSave.call(this, data);
+Formain.prototype._updateAfterSave = function(data, target) {
+	Fortag.prototype._updateAfterSave.call(this, data, target);
 	
 	/**
 	 * Cover and poster images are no longer new.
