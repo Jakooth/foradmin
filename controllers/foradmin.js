@@ -856,6 +856,10 @@ function AdminManager() {
 		
 		e.preventDefault();
 		
+		var o = _createObject($this.attr('href').split('#')[1]);
+		
+		o.resetData();
+		
 		self.showSectionInWindow($this.attr('href'), 
 								 $this.parents('div').find('input[id]'));
 	});
