@@ -110,20 +110,48 @@ function LoginManager() {
 		}
 	}
 	
-	var applyPermissions = function(isAdmin) {
+	var applyPermissions = function(isAdmin, isSuperAdmin) {
 		var $log = $('button.log'),
 			$new = $('button.new'),
 			$save = $('button.save'),
+			$upload = $('button.upload'),
 			$publish = $('button.publish');
 		
 		if (isAdmin) {
-			$log.show();
+			if (isSuperAdmin) {
+				$log.show();
+				
+				$('a[href="#log"]').show();
+				$('a[href="#issue"]').show();
+				$('a[href="#author"]').show();
+				$('a[href="#sticker"]').show();
+				$('a[href="#genre"]').show();
+				$('a[href="#advert"]').show();
+			} else {
+				$log.hide();
+				
+				$('a[href="#log"]').hide();
+				$('a[href="#issue"]').hide();
+				$('a[href="#author"]').hide();
+				$('a[href="#sticker"]').hide();
+				$('a[href="#genre"]').hide();
+				$('a[href="#advert"]').hide();
+			}
+			
 			$new.show();
+			$upload.show();
 			$save.show();
 			$publish.show();
 		} else {
+			$('a[href="#issue"]').hide();
+			$('a[href="#author"]').hide();
+			$('a[href="#sticker"]').hide();
+			$('a[href="#genre"]').hide();
+			$('a[href="#advert"]').hide();
+			
 			$log.hide();
 			$new.hide();
+			$upload.hide();
 			$save.hide();
 			$publish.hide();
 		}
@@ -159,9 +187,13 @@ function LoginManager() {
 				if (window.userProfile['app_metadata']['roles'][0] != 'admin' &&
                     window.userProfile['app_metadata']['roles'][0] != 'superadmin') {
 					
-					applyPermissions(false);
+					applyPermissions(false, false);
 				} else {
-					applyPermissions(true);
+					if (window.userProfile['app_metadata']['roles'][0] != 'superadmin') {
+						applyPermissions(true, false);
+					} else {
+						applyPermissions(true, true);
+					}
 				}
 			} 
 		});
