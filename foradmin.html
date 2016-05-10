@@ -8,7 +8,7 @@
 <title>Foradmin</title>
 <link href="assets/bootstrap-tagsinput.css" type="text/css" rel="stylesheet"/>
 <link href="assets/typeaheadjs.css" type="text/css" rel="stylesheet"/>
-<link href="assets/foradmin.css" type="text/css" rel="stylesheet"/>
+<link href="assets/foradmin.css?v=2.0.1" type="text/css" rel="stylesheet"/>
 <script src="/jslib/jquery-2.1.4.min.js"></script>
 <script src="jslib/jquery-ui.min.js"></script>
 <script src="/jslib/jsrender.min.js"></script>
@@ -1150,18 +1150,21 @@
         <h2><a href="#images">Картинки<span class="">Прикачи картинкии и избери,
                     кои да влезнат в галерията.</span></a></h2>
         <form>
-            <label><span>Таг:</span>
-                <input autocomplete="off" type="text" placeholder="gta-5, sam-houser, rockstar" id="imagesTagInput"/>
-            </label>
-            <ul role="listbox">
-                <li role="option">
-                    <div class="file">
-                        <label><span class="clip">Избери</span>
-                            <input multiple="multiple" type="file"/>
-                            <img alt="" role="presentation" src="/assets/helpers/16-9.png" /> </label>
-                    </div>
-                </li>
-            </ul>
+            <div class="one-col">
+                <label><span>Таг:</span>
+                    <input autocomplete="off" type="text" placeholder="gta-5, sam-houser, rockstar" id="imagesTagInput"/>
+                </label>
+                <a class="create" href="#fortag"><img src="../assets/icons/iconmonstr/iconmonstr-plus-2-icon.svg" alt="Създай Тагове" class="svg"/></a>
+                <ul role="listbox">
+                    <li role="option">
+                        <div class="file">
+                            <label><span class="clip">Избери</span>
+                                <input multiple="multiple" type="file"/>
+                                <img alt="" role="presentation" src="/assets/helpers/16-9.png" /> </label>
+                        </div>
+                    </li>
+                </ul>
+        	</div>
         </form>
         <div role="toolbar">
             <button type="button" class="ok">Избери</button>

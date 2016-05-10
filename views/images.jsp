@@ -11,7 +11,8 @@
         <form>
             <admin:formItem id="imagesTagInput" label="Таг" 
             				placeholder="gta-5, sam-houser, rockstar" 
-                            type="text" autocomplete="off" />
+                            type="text" autocomplete="off" url="fortag" 
+                            layout="one-col" />
             <ul role="listbox">
                 <li role="option">
                     <div class="file">
