@@ -30,7 +30,7 @@
             <script src="/jslib/jsrender.min.js">
                 <!--script-->
             </script>
-            <script src="//cdn.auth0.com/js/lock-8.2.min.js">
+            <script src="//cdn.auth0.com/js/lock-9.2.1.min.js">
                 <!--script-->
             </script>
             <script src="jslib/typeahead.bundle.min.js">
