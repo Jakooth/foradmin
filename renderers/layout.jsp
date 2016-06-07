@@ -48,7 +48,7 @@
                      role="presentation" />
                 <p class="select-subtitle">Избери позициониране на картинките.</p>
                 <div class="sublayout z0Sublayout">
-                	<admin:imgProxy pointer="Ляво" video="true" />
+                	<admin:imgProxy pointer="Горе" video="true" />
                 </div>
                 <div class="sublayout z1Sublayout">
                     <admin:imgProxy pointer="Ляво" video="true" />
