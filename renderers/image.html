@@ -4,7 +4,7 @@
 	data-mime="" 
     data-new="false">
     <label> <img role="presentation" 
-    			 src="{{if #data}}/assets/articles/{{:~parseImgTag(#data)}}/{{:#data}}{{/if}}"
+    			 src="{{if #data}}/assets/articles/{{:~parseImgTag(#data)}}/{{:#data}}?id={{:~preventCache}}{{/if}}"
                  alt="" /> <span class="clip">Добави картинката в галерията</span>
         <input type="checkbox" aria-label="Добави в галерията" value="{{:#data}}" />
         <input type="radio" name="imgChoice" aria-label="Избери" value="{{:#data}}" />

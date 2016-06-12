@@ -59,7 +59,10 @@ function ImgsManager() {
 				}),
 				html = $.templates
 						.imgsTemplate
-						.render(data, {parseImgTag: utils.parseImgTag});
+						.render(data, {parseImgTag: utils.parseImgTag,
+									   preventCache: String(
+													utils.today() + 
+													utils.now()).replace(/[-:]|– |- /g, '')});
 			
 			$(imagesList).find('[role=option][data-new=false]').remove();				
 			$(imagesList).append(html);
