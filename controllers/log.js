@@ -154,6 +154,16 @@ function LogManager() {
 			}
 			
 			admin.hideAlert();
+			
+			/**
+			 * No matter of the result scroll to the next item.
+			 */
+			 
+			var $top = $('button[aria-pressed=false]:eq(0)');
+			 
+			if ($top) {
+				$(window).scrollTop($top.offset().top - 84);
+			}
 		}).fail(function(resultData) {
 			var data = resultData.length ? JSON.parse(resultData) : resultData;
 			
