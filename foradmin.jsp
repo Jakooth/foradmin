@@ -57,13 +57,13 @@
             <script src="controllers/search.js?v=2.0.0">
                 <!--script-->
             </script>
-            <script src="controllers/log.js?v=2.0.0">
+            <script src="controllers/log.js?v=2.0.1">
                 <!--script-->
             </script>
             <script src="controllers/login.js?v=2.0.0">
                 <!--script-->
             </script>
-            <script src="controllers/imgs.js?v=2.0.0">
+            <script src="controllers/imgs.js?v=2.0.1">
                 <!--script-->
             </script>
             <script src="controllers/objects/fortag.js?v=2.0.0">

@@ -68,12 +68,6 @@ Happening.prototype.save = function() {
 	this.json.artists = this.artists;
 	this.json.endDate = this.endDate;
 	this.json.city = this.city;
-	
-	/**
-	 * Override in case of null values.
-	 * Very rare case, but just in case.
-	 */ 
-	this.json.type = 'music';
 }
 
 Happening.prototype.resetData = function() {

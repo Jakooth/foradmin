@@ -606,6 +606,7 @@ function AdminManager() {
 	
 	this.setDefaults = function() {
 		$('#fortagObjectSelect').val('game').change();
+		$('#eventTypeSelect').val('music').change();
 		$('#articleTypeSelect').val('games').change();
 		$('#articleSubtypeSelect').val('news').change();
 		$('#articleVideoTechSelect').val('').change();
@@ -730,6 +731,7 @@ function AdminManager() {
 	
 	this.loadOptions($('#eventGenreGroup'), musicGenres, 'checkbox');
 	this.loadOptions($('#eventCountrySelect'), countries, 'option');
+	this.loadOptions($('#eventTypeSelect'), type, 'option');
 	
 	initTagInput(music, 'music', '#eventArtistInput');
 	initTagInput(series, 'series', '#eventSerieInput', 1);
@@ -867,8 +869,7 @@ function AdminManager() {
 	$('#fortag').on('change', '#fortagObjectSelect', function(e) {
 		var $typeSelect = $('#fortagTypeSelect');
 																
-		if ($(this).val() == "band" || 
-			$(this).val() == "event" || 
+		if ($(this).val() == "band" ||  
 			$(this).val() == "album") {
 			
 			$typeSelect.prop('disabled', true);

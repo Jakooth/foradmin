@@ -28,6 +28,7 @@
             				placeholder="sofia-rocks-2015" type="text" />
             <admin:formItem id="eventBgNameInput" label="Име на български" 
             				placeholder="" type="text" />
+            <admin:formItem id="eventTypeSelect" label="Тип" type="select" />
             <admin:formItem id="eventArtistInput" label="Изпълнители" 
             				placeholder="Emil Bulls" type="text" 
                             autocomplete="off" url="band" layout="one-col" />
@@ -52,7 +53,6 @@
             				placeholder="" 
                             type="text" autocomplete="off" />
         	<h3>Скрити стойности</h3>
-            <admin:formItem id="eventTypeSelect" label="Тип" type="hidden" value="music" />
             <admin:formItem id="eventSaveIdInput" label="Идентификатор на записа" type="hidden" value="" />
             <admin:formItem id="eventSaveRelatedInput" label="Свързани" type="hidden" value="" />
         </form>
