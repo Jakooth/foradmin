@@ -76,17 +76,33 @@ function AddManager() {
 				insideAuthor = false;
 				
 			var $layout,
-				$layouts;
+				$layouts,
+				$add;
 			 
-			$appender.before(html);
+			if ($appender.is('button.add')) {
+				$appender.parents('.layout').after(html);
+				
+				$add = $appender.parents('.Add');
+			} else  {
+				$appender.append(html);
+				
+				$add = $appender;
+			}
 			
 			if (data) {
-				$layout = $('.Content:visible').find(
-							'.layout[data-id=' + data.data.layout_id + ']');
+				$layout = $appender.find('.layout[data-id=' + data.data.layout_id + ']');
 			} else {
-				$layout = $appender.prev();
-				$layout.data('order', $('.Content:visible .layout').length - 1);
-				$layout.attr('data-order', $layout.data('order'));
+				if ($appender.is('button.add')) {
+					$layout = $appender.parents('.layout').next('.layout');
+				} else {
+					$layout = $appender.find('.layout:last-of-type');
+				}
+				
+				/**
+				 * Assign order values.
+				 */
+				
+				self.sortLayoutByOrder($add);
 			}
 			
 			/**
@@ -95,16 +111,16 @@ function AddManager() {
 			 * and the order is not guaranteed.
 			 */
 			
-			$layouts = $('.Content:visible .layout').sort(function (a, b) {
+			$layouts = $add.find('.layout').sort(function (a, b) {
 				var contentA = parseInt($(a).attr('data-order'));
 				var contentB = parseInt($(b).attr('data-order'));
 				
 				return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
 			});
 			
-			$('.Content:visible .layout').remove();
+			$add.find('.layout').remove();
 			
-			$appender.before($layouts);
+			$add.append($layouts);
 			
 			/**
 			 * Convert SVGs.
@@ -289,32 +305,74 @@ function AddManager() {
 		});
 	}
 	
-	this.showLayout = function($appender, value) {
-		$appender.find('.' + value + 'Layout').show();
+	this.removeLayout = function($appender) {
+		var $layout = $appender.parents('.layout'),
+			$cke = $layout.find('.cke_editable');
+			
+		var cke1 = $cke.eq(0).prop('id'),
+			cke2 = $cke.eq(1).prop('id');
+		
+		$layout.remove();
+		
+		if ($cke.length > 0) {
+			CKEDITOR.instances[cke1].destroy();
+			CKEDITOR.instances[cke2].destroy();
+		}
+	}
+	
+	this.moveLayoutUp = function($appender) {
+		var $1 = $appender.parents('.layout'),
+			$2 = $appender.parents('.layout').prev();
+	
+		$1.insertBefore($2);
+		
+		this.sortLayoutByOrder($appender.parents('.Add'));
+	}
+	
+	this.moveLayoutDown = function($appender) {
+		var $1 = $appender.parents('.layout'),
+			$2 = $appender.parents('.layout').next();
+		
+		$1.insertAfter($2);
+		
+		this.sortLayoutByOrder($appender.parents('.Add'));
+	}
+	
+	this.sortLayoutByOrder = function($add) {
+		$.each($add.find('.layout'), function(index, layout) {
+			var $layout = $(layout);
+			
+			$layout.data('order', index);
+			$layout.attr('data-order', $layout.data('order'));
+		});
+	}
+	
+	this.showLayout = function($layout, value) {
+		$layout.find('.' + value + 'Layout').show();
 		
 		/**
 		 * For images hide the side content.
 		 */
 		
 		if (value == 'img' || value == 'inside') {
-			$appender.addClass('fullscreen');
+			$layout.addClass('fullscreen');
 		} else {
-			$appender.removeClass('fullscreen');
+			$layout.removeClass('fullscreen');
 		}
 	}
 	
-	this.hideLayouts =  function($appender) {
-		$appender.find('.center-col').hide();
+	this.hideLayouts =  function($layout) {
+		$layout.find('.center-col').hide();
 	}
 	
-	this.showSublayout = function($appender, value) {
-		$appender.find('.' + value + 'Sublayout').show();
-		$appender.data('sublayout', value);
-		$appender.attr('data-sublayout', $appender.data('sublayout'));
+	this.showSublayout = function($center, value) {
+		$center.find('.' + value + 'Sublayout').show();
+		$center.data('sublayout', value);
+		$center.attr('data-sublayout', $center.data('sublayout'));
 	}
 	
-	this.hideSublayouts =  function($appender) {
-		$appender.find('.sublayout').hide();
+	this.hideSublayouts =  function($center) {
+		$center.find('.sublayout').hide();
 	}
 	
 	this.addPlatform = function($platform) {
@@ -386,25 +444,13 @@ function AddManager() {
 			$track.attr('data-index', $track.data('index'));
 		});	
 	}
-	
-	this.removeLayout = function($appender) {
-		var $layout = $appender.parents('.layout'),
-			$cke = $layout.find('.cke_editable');
-			
-		var cke1 = $cke.eq(0).prop('id'),
-			cke2 = $cke.eq(1).prop('id');
-		
-		$layout.remove();
-		
-		if ($cke.length > 0) {
-			CKEDITOR.instances[cke1].destroy();
-			CKEDITOR.instances[cke2].destroy();
-		}
-	}
+
 	
 	
 	
 	
+
+
 	
 	/** 
 	 * INIT
@@ -426,8 +472,20 @@ function AddManager() {
 	 * ARTICLE
 	 */
 	
-	$('.Content').on('click', '> button.add', function(e) {
+	$('.Content').on('click', '.layout > button.add', function(e) {
 		self.addLayout($(this), false, true);
+	});
+	
+	$('.Content').on('click', '.layout > button.remove', function(e) {
+		self.removeLayout($(this));
+	});
+	
+	$('.Content').on('click', '.layout > button.up', function(e) {
+		self.moveLayoutUp($(this));
+	});
+	
+	$('.Content').on('click', '.layout > button.down', function(e) {
+		self.moveLayoutDown($(this));
 	});
 	
 	/**
@@ -513,10 +571,6 @@ function AddManager() {
 		
 		$checkboxes.prop('checked', $this.is(':checked'))
 	}); 
-	
-	$('.Content').on('click', '.layout > button.remove', function(e) {
-		self.removeLayout($(this));
-	});
 	
 	$('#game, #band, #album, ' + 
 	  '#movie, #eventm, #dlc, ' + 

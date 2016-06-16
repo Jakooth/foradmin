@@ -40,6 +40,13 @@ function Layout(id) {
 	this.ratio = '16-9';
 	this._saveImgs = $layout.data('saveimgs') || 0;
 	
+	/**
+	 * This is the SQL id passed from the response.
+	 * It is not set for new layouts and is used for UPDATE.
+	 */
+	
+	this._saveId;
+	
 	this.setCenter = function() {
 		self.center = _escapeValue(CKEDITOR.instances[self.id]
 										   .getData());

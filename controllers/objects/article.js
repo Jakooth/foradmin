@@ -107,9 +107,12 @@ Article.prototype._getLayouts = function(id) {
 	
 	if ($layouts.length) {
 		$layouts.each(function(index, layout) {
-			self.layouts.push(new Layout($(this)
-										 .find('.center-col:visible')
-										 .attr('id')));
+			var layout = new Layout($(this).find('.center-col:visible')
+										   .attr('id'));
+										   
+			layout._saveId = $(this).data('id');
+		
+			self.layouts.push(layout);
 		
 			if (self.subtype == 'review' && index == 0) {
 				self.layouts[0].left = {object: self.prime.object,
@@ -124,7 +127,7 @@ Article.prototype._getLayouts = function(id) {
 
 Article.prototype._resetLayouts = function(isUpdate) {
 	var $layouts = this._$this.find('.layout'),
-		$appender = $('#article .Content button.add');
+		$appender = $('#article .Content');
 	
 	if ($layouts.length) {
 		$layouts.remove();
@@ -139,7 +142,7 @@ Article.prototype._setLayouts = function(layouts) {
 	var self = this;
 	
 	var $layouts = this._$this.find('.layout'),
-		$appender = $('#article .Content button.add');
+		$appender = $('#article .Content');
 	
 	if ($layouts.length) {
 		$layouts.remove();

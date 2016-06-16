@@ -190,8 +190,8 @@ button:focus,
 button:hover,
 button:first-child:focus,
 button:first-child:hover,
-.Add > button:last-child:focus,
-.Add > button:last-child:hover,
+.layout > button:focus,
+.layout > button:hover,
 header a:focus,
 header a:hover,
 .breadcrumb a.active,
@@ -306,7 +306,7 @@ button.select,
 button.search,
 a.create,
 .file,
-.Add > button:last-child,
+.layout > button,
 button:first-of-type {
 	background-color: @prime;
 }
@@ -324,8 +324,6 @@ button:first-of-type {
 
 header h2,
 .coverLayout,
-.Add button.add,
-.Add button.remove,
 .breadcrumb a, 
 main h2 a,
 footer {
@@ -900,11 +898,22 @@ body[aria-busy=true]::before {
 	padding-left: @unit * 4;
 } 
 
-.Add button.add,
-.Add button.remove {
+.layout > button.add,
+.layout > button.remove {
 	width: 100%;
 	display: block;
 	line-height: normal;
+	padding: @unit * 4;
+}
+
+#article .layout > button {
+	width: 25%;
+	float: left;
+}
+
+#article .layout > button.down,
+#article .layout > button.add {
+	float: right;
 }
 
 select.header {
@@ -969,6 +978,9 @@ button.select::after {
 	pointer-events: none;
 }
 
+button.down,
+button.remove,
+button.up,
 button.add {
 	background-size: 64px 64px;
 	background-position: center center;
@@ -978,10 +990,22 @@ button.add {
 
 button.remove {
 	background-image: url(../../assets/icons/iconmonstr/iconmonstr-x-mark-5-icon.svg);
-	background-size: 64px 64px;
-	background-position: center center;
-	background-repeat: no-repeat;
-	min-height: 76px;
+}
+
+button.up {
+	background-image: url(../../assets/icons/iconmonstr/iconmonstr-upload-1.svg);
+}
+
+button.down {
+	background-image: url(../../assets/icons/iconmonstr/iconmonstr-download-1.svg);
+}
+
+.layout button.add {
+	background-image: url(../../assets/icons/iconmonstr/iconmonstr-file-14.svg);	
+}
+
+.layout button.remove {
+	background-image: url(../../assets/icons/iconmonstr/iconmonstr-note-30.svg);	
 }
 
 .Box button.remove {
@@ -1288,7 +1312,17 @@ button.remove {
 	pointer-events: none;
 }
 
-.Content .layout:first-of-type button.remove {
+.Content .layout:first-of-type button.remove,
+.Content .layout:first-of-type button.up,
+.Content .layout:first-of-type button.down {
+	display: none;
+}
+
+.Content .layout:nth-of-type(2) button.up {
+	display: none;
+}
+
+.Content .layout:last-of-type button.down {
 	display: none;
 }
 

@@ -159,5 +159,14 @@
         <button class="remove" type="button">
             <span class="clip">Изтрий</span>
         </button>
+        <button class="add" type="button">
+            <span class="clip">Добави текст или картинка</span>
+        </button>
+        <button class="up" type="button">
+            <span class="clip">Премести нагоре</span>
+        </button>
+        <button class="down" type="button">
+            <span class="clip">Премести надолу</span>
+        </button>
     </div>
 </jsp:root>
