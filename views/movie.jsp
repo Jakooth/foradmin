@@ -22,12 +22,14 @@
                     </label>
                 </div>
             </div>
-            <admin:formItem id="movieBgNameInput" label="Филм" 
+            <admin:formItem id="movieBgNameInput" label="Име на български" 
             				placeholder="Междузвездни Войни: Силата се Пробужда" type="text" />
-            <admin:formItem id="movieEnNameInput" label="Име на латиница" 
+            <admin:formItem id="movieEnNameInput" label="Филм" 
             				placeholder="Star Wars: The Force Awakens" type="text" />
             <admin:formItem id="movieTagInput" label="Таг" 
             				placeholder="star-wars-episode-the-force-awakens" type="text" />
+            <admin:formItem id="movieSiteInput" label="Сайт или Уикипедиа" 
+            				placeholder="http://www.warcraftmovie.com/" type="text" />
             <admin:formItem id="movieSerieInput" label="Поредица" 
             				placeholder="star-wars" type="text" 
                             autocomplete="off" url="serie" layout="one-col" />

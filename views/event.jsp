@@ -28,6 +28,8 @@
             				placeholder="sofia-rocks-2015" type="text" />
             <admin:formItem id="eventBgNameInput" label="Име на български" 
             				placeholder="" type="text" />
+            <admin:formItem id="eventSiteInput" label="Сайт или Уикипедиа" 
+            				placeholder="http://www.exitfest.org/" type="text" />
             <admin:formItem id="eventTypeSelect" label="Тип" type="select" />
             <admin:formItem id="eventArtistInput" label="Изпълнители" 
             				placeholder="Emil Bulls" type="text" 

@@ -26,6 +26,7 @@ function Fortag(o) {
 	this._$typeSelect = $('#' + o + 'TypeSelect');
 	this._$subtypeSelect = $('#' + o + 'SubtypeSelect');
 	this._$relatedInput = $('#' + o + 'RelatedInput');
+	this._$siteInput = $('#' + o + 'SiteInput');
 	
 	this._$saveIdInput = $('#' + o + 'SaveIdInput');
 	this._$saveRelatedInput = $('#' + o + 'SaveRelatedInput');
@@ -43,6 +44,7 @@ function Fortag(o) {
 	this.type;
 	this.subtype;
 	this.related;
+	this.site;
 	this.object = $('#fortag').is(':visible') ? 
 				  $('#fortagObjectSelect').val() : o;
 	
@@ -285,6 +287,7 @@ Fortag.prototype.save = function() {
 	this.type = this._getInputValue(this._$typeSelect);
 	this.subtype = this._getInputValue(this._$subtypeSelect);
 	this.related = this._getTypeaheadValue(this._$relatedInput);
+	this.site = this._getInputValue(this._$siteInput);
 	this.main = utils.parseImg(this._getInputValue(this._$mainInput));
 	this.img = this.main ? this.main.split('.').pop() : null;
 	
@@ -302,6 +305,7 @@ Fortag.prototype.save = function() {
 		subtype: this.subtype,
 		object: this.object,
 		related: this.related,
+		site: this.site,
 		main: this.main,
 		img: this.img,
 		_saveId: this._saveId,
@@ -327,6 +331,7 @@ Fortag.prototype.resetData = function() {
 	if (this._$bgNameInput.length) this._$bgNameInput.val(null);
 	if (this._$dateInput.length) this._$dateInput.val(null);
 	if (this._$tagInput.length) this._$tagInput.val(null);
+	if (this._$siteInput.length) this._$siteInput.val(null);
 	
 	
 	if (this._$typeSelect.length) this._$typeSelect.val(this._$typeSelect.not('[type=hidden]') ? 
@@ -353,6 +358,7 @@ Fortag.prototype.updateData = function(data) {
 	this._setInputValue(this._$tagInput, data.tag || null);
 	this._setInputValue(this._$typeSelect, data.type || null);
 	this._setInputValue(this._$subtypeSelect, data.subtype || null);
+	this._setInputValue(this._$siteInput, data.site || null);
 	
 	this._setTagsinputValue(data.related || null);
 		

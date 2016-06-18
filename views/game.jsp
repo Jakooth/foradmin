@@ -22,6 +22,8 @@
             				placeholder="gta-5" type="text" />
             <admin:formItem id="gameBgNameInput" label="Име на български" 
             				placeholder="Гранд Тефт Ауто 5" type="text" />
+            <admin:formItem id="gameSiteInput" label="Сайт или Уикипедиа" 
+            				placeholder="http://www.rockstargames.com/V/" type="text" />
             <admin:formItem id="gameSerieInput" label="Поредица" 
             				placeholder="gta, halo" type="text" 
                             autocomplete="off" url="serie" layout="one-col" />

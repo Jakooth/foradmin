@@ -194,7 +194,7 @@ Formain.prototype._uploadImgs = function() {
 Formain.prototype.save = function() { 
 	Fortag.prototype.save.call(this);
 	
-	this.stickers = this._getTypeaheadValue(this._$stickersInput);	
+	this.stickers = this._getTypeaheadValue(this._$stickersInput);		
 	this.serie = this._getTypeaheadValue(this._$serieInput);
 	this.genres  =  this._getGroupValue(this._$genreGroup);
 	this.country = this._getInputValue(this._$countrySelect);

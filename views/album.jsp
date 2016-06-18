@@ -28,6 +28,8 @@
             				placeholder="sacrifice-to-venus" type="text" />
             <admin:formItem id="albumBgNameInput" label="Име на български" 
             				placeholder="" type="text" />
+            <admin:formItem id="albumSiteInput" label="Сайт или Уикипедиа" 
+            				placeholder="https://en.wikipedia.org/wiki/Manslaughter_(album)" type="text" />
             <admin:formItem id="albumArtistInput" label="Изпълнител" 
             				placeholder="Emil Bulls" type="text" 
                             autocomplete="off" url="person" layout="one-col" />
