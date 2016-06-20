@@ -160,27 +160,39 @@ Article.prototype._setLayouts = function(layouts) {
 }
 
 Article.prototype._getPreviewText = function(id) {
-	var preview = null;
+	var preview = null,
+		i = 0;
 	
-	var $layouts = this._$this.find('.layout');
+	var $layouts = this._$this.find('.layout'),
+		$layout = false;
 	
 	if ($layouts.length) {
-		
-		/**
-		 *  Triple precaution for the type of the first layout.
-		 */
-		 
-		if (this.layouts[0].type != 'text') {
-			return false;
+		for (i = 0; i < this.layouts.length; i ++) {
+			if ($('#article .layout').eq(i)
+									 .find('.center-col:visible')
+									 .find('p').length > 0 && 
+				this.layouts[i].type == 'text') {
+				
+				$layout = $layouts.eq(i);
+				
+				break;
+			}
 		}
 		
-		preview = $(CKEDITOR.instances[$layouts.eq(0)
-				  .find('.center-col:visible')
-				  .attr('id')].getData())
-				  .filter('p')
-				  .map(function(i, element) { 
-								return $(element).text(); 
-				  }).get().join(' ');
+		/**
+		 * If there is not text layout return false.
+		 */
+		 
+		if (!$layout) return false;
+		
+		preview = $(CKEDITOR.instances[$layout
+						    .find('.center-col:visible')
+						    .attr('id')].getData())
+						    .filter('p')
+						    .map(function(i, element) { 
+										
+			return $(element).text(); 
+		}).get().join(' ');
 	}
 	
 	preview = this._escapeValue(preview);
