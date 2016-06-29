@@ -20,8 +20,9 @@
 <script src="/controllers/utils.js?v=2.0.0"></script>
 <script src="controllers/foradmin.js?v=2.0.0"></script>
 <script src="controllers/add.js?v=2.0.0"></script>
-<script src="controllers/search.js?v=2.0.0"></script>
-<script src="controllers/log.js?v=2.0.1"></script>
+<script src="controllers/search.js?v=2.0.1"></script>
+<script src="controllers/log.js?v=2.0.2"></script>
+<script src="controllers/sitemap.js?v=2.0.3"></script>
 <script src="controllers/login.js?v=2.0.0"></script>
 <script src="controllers/imgs.js?v=2.0.1"></script>
 <script src="controllers/objects/fortag.js?v=2.1.0"></script>
@@ -41,7 +42,7 @@
 <script src="controllers/objects/author.js?v=2.0.0"></script>
 <script src="controllers/objects/issue.js?v=2.0.0"></script>
 <script src="controllers/objects/country.js?v=2.0.0"></script>
-<script src="controllers/INIT.js?v=2.0.0"></script>
+<script src="controllers/INIT.js?v=2.0.1"></script>
 </head>
 <body>
 <header id="main">
@@ -81,6 +82,8 @@
                         и факти</span></a></li>
             <li><a href="#author"><img role="presentation" alt="Автор" src="../assets/icons/lorc/originals/svg/000000/transparent/fountain-pen.svg" class="svg"/><span class="">Автор</span></a></li>
             <li><a href="#issue"><img role="presentation" alt="Брой" src="../assets/icons/delapouite/originals/svg/000000/transparent/calendar.svg" class="svg"/><span class="">Брой</span></a></li>
+            <li><a href="#sitemap"><img role="presentation" alt="Карта на сайта" src="../assets/icons/lorc/originals/svg/000000/transparent/treasure-map.svg" class="svg"/><span class="">Карта
+                        на сайта</span></a></li>
         </ul>
     </nav>
     <nav aria-label="Бърза навигация назад" class="breadcrumb">
@@ -1028,7 +1031,9 @@
                 <label><span>Вертикално позициониране:</span>
                     <select id="articleBgVSelect">
                         <option value="top">Горе</option>
+                        <option value="25%">25%</option>
                         <option value="center">Център</option>
+                        <option value="75%">75%</option>
                         <option value="bottom">Долу</option>
                     </select>
                 </label>
@@ -1180,7 +1185,7 @@
                         </div>
                     </li>
                 </ul>
-        	</div>
+            </div>
         </form>
         <div role="toolbar">
             <button type="button" class="ok">Избери</button>
@@ -1474,6 +1479,20 @@
         </form>
         <div role="toolbar">
             <button type="button" class="refresh"><img role="presentation" alt="" src="../assets/icons/delapouite/gui/svg/000000/transparent/clockwise-rotation.svg" class="svg"/></button>
+        </div>
+    </section>
+    <section id="sitemap">
+        <h2 class="clip"><a href="#sitemap">Карта на сайта<span class="">Подходяща
+                    за Gooogle.</span></a></h2>
+        <form>
+            <label><span>Изходен код:</span>
+                <textarea placeholder="" readonly="readonly" id="sitemapCodeOutput"></textarea>
+            </label>
+        </form>
+        <div role="toolbar">
+            <button type="button" class="save">Генерирай</button>
+            <button type="button" class="publish">Изпрати</button>
+            <button type="button" class="cancel">Отмени</button>
         </div>
     </section>
 </main>

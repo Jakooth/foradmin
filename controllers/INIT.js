@@ -4,6 +4,7 @@ $(document).ready(function() {
 	window.add = new AddManager();
     window.query = new SearchManager(); 
 	window.activity = new LogManager();
+	window.sitemap = new SitemapManager();
 	window.imgs = new ImgsManager();
     window.lock = new Auth0Lock('P8wrSYlMVUu5rZDEFGSqFL18tVfgo9Gz',
 								'forplay.eu.auth0.com'); 
@@ -34,7 +35,7 @@ $(document).ready(function() {
 	 */
 	
 	$.ajaxSetup({ 
-		'beforeSend':  function(xhr) { 
+		'beforeSend': function(xhr) { 
 			if (localStorage.getItem('userToken')) { 
 				xhr.setRequestHeader('Authorization',  
 									 'Bearer ' + localStorage.getItem('userToken')); 

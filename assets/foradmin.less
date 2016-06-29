@@ -82,6 +82,7 @@ h3 {
 	font-family: 'Poiret One', sans-serif;
 }
 
+#sitemap textarea,
 #xml textarea {
 	font-family: "Courier New", Courier, monospace;
 }
@@ -680,6 +681,10 @@ form input[type=password] {
 form textarea {
 	width: 100%;
 	min-height: 60px;
+}
+
+#sitemap textarea {
+	min-height: 512px;
 }
 
 form input[type=checkbox],
@@ -2572,5 +2577,13 @@ section#login h2 {
 		margin-left: 10%;
     	margin-right: 10%;
     	width: 80%;
+	}
+	
+	section#search form>label:first-child,
+	section#search label,
+	section#search button,
+	section#search [role=option] {
+		display: block;
+		width: 100%;
 	}
 }

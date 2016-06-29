@@ -127,6 +127,7 @@ function LoginManager() {
 				$('a[href="#sticker"]').show();
 				$('a[href="#genre"]').show();
 				$('a[href="#advert"]').show();
+				$('a[href="#sitemap"]').show();
 			} else {
 				$log.hide();
 				
@@ -136,6 +137,7 @@ function LoginManager() {
 				$('a[href="#sticker"]').hide();
 				$('a[href="#genre"]').hide();
 				$('a[href="#advert"]').hide();
+				$('a[href="#sitemap"]').hide();
 			}
 			
 			$new.show();
@@ -148,6 +150,7 @@ function LoginManager() {
 			$('a[href="#sticker"]').hide();
 			$('a[href="#genre"]').hide();
 			$('a[href="#advert"]').hide();
+			$('a[href="#sitemap"]').hide();
 			
 			$log.hide();
 			$new.hide();

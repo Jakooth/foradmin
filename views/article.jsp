@@ -71,7 +71,9 @@
             </admin:formItem>
             <admin:formItem id="articleBgVSelect" label="Вертикално позициониране" type="select" layout="two-cols">
                 <option value="top">Горе</option>
+                <option value="25%">25%</option>
                 <option value="center">Център</option>
+                <option value="75%">75%</option>
                 <option value="bottom">Долу</option>
             </admin:formItem>
             <admin:formItem id="articleThemeSelect" label="Тема" type="select" layout="two-cols">

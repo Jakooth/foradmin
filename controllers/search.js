@@ -301,7 +301,7 @@ function SearchManager() {
 		_doSearch();
 	});
 	
-	$body.on('dblclick', '#search [role=option]', function(e) {
+	$body.on('dblclick touchend', '#search [role=option]', function(e) {
 		self._openSearch($(this));
 	});
 	

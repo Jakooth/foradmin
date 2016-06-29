@@ -54,10 +54,13 @@
             <script src="controllers/add.js?v=2.0.0">
                 <!--script-->
             </script>
-            <script src="controllers/search.js?v=2.0.0">
+            <script src="controllers/search.js?v=2.0.1">
                 <!--script-->
             </script>
-            <script src="controllers/log.js?v=2.0.1">
+            <script src="controllers/log.js?v=2.0.2">
+                <!--script-->
+            </script>
+            <script src="controllers/sitemap.js?v=2.0.0">
                 <!--script-->
             </script>
             <script src="controllers/login.js?v=2.0.0">
@@ -192,6 +195,10 @@
                             <admin:menuItem label="Брой" url="issue" 
                     				icon="delapouite,calendar" />
                         </li>
+                        <li>
+                            <admin:menuItem label="Карта на сайта" url="sitemap" 
+                    				icon="lorc,treasure-map" />
+                        </li>
                     </ul>
                 </nav>
                 <nav class="breadcrumb" aria-label="Бърза навигация назад">
@@ -234,6 +241,7 @@
                 <jsp:include page="views/country.jsp" />
                 <jsp:include page="views/sticker.jsp" />
                 <jsp:include page="views/log.jsp" />
+                <jsp:include page="views/sitemap.jsp" />
             </main>
             <footer>
                 <p>&amp;copy; Copyright 2015

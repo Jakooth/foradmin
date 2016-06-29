@@ -202,7 +202,7 @@ function LogManager() {
 		_doLog();
 	});
 	
-	$body.on('dblclick', '#log [role=option]', function(e) {
+	$body.on('dblclick touchend', '#log [role=option]', function(e) {
 		
 		/**
 		 * TODO: First query to get the ID.
