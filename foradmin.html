@@ -17,9 +17,9 @@
 <script src="jslib/bootstrap-tagsinput.min.js"></script>
 <script src="jslib/ckeditor/ckeditor.js"></script>
 <script src="/jslib/he.js"></script>
-<script src="/controllers/utils.js?v=2.0.0"></script>
-<script src="controllers/foradmin.js?v=2.0.0"></script>
-<script src="controllers/add.js?v=2.0.0"></script>
+<script src="/controllers/utils.js?v=2.1.0"></script>
+<script src="controllers/foradmin.js?v=2.1.0"></script>
+<script src="controllers/add.js?v=2.1.1"></script>
 <script src="controllers/search.js?v=2.0.1"></script>
 <script src="controllers/log.js?v=2.0.2"></script>
 <script src="controllers/sitemap.js?v=2.0.3"></script>
@@ -33,6 +33,7 @@
 <script src="controllers/objects/quote.js?v=2.0.0"></script>
 <script src="controllers/objects/game.js?v=2.0.0"></script>
 <script src="controllers/objects/movie.js?v=2.0.0"></script>
+<script src="controllers/objects/tv.js?v=2.0.0"></script>
 <script src="controllers/objects/album.js?v=2.0.0"></script>
 <script src="controllers/objects/event.js?v=2.0.0"></script>
 <script src="controllers/objects/book.js?v=2.0.0"></script>
@@ -579,6 +580,88 @@
     </section>
     <section id="tv">
         <h2><a href="#tv">Сериал<span class="">Добави сериал и създай таг.</span></a></h2>
+        <form>
+            <div role="group" class="Main">
+                <div class="file">
+                    <label><span class="clip">Избери</span>
+                        <input type="file" id="tvMainInput">
+                    </label>
+                </div>
+                <div class="file">
+                    <label><span class="clip">Избери</span>
+                        <input data-subtype="poster" type="file" id="tvPosterInput">
+                    </label>
+                </div>
+            </div>
+            <label><span>Име на български:</span>
+                <input autocomplete="" type="text" placeholder="Игра на Тронове" id="tvBgNameInput">
+            </label>
+            <label><span>Филм:</span>
+                <input autocomplete="" type="text" placeholder="Game of Thrones" id="tvEnNameInput">
+            </label>
+            <label><span>Таг:</span>
+                <input autocomplete="" type="text" placeholder="game-of-thrones" id="tvTagInput">
+            </label>
+            <label><span>Сайт или Уикипедиа:</span>
+                <input autocomplete="" type="text" placeholder="http://www.hbo.com/game-of-thrones" id="tvSiteInput">
+            </label>
+            <label><span>Стикери:</span>
+                <input autocomplete="" type="text" placeholder="Broadsword, Soccer ball, Female elf face" id="tvStickersInput">
+            </label>
+            <label><span>Жанр:</span></label>
+            <div id="tvGenreGroup" role="group"></div>
+            <div class="one-col">
+                <label><span>Кастинг:</span>
+                    <input autocomplete="" type="text" placeholder="Стив Бушеми, Стивън Греъм, Майкъл Шанън, Майкъл Пит, Чарли Кокс" id="tvCastInput">
+                </label>
+                <a class="create" href="#person"><img src="../assets/icons/iconmonstr/iconmonstr-plus-2-icon.svg" alt="Създай Кастинг" class="svg"></a></div>
+            <div class="one-col">
+                <label><span>Именити автори, продуценти и режисьори:</span>
+                    <input autocomplete="" type="text" placeholder="Терънс Уинтър, Мартин Скорсезе, Марк Уолбърг, Тимъти Ван Патън" id="tvStarsInput">
+                </label>
+                <a class="create" href="#person"><img src="../assets/icons/iconmonstr/iconmonstr-plus-2-icon.svg" alt="Създай Именити автори, продуценти и режисьори" class="svg"></a></div>
+            <div class="one-col">
+                <label><span>Най-култови образи:</span>
+                    <input autocomplete="" type="text" placeholder="Джип Розети" id="tvCharactersInput">
+                </label>
+                <a class="create" href="#character"><img src="../assets/icons/iconmonstr/iconmonstr-plus-2-icon.svg" alt="Създай Най-култови образи" class="svg"></a></div>
+            <label><span>Престижни награди:</span>
+                <textarea placeholder="2 златни глобуса, 20 награди Emmy, над 170 номинации" id="tvAwardsInput"></textarea>
+            </label>
+            <div class="two-cols">
+                <label><span>Начло на излъчване:</span>
+                    <input autocomplete="" type="date" placeholder="" id="tvDateInput">
+                </label>
+            </div>
+            <div class="two-cols">
+                <label><span>Край на излъчване:</span>
+                    <input autocomplete="" type="date" placeholder="" id="tvEndDateInput">
+                </label>
+            </div>
+            <div class="two-cols">
+                <label><span>Сезони:</span>
+                    <input autocomplete="" type="text" placeholder="5" id="tvSeasonsInput">
+                </label>
+            </div>
+            <label><span>Подобни:</span>
+                <input autocomplete="off" type="text" placeholder="" id="tvRelatedInput">
+            </label>
+            <h3>Скрити стойности</h3>
+            <label>
+                <input value="tv" type="hidden" id="tvTypeSelect">
+                <span class="hidden"><i>Тип:</i><b>hidden</b> </span></label>
+            <label>
+                <input value="" type="hidden" id="tvSaveIdInput">
+                <span class="hidden"><i>Идентификатор на записа:</i><b>hidden</b> </span></label>
+            <label>
+                <input value="" type="hidden" id="tvSaveRelatedInput">
+                <span class="hidden"><i>Свързани:</i><b>hidden</b> </span></label>
+        </form>
+        <div role="toolbar">
+            <button type="button" class="new">Нов</button>
+            <button type="button" class="save">Запази</button>
+            <button type="button" class="cancel">Отмени</button>
+        </div>
     </section>
     <section id="music">
         <h2><a href="#music">Музика<span class="">Създай...</span></a></h2>
@@ -1270,6 +1353,7 @@
                 </select>
             </label>
             <button type="button" class="ok">Избери</button>
+            <button type="button" class="remove">Премахни</button>
             <button type="button" class="cancel">Отмени</button>
         </div>
     </section>

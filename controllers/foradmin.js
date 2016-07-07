@@ -134,6 +134,10 @@ function AdminManager() {
 				o = new Movie(id);
 				
 				break;
+			case 'tv':
+				o = new Tv(id);
+				
+				break;
 			case 'album':
 				o = new Album(id);
 				
@@ -291,8 +295,7 @@ function AdminManager() {
 		});	
 	}
 	
-	this.refreshTagsinput = function(data, input) {
-		
+	this.refreshTagsinput = function(data, input) {		
 		var promise = data.initialize(true);
 		
 		promise.done(function() {
@@ -312,6 +315,7 @@ function AdminManager() {
 	var issues = bloodhound('/forapi/get.php?object=issue');
 	var series = bloodhound('/forapi/get.php?object=serie');
 	var movies = bloodhound('/forapi/get.php?object=movie');
+	var tv = bloodhound('/forapi/get.php?object=tv');
 	var authors = bloodhound('/forapi/get.php?object=author');
 	var characters = bloodhound('/forapi/get.php?object=character');
 	var persons = bloodhound('/forapi/get.php?object=person');
@@ -331,12 +335,19 @@ function AdminManager() {
 		issues.clearPrefetchCache();
 		series.clearPrefetchCache();
 		movies.clearPrefetchCache();
+		tv.clearPrefetchCache();
 		authors.clearPrefetchCache();
 		characters.clearPrefetchCache();
 		persons.clearPrefetchCache();
 		music.clearPrefetchCache();
 		books.clearPrefetchCache();
 		tags.clearPrefetchCache();
+		
+		this.refreshTagsinput(stickers, '#tvStickersInput');
+		this.refreshTagsinput(persons, '#tvCastInput');
+		this.refreshTagsinput(persons, '#tvStarsInput');
+		this.refreshTagsinput(persons, '#tvCharactersInput');
+		this.refreshTagsinput(tv, '#tvRelatedInput');
 		
 		this.refreshTagsinput(persons, '#bookAuthorInput');
 		this.refreshTagsinput(persons, '#bookTranslatorInput');
@@ -679,7 +690,7 @@ function AdminManager() {
 	
 	initTagInput(issues, 'issues', '#publishIssueInput', 1);
 	initTagInput(authors, 'authors', '#articleAuthorsInput');
-	initTagInput(tags, 'tags', '#articleTagsInput', 5);
+	initTagInput(tags, 'tags', '#articleTagsInput', 10);
 	initTagInput(tags, 'tags', '#articleBetterInput', 1);
 	initTagInput(tags, 'tags', '#articleWorseInput', 1);
 	initTagInput(tags, 'tags', '#articleEqualInput', 1);
@@ -700,6 +711,18 @@ function AdminManager() {
 	initTagInput(persons, 'persons', '#movieWriterInput');
 	initTagInput(persons, 'persons', '#movieCameraInput');
 	initTagInput(persons, 'persons', '#movieMusicInput');
+	
+	/**
+	 * MOVIES::TV
+	 */
+	
+	this.loadOptions($('#tvGenreGroup'), movieGenres, 'checkbox');
+	
+	initTagInput(stickers, 'stickers', '#tvStickersInput');
+	initTagInput(tv, 'tv', '#tvRelatedInput');
+	initTagInput(persons, 'persons', '#tvCastInput');
+	initTagInput(persons, 'persons', '#tvStarsInput');
+	initTagInput(characters, 'characters', '#tvCharactersInput');
 	
 	/**
 	 * GAMES::GAME
@@ -1193,7 +1216,7 @@ function AdminManager() {
 	 * Not merging to avoid additional testing.
 	 */
 	
-	$('#game, #movie, #album, ' + 
+	$('#game, #movie, #album, #tv, ' + 
 	  '#event, #book, #platform, ' +
 	  '#genre, #sticker, #fortag').on('click', 'button.save', function(e) {
 		

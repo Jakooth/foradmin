@@ -141,6 +141,4 @@ Movie.prototype.updateData = function(data) {
 
 	this._setInputValue(this._$worldDateInput, data.world_date || null);
 	this._setInputValue(this._$timeInput, data.time || null);
-	
-	this._setPosterImgValue(this._$posterInput, data.tag || null);
 }

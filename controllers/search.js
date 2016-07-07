@@ -195,9 +195,27 @@ function SearchManager() {
 												  'url(../assets/tags/' + 
 												  aside.tag + '.jpg');
 			}
+			
+			admin.hideSectionInWindow($(searchSection));
 		}).fail(function() {
 			alert("Failed to load aside.");
 		});
+	}
+	
+	var _removeSearch = function() {
+		var $aside = window.admin.selectTarget.parents('.inline-col');
+		
+		window.admin.selectTarget.focus();
+		
+		$aside.data('object', '');
+		$aside.attr('data-object', $aside.data('object'));
+		$aside.data('url', '');
+		$aside.attr('data-url', $aside.data('url'));
+		$aside.data('valign', '');
+		$aside.attr('data-valign', $aside.data('valign'));
+		$aside.find('> button').css('background-image', 'none');
+		
+		admin.hideSectionInWindow($(searchSection));
 	}
 	
 	this._openSearch = function($opener) {
@@ -324,5 +342,9 @@ function SearchManager() {
 	
 	$body.on('click', '[role=dialog] #search button.ok', function(e) {
 		_selectSearch();
+	});
+	
+	$body.on('click', '[role=dialog] #search button.remove', function(e) {
+		_removeSearch();
 	});
 }

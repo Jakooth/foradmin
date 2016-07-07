@@ -443,7 +443,8 @@ function ImgsManager() {
 	
 	$('#article, #aside').on('click', '.file input[type=file]', function(e) {
 		var $this = $(this),
-			$that = $('#articleCaretUpload');
+			$that = $('#articleCaretUpload'),
+			$subtype = $('#articleSubtypeSelect');
 		
 		/**
 		 * Right side of the caret will upload a new image.
@@ -464,8 +465,9 @@ function ImgsManager() {
 		
 		admin.showSectionInWindow(imagesSection);
 		
-		if (tags) {
-			$(imagesTagInput).tagsinput('removeAll');
+		$(imagesTagInput).tagsinput('removeAll');
+		
+		if (tags && $subtype.val() == 'review') {
 			$(imagesTagInput).tagsinput('add', tags[0]);
 		}
 		

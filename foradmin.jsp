@@ -48,7 +48,7 @@
             <script src="/controllers/utils.js?v=2.0.0">
                 <!--script-->
             </script>
-            <script src="controllers/foradmin.js?v=2.0.0">
+            <script src="controllers/foradmin.js?v=2.1.0">
                 <!--script-->
             </script>
             <script src="controllers/add.js?v=2.0.0">
@@ -91,6 +91,9 @@
                 <!--script-->
             </script>
             <script src="controllers/objects/movie.js?v=2.0.0">
+                <!--script-->
+            </script>
+            <script src="controllers/objects/tv.js?v=2.0.0">
                 <!--script-->
             </script>
             <script src="controllers/objects/album.js?v=2.0.0">

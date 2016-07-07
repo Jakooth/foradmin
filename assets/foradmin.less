@@ -1048,7 +1048,8 @@ button.down {
 
 #book .Main .file:nth-child(2),
 #event .Main .file:nth-child(2),
-#movie .Main .file:nth-child(2) {
+#movie .Main .file:nth-child(2),
+#tv .Main .file:nth-child(2) {
 	width: 346px;
 	height: 512px;
 }
@@ -2259,14 +2260,6 @@ button.down {
 	width: 100%;
 }
 
-[role=dialog] #search form > label:first-child {
-	width: 55%;
-}
-
-[role=dialog] #search form > label:nth-of-type(2) {
-	display: none;
-}
-
 #search [role=toolbar] {
 	display: none;
 }
@@ -2290,6 +2283,10 @@ button.down {
 
 [role=dialog] #search [role=toolbar] {
 	display: block;
+}
+
+[role=dialog] #search button.remove {
+	background-image: none;
 }
 
 #search form > button {

@@ -5,6 +5,8 @@ function AddManager() {
 	 */
 	 
 	var self = this;
+	var forplayAPI = '/forapi/forplay.php';
+	var fotagsAPI = '/forapi/get.php';
 	
 	var platforms = '/forapi/get.php?object=platform';
 	
@@ -223,7 +225,59 @@ function AddManager() {
 					   .val(data.data.subtype).change();
 				$layout.find('.center-col:visible .img-proxy [type=checkbox]')
 					   .prop('checked', data.data.ratio == '16-10' ? true : false);
+					   
+					 
+				var $left = $layout.find('.left-col:visible > button'),
+					$right = $layout.find('.right-col:visible > button');
+					
+				var getAside,
+					object,
+					id;	
+
+				if (data.data.left) {
+					object = data.data.left_object;
+					id = data.data.left;
+				
+					if (object == 'quote' || 
+						object == 'review' || 
+						object == 'feature' ||
+						object == 'video' || 
+						object == 'aside') {
 						
+						getAside = $.get(encodeURI(forplayAPI + '?tag=' + id));
+					} else {
+						getAside = $.get(encodeURI(fotagsAPI + '?tag=' + id + '&object=' + object));
+					}
+					
+					$.when(getAside).done(function(getAsideData) {
+						var data = getAsideData.length ? JSON.parse(getAsideData) : getAsideData,
+							aside = data.articles ? data.articles[0] : data.tags[0];
+						
+						switch (aside.subtype) {
+							case 'quote':
+								$left.css('background-image', 
+										  'url(../assets/tags/' + 
+										  aside.shot_img);
+								break;
+							case 'review':
+							case 'feature':
+							case 'video':
+							case 'aside':
+								$left.css('background-image', 
+										  'url(../assets/articles/' + 
+										  utils.parseImgTag(aside.shot_img) + '/' +
+										  aside.shot_img + ')');
+								break;
+							default:
+								$left.css('background-image', 
+										  'url(../assets/tags/' + 
+										  aside.tag + '.jpg');
+						}
+					}).fail(function() {
+						alert("Failed to load aside.");
+					});
+				}
+				
 				/**
 				 * Set imgs one by one.
 				 * We do not use renderer, because there are various layouts.
@@ -575,7 +629,7 @@ function AddManager() {
 	$('#game, #band, #album, ' + 
 	  '#movie, #eventm, #dlc, ' + 
 	  '#book, #person, #company,' +
-	  '#character, #serie').on('change', '.file input[type=file]', function(e) {
+	  '#character, #serie, #tv').on('change', '.file input[type=file]', function(e) {
 	  
 		self.addImage(e);
 	});

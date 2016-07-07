@@ -45,6 +45,7 @@
             </admin:formItem>
             <button class="ok" type="button">Избери</button>
             <button class="cancel" type="button">Отмени</button>
+            <button class="remove" type="button">Премахни</button>
         </div>
     </section>
 </jsp:root>
