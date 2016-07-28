@@ -203,13 +203,6 @@ function LoginManager() {
 	}
 	 
 	
-
-	
-	/** 
-	 * INIT
-	 */
-	 
-	 
 	 
 	 
 	/** 
@@ -241,25 +234,4 @@ function LoginManager() {
 	$('#login').on('click', 'button.login', function (e) {
 		window.location.href = "foradmin.html#main";
 	});
-	
-	/**
-	 * Forplay customization.
-	 */
-	
-	/*
-	window.lock.once('shown', function() {
-		var $lock = $('#a0-lock .a0-panel');
-		
-		$('body').attr('aria-busy', true);
-		$('head style:eq(1)').remove();
-		
-		$lock.prepend('<h1><img alt="Forplay&amp;reg;" src="../assets/forplay.svg" class="svg"/></h1>');
-		
-		utils.convertSVG($lock.find('.svg:eq(0)'));
-	});
-	
-	window.lock.once('hidden', function() {
-		$('body').attr('aria-busy', false);
-	});
-	*/
 }
