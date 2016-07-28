@@ -117,6 +117,12 @@ Fortag.prototype._escapeValue = function(data) {
 	s = he.escape(s);
 	
 	/**
+	 * Trim white spaces at the ends.
+	 */
+	 
+	s = s.trim(); 
+	
+	/**
 	 * There is an error if you simple return quoted string.
 	 * For this reason we return string object to string.
 	 */
