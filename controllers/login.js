@@ -201,6 +201,16 @@ function LoginManager() {
 			} 
 		});
 	}
+	
+	this.getUserInfo = function() {
+		var token = localStorage.getItem('userToken');
+				
+		if (token) {
+			lock.getProfile(token, function(error, profile) {
+				localStorage.setItem('userToken', token);
+			});
+		}
+	}
 	 
 	
 	 
