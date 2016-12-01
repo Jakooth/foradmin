@@ -34,6 +34,7 @@
                 <select aria-label="Оформление на картинките" class="header">
                     <option value="z0">голяма</option>
                     <option value="z1">средна</option>
+					<option value="z2">външна</option>
                     <option value="a1">2 малки + голяма</option>
                     <option value="a2">голяма + 2 малки</option>
                     <option value="a3">голяма + средна + малка</option>
@@ -52,6 +53,9 @@
                 </div>
                 <div class="sublayout z1Sublayout">
                     <admin:imgProxy pointer="Ляво" video="true" />
+                </div>
+				<div class="sublayout z2Sublayout">
+                    <admin:imgProxy pointer="Горе" video="true" />
                 </div>
                 <div class="sublayout a1Sublayout">
                 	<admin:imgProxy pointer="Горе" ratio="true" video="true" />

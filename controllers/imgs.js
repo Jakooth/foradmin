@@ -357,8 +357,6 @@ function ImgsManager() {
 					if (imgChoice.indexOf(img.path) != -1) {
 						_setImgValue(window.admin.imgTarget, imgChoice);
 						
-						window.admin.imgTarget.data('img', imgChoice);
-						window.admin.imgTarget.attr('data-img', window.admin.imgTarget.data('img'));
 						window.admin.imgTarget.focus();
 					}
 				}
@@ -496,6 +494,20 @@ function ImgsManager() {
 		add.addImage(e);
 	});
 	
+	$('#article').on('change', '.z2Sublayout [type=text]', function(e) {
+		var $this = $(this),
+			$proxy = $this.parents('.img-proxy'),
+			$img = $proxy.find('[type=file]');
+			
+		var data = Math.round(Math.random() * 100000) + '-' + 
+				   Math.round(Math.random() * 100000) + '.jpg';
+		
+		$img.parents('.file').css('background-image', 'url(' + $this.val() + ')');
+		
+		$img.data('img', data);
+		$img.attr('data-img', $img.data('img'));	
+	});
+	
 	$(imagesSection).on('change', '.file input[type=file]', function(e) {
 		self.addImage($(this), e);
 	});
@@ -510,8 +522,6 @@ function ImgsManager() {
 		if ($imgChoice.length > 0) {
 			_setImgValue(window.admin.imgTarget, $imgChoice.val());
 				
-			window.admin.imgTarget.data('img', $imgChoice.val());
-			window.admin.imgTarget.attr('data-img', window.admin.imgTarget.data('img'));
 			window.admin.imgTarget.focus();
 		}
 		

@@ -34,7 +34,7 @@
                         тук, за да редактирате коментара.</p>
                 </c:if>
                 <c:if test="${!empty video}">
-                    <input placeholder="Видео" aria-label="Видео" type="text" />
+                    <input placeholder="https://" aria-label="препратка" type="text" />
                 </c:if>
                 <c:if test="${!empty tracklist}">
                     <select aria-label="Траклист">

@@ -1,9 +1,38 @@
+AddHandler application/x-httpd-php56 .php .php5 .php4 .php3
+# SetEnv PHPRC /home/forplay/php.ini
+
+# Forplay
+# Make user friendly links for searc engines.
 Options +FollowSymLinks -MultiViews
 RewriteEngine On
 
+# Allow Auth0 header with token
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
+# RewriteBase /the-force-awakens/
 RewriteBase /
 
 # from 	http://forplay.bg/articles/games/news/19/uncharted-4-геймплей 
-# to 	http://forplay.bg/index.html?type=games&subtype=news&id=19&url=uncharted-4-геймплей
-RewriteRule ^articles/([0-9a-zA-Z-]+)/([0-9a-zA-Z-]+)/([0-9]+)/([^/]*)$ index.html?type=$1&subtype=$2&id=$3&url=$4 [NC,QSA,L]
+# to 	http://forplay.bg/index.php?type=games&subtype=news&id=19&url=uncharted-4-геймплей
+RewriteRule ^articles/([0-9a-zA-Z-]+)/([0-9a-zA-Z-]+)/([0-9]+)/([^/]*)$ index.php?type=$1&subtype=$2&id=$3&url=$4 [NC,QSA,L]
+
+# from 	http://forplay.bg/portals/news 
+# to 	http://forplay.bg/index.php?type=portal&subtype=news
+RewriteRule ^portals/([0-9a-zA-Z-]+)$ index.php?type=portal&subtype=$1 [NC,QSA,L]
+
+# from 	http://forplay.bg/portals/author/8/forplay 
+# to 	http://forplay.bg/index.php?type=portal&author=8
+RewriteRule ^portals/author/([0-9]+)/([^/]*)$ index.php?type=portal&author=$1 [NC,QSA,L]
+
+# from 	http://forplay.bg/sitemap
+# to 	http://forplay.bg/forapi/sitemap.php
+RewriteRule ^sitemap$ forapi/sitemap.php [NC,QSA,L]
+
+# from 	http://forplay.bg/ 
+# to 	https://www.forplay.bg/ 
+RewriteCond %{HTTP_HOST} ^forplay.bg$
+RewriteRule ^/?$ "https\:\/\/www\.forplay\.bg\/" [R=301,L]
+
+
 

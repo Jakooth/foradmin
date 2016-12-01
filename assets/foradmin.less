@@ -1685,9 +1685,10 @@ button.down {
 } 
 
 /**
- * z0, z1
+ * z0, z1, z2
  */
  
+.z2Sublayout .img-proxy,
 .z0Sublayout .img-proxy {
 	width: 60%;
 	margin-left: 20%;
@@ -1698,13 +1699,18 @@ button.down {
 	margin-left: 20%;
 }
 
-.z0Sublayout .img-proxy div.settings {
+.z0Sublayout .img-proxy div.settings,
+.z2Sublayout .img-proxy div.settings {
 	right: 0;
 	top: 0;
 	width: 40%;
 	margin: 20px;
 	height: 100%;
-} 
+}
+
+.z2Sublayout .file {
+	pointer-events: none;
+}
 
 .z1Sublayout .img-proxy div.settings {
 	left: 100%;
@@ -1713,7 +1719,8 @@ button.down {
 	margin: 20px;
 }
 
-.z0Sublayout .img-proxy div.settings p {
+.z0Sublayout .img-proxy div.settings p,
+.z2Sublayout .img-proxy div.settings p {
 	background-color: white;
     padding: 20px;
     bottom: 20px;
