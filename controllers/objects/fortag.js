@@ -11,7 +11,7 @@ function Fortag(o) {
 	 */
 	
 	this._url = '/forapi/forsecure/save.php';
-	this._get = '/forapi/get.php';
+	this._get = '/forapi/tags.php';
 	this._isValid = true;
 	this._saveId;
 	this._saveRelated;

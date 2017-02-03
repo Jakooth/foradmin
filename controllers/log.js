@@ -7,7 +7,7 @@ function LogManager() {
 	var self = this;
 	var logAPI = '/forapi/forsecure/log.php';
 	var forplayAPI = '/forapi/forplay.php';
-	var fotagsAPI = '/forapi/get.php';
+	var fotagsAPI = '/forapi/tags.php';
 	
 	var $body =  $('body'),
 		$header = $('header');

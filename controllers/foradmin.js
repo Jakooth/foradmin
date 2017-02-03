@@ -12,12 +12,12 @@ function AdminManager() {
 	var hype = 'data/settings/hype.json';
 	var theme = 'data/settings/theme.json';
 	var subtheme = 'data/settings/subtheme.json';
-	var gameGenres = '/forapi/get.php?object=genre&type=games';
-	var musicGenres = '/forapi/get.php?object=genre&type=music';
-	var platforms = '/forapi/get.php?object=platform';
-	var movieGenres = '/forapi/get.php?object=genre&type=movies';
-	var bookGenres = '/forapi/get.php?object=genre&type=books';
-	var countries = '/forapi/get.php?object=country';
+	var gameGenres = '/forapi/tags.php?object=genre&type=games';
+	var musicGenres = '/forapi/tags.php?object=genre&type=music';
+	var platforms = '/forapi/tags.php?object=platform';
+	var movieGenres = '/forapi/tags.php?object=genre&type=movies';
+	var bookGenres = '/forapi/tags.php?object=genre&type=books';
+	var countries = '/forapi/tags.php?object=country';
 	
 	var bloodhound = function(data, nameField) {
 		var nameField = nameField || 'en_name';
@@ -309,19 +309,19 @@ function AdminManager() {
 	 * Tagsinput data sources.
 	 */
 
-	var games = bloodhound('/forapi/get.php?object=game');
-	var stickers = bloodhound('/forapi/get.php?object=sticker');
-	var companies = bloodhound('/forapi/get.php?object=company');
-	var issues = bloodhound('/forapi/get.php?object=issue');
-	var series = bloodhound('/forapi/get.php?object=serie');
-	var movies = bloodhound('/forapi/get.php?object=movie');
-	var tv = bloodhound('/forapi/get.php?object=tv');
-	var authors = bloodhound('/forapi/get.php?object=author');
-	var characters = bloodhound('/forapi/get.php?object=character');
-	var persons = bloodhound('/forapi/get.php?object=person');
-	var music = bloodhound('/forapi/get.php?type=music');
-	var books = bloodhound('/forapi/get.php?object=book');
-	var tags = bloodhound('/forapi/get.php');
+	var games = bloodhound('/forapi/tags.php?object=game');
+	var stickers = bloodhound('/forapi/tags.php?object=sticker');
+	var companies = bloodhound('/forapi/tags.php?object=company');
+	var issues = bloodhound('/forapi/tags.php?object=issue');
+	var series = bloodhound('/forapi/tags.php?object=serie');
+	var movies = bloodhound('/forapi/tags.php?object=movie');
+	var tv = bloodhound('/forapi/tags.php?object=tv');
+	var authors = bloodhound('/forapi/tags.php?object=author');
+	var characters = bloodhound('/forapi/tags.php?object=character');
+	var persons = bloodhound('/forapi/tags.php?object=person');
+	var music = bloodhound('/forapi/tags.php?type=music');
+	var books = bloodhound('/forapi/tags.php?object=book');
+	var tags = bloodhound('/forapi/tags.php');
 	
 	/**
 	 * Clear cache and reinitialize tag input.

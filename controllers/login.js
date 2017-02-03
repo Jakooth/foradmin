@@ -289,7 +289,17 @@ function LoginManager() {
 	 * Forplay
 	 */
 	
-	$('#userLogin').click(function(e) { 
+	$('#userLogin').click(function(e) {
+		
+		/**
+		 * For some reason this is not working as a selector:
+		 * #userLogin[aria-pressed=false].
+		 */
+		
+		if($(this).attr('aria-pressed') == 'true') {
+			return;
+		}
+		
 		self.showUserLock();
 	});
 }

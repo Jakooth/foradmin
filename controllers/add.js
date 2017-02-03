@@ -6,9 +6,9 @@ function AddManager() {
 	 
 	var self = this;
 	var forplayAPI = '/forapi/forplay.php';
-	var fotagsAPI = '/forapi/get.php';
+	var fotagsAPI = '/forapi/tags.php';
 	
-	var platforms = '/forapi/get.php?object=platform';
+	var platforms = '/forapi/tags.php?object=platform';
 	
 	
 
@@ -352,7 +352,7 @@ function AddManager() {
 			});
 			 
 			admin.loadOptions($layout.find('.insideLayout .settings select:eq(1)'), 
-										   '/forapi/get.php?object=author', 
+										   '/forapi/tags.php?object=author', 
 										   'option', insideAuthor);
 		}).fail(function() {
 			alert("Failed to load layout.");
