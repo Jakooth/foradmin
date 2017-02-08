@@ -5,6 +5,7 @@ function LoginManager() {
 	 */
 	 
 	var self = this;
+	var profilesAPI = '/forapi/forsecure/profiles.php';
 	
 	var bg = {
 		"loadingTitle":                  "Моля изчакайте...",
@@ -205,47 +206,114 @@ function LoginManager() {
 	this.showUserLock = function() {
 		lock.show({dict: bg, avatar: null}, function(err, profile, token) {
 			if (err) {
-
+				console.log("Failed to authorize user with Auth0.");
 			} else { 
-				localStorage.setItem('userToken', token);
-				
-				window.userProfile = profile;
-				
-				self.renderUserUI();
-				
-				if (window.userProfile['app_metadata']['roles'][0] != 'admin' &&
-                    window.userProfile['app_metadata']['roles'][0] != 'superadmin') {
-				
-				} else {
-					
-				}
+				self.extendUserProfile(token, profile);	
 			} 
 		});
 	}
 	
-	this.getUserInfo = function() {
-		var token = localStorage.getItem('userToken');
-				
-		if (token) {
-			lock.getProfile(token, function(err, profile) {
+	this.getUserProfile = function() {
+		var token = localStorage.getItem('userToken')
+			userdData = null;
+			
+		if (token) {		
+			lock.getProfile(token, function(err, profile) {				
 				if(!err) {
-					localStorage.setItem('userToken', token);
-					
-					window.userProfile = profile;
-					
-					self.renderUserUI();
+					self.extendUserProfile(token, profile);
+				} else {
+					console.log("Failed to authorize user with Auth0.");
 				}
 			});
 		}
 	}
 	
-	this.renderUserUI = function() {
-		var $login = $('#userLogin'),
-			$user =$('#userLogin b');
+	this.extendUserProfile = function(token, profile) {
+		localStorage.setItem('userToken', token);
+				
+		window.userProfile = profile;
 		
-		$login.css('background-image', 'url(' + window.userProfile.picture + ')');
-		$login.attr('aria-pressed', true);
-		$user.text(window.userProfile.name.split(' ')[0] || window.userProfile.nickname);
+		var params = '?email=' + window.userProfile.email,
+			getProfile = $.get(encodeURI(profilesAPI + params)),
+			data = null;
+			
+		$.when(getProfile).done(function(data) {
+			data = data.length ? JSON.parse(data) : data;
+			
+			if (!data.profiles) {
+				/**
+				 * TODO: If the user ia authorized but the GET returns nothing,
+				 * do a POST to create the user.
+				 */	
+			} else {
+				$.extend(window.userProfile, data);
+
+				self.renderUserUI(window.userProfile);
+			} 
+			
+			/**
+			 * TODO: Admin can manage comments.
+			 * Usere can modify only their comments.s
+			 */	
+			 
+			if (window.userProfile['app_metadata']['roles'][0] != 'admin' &&
+				window.userProfile['app_metadata']['roles'][0] != 'superadmin') {
+			
+			} else {
+				
+			} 
+		}).fail(function() {
+			console.log("Failed to load profile information.");
+			
+			self.renderUserUI(window.userProfile);
+			
+			/**
+			 * TODO: The user name will render, but cannot write comments.
+			 */	
+		});
+	}
+	
+	this.renderUserUI = function(profile) {
+		var $profile = $('#userLogin, #profileChange'),
+			$user = $('#userLogin b'),
+			$id = $('#profileId'),
+			$nickname = $('#profileNickname'),
+			$name = $('#profileGivenName'),
+			$family = $('#profileFamilyName');
+			
+		if (!profile) {
+			$profile.removeAttr('style');
+			$profile.attr('aria-pressed', false);
+			$user.text('Непознат');
+			$id.val('');
+			$nickname.val('');
+			$name.val('');
+			$family.val('');
+		} else {
+			
+			/**
+			 * TODO: Take profile information from the GET response.
+			 * This will provide additional info like nickname.
+			 */	
+			
+			$profile.css('background-image', 'url(' + window.userProfile.picture + ')');
+			$profile.attr('aria-pressed', true);
+			$user.text(window.userProfile.name.split(' ')[0]);
+			$name.val(window.userProfile.given_name);
+			$family.val(window.userProfile.family_name);
+		}
+	}
+	
+	this.showProfile = function() {
+		$profile = $('#userProfile');
+		
+		$profile.attr('aria-hidden', false);
+	}
+	
+	this.hideProfile = function() {
+		$profile = $('#userProfile');
+		
+		$profile.attr('aria-hidden', true);
 	}
 	 
 	
@@ -297,9 +365,28 @@ function LoginManager() {
 		 */
 		
 		if($(this).attr('aria-pressed') == 'true') {
+			self.showProfile();
+			
 			return;
 		}
 		
 		self.showUserLock();
 	});
+	
+	$('#profileChange').click(function(e) {		
+		self.showUserLock();
+	});
+	
+	$('#profileClose').click(function(e) {		
+		self.hideProfile();
+	});
+	
+	$('#userLogout').click(function(e) {	
+		localStorage.removeItem('userToken'); 
+		
+		window.userProfile = null;
+		
+		self.renderUserUI();
+		self.hideProfile();
+	}); 
 }
