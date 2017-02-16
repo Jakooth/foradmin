@@ -6,8 +6,7 @@ $(document).ready(function() {
 	window.activity = new LogManager();
 	window.sitemap = new SitemapManager();
 	window.imgs = new ImgsManager();
-    window.lock = new Auth0Lock('P8wrSYlMVUu5rZDEFGSqFL18tVfgo9Gz',
-								'forplay.eu.auth0.com'); 
+    
 	window.login = new LoginManager();												
 	window.userProfile = null; 
 	
@@ -36,9 +35,9 @@ $(document).ready(function() {
 	
 	$.ajaxSetup({ 
 		'beforeSend': function(xhr) { 
-			if (localStorage.getItem('userToken')) { 
+			if (localStorage.getItem('idToken')) { 
 				xhr.setRequestHeader('Authorization',  
-									 'Bearer ' + localStorage.getItem('userToken')); 
+									 'Bearer ' + localStorage.getItem('idToken')); 
 			} 
 		} 
 	});
