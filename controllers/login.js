@@ -8,12 +8,18 @@ function LoginManager() {
 	var profilesAPI = '/forapi/forsecure/profiles.php';
 	var auth0clientID = 'P8wrSYlMVUu5rZDEFGSqFL18tVfgo9Gz';
 	var auth0Domain = 'forplay.eu.auth0.com';
+	var failedLogins = 0;
+	var maxLoginAttempts = 1;
 	
-	var lockOptions = {
+	var lockAdminOptions = {
 		avatar: null,
 		autoclose: true,
 		allowLogin: true,
-		closable: true
+		closable: true,
+		allowedConnections: ['Username-Password-Authentication'],
+		auth: {
+			redirect: false
+		}
 	}; 
 	
 	var lockUserOptions = {
@@ -21,10 +27,21 @@ function LoginManager() {
 		autoclose: true,
 		allowLogin: true,
 		closable: true,
-		allowedConnections: ['facebook', 'google-oauth2']
+		allowedConnections: ['facebook', 'google-oauth2'],
+		auth: {
+			redirectUrl: window.location.origin + '/auth/return-url',
+			responseType: 'token',
+			redirect: true,
+			params: {
+				state: JSON.stringify({
+					return_url: encodeURIComponent(window.location.pathname)
+				})
+			}
+		}
 	}; 
 	
-	window.lock = new Auth0Lock(auth0clientID, auth0Domain, lockOptions); 
+	window.auth0 = new auth0.WebAuth({domain: auth0Domain, clientID: auth0clientID});
+	window.adminLock = new Auth0Lock(auth0clientID, auth0Domain, lockAdminOptions); 
 	window.userLock = new Auth0Lock(auth0clientID, auth0Domain, lockUserOptions); 
 	
 	var bg = {
@@ -188,86 +205,110 @@ function LoginManager() {
 	 * PUBLIC
 	 */
 	 
-	this.showLock = function() {
+	this.showAdminLock = function() {
 		applyPermissions(false);
 		
-		window.lock.show();
+		window.adminLock.show();
 	}
-	
-	window.lock.on("authenticated", function(authResult) {
-	  var $login = $('#main button.login'),
-		  $logout = $('#main button.logout');
-	  
-	  window.userLock.getUserInfo(authResult.accessToken, function(error, profile) {	
-		if (error) {
-		  $login.attr('aria-hidden', false);
-		  $logout.attr('aria-hidden', true);
-		  
-		  return;
-		}
-		
-		localStorage.setItem('idToken', authResult.idToken);
-		localStorage.setItem('accessToken', authResult.accessToken);
-				
-		window.userProfile = profile; 
-		
-		$login.css('background-image', 'url(' + window.userProfile.picture + ')');
-		$logout.css('background-image', 'url(' + window.userProfile.picture + ')');
-		$login.attr('aria-hidden', true);
-		$logout.attr('aria-hidden', false);
-		
-		if (window.userProfile['appMetadata']['roles'][0] != 'admin' &&
-			window.userProfile['appMetadata']['roles'][0] != 'superadmin') {
-			
-			applyPermissions(false, false);
-		} else {
-			if (window.userProfile['appMetadata']['roles'][0] != 'superadmin') {
-				applyPermissions(true, false);
-			} else {
-				applyPermissions(true, true);
-			}
-		}	
-	  });
-	});
 	
 	this.showUserLock = function() {
 		window.userLock.show();
 	}
 	
-	window.userLock.on("authenticated", function(authResult) {
-	  window.userLock.getUserInfo(authResult.accessToken, function(error, profile) {
+	this.clearUserProfile = function() {
+		localStorage.removeItem('idToken');
+		localStorage.removeItem('accessToken');
+		localStorage.removeItem('forplayProfile');
 		
-		if (error) {
-		  console.log("Failed to get Auth0 user info.");
-		  
-		  return;
-		}
+		window.userProfile = null;
 		
-		self.extendUserProfile(authResult.idToken, 
-							   authResult.accessToken, 
-							   profile);	
-	  });
-	});
+		self.renderUserUI();
+	}
 	
 	this.getUserProfile = function() {
-		var accessToken = localStorage.getItem('accessToken'),
-			idToken = localStorage.getItem('idToken'),
-			userdData = null;
+		var profile = localStorage.getItem('forplayProfile'),
+			accessToken = localStorage.getItem('accessToken'),
+			idToken = localStorage.getItem('idToken');
+		
+		/**
+		 * The user is not autheticated.
+		 */
+		
+		if (!profile && (!accessToken || !idToken)) {		
+			self.clearUserProfile();
 			
-		if (accessToken) {
-			window.userLock.getUserInfo(accessToken, function(error, profile) {
-				if (error) {
-				  console.log("Failed to get Auth0 user info.");
+			return false;
+		}
+		
+		if (!profile && (accessToken || idToken)) {
+			window.userLock.getUserInfo(accessToken, function(err, profile) {
+				if (err) {
+				  console.log("There is no stored Forplay profile and access has probably expried. " + 
+				  			  "Automatically trying to renew log in. Auth 0 says: " + err);
+				  
+				  self.renewUserProfile();
+				  
+				  return false;
+				}
+				
+				self.extendUserProfile({idToken: idToken, 
+										accessToken: accessToken}, profile);	
+			});
+		}
+		
+		if (profile && accessToken && idToken) {
+			self.extendUserProfile({idToken: idToken, 
+									accessToken: accessToken}, JSON.parse(profile));
+			
+			return true;
+		}
+	}
+	
+	this.renewUserProfile = function() {
+		auth0.renewAuth({
+			audience: '',
+			scope: 'openid app_metadata user_metadata',
+		  	redirectUri: 'http://localhost/auth/silent-callback',
+		  	usePostMessage: true,
+		}, function (err, authResult) {
+			if (err) {
+			  console.log("Failed to renew log in. Logging out. " +
+			  			  "Try to log in again or contact admin@forplay.bg. Auth 0 says:" + err);
+			  
+			  self.clearUserProfile();
+			  
+			  return;
+			}
+			
+			window.userLock.getUserInfo(authResult.accessToken, function(err, profile) {
+				if (err) {
+				  console.log("Renew login was successful, but we failed to get your profile. " + 
+				  			  "Logging out. Try to log in again or contact admin@forplay.bg. Auth 0 says: " + err);
+				  
+				  self.clearUserProfile();
 				  
 				  return;
 				}
 				
-				self.extendUserProfile(idToken, accessToken, profile);
+				self.extendUserProfile({idToken: authResult.idToken, 
+										accessToken: authResult.accessToken}, profile);	
 			});
-		}
+		});
 	}
 	
 	this.createUserProfile = function(profile, isUpdate) {
+		
+		/**
+		 * Clean old localStorage items.
+		 * This is only for Foplray admins and can be removed soon.
+		 */
+		
+		localStorage.removeItem('userToken');
+		
+		/**
+		 * Now save the new profile and tokens.
+		 */
+		
 		var postProfile = $.ajax({
 				type: "POST",
 				contentType: "application/json; charset=utf-8",
@@ -285,7 +326,7 @@ function LoginManager() {
 			self.renderUserUI(window.userProfile);
 			
 			if (!isUpdate) {
-				self.showProfile();
+				self.showUserProfile();
 			}
 		}).fail(function() {
 			if (!isUpdate) {
@@ -298,9 +339,10 @@ function LoginManager() {
 		});
 	}
 	
-	this.extendUserProfile = function(idToken, accessToken, profile) {
-		localStorage.setItem('idToken', idToken);
-		localStorage.setItem('accessToken', accessToken);
+	this.extendUserProfile = function(authResult, profile) {
+		localStorage.setItem('idToken', authResult.idToken);
+		localStorage.setItem('accessToken', authResult.accessToken);
+		localStorage.setItem('forplayProfile', JSON.stringify(profile));
 				
 		window.userProfile = profile;
 		
@@ -333,7 +375,7 @@ function LoginManager() {
 			
 			/**
 			 * TODO: Admin can manage comments.
-			 * Usere can modify only their comments.s
+			 * Usere can modify only their comments
 			 */	
 			 
 			if (window.userProfile['appMetadata']['roles'][0] != 'admin' &&
@@ -343,14 +385,19 @@ function LoginManager() {
 				
 			} 
 		}).fail(function() {
-			console.log("Failed to load profile information.");
+			if (failedLogins >= maxLoginAttempts) {
+				console.log("Too many automatic retries. Logging out.  " + 
+				  			"Try to log in again or contact admin@forplay.bg.");
+							
+				self.clearUserProfile();
+			}
 			
-			self.renderUserUI(window.userProfile);
+			console.log("Failed to load profile information from the server. " + 
+				  		"Automatically trying to renew log in.");
 			
-			/**
-			 * TODO: The user name will render, 
-			 * but cannot write comments.
-			 */	
+			failedLogins ++;
+			
+			self.renewUserProfile();
 		});
 	}
 	
@@ -389,13 +436,13 @@ function LoginManager() {
 		}
 	}
 	
-	this.showProfile = function() {
+	this.showUserProfile = function() {
 		$profile = $('#userProfile');
 		
 		$profile.attr('aria-hidden', false);
 	}
 	
-	this.hideProfile = function() {
+	this.hideUserProfile = function() {
 		$profile = $('#userProfile');
 		
 		$profile.attr('aria-hidden', true);
@@ -412,6 +459,43 @@ function LoginManager() {
 	 * Admin
 	 */ 
 	 
+	window.adminLock.on("authenticated", function(authResult) {
+		var $login = $('#main button.login'),
+		  	$logout = $('#main button.logout');
+	  
+	  	window.adminLock.getUserInfo(authResult.accessToken, function(error, profile) {	
+			if (error) {
+			  	$login.attr('aria-hidden', false);
+			  	$logout.attr('aria-hidden', true);
+			  
+			  	return;
+			}
+		
+			localStorage.setItem('idToken', authResult.idToken);
+			localStorage.setItem('accessToken', authResult.accessToken);
+			localStorage.setItem('forplayProfile', JSON.stringify(profile));
+				
+			window.userProfile = profile; 
+		
+			$login.css('background-image', 'url(' + window.userProfile.picture + ')');
+			$logout.css('background-image', 'url(' + window.userProfile.picture + ')');
+			$login.attr('aria-hidden', true);
+			$logout.attr('aria-hidden', false);
+		
+			if (window.userProfile['appMetadata']['roles'][0] != 'admin' &&
+				window.userProfile['appMetadata']['roles'][0] != 'superadmin') {
+			
+				applyPermissions(false, false);
+			} else {
+				if (window.userProfile['appMetadata']['roles'][0] != 'superadmin') {
+					applyPermissions(true, false);
+				} else {
+					applyPermissions(true, true);
+				}
+			}	
+	  	});
+	});
+	 
 	$(window).on('load', function(e) {
 		$('#login img.svg').each(function() {
 			utils.convertSVG($(this));
@@ -419,7 +503,7 @@ function LoginManager() {
 	});
 	
 	$('#main button.login').click(function(e) { 
-		self.showLock();
+		self.showAdminLock();
 	});
 	
 	$('#main button.logout').click(function(e) {
@@ -427,7 +511,7 @@ function LoginManager() {
 			$logout = $('#main button.logout');
 					
 		localStorage.removeItem('idToken');
-		localStorage.removeItem('accessToken');
+		localStorage.removeItem('forplayProfile');
 		
 		window.userProfile = null;
 		
@@ -443,6 +527,10 @@ function LoginManager() {
 	 * Forplay
 	 */
 	
+	window.userLock.on("authenticated", function(authResult) {
+		self.getUserProfile(authResult);
+	});
+	
 	$('#userLogin').click(function(e) {
 		
 		/**
@@ -451,7 +539,7 @@ function LoginManager() {
 		 */
 		
 		if($(this).attr('aria-pressed') == 'true') {
-			self.showProfile();
+			self.showUserProfile();
 			
 			return;
 		}
@@ -465,7 +553,7 @@ function LoginManager() {
 		window.userProfile.family_name = $('#profileFamilyName').val() ? $('#profileFamilyName').val() : null;
 		
 		self.createUserProfile(window.userProfile, true);
-		self.hideProfile();
+		self.hideUserProfile();
 	});
 	
 	$('#profileChange').click(function(e) {		
@@ -473,16 +561,11 @@ function LoginManager() {
 	});
 	
 	$('#profileClose').click(function(e) {		
-		self.hideProfile();
+		self.hideUserProfile();
 	});
 	
-	$('#userLogout').click(function(e) {	
-		localStorage.removeItem('idToken');
-		localStorage.removeItem('accessToken');
-		
-		window.userProfile = null;
-		
-		self.renderUserUI();
-		self.hideProfile();
+	$('#userLogout').click(function(e) {
+		self.clearUserProfile();
+		self.hideUserProfile();
 	}); 
 }

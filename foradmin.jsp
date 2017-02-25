@@ -30,6 +30,9 @@
             <script src="/jslib/jsrender.min.js">
                 <!--script-->
             </script>
+            <script src="https://cdn.auth0.com/js/auth0/8.0.4/auth0.min.js">
+				<!--script-->
+			</script>
             <script src="https://cdn.auth0.com/js/lock/10.9.1/lock.min.js">
                 <!--script-->
             </script>
