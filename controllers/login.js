@@ -333,6 +333,7 @@ function LoginManager() {
 		 */
 		
 		localStorage.removeItem('userToken');
+    localStorage.removeItem('header');
 		
 		/**
 		 * Now save the new profile and tokens.
@@ -349,17 +350,32 @@ function LoginManager() {
 		
 		$.when(postProfile).done(function(data) {
 			var data = data.length ? JSON.parse(data) : data,
-          newProfile = $.extend(profile, data.profiles);
+          doReload = false;
       
-      localStorage.setItem('forplayProfile', JSON.stringify(newProfile));
+      /**
+       * The problem is there are some articles to move around
+       * and it is hard to do this in real time on profil update now.
+       */
       
-      window.userProfile = newProfile;
+      if (isUpdate && window.userProfile.collapsed != data.profiles.collapsed) {
+        doReload = true;
+      }
       
-			self.renderUserUI(window.userProfile);
+      $.extend(profile, data.profiles);
+      
+      localStorage.setItem('forplayProfile', JSON.stringify(profile));
+      
+      window.userProfile = profile;
+      
+      if (doReload) {
+        window.location.reload();
+      } else {
+        self.renderUserUI(window.userProfile);
 			
-			if (!isUpdate) {
-				self.showUserProfile();
-			}
+        if (!isUpdate) {
+          self.showUserProfile();
+        }
+      }
 		}).fail(function() {
 			if (!isUpdate) {
 				console.log("Failed to create Forplay profile.");
@@ -459,6 +475,7 @@ function LoginManager() {
       $collapsed.prop('checked', false);
       
       utils.setTheme('dark', 0);
+      banner.setHeader(localStorage.getItem('forplayHeader'));
 		} else {
 			avatar = profile.pictureLarge ? 
                profile.pictureLarge : 
@@ -476,6 +493,7 @@ function LoginManager() {
       $collapsed.prop('checked', Number(profile.collapsed));
       
       utils.setTheme('dark', Number(profile.darkened));
+      banner.setHeader(Number(profile.collapsed));
 		}
 	}
 	
