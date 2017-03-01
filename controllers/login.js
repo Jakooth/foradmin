@@ -507,29 +507,25 @@ function LoginManager() {
 		  	$logout = $('#main button.logout');
 	  
 	  window.adminLock.getUserInfo(authResult.accessToken, function(err, profile) {	
-			if (err) {
-			  	$login.attr('aria-hidden', false);
-			  	$logout.attr('aria-hidden', true);
-			  
-			  	return;
-			}
+      if (err) {
+          $login.attr('aria-hidden', false);
+          $logout.attr('aria-hidden', true);
+        
+          return;
+      }
+      
+      self.extendUserProfile(authResult, profile);
 		
-			localStorage.setItem('idToken', authResult.idToken);
-			localStorage.setItem('accessToken', authResult.accessToken);
-			localStorage.setItem('forplayProfile', JSON.stringify(profile));
-				
-			window.userProfile = profile; 
-		
-			$login.css('background-image', 'url(' + window.userProfile.picture + ')');
-			$logout.css('background-image', 'url(' + window.userProfile.picture + ')');
-			$login.attr('aria-hidden', true);
-			$logout.attr('aria-hidden', false);
+      $login.css('background-image', 'url(' + window.userProfile.picture + ')');
+      $logout.css('background-image', 'url(' + window.userProfile.picture + ')');
+      $login.attr('aria-hidden', true);
+      $logout.attr('aria-hidden', false);
 		
 			if (window.userProfile['appMetadata']['roles'][0] != 'admin' &&
 				  window.userProfile['appMetadata']['roles'][0] != 'superadmin') {
 			
 				applyPermissions(false, false);
-			} else {
+      } else {
 				if (window.userProfile['appMetadata']['roles'][0] != 'superadmin') {
 					applyPermissions(true, false);
 				} else {
