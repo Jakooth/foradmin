@@ -11,7 +11,129 @@ function LoginManager() {
 	var failedLogins = 0;
 	var maxLoginAttempts = 1;
 	
+	var bg = {
+		error: {
+			forgotPassword: {
+				"too_many_requests": "Достигна максималния брой опити за смяна на паролата. Моля, изчакай преди да опиташ отново.",
+				"lock.fallback": "Съжаляваме, нещо се обърка при заявката за смяна на парола."
+			},
+			
+			login: {
+				"blocked_user": "Потребителят е блокиран.",
+				"invalid_user_password": "Невалидна оторизация.",
+				"lock.fallback": "Съжаляваме, нещо се обърка при опита за влизане.",
+				"lock.invalid_code": "Навалиден код.",
+				"lock.invalid_email_password": "Грешен имейл или парола.",
+				"lock.invalid_username_password": "Грешен потребител или парола.",
+				"lock.network": "Не можем да се свържем със сървъра. Моля, провери интернет връзката си и опитай отново.",
+				"lock.popup_closed": "Pop-up прозорецът се затвори. Опитай отново.",
+				"lock.unauthorized": "Не е дадено позволение. Опитай отново.",
+				"lock.mfa_registration_required": "Изисква се мултифакторна автентикация, но твоето устройство не е в списъка. Моля, регистрирай го преди да продължиш.",
+				"lock.mfa_invalid_code": "Навалиден код. Моля, опитай отново.",
+				"password_change_required": "Трябва да промениш паролата си, защото това е първото ти влизане или защото валидността на предишната ти парола е изтекла.",
+				"password_leaked": "Блокирахме твоето влизане, защото паролата е издадена на друг уебсайт. Изпратихме имейл с инструкции как да я отблокираш.",
+				"too_many_attempts": "Твоят профил бе блокиран след последователни неуспешни опити за влизане.",
+				"session_missing": "Не можем да завършим оторизацията. Моля, опитай отново, след като затвориш всички отворени диалогови прозорци.",
+				"hrd.not_matching_email": "Моля, използвайте твоя корпоративен имейл за вход."
+			},
+			
+			passwordless: {
+				"bad.email": "Невалиден имейл.",
+				"bad.phone_number": "Невалиден телефон.",
+				"lock.fallback": "Съжаляваме, нещо се обърка."
+			},
+			
+			signUp: {
+				"invalid_password": "Невалидна парола.",
+				"lock.fallback": "Съжаляваме, нещо се обърка при опита за регистрация.",
+				"password_dictionary_error": "Паролата ти е твърде лесна за отгатване. Хайде де, бъди по-креативен!",
+				"password_no_user_info_error": "Паролата е базирана на информация от профила.",
+				"password_strength_error": "Паролата е много лесна.",
+				"user_exists": "Потребителят вече съществува.",
+				"username_exists": "Потребителското име вече съществува."
+			}
+		},
+		  
+		success: {
+			logIn: "Благодарим за посещението.",
+			forgotPassword: "Току-що ти изпратихме имейл за подновяване на паролата.",
+			magicLink: "Изпратихме ти връзка за вход<br />в %s.",
+			signUp: "Благодарим за регистрацията."
+		},
+		
+		blankErrorHint: "Това поле не може да остане празно.",
+		codeInputPlaceholder: "твоят код",
+		databaseEnterpriseLoginInstructions: "",
+		databaseEnterpriseAlternativeLoginInstructions: "или",
+		databaseSignUpInstructions: "",
+		databaseAlternativeSignUpInstructions: "или",
+		emailInputPlaceholder: "yours@example.com",
+		enterpriseLoginIntructions: "Вход с твоите корпоративни кодове за достъп.",
+		enterpriseActiveLoginInstructions: "Моля, въведи корпоративните си кодове за достъп в %s.",
+		failedLabel: "Не се получи!",
+		forgotPasswordTitle: "Смени си паролата",
+		forgotPasswordAction: "Пак се напи и не си спомняш паролата?",
+		forgotPasswordInstructions: "Моля, въведи имейл. Ще ти изпратим линк за смяна на паролата.",
+		forgotPasswordSubmitLabel: "Изпрати имейл",
+		invalidErrorHint: "Невалиден",
+		lastLoginInstructions: "Последния път влезе като",
+		loginAtLabel: "Влез в %s",
+		loginLabel: "Влез",
+		loginSubmitLabel: "Влез",
+		loginWithLabel: "Влез със %s",
+		notYourAccountAction: "Не е твоят профил?",
+		passwordInputPlaceholder: "твоята парола",
+		  
+		passwordStrength: {
+			containsAtLeast: "Съдържа поне %d от тези %d типове символи:",
+			identicalChars: "Не повече от %d идентични последователни символи (пример, \"%s\" не е позволено)",
+			nonEmpty: "Полето с паролата не може да остане празно.",
+			numbers: "Цифри (0-9)",
+			lengthAtLeast: "Поне %d символа на дължина",
+			lowerCase: "Малки букви (а-я)",
+			shouldContain: "Трябва да съдържа:",
+			specialCharacters: "Специални символи (пример !@#$%^&*)",
+			upperCase: "Главни букви (А-Я)"
+		},
+		
+		passwordlessEmailAlternativeInstructions: "В противен случай въведи твоя имейл за вход<br/>или създай профил",
+		passwordlessEmailCodeInstructions: "Имейл с кода беше изпратен до %s.",
+		passwordlessEmailInstructions: "Въведи твоя имейл за вход<br/>или създай профил",
+		passwordlessSMSAlternativeInstructions: "В противен случай въведи твоя телефон за вход<br/>или създай профил",
+		passwordlessSMSCodeInstructions: "Изпратихме СМС с код<br/>до %s.",
+		passwordlessSMSInstructions: "Въведи твоя телефон за вход<br/>или създай профил",
+		phoneNumberInputPlaceholder: "твоят телефон",
+		resendCodeAction: "Не получи кода?",
+		resendLabel: "Изпрати отново",
+		resendingLabel: "Изпращаме отново...",
+		retryLabel: "Опитай отново",
+		sentLabel: "Изпратено!",
+		signupTitle: "Регистрация",
+		signUpLabel: "Регистрация",
+		signUpSubmitLabel: "Регистрация",
+		signUpTerms: "",
+		signUpWithLabel: "Регистрация със %s",
+		socialLoginInstructions: "",
+		socialSignUpInstructions: "",
+		ssoEnabled: "Single Sign-On включен",
+		submitLabel: "Изпрати",
+		unrecoverableError: "Нещо се обърка.<br />Моля пиши на admin@forplay.bg.",
+		usernameFormatErrorHint: "Използвай %d-%d букви, цифри и \"_\"",
+		usernameInputPlaceholder: "твоето потребителско име",
+		usernameOrEmailInputPlaceholder: "потребителско име/имейл",
+		title: "Forplay",
+		welcome: "Наздраве, %s!",
+		windowsAuthInstructions: "Вързан си от твоята корпоративна мрежа&hellip;",
+		windowsAuthLabel: "Windows Оторизация",
+		mfaInputPlaceholder: "Коде",
+		mfaLoginTitle: "Валидиране в 2 стъпки",
+		mfaLoginInstructions: "Моля, въведи кода за потвърждение от мобилното приложение.",
+		mfaSubmitLabel: "Влез",
+		mfaCodeErrorHint: "Използвай %d числа"
+	}
+	
 	var lockAdminOptions = {
+		languageDictionary: bg,
 		avatar: null,
 		autoclose: true,
 		allowLogin: true,
@@ -19,15 +141,25 @@ function LoginManager() {
 		allowedConnections: ['Username-Password-Authentication'],
 		auth: {
 			redirect: false
+		},
+		theme: {
+			labeledSubmitButton: false,
+      primaryColor: '#FF5722'
 		}
 	}; 
 	
 	var lockUserOptions = {
+		languageDictionary: bg,
 		avatar: null,
 		autoclose: true,
 		allowLogin: true,
 		closable: true,
 		allowedConnections: ['facebook', 'google-oauth2'],
+		socialButtonStyle: 'small',
+		theme: {
+			labeledSubmitButton: false,
+      primaryColor: '#FF5722'
+		},
 		auth: {
 			redirectUrl: window.location.origin + '/auth/return-url',
 			responseType: 'token',
@@ -44,116 +176,12 @@ function LoginManager() {
 	window.adminLock = new Auth0Lock(auth0clientID, auth0Domain, lockAdminOptions); 
 	window.userLock = new Auth0Lock(auth0clientID, auth0Domain, lockUserOptions); 
 	
-	var bg = {
-		"loadingTitle":                  "Моля изчакайте...",
-		"close":                         "Затвори",
-		"windowsAuthTitle":              "Windows Валидация",
-		"invalid":                       "Невалиден",
-		"mustMatch":                     "Трябва да съвпада",
-		"loginSocialButton":             "Влез като {connection:title}",
-		"signupSocialButton":            "Регистрирай се като {connection:title}",
-		"networkError":                  "Няма връзка със сървъра.<br />Моля опитай пак.",
-		"noConnectionError":             "Няма връзка към интернет.",
-		
-		"signin": {
-			"title":                            "Вход",
-			"action":                           "Влез",
-			"actionDomain":                     "Влез към адрес {domain}",
-			"all":                              "Не е твоят профил?",
-			"strategyEmailEmpty":               "Емайлът е празен.",
-			"strategyEmailInvalid":             "Емайлът е невалиден.",
-			"strategyDomainInvalid":            "Адресът {domain} не е настроен.",
-			"signinText":                       "Влез",
-			"signupText":                       "Регистрирай се",
-			"forgotText":                       "Пак са напи и не си помниш паролата?",
-			"cancelAction":                     "Отмени",
-			"footerText":                       "",
-			"emailPlaceholder":                 "Емайл",
-			"usernamePlaceholder":              "Форплеец",
-			"passwordPlaceholder":              "Парола",
-			"separatorText":                    "или",
-			"serverErrorText":                  "Имаше проблем при пенетрирането на входа.",
-			"returnUserLabel":                  "Последния път влиза като...",
-			"domainUserLabel":                  "Вие сте свързани от корпоративнат ви мрежа...",
-			"wrongEmailPasswordErrorText":      "Навлиден емайл или парола.",
-			"passwordChangeRequiredErrorText":  "Трябва да си смените паролата.",
-			"unauthorizedErrorText":            "Нямата достъп.",
-			"userBlockedErrorText":             "Профилът ви е блокриан",
-			"or":                               "... или влезта като",
-			"loadingMessage":                   "Влизане като {connection}...",
-			"popupCredentials":                 "Въведте кодовете си за достъп",
-			"userClosedPopup":                  "Прозорецът се затвори. Опитай пак.",
-			"userConsentFailed":                "Нямате позволение. Опитай пак."
-		},
-		
-		"signup": {
-			"description":                 "",
-			"title":                       "Sign Up",
-			"action":                      "Sign Up",
-			"signinText":                  "Log In",
-			"signupText":                  "Sign Up",
-			"emailPlaceholder":            "Email",
-			"usernamePlaceholder":         "Username",
-			"passwordPlaceholder":         "Create a Password",
-			"cancelAction":                "Cancel",
-			"headerText":                  "Please enter your email and password",
-			"footerText":                  "",
-			"serverErrorText":             "There was an error processing the signup.",
-			"userExistsErrorText":         "The user already exists.",
-			"signupOnSSODomainErrorText":  "This domain {domain} has been configured for Single Sign On and you can't create an account. Try signing in instead.",
-			"usernameInUseErrorText":      "The username is already in use.",
-			"invalidPassword":             "Password is too weak.",				
-		
-		"passwordStrength": {
-			"nonEmpty": "Non-empty password required",
-			"lengthAtLeast": "At least %d characters in length",
-			"shouldContain": "Should contain:",
-			"containsAtLeast" : "Contain at least %d of the following %d types of characters:",
-			"lowerCase": "Lower case letters (a-z)",
-			"upperCase": "Upper case letters (A-Z)",
-			"numbers": "Numbers (i.e. 0-9)",
-			"specialCharacters" : "Special characters (e.g. !@#$%^&*)",
-			"identicalChars": "No more than %d identical characters in a row (e.g., \"%s\" not allowed)"
-		}
-
-		},
-		"newReset": {
-			"title":                       "Password Reset",
-			"action":                      "Send",
-			"emailPlaceholder":            "Email",
-			"cancelAction":                "Cancel",
-			"footerText":                  "",
-			"successText":                 "We've just sent you an email to reset your password.",
-			"headerText":                  "Please enter your email address. We will send you an email to reset your password.",
-			"serverErrorText":             "There was an error processing the password reset.",
-			"userDoesNotExistErrorText":   "User does not exist.",
-			"tooManyRequestsErrorText":    "You have reached the limit on password reset attempts.  Please wait before trying again."
-		},
-		
-		"reset": {
-			"title":                       "Password Change",
-			"action":                      "Send",
-			"emailPlaceholder":            "Email",
-			"passwordPlaceholder":         "New Password",
-			"repeatPasswordPlaceholder":   "Confirm New Password",
-			"cancelAction":                "Cancel",
-			"footerText":                  "",
-			"successText":                 "We've just sent you an email to reset your password.",
-			"enterSamePasswordText":       "Please enter the same password.",
-			"headerText":                  "Please enter your email and the new password. We will send you an email to confirm the password change.",
-			"serverErrorText":             "There was an error processing the password reset.",
-			"userDoesNotExistErrorText":   "User does not exist.",
-			"tooManyRequestsErrorText":    "You have reached the limit on password reset attempts.  Please wait before trying again.",
-			"invalidPassword":             "Password is too weak."
-		}
-	}
-	
 	var applyPermissions = function(isAdmin, isSuperAdmin) {
 		var $log = $('button.log'),
-			$new = $('button.new'),
-			$save = $('button.save'),
-			$upload = $('button.upload'),
-			$publish = $('button.publish');
+        $new = $('button.new'),
+        $save = $('button.save'),
+        $upload = $('button.upload'),
+        $publish = $('button.publish');
 		
 		if (isAdmin) {
 			if (isSuperAdmin) {
@@ -227,8 +255,8 @@ function LoginManager() {
 	
 	this.getUserProfile = function() {
 		var profile = localStorage.getItem('forplayProfile'),
-			accessToken = localStorage.getItem('accessToken'),
-			idToken = localStorage.getItem('idToken');
+        accessToken = localStorage.getItem('accessToken'),
+        idToken = localStorage.getItem('idToken');
 		
 		/**
 		 * The user is not autheticated.
@@ -243,8 +271,8 @@ function LoginManager() {
 		if (!profile && (accessToken || idToken)) {
 			window.userLock.getUserInfo(accessToken, function(err, profile) {
 				if (err) {
-				  console.log("There is no stored Forplay profile and access has probably expried. " + 
-				  			  "Automatically trying to renew log in. Auth 0 says: " + err);
+				  console.log("There is no stored Forplay profile and access has probably expired. " + 
+				  			      "Automatically trying to renew log in. Auth 0 says: " + err);
 				  
 				  self.renewUserProfile();
 				  
@@ -252,13 +280,14 @@ function LoginManager() {
 				}
 				
 				self.extendUserProfile({idToken: idToken, 
-										accessToken: accessToken}, profile);	
+										            accessToken: accessToken}, profile);	
 			});
 		}
 		
 		if (profile && accessToken && idToken) {
-			self.extendUserProfile({idToken: idToken, 
-									accessToken: accessToken}, JSON.parse(profile));
+      window.userProfile = JSON.parse(profile); 
+      
+			self.renderUserUI(window.userProfile);
 			
 			return true;
 		}
@@ -268,12 +297,12 @@ function LoginManager() {
 		auth0.renewAuth({
 			audience: '',
 			scope: 'openid app_metadata user_metadata',
-		  	redirectUri: 'http://localhost/auth/silent-callback',
-		  	usePostMessage: true,
+      redirectUri: 'http://localhost/auth/silent-callback',
+      usePostMessage: true,
 		}, function (err, authResult) {
 			if (err) {
 			  console.log("Failed to renew log in. Logging out. " +
-			  			  "Try to log in again or contact admin@forplay.bg. Auth 0 says:" + err);
+			  			      "Try to log in again or contact admin@forplay.bg. Auth 0 says:" + err);
 			  
 			  self.clearUserProfile();
 			  
@@ -283,7 +312,7 @@ function LoginManager() {
 			window.userLock.getUserInfo(authResult.accessToken, function(err, profile) {
 				if (err) {
 				  console.log("Renew login was successful, but we failed to get your profile. " + 
-				  			  "Logging out. Try to log in again or contact admin@forplay.bg. Auth 0 says: " + err);
+				  			      "Logging out. Try to log in again or contact admin@forplay.bg. Auth 0 says: " + err);
 				  
 				  self.clearUserProfile();
 				  
@@ -291,7 +320,7 @@ function LoginManager() {
 				}
 				
 				self.extendUserProfile({idToken: authResult.idToken, 
-										accessToken: authResult.accessToken}, profile);	
+										            accessToken: authResult.accessToken}, profile);	
 			});
 		});
 	}
@@ -319,10 +348,13 @@ function LoginManager() {
 			data = null;
 		
 		$.when(postProfile).done(function(data) {
-			data = data.length ? JSON.parse(data) : data;
-			
-			$.extend(window.userProfile, data.profiles);
-
+			var data = data.length ? JSON.parse(data) : data,
+          newProfile = $.extend(profile, data.profiles);
+      
+      localStorage.setItem('forplayProfile', JSON.stringify(newProfile));
+      
+      window.userProfile = newProfile;
+      
 			self.renderUserUI(window.userProfile);
 			
 			if (!isUpdate) {
@@ -342,13 +374,12 @@ function LoginManager() {
 	this.extendUserProfile = function(authResult, profile) {
 		localStorage.setItem('idToken', authResult.idToken);
 		localStorage.setItem('accessToken', authResult.accessToken);
-		localStorage.setItem('forplayProfile', JSON.stringify(profile));
 				
 		window.userProfile = profile;
 		
 		var params = '?email=' + window.userProfile.email,
-			getProfile = $.get(encodeURI(profilesAPI + params)),
-			data = null;
+        getProfile = $.get(encodeURI(profilesAPI + params)),
+        data = null;
 			
 		$.when(getProfile).done(function(data) {
 			data = data.length ? JSON.parse(data) : data;
@@ -357,17 +388,19 @@ function LoginManager() {
 				self.createUserProfile(window.userProfile);
 			} else {				
 				if ((window.userProfile.identities[0].provider == 'facebook' && 
-					 window.userProfile.identities[0].user_id != data.profiles.facebook_id) ||
-					(window.userProfile.identities[0].provider == 'google-oauth2' && 
-					 window.userProfile.identities[0].user_id != data.profiles.google_id) || 
-					(window.userProfile.identities[0].provider == 'auth0' && 
-					 window.userProfile.identities[0].user_id != data.profiles.auth0_id)) {
+             window.userProfile.identities[0].userId != data.profiles.facebook_id) ||
+            (window.userProfile.identities[0].provider == 'google-oauth2' && 
+             window.userProfile.identities[0].userId != data.profiles.google_id) || 
+            (window.userProfile.identities[0].provider == 'auth0' && 
+             window.userProfile.identities[0].userId != data.profiles.auth0_id)) {
 						
 					$.extend(window.userProfile, data.profiles);  	
 						
 					self.createUserProfile(window.userProfile, true);	
 				} else {
 					$.extend(window.userProfile, data.profiles);
+          
+          localStorage.setItem('forplayProfile', JSON.stringify(window.userProfile));
 
 					self.renderUserUI(window.userProfile);
 				}
@@ -375,11 +408,11 @@ function LoginManager() {
 			
 			/**
 			 * TODO: Admin can manage comments.
-			 * Usere can modify only their comments
+			 * Usere can modify only their comments.
 			 */	
 			 
 			if (window.userProfile['appMetadata']['roles'][0] != 'admin' &&
-				window.userProfile['appMetadata']['roles'][0] != 'superadmin') {
+				  window.userProfile['appMetadata']['roles'][0] != 'superadmin') {
 			
 			} else {
 				
@@ -387,13 +420,13 @@ function LoginManager() {
 		}).fail(function() {
 			if (failedLogins >= maxLoginAttempts) {
 				console.log("Too many automatic retries. Logging out.  " + 
-				  			"Try to log in again or contact admin@forplay.bg.");
+				  			    "Try to log in again or contact admin@forplay.bg.");
 							
 				self.clearUserProfile();
 			}
 			
 			console.log("Failed to load profile information from the server. " + 
-				  		"Automatically trying to renew log in.");
+				  		    "Automatically trying to renew log in.");
 			
 			failedLogins ++;
 			
@@ -403,12 +436,14 @@ function LoginManager() {
 	
 	this.renderUserUI = function(profile) {
 		var $profile = $('#userLogin'),
-			$avatar = $('#profileChange'),
-			$user = $('#userLogin b'),
-			$id = $('#profileId'),
-			$nickname = $('#profileNickname'),
-			$name = $('#profileGivenName'),
-			$family = $('#profileFamilyName');
+        $avatar = $('#profileChange'),
+        $user = $('#userLogin b'),
+        $id = $('#profileId'),
+        $nickname = $('#profileNickname'),
+        $name = $('#profileGivenName'),
+        $family = $('#profileFamilyName'),
+        $darkened = $('#profileDarkened'),
+        $collapsed = $('#profileCollapsed');
 			
 		var avatar = null;
 			
@@ -420,19 +455,27 @@ function LoginManager() {
 			$nickname.val('');
 			$name.val('');
 			$family.val('');
+      $darkened.prop('checked', false);
+      $collapsed.prop('checked', false);
+      
+      utils.setTheme('dark', 0);
 		} else {
-			avatar = window.userProfile.pictureLarge ? 
-					 window.userProfile.pictureLarge : 
-					 window.userProfile.picture;
+			avatar = profile.pictureLarge ? 
+               profile.pictureLarge : 
+               profile.picture;
 			
-			$profile.css('background-image', 'url(' + window.userProfile.picture + ')');
+			$profile.css('background-image', 'url(' + profile.picture + ')');
 			$avatar.css('background-image', 'url(' + avatar + ')');
 			$profile.attr('aria-pressed', true);
 			$avatar.attr('aria-pressed', true);
-			$user.text(window.userProfile.nickname || window.userProfile.name.split(' ')[0]);
-			$nickname.val(window.userProfile.nickname);
-			$name.val(window.userProfile.given_name);
-			$family.val(window.userProfile.family_name);
+			$user.text(profile.nickname || profile.name.split(' ')[0]);
+			$nickname.val(profile.nickname);
+			$name.val(profile.given_name);
+			$family.val(profile.family_name);
+      $darkened.prop('checked', Number(profile.darkened));
+      $collapsed.prop('checked', Number(profile.collapsed));
+      
+      utils.setTheme('dark', Number(profile.darkened));
 		}
 	}
 	
@@ -463,8 +506,8 @@ function LoginManager() {
 		var $login = $('#main button.login'),
 		  	$logout = $('#main button.logout');
 	  
-	  	window.adminLock.getUserInfo(authResult.accessToken, function(error, profile) {	
-			if (error) {
+	  window.adminLock.getUserInfo(authResult.accessToken, function(err, profile) {	
+			if (err) {
 			  	$login.attr('aria-hidden', false);
 			  	$logout.attr('aria-hidden', true);
 			  
@@ -483,7 +526,7 @@ function LoginManager() {
 			$logout.attr('aria-hidden', false);
 		
 			if (window.userProfile['appMetadata']['roles'][0] != 'admin' &&
-				window.userProfile['appMetadata']['roles'][0] != 'superadmin') {
+				  window.userProfile['appMetadata']['roles'][0] != 'superadmin') {
 			
 				applyPermissions(false, false);
 			} else {
@@ -493,7 +536,7 @@ function LoginManager() {
 					applyPermissions(true, true);
 				}
 			}	
-	  	});
+	  });
 	});
 	 
 	$(window).on('load', function(e) {
@@ -508,7 +551,7 @@ function LoginManager() {
 	
 	$('#main button.logout').click(function(e) {
 		var $login = $('#main button.login'),
-			$logout = $('#main button.logout');
+			  $logout = $('#main button.logout');
 					
 		localStorage.removeItem('idToken');
 		localStorage.removeItem('forplayProfile');
@@ -551,6 +594,10 @@ function LoginManager() {
 		window.userProfile.nickname = $('#profileNickname').val() ? $('#profileNickname').val() : null;
 		window.userProfile.given_name = $('#profileGivenName').val() ? $('#profileGivenName').val() : null;
 		window.userProfile.family_name = $('#profileFamilyName').val() ? $('#profileFamilyName').val() : null;
+    window.userProfile.settings = {
+      darkened: $('#profileDarkened').prop('checked') ? 1 : 0,
+      collapsed: $('#profileCollapsed').prop('checked') ? 1 : 0
+    };
 		
 		self.createUserProfile(window.userProfile, true);
 		self.hideUserProfile();
