@@ -364,7 +364,7 @@ function ImgsManager() {
 			
 			xhr.open("POST", imgsAPI);
 			xhr.setRequestHeader('Authorization',  
-							     'Bearer ' + localStorage.getItem('userToken')); 
+							     'Bearer ' + localStorage.getItem('idToken')); 
 			xhr.send(imgForm);
 		});
 	}

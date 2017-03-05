@@ -376,7 +376,25 @@ function LoginManager() {
           self.showUserProfile();
         }
       }
-		}).fail(function() {
+		}).fail(function(err) {
+      if (err.status == "401") {
+        if (failedLogins >= maxLoginAttempts) {
+          console.log("Too many automatic retries after update. Logging out.  " + 
+                      "Try to log in again or contact admin@forplay.bg.");
+                
+          self.clearUserProfile();
+        }
+        
+        console.log("Failed to update profile information on the server. " + 
+                    "Automatically trying to renew log in.");
+        
+        failedLogins ++;
+        
+        self.renewUserProfile();
+        
+        return;
+      }
+      
 			if (!isUpdate) {
 				console.log("Failed to create Forplay profile.");
 			} else {
@@ -451,6 +469,13 @@ function LoginManager() {
 	}
 	
 	this.renderUserUI = function(profile) {
+    
+    /**
+     * This is not applicable to the admin.
+     */
+    
+    if (typeof banner === 'undefined') return;
+    
 		var $profile = $('#userLogin'),
         $avatar = $('#profileChange'),
         $user = $('#userLogin b'),
@@ -473,7 +498,7 @@ function LoginManager() {
 			$family.val('');
       $darkened.prop('checked', false);
       $collapsed.prop('checked', false);
-      
+                
       utils.setTheme('dark', 0);
       banner.setHeader(localStorage.getItem('forplayHeader'));
 		} else {

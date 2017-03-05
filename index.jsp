@@ -28,10 +28,10 @@
 			<script src="https://cdn.auth0.com/js/lock/10.9.1/lock.min.js">
                 <!--script-->	
             </script>
-            <script src="/controllers/utils.js?v=1.5.0">
+            <script src="/controllers/utils.js?v=3.0.0">
                 <!--script-->
             </script>
-            <script src="controllers/login.js?v=1.0.0">
+            <script src="controllers/login.js?v=3.0.0">
                 <!--script-->
             </script>
             <script>$(document).ready(function() { window.utils = new UtilsManager();

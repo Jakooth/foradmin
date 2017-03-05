@@ -48,7 +48,7 @@
             <script src="/jslib/he.js">
                 <!--script-->
             </script>
-            <script src="/controllers/utils.js?v=2.0.0">
+            <script src="/controllers/utils.js?v=3.0.0">
                 <!--script-->
             </script>
             <script src="controllers/foradmin.js?v=2.1.0">
@@ -66,10 +66,10 @@
             <script src="controllers/sitemap.js?v=2.0.0">
                 <!--script-->
             </script>
-            <script src="controllers/login.js?v=2.0.0">
+            <script src="controllers/login.js?v=3.0.0">
                 <!--script-->
             </script>
-            <script src="controllers/imgs.js?v=2.1.0">
+            <script src="controllers/imgs.js?v=3.0.0">
                 <!--script-->
             </script>
             <script src="controllers/objects/fortag.js?v=2.1.0">
@@ -126,7 +126,7 @@
             <script src="controllers/objects/country.js?v=2.0.0">
                 <!--script-->
             </script>
-            <script src="controllers/INIT.js?v=2.0.0">
+            <script src="controllers/INIT.js?v=3.0.0">
                 <!--script-->
             </script>
         </head>

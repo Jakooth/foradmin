@@ -37,7 +37,7 @@ $(document).ready(function() {
 		'beforeSend': function(xhr) { 
 			if (localStorage.getItem('idToken')) { 
 				xhr.setRequestHeader('Authorization',  
-									 'Bearer ' + localStorage.getItem('idToken')); 
+									           'Bearer ' + localStorage.getItem('idToken')); 
 			} 
 		} 
 	});
