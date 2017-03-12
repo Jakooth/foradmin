@@ -8,7 +8,7 @@ function LoginManager() {
 	var profilesAPI = '/forapi/forsecure/profiles.php';
 	var auth0clientID = 'P8wrSYlMVUu5rZDEFGSqFL18tVfgo9Gz';
 	var auth0Domain = 'forplay.eu.auth0.com';
-	var failedLogins = 0;
+  var failedLogins = 0;
 	var maxLoginAttempts = 1;
 	
 	var bg = {
@@ -232,6 +232,14 @@ function LoginManager() {
 	/** 
 	 * PUBLIC
 	 */
+   
+  this.canRetryLogin = function() {
+    return failedLogins >= maxLoginAttempts ? false : true;
+  }
+  
+  this.increaseFailedLogins = function() {
+    failedLogins ++;
+  }
 	 
 	this.showAdminLock = function() {
 		applyPermissions(false);
@@ -293,7 +301,7 @@ function LoginManager() {
 		}
 	}
 	
-	this.renewUserProfile = function() {
+	this.renewUserProfile = function(callback) {
 		auth0.renewAuth({
 			audience: '',
 			scope: 'openid app_metadata user_metadata',
@@ -321,7 +329,9 @@ function LoginManager() {
 				
 				self.extendUserProfile({idToken: authResult.idToken, 
 										            accessToken: authResult.accessToken}, profile);	
-			});
+			  
+        if (callback) callback();
+      });
 		});
 	}
 	
@@ -353,7 +363,7 @@ function LoginManager() {
           doReload = false;
       
       /**
-       * The problem is there are some articles to move around
+       * The problem is there are some articles to move around.
        * and it is hard to do this in real time on profil update now.
        */
       
@@ -383,6 +393,8 @@ function LoginManager() {
                       "Try to log in again or contact admin@forplay.bg.");
                 
           self.clearUserProfile();
+          
+          return;
         }
         
         console.log("Failed to update profile information on the server. " + 
@@ -457,6 +469,8 @@ function LoginManager() {
 				  			    "Try to log in again or contact admin@forplay.bg.");
 							
 				self.clearUserProfile();
+        
+        return;
 			}
 			
 			console.log("Failed to load profile information from the server. " + 

@@ -20,7 +20,7 @@ function AddManager() {
 	this.initAsideTextEditor = function() {
 		if (!CKEDITOR.instances.textLayout_aside) {
 			var asideEditor = CKEDITOR.inline('textLayout_aside', {
-				extraPlugins: 'sourcedialog',
+        extraPlugins: 'sourcedialog',
 				toolbar: [
 					{
 						name: 'clipboard', 
@@ -34,7 +34,7 @@ function AddManager() {
 						name: 'links', 
 						items: [ 'Link', 'Unlink' ] 
 					}, { 
-						name: 'Sourcedialog', 
+						name: 'document', 
 						items: [ 'Sourcedialog' ] 
 					}
 				]
@@ -158,7 +158,7 @@ function AddManager() {
 			 */
 			
 			var textEditor = CKEDITOR.inline('textLayout_' + id, {
-				extraPlugins: 'sourcedialog',
+        extraPlugins: 'sourcedialog',
 				toolbar: [
 					{
 						name: 'clipboard', 
@@ -179,7 +179,7 @@ function AddManager() {
 						name: 'styles', 
 						items: [ 'Format' ] 
 					}, { 
-						name: 'Sourcedialog', 
+						name: 'document', 
 						items: [ 'Sourcedialog' ] 
 					}
 				]
@@ -207,7 +207,7 @@ function AddManager() {
 						name: 'styles', 
 						items: [ 'Format' ] 
 					}, { 
-						name: 'Sourcedialog', 
+						name: 'document', 
 						items: [ 'Sourcedialog' ] 
 					}
 				]

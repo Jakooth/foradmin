@@ -262,7 +262,7 @@ Aside.prototype._setPrimeAndUrl = function() {
 		this.prime = $tags.eq(0).data().item;
 	}
 		
-	if (this.subtype == 'review' || this.subtype == 'video') {
+	if (this.subtype == 'review') {
 		this.url = this.prime.tag;
 	} else {
 		this.url = utils.formatTag(this._unescapeValue(this.title));
