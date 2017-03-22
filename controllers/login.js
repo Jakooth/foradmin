@@ -155,7 +155,6 @@ function LoginManager() {
 		allowLogin: true,
 		closable: true,
 		allowedConnections: ['facebook', 'google-oauth2'],
-		socialButtonStyle: 'small',
 		theme: {
 			labeledSubmitButton: false,
       primaryColor: '#FF5722'
