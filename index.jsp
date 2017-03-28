@@ -22,10 +22,10 @@
             <script src="/jslib/jquery-2.1.4.min.js">
                 <!--script-->
             </script>
-            <script src="https://cdn.auth0.com/js/auth0/8.0.4/auth0.min.js">
+            <script src="https://cdn.auth0.com/js/auth0/8.3.0/auth0.min.js">
 				<!--script-->
 			</script>
-			<script src="https://cdn.auth0.com/js/lock/10.9.1/lock.min.js">
+			<script src="https://cdn.auth0.com/js/lock/10.12.1/lock.min.js">
                 <!--script-->	
             </script>
             <script src="/controllers/utils.js?v=3.0.0">

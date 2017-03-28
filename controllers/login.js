@@ -165,7 +165,8 @@ function LoginManager() {
 			redirect: true,
 			params: {
 				state: JSON.stringify({
-					return_url: encodeURIComponent(window.location.pathname)
+					return_url: encodeURIComponent(window.location.pathname + 
+                                         window.location.hash)
 				})
 			}
 		}
@@ -248,16 +249,6 @@ function LoginManager() {
 	
 	this.showUserLock = function() {
 		window.userLock.show();
-	}
-	
-	this.clearUserProfile = function() {
-		localStorage.removeItem('idToken');
-		localStorage.removeItem('accessToken');
-		localStorage.removeItem('forplayProfile');
-		
-		window.userProfile = null;
-		
-		self.renderUserUI();
 	}
 	
 	this.getUserProfile = function() {
@@ -450,18 +441,6 @@ function LoginManager() {
 					self.renderUserUI(window.userProfile);
 				}
 			} 
-			
-			/**
-			 * TODO: Admin can manage comments.
-			 * Usere can modify only their comments.
-			 */	
-			 
-			if (window.userProfile['appMetadata']['roles'][0] != 'admin' &&
-				  window.userProfile['appMetadata']['roles'][0] != 'superadmin') {
-			
-			} else {
-				
-			} 
 		}).fail(function() {
 			if (failedLogins >= maxLoginAttempts) {
 				console.log("Too many automatic retries. Logging out.  " + 
@@ -480,6 +459,29 @@ function LoginManager() {
 			self.renewUserProfile();
 		});
 	}
+  
+  /**
+   * Logged out:
+   * This is a final stage of all methods.
+   * If renew or created failed the user is looged out.
+   */
+	
+	this.clearUserProfile = function() {
+		localStorage.removeItem('idToken');
+		localStorage.removeItem('accessToken');
+		localStorage.removeItem('forplayProfile');
+		
+		window.userProfile = null;
+		
+		self.renderUserUI();
+	}
+  
+  /**
+   * Logged in:
+   * This is a final stage of all methods.
+   * After renew, create or extend the user is logged in
+   * and the profile UI is rendered.
+   */
 	
 	this.renderUserUI = function(profile) {
     
@@ -514,6 +516,8 @@ function LoginManager() {
                 
       utils.setTheme('dark', 0);
       banner.setHeader(localStorage.getItem('forplayHeader'));
+      
+      $(document).trigger('loggedOut');
 		} else {
 			avatar = profile.pictureLarge ? 
                profile.pictureLarge : 
@@ -532,6 +536,8 @@ function LoginManager() {
       
       utils.setTheme('dark', Number(profile.darkened));
       banner.setHeader(Number(profile.collapsed));
+      
+      $(document).trigger('loggedIn');
 		}
 	}
 	
@@ -577,12 +583,12 @@ function LoginManager() {
       $login.attr('aria-hidden', true);
       $logout.attr('aria-hidden', false);
 		
-			if (window.userProfile['appMetadata']['roles'][0] != 'admin' &&
-				  window.userProfile['appMetadata']['roles'][0] != 'superadmin') {
+			if (window.userProfile['roles'][0] != 'admin' &&
+				  window.userProfile['roles'][0] != 'superadmin') {
 			
 				applyPermissions(false, false);
       } else {
-				if (window.userProfile['appMetadata']['roles'][0] != 'superadmin') {
+				if (window.userProfile['roles'][0] != 'superadmin') {
 					applyPermissions(true, false);
 				} else {
 					applyPermissions(true, true);
