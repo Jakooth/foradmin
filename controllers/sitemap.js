@@ -11,7 +11,7 @@ function SitemapManager() {
 	var $body =  $('body');
 	
 	var sitemapSection = '#sitemap',
-		sitemapPreviewInput = sitemapSection + 'CodeOutput';
+		  sitemapPreviewInput = sitemapSection + 'CodeOutput';
 	
 	var _doSitemap = function() {
 		var sitemapRequest = $.ajax({
@@ -31,7 +31,7 @@ function SitemapManager() {
 	}
 	
 	var _submitSitemapToGoogle = function($opener) {
-		window.open(sitemapGoogleAPI,'_blank');
+		window.open(sitemapGoogleAPI, '_blank');
 	}
 	
 	
