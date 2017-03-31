@@ -279,7 +279,9 @@ function LoginManager() {
 				
 				self.extendUserProfile({idToken: idToken, 
 										            accessToken: accessToken}, profile);	
-			});
+			  
+        return false;
+      });
 		}
 		
 		if (profile && accessToken && idToken) {
@@ -295,7 +297,7 @@ function LoginManager() {
 		auth0.renewAuth({
 			audience: '',
 			scope: 'openid app_metadata user_metadata',
-      redirectUri: 'http://localhost/auth/silent-callback',
+      redirectUri: window.location.origin + '/auth/silent-callback',
       usePostMessage: true,
 		}, function (err, authResult) {
 			if (err) {
@@ -316,6 +318,8 @@ function LoginManager() {
 				  
 				  return;
 				}
+        
+        failedLogins = 0;
 				
 				self.extendUserProfile({idToken: authResult.idToken, 
 										            accessToken: authResult.accessToken}, profile);	
@@ -377,7 +381,7 @@ function LoginManager() {
         }
       }
 		}).fail(function(err) {
-      if (err.status == "401") {
+      if (err.status == '401') {
         if (failedLogins >= maxLoginAttempts) {
           console.log("Too many automatic retries after update. Logging out.  " + 
                       "Try to log in again or contact admin@forplay.bg.");
@@ -392,7 +396,9 @@ function LoginManager() {
         
         failedLogins ++;
         
-        self.renewUserProfile();
+        self.renewUserProfile(function() { 
+          self.createUserProfile(profile, isUpdate); 
+        });
         
         return;
       }
@@ -472,6 +478,8 @@ function LoginManager() {
 		localStorage.removeItem('forplayProfile');
 		
 		window.userProfile = null;
+    
+    failedLogins = 0;
 		
 		self.renderUserUI();
 	}
