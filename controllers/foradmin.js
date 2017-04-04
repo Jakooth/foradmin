@@ -451,22 +451,33 @@ function AdminManager() {
 		
 		self.hideSections();
 		
-		if (section == "#main") {
+		if (section == '#main' || section == '#games' || 
+        section == '#movies' || section == '#music' || 
+        section == '#books' || section == '#boards') {
+          
 			$('header').removeClass('compact');
-			$('header h1').addClass('clip');
-			$('header h1 a').attr('tabindex', -1);
 			$('header nav').removeClass('clip');
 			$('header .breadcrumb').addClass('clip');
-			$('header [role=toolbar]').removeClass('clip');
-			
-			self.removeAllBreadcrumbs();
+      
+      if (section != '#main') {
+        if (isBreadcrumb) {
+				  self.removeBreadcrumb();
+        } else {
+          self.addBreadcrumb($section);
+        }
+        
+        $section.fadeIn();
+        
+        $('header nav:nth-of-type(1)').attr('aria-hidden', true);
+      } else {
+        $('header nav:nth-of-type(1)').attr('aria-hidden', false);
+        
+        self.removeAllBreadcrumbs();
+      }
 		} else {
 			$('header').addClass('compact');
-			$('header h1').removeClass('clip');
-			$('header h1 a').attr('tabindex', 0);
 			$('header nav').addClass('clip');
 			$('header .breadcrumb').removeClass('clip');
-			$('header [role=toolbar]').addClass('clip');
 			
 			if (isBreadcrumb) {
 				self.removeBreadcrumb();

@@ -28,11 +28,7 @@
             </table>
         </form>
         <div role="toolbar">
-            <button class="refresh" type="button">
-                <img class="svg" 
-                	 src="../assets/icons/delapouite/gui/svg/000000/transparent/clockwise-rotation.svg" 
-            		 alt="" role="presentation" />
-            </button>
+            <button class="refresh" type="button"><!--icon--></button>
         </div>
     </section>
 </jsp:root>

@@ -1,0 +1,111 @@
+/**
+ * WINDOWS
+ */
+
+.Window {
+	position: absolute;
+	top: 18%;
+	left: 9%;
+	right: 9%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 12000;
+	padding: 20px;
+
+  section {
+    padding: 0;
+  }
+  
+  h2 a {
+    pointer-events: none;
+    display: block;
+    background: none;
+  }
+  
+  h2 span {
+    display: block;
+    font-weight: normal;
+    padding-top: 6px;
+  }
+  
+  div[role=toolbar] {
+    position: relative;
+    float: right;
+  }
+  
+  &.Alert {
+    left: 18%;
+    right: 18%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 22000;
+  
+  
+    div[role=toolbar] {
+      height: 128px;
+    }
+    
+    div[role=toolbar] button {
+      height: 100%;
+    }
+    
+    p {
+      width: 60%;
+      padding: 20px;
+      font-size: 14pt;
+      color: @light;
+      float: left;
+    }
+    
+    div:first-of-type {
+      width: 128px;
+      height: 128px;
+      float: left;
+      transition: 1s ease-out border-radius, 1s ease-out background-color;
+    }
+    
+    .error {
+      background-color: @red;	
+    }
+    
+    .warning {
+      width: 0 !important;
+      height: 0 !important;
+      border-bottom: 128px solid @yellow;
+      border-left: 64px solid transparent;
+      border-right: 64px solid transparent;
+    }
+    
+    .success {
+      background-color: @green;
+      border-radius: 128px;
+    }
+    
+    
+    .loading {
+      background-color: @light;
+    
+      margin: 0 auto;
+      animation: sk-rotateplane 1.2s infinite ease-in-out, sk-planecolor 12s infinite ease-in-out;
+    }
+  }
+}
+
+[role=alertdialog] {
+  button {
+    &:extend(main [role=toolbar] button, main button);
+     
+	  background-color: #CCC;
+	  border: none;
+    
+    &:first-of-type {
+      background-color: @primary;
+    }
+    
+    &:last-of-type {
+      display: block;
+    }
+  }
+  
+  [role=toolbar] {
+    &:extend(main [role=toolbar]);
+  }
+}

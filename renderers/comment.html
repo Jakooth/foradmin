@@ -1,0 +1,10 @@
+<tr role="option" data-id="{{:comment_id}}"
+                  data-flags="{{:flags >= 1 ? true : false}}"
+				          data-article="{{:article_id}}">
+  <td><img src="{{:avatar}}" alt="{{:nickname}}" /><span>{{:given_name}} {{:family_name}}<strong>{{:email}}</strong></span></td>
+  <td><a href="/articles/{{:#data.type}}/{{:#data.subtype}}/{{:#data.article_id}}/{{:#data.url}}#comment" 
+         target="_blank">{{:title}}</a><em>{{:created}}</em>
+    <p>{{:~unescape(#data.comment)}}</p></td>
+  <td><strong>{{:flags}}</strong></td>
+  <td><button type="button" class="ban" aria-pressed="{{:banned == 1 ? true : false}}"></button></td>
+</tr>

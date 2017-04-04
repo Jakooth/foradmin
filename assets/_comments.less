@@ -1,0 +1,82 @@
+/**
+ * COMMENTS
+ */
+
+#comments {
+  &:extend(#log all);
+  
+  [data-flags=true] {
+    td:nth-of-type(3) {
+      padding: 20px;
+      vertical-align: top;
+          
+      strong {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: @review;
+        color: contrast(@review);
+        width: 32px;
+        height: 32px;
+        border-radius: 32px;
+      }
+    }
+  }
+  
+  [data-flags=false] {
+    td:nth-of-type(3) {
+      opacity: 0;
+    }
+  }
+  
+  [role=option] {    
+    td:nth-of-type(2) {
+      padding: 20px;
+      width: 50%;
+      
+      a {
+        text-decoration: none;
+        width: 80%;
+        display: inline-block;
+        color: lighten(@dark, 50%);
+        font-weight: bold;
+      }
+      
+      em {
+        width: 20%;
+        text-align: right;
+        display: inline-block;
+        color: darken(@accent, 20%);
+      }
+      
+      p {
+        padding: 0;
+      }
+    }
+    
+    td:first-of-type {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+      padding-left: 0;
+      
+      img {
+        width: 84px;
+        height: 84px;
+      }
+      
+      span {
+        width: ~'calc(100% - 104px)';
+        padding-left: 20px;
+      }
+      
+      span,
+      strong {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

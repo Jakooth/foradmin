@@ -1,0 +1,20 @@
+/**
+ * ICONS
+ */
+ 
+button {
+  border: none;
+  cursor: pointer;
+  
+  &::before {
+    &:extend([class^="icon-"] all);
+         
+    color: contrast(@primary);
+  }
+  
+  &.ackowledge::before { &:extend(.icon-check:before); }
+  &.ban::before { &:extend(.icon-gavel:before); }
+  &.refresh::before { &:extend(.icon-repeat:before); }
+  &.ackowledge[aria-pressed=true]::before { &:extend(.icon-check-square:before); color: contrast(lighten(@background, 70%)); }
+}
+

@@ -1,0 +1,27 @@
+video {
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
+}
+
+header, main, footer {
+  z-index: 2;
+  position: relative;
+}

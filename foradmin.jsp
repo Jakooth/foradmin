@@ -19,9 +19,12 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
       <title>Foradmin</title>
-      <link rel="stylesheet" type="text/css" href="assets/bootstrap-tagsinput.css" />
-      <link rel="stylesheet" type="text/css" href="assets/typeaheadjs.css" />
-      <link rel="stylesheet" type="text/css" href="assets/foradmin.css" />
+      <link rel="assets/csslib/stylesheet" type="text/css" href="assets/bootstrap-tagsinput.css" />
+      <link rel="assets/csslib/stylesheet" type="text/css" href="assets/typeaheadjs.css" />
+      <link rel="stylesheet/less" type="text/css" href="assets/foradmin.less" />
+      <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js">
+        <!--script-->
+      </script>
       <script src="/jslib/jquery-2.1.4.min.js">
         <!--script-->
       </script>
@@ -62,6 +65,9 @@
         <!--script-->
       </script>
       <script src="controllers/log.js?v=2.0.2">
+        <!--script-->
+      </script>
+      <script src="controllers/comments.js?v=2.0.0">
         <!--script-->
       </script>
       <script src="controllers/sitemap.js?v=2.0.0">
@@ -133,15 +139,15 @@
     </head>
     <body>
       <header id="main">
-        <h1 class="clip">
-          <admin:menuItem label="Основно меню" url="main" icon="lorc,magic-portal" clipLabel="clip" />
-        </h1>
         <div role="toolbar">
+          <h1>Администрация</h1>
+          <admin:menuItem label="Начало" url="main" icon="lorc,magic-portal" />
           <button role="link" class="search" type="button">Търсене</button>
           <button role="link" class="log" type="button">Активност</button>
+          <button role="link" class="comments" type="button">Коментари</button>
           <div role="group">
-            <button role="link" class="login" type="button">Влез</button>
-            <button role="link" class="logout" type="button">Излез</button>
+            <button class="login" type="button">Влез</button>
+            <button class="logout" type="button">Излез</button>
           </div>
         </div>
         <nav aria-label="Създаване на тагове">
@@ -233,6 +239,7 @@
         <jsp:include page="views/country.jsp" />
         <jsp:include page="views/sticker.jsp" />
         <jsp:include page="views/log.jsp" />
+        <jsp:include page="views/comments.jsp" />
         <jsp:include page="views/sitemap.jsp" />
       </main>
       <footer>

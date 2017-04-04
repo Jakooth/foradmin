@@ -1,0 +1,67 @@
+/**
+ * LOG
+ */
+
+#log {
+  form {
+    padding: 0;
+  } 
+  
+  [role=listbox] {
+    width: 100%;
+    display: table;
+    float: none;
+    border: none;
+    background: none;
+    border-collapse: collapse;
+  }
+  
+  [role=listbox] thead {
+    display: none;
+  }
+  
+  [role=option] {
+    display: table-row;
+    float: none;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+  
+  [role=option][data-table=extras],
+  [role=option][data-object=shot],
+  [role=option][data-object=tag] {
+    background-color: @video;
+  }
+  
+  th,
+  td {
+    height: 84px;
+    padding: 0 @unit * 4;
+    border: none;
+  }
+  
+  th:last-of-type,
+  td:last-of-type {
+    padding: 0;
+    width: 84px;
+  }
+  
+  th button,
+  td button {
+    height: 84px;
+      width: 84px;
+    float: left;
+  }
+  
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  td button[aria-pressed=true] {
+    background-color: transparent;
+  }
+}

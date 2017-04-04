@@ -46,10 +46,6 @@ function LogManager() {
 				$(logList).append(html);
 			}
 			
-			$('#log img.svg').each(function() {
-				utils.convertSVG($(this));
-			});
-			
 			admin.hideAlert();
 		}).fail(function(resultData) {
 			var data = resultData.length ? JSON.parse(resultData) : resultData;

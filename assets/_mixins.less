@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+#createTheme (@theme, @color) {	
+	/**
+	 * ADMIN
+	 */
+	
+	.@{theme} .Cover svg path,
+	.@{theme} .Main svg path {
+		fill: @color;
+	}
+	
+	.@{theme} .textLayout blockquote {
+		color: @color;
+	}
+	
+	.@{theme} .textLayout h2 {
+		text-shadow: 20px 20px fade(@color, 5%);
+	}
+}

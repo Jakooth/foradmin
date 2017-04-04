@@ -1,0 +1,66 @@
+#games,
+#movies,
+#music,
+#books,
+#boards {
+  width: 20%;
+  padding: 0;
+  top: 0;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  float: none;
+  background-color: @background;
+  
+  h2 {
+    &:extend(header h2 all);
+  }
+  
+  nav {
+    &:extend(header nav:not(.breadcrumb));
+    
+    width: 100%;
+    margin: 0;
+    
+    /**
+     * Custom colors.
+     */
+    
+    ul {
+      &:extend(header nav:not(.breadcrumb) ul all);
+    }
+    
+    li {
+      &:extend(header nav:not(.breadcrumb) li all);
+      
+      &:nth-of-type(1) {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  #games,
+  #movies,
+  #music,
+  #books,
+  #boards {
+    width: 100%;
+    top: auto;
+    position: relative;
+    left: auto;
+    transform: translate(0);
+    
+    h2 {
+      width: ~'calc(100% - 36px)';
+      margin: 0 (16px + 2px);
+    }
+    
+    nav {
+      width: auto;
+      margin: 0 16px;
+    }
+  }
+}
+

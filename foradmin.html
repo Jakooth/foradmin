@@ -11,9 +11,10 @@
 <meta http-equiv="expires" content="Tue, 06 Jan 1982 1:00:00 GMT" />
 <meta http-equiv="pragma" content="no-cache" />
 <title>Foradmin</title>
-<link href="assets/bootstrap-tagsinput.css" type="text/css" rel="stylesheet"/>
-<link href="assets/typeaheadjs.css" type="text/css" rel="stylesheet"/>
-<link href="assets/foradmin.css?v=2.0.1" type="text/css" rel="stylesheet"/>
+<link href="assets/csslib/bootstrap-tagsinput.css" type="text/css" rel="stylesheet"/>
+<link href="assets/csslib/typeaheadjs.css" type="text/css" rel="stylesheet"/>
+<link href="assets/foradmin.less?v=2.0.1" type="text/css" rel="stylesheet/less"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script>
 <script src="/jslib/jquery-2.1.4.min.js"></script>
 <script src="jslib/jquery-ui.min.js"></script>
 <script src="/jslib/jsrender.min.js"></script>
@@ -28,6 +29,7 @@
 <script src="controllers/add.js?v=2.1.1"></script>
 <script src="controllers/search.js?v=2.0.1"></script>
 <script src="controllers/log.js?v=2.0.2"></script>
+<script src="controllers/comments.js?v=2.0.0"></script>
 <script src="controllers/sitemap.js?v=2.0.3"></script>
 <script src="controllers/login.js?v=3.0.0"></script>
 <script src="controllers/imgs.js?v=3.0.0"></script>
@@ -53,16 +55,15 @@
 </head>
 <body>
 <header id="main">
-  <h1 class="clip"><a href="#main"><img role="presentation" alt="Основно меню" src="../assets/icons/lorc/originals/svg/000000/transparent/magic-portal.svg" class="svg"/><span class="clip">Основно
-    меню</span></a></h1>
   <div role="toolbar">
+    <h1>Администрация</h1>
+    <a href="#main"><img role="presentation" alt="Основно меню" src="../assets/icons/lorc/originals/svg/000000/transparent/magic-portal.svg" class="svg"/><span>Начало</span></a>
     <button type="button" class="search" role="link">Търсене</button>
     <button type="button" class="log" role="link">Активност</button>
+    <button type="button" class="comments" role="link">Коментари</button>
     <div role="group">
-      <button aria-hidden="false" role="link" 
-            		type="button" class="login">Влез</button>
-      <button aria-hidden="true" role="link" 
-            		type="button" class="logout">Излез</button>
+      <button aria-hidden="false" type="button" class="login">Влез</button>
+      <button aria-hidden="true" type="button" class="logout">Излез</button>
     </div>
   </div>
   <nav aria-label="Създаване на тагове">
@@ -1569,7 +1570,27 @@
       </table>
     </form>
     <div role="toolbar">
-      <button type="button" class="refresh"><img role="presentation" alt="" src="../assets/icons/delapouite/gui/svg/000000/transparent/clockwise-rotation.svg" class="svg"/></button>
+      <button type="button" class="refresh"></button>
+    </div>
+  </section>
+  <section id="comments">
+    <h2><a href="#comments">Коментари<span class="">Преглеждана на коментарите.</span></a></h2>
+    <form>
+      <table role="listbox">
+        <thead>
+          <tr>
+            <th>Автор</th>
+            <th>Коментар</th>
+            <th>Сигнали</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </form>
+    <div role="toolbar">
+      <button type="button" class="refresh"></button>
     </div>
   </section>
   <section id="sitemap">

@@ -1,11 +1,12 @@
 $(document).ready(function() { 
 	window.utils = new UtilsManager();
-    window.admin = new AdminManager(); 
+  window.admin = new AdminManager(); 
 	window.add = new AddManager();
-    window.query = new SearchManager(); 
+  window.query = new SearchManager(); 
 	window.activity = new LogManager();
 	window.sitemap = new SitemapManager();
 	window.imgs = new ImgsManager();
+  window.comments = new CommentsManager();
     
 	window.login = new LoginManager();												
 	window.userProfile = null; 
@@ -26,7 +27,7 @@ $(document).ready(function() {
 	 * Require immediate login to enable save and logs. 
 	 */
 	 
-	login.showAdminLock();
+	//login.showAdminLock();
 	
 	/**
 	 * Send the authorization header on all API requests.

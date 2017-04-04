@@ -177,33 +177,24 @@ function LoginManager() {
 	window.userLock = new Auth0Lock(auth0clientID, auth0Domain, lockUserOptions); 
 	
 	var applyPermissions = function(isAdmin, isSuperAdmin) {
-		var $log = $('button.log'),
-        $new = $('button.new'),
+		var $new = $('button.new'),
         $save = $('button.save'),
         $upload = $('button.upload'),
         $publish = $('button.publish');
 		
 		if (isAdmin) {
 			if (isSuperAdmin) {
-				$log.show();
-				
-				$('a[href="#log"]').show();
-				$('a[href="#issue"]').show();
-				$('a[href="#author"]').show();
-				$('a[href="#sticker"]').show();
-				$('a[href="#genre"]').show();
-				$('a[href="#advert"]').show();
-				$('a[href="#sitemap"]').show();
+				$('a[href="#issue"]').parents('li').show();
+				$('a[href="#author"]').parents('li').show();
+				$('a[href="#sticker"]').parents('li').show();
+				$('a[href="#genre"]').parents('li').show();
+				$('a[href="#advert"]').parents('li').show();
 			} else {
-				$log.hide();
-				
-				$('a[href="#log"]').hide();
-				$('a[href="#issue"]').hide();
-				$('a[href="#author"]').hide();
-				$('a[href="#sticker"]').hide();
-				$('a[href="#genre"]').hide();
-				$('a[href="#advert"]').hide();
-				$('a[href="#sitemap"]').hide();
+				$('a[href="#issue"]').parents('li').hide();
+				$('a[href="#author"]').parents('li').hide();
+				$('a[href="#sticker"]').parents('li').hide();
+				$('a[href="#genre"]').parents('li').hide();
+				$('a[href="#advert"]').parents('li').hide();
 			}
 			
 			$new.show();
@@ -211,14 +202,12 @@ function LoginManager() {
 			$save.show();
 			$publish.show();
 		} else {
-			$('a[href="#issue"]').hide();
-			$('a[href="#author"]').hide();
-			$('a[href="#sticker"]').hide();
-			$('a[href="#genre"]').hide();
-			$('a[href="#advert"]').hide();
-			$('a[href="#sitemap"]').hide();
+			$('a[href="#issue"]').parents('li').hide();
+			$('a[href="#author"]').parents('li').hide();
+			$('a[href="#sticker"]').parents('li').hide();
+			$('a[href="#genre"]').parents('li').hide();
+			$('a[href="#advert"]').parents('li').hide();
 			
-			$log.hide();
 			$new.hide();
 			$upload.hide();
 			$save.hide();
@@ -586,7 +575,6 @@ function LoginManager() {
       
       self.extendUserProfile(authResult, profile);
 		
-      $login.css('background-image', 'url(' + window.userProfile.picture + ')');
       $logout.css('background-image', 'url(' + window.userProfile.picture + ')');
       $login.attr('aria-hidden', true);
       $logout.attr('aria-hidden', false);
