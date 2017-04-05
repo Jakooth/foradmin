@@ -14,9 +14,7 @@
 @import "_breadcrumb.less";
 @import "_login.less";
 @import "_log.less";
-@import "_comments.less";
 @import "_loading.less";
-@import "_windows.less";
 
 /**
  * Admin settings.
@@ -41,7 +39,7 @@
 	line-height: 16pt;
 }
 
-main h3 {
+h3 {
 	font-size: 30pt;
 	font-weight: normal;
 	font-style: italic;
@@ -54,31 +52,18 @@ main h3 {
 	font-family: "Courier New", Courier, monospace;
 }
 
-main label {
+label {
 	font-weight: normal;
 }
 
-main ::-webkit-input-placeholder {
+::-webkit-input-placeholder,
+:-moz-placeholder,
+:-ms-input-placeholder {
    color: @primary;
    font-size: 12pt;
 }
 
-main :-moz-placeholder {
-   color: @primary; 
-   font-size: 12pt;
-}
-
-main ::-moz-placeholder {
-   color: @primary;
-   font-size: 12pt;
-}
-
-main :-ms-input-placeholder {  
-   color: @primary;
-   font-size: 12pt;
-}
-
-main button {
+button {
 	font-size: 20pt;
 	font-weight: bold;
 }
@@ -126,38 +111,6 @@ main button {
 
 
 /**
- * FOCUS & ACTIVE
- */
-
-button.select:focus,
-button.select:hover,
-a.create:focus,
-a.create:hover,
-.file:focus,
-.file:hover,
-.file input:focus,
-.file input:hover,
-select.header:focus,
-select.header:hover,
-main button:focus,
-main button:hover,
-main button:first-child:focus,
-main button:first-child:hover,
-.layout > button:focus,
-.layout > button:hover {
-	cursor: pointer;
-	background-color: @secondary;
-	outline: none;
-}
-
-
-
-
-
-
-
-
-/**
  * COLORS
  */
 
@@ -179,11 +132,7 @@ body {
   background-color: @background;
 }
 
-select.header {
-	background-color: @background;
-}
-
-main button {
+button {
 	background-color: #CCC;
 	border: none;
 }
@@ -193,8 +142,40 @@ button.select,
 a.create,
 .file,
 .layout > button,
-main button:first-of-type {
+button:first-of-type {
 	background-color: @primary;
+}
+
+
+
+
+
+
+
+
+/**
+ * FOCUS & ACTIVE
+ */
+
+select.header:focus,
+select.header:hover,
+button.select:focus,
+button.select:hover,
+a.create:focus,
+a.create:hover,
+.file:focus,
+.file:hover,
+.file input:focus,
+.file input:hover,
+button:focus,
+button:hover,
+button:first-child:focus,
+button:first-child:hover,
+.layout > button:focus,
+.layout > button:hover {
+	cursor: pointer;
+	background-color: @secondary;
+	outline: none;
 }
 
 
@@ -216,7 +197,6 @@ div.settings p,
 form > [role=group]:not(.Main),
 .Cover,
 h3,
-.Window h2 span,
 .Add .file,
 form input,
 form select,
@@ -239,7 +219,7 @@ form textarea {
 	display: none !important;
 }
 
-main * {
+* {
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -252,7 +232,7 @@ main {
   background-color: lighten(@background, 70%);
 }
 
-main h3 {
+h3 {
 	float: left;
 	clear: both;
 	width: 100%;
@@ -280,6 +260,10 @@ main [role=toolbar] button {
 	float: left;
 	padding: @unit * 4;
 	min-width: 84px;
+  
+  &:last-of-type {
+    display: none; 
+  }
 }
 
 main [role=toolbar] [role=group] {
@@ -406,6 +390,7 @@ form input[type=time],
 	opacity: 0.5;
 	color: #666;
 	line-height: 40px;
+  display: flex;
 }
 
 .hidden i {
@@ -491,6 +476,9 @@ form input[type=time],
 }
 
 select.header {
+  font-size: 20pt;
+  font-weight: 700;
+  background-color: @background;
 	height: 84px;
 	padding: @unit * 4;
 	padding-left: 20px;
@@ -511,6 +499,10 @@ select.header {
 	width: 64px;
 	height: 64px;
 	pointer-events: none;
+  
+  path {
+    fill: @primary;
+  }
 }
 
 .imageLayout .select-svg {
@@ -560,6 +552,10 @@ button.add {
 	background-position: center center;
 	background-repeat: no-repeat;
 	min-height: 76px;
+}
+
+.Tracklist button.add {
+  padding: 20px;
 }
 
 button.remove {
@@ -1316,7 +1312,7 @@ button.down {
 	width: 40%;
 	padding-right: 0;
 	padding-top: 0;
-	z-index: 1000;
+	z-index: 99;
 }
 
 .a1Sublayout .img-proxy:nth-of-type(1) div.settings,
@@ -1333,7 +1329,7 @@ button.down {
 	padding-right: 0;
 	padding-bottom: 0;
 	padding-top: 0;
-	z-index: 999;
+	z-index: 98;
 }
 
 .a1Sublayout .img-proxy:nth-of-type(2) div.settings,
@@ -1452,6 +1448,23 @@ button.down {
 	margin: 0;
 	padding: 0;
 	float: left;
+}
+
+.b2Sublayout {
+  button.add,
+  button.remove {
+    width: 100%;
+    display: block;
+    line-height: normal;
+  }
+  
+  button.add {
+    background-image: none;
+  }
+  
+  button.remove {
+    background-image: url(../../assets/icons/iconmonstr/iconmonstr-x-mark-5-icon.svg);
+  }
 }
 
 .b2Sublayout .img-proxy p {
@@ -1850,10 +1863,6 @@ button.down {
 	display: none;
 }
 
-[role=dialog] [role=toolbar] button:last-of-type {
-	display: block;
-}
-
 #publish [role=toolbar] {
 	width: 100%;
 }
@@ -2014,3 +2023,10 @@ button.down {
 		width: 100%;
 	}
 }
+
+/**
+ * ADD-INS
+ */
+
+@import "_comments.less";
+@import "_windows.less";

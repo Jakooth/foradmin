@@ -19,17 +19,41 @@
     pointer-events: none;
     display: block;
     background: none;
+    font-size: 20pt;
+    font-weight: 700;
+    color: @light;
+    text-decoration: none;
   }
   
   h2 span {
     display: block;
     font-weight: normal;
     padding-top: 6px;
+    margin-bottom: @unit * 4;
+    color: @primary;
   }
   
-  div[role=toolbar] {
+  form {
+    &:extend(main form all);
+    
+    background-color: lighten(@background, 70%);
+  }
+  
+  [role=toolbar] {
+    &:extend(main [role=toolbar] all);
+    
     position: relative;
     float: right;
+    
+    button {
+      &:last-of-type {
+        display: block;
+      }
+    }
+  }
+  
+  [role=group] {
+    &:extend(main [role=group] all);
   }
   
   &.Alert {
@@ -39,11 +63,11 @@
     z-index: 22000;
   
   
-    div[role=toolbar] {
+    [role=toolbar] {
       height: 128px;
     }
     
-    div[role=toolbar] button {
+    [role=toolbar] button {
       height: 100%;
     }
     
@@ -77,8 +101,7 @@
     .success {
       background-color: @green;
       border-radius: 128px;
-    }
-    
+    } 
     
     .loading {
       background-color: @light;
@@ -86,26 +109,5 @@
       margin: 0 auto;
       animation: sk-rotateplane 1.2s infinite ease-in-out, sk-planecolor 12s infinite ease-in-out;
     }
-  }
-}
-
-[role=alertdialog] {
-  button {
-    &:extend(main [role=toolbar] button, main button);
-     
-	  background-color: #CCC;
-	  border: none;
-    
-    &:first-of-type {
-      background-color: @primary;
-    }
-    
-    &:last-of-type {
-      display: block;
-    }
-  }
-  
-  [role=toolbar] {
-    &:extend(main [role=toolbar]);
   }
 }
