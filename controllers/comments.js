@@ -37,7 +37,7 @@ function CommentsManager() {
 		admin.showAlert({message: 'Търся...', status: 'loading'});
 		
 		_renderCommentsResult(commentsRequest);
-	}    
+	}
   
   var _renderCommentsResult = function(data) {
 		var getResult = data || $.get(_query),
@@ -98,6 +98,63 @@ function CommentsManager() {
   
   
   /** 
+	 * PUBLIC
+	 */
+  
+  this.ban = function(data) {
+    var self = this;
+    
+    admin.showAlert({message: 'Наказвам...', status: 'loading'});
+    
+    $.ajax({
+      type: "POST",
+      contentType: "application/json; charset=utf-8",
+      url: commentAPI,
+      data: JSON.stringify(data),
+      dataType: 'json'
+    }).done(function (data, textStatus, jqXHR) {
+    
+			/**
+			 * Result is either JSON from the GET
+			 * or directly a parsed object from the POST.
+			 */
+			
+			var data = data.length ? JSON.parse(data) : data;
+			
+			if (!data.events.mysql.connection) {
+				admin.showAlert({message: data.events.mysql.error, status: 'error'});
+			} else if (!data.events.mysql.result) {
+				admin.showAlert({message: data.events.mysql.error, status: 'error'});
+			}
+			
+			admin.hideAlert();
+    }).fail(function (data, textStatus, jqXHR) {
+      var data = data.length ? JSON.parse(data) : data;
+			
+			if (data.statusText) {
+				admin.showAlert({message: data.statusText, status: 'error'});
+				
+				return;
+			}
+			
+			if (!data.events.mysql.connection) {
+				admin.showAlert({message: data.events.mysql.error, status: 'error'});
+			} else if (!data.events.mysql.result) {
+				admin.showAlert({message: data.events.mysql.error, status: 'error'});
+			}
+			
+			console.log(data);
+    });
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  /** 
 	 * EVENTS
 	 */
    
@@ -108,6 +165,25 @@ function CommentsManager() {
 			_doComments();
 		}
 	}); 
+  
+  $body.on('click', '#comments button.refresh', function(e) {
+		_doComments();
+	});
+  
+  $body.on('click', '#comments [role=option] button', function(e) {
+		var $this = $(this);
+		
+		var banned = $this.attr('aria-pressed') == 'true' ? 0 : 1,
+        ariaPressed = $this.attr('aria-pressed') == 'true' ? true : false,
+        id = $this.parents('[role=option]').data('id');
+		
+		$this.attr('aria-pressed',  !ariaPressed);
+		
+		self.ban({
+      commentId: id,
+      banned: banned
+    });
+	});
    
   $header.on('click', 'button.comments', function(e) {
 		admin.showSection(commentsSection);

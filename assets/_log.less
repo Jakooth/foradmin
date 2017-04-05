@@ -7,6 +7,14 @@
     padding: 0;
   } 
   
+  [role=toolbar] {
+    button {
+      &:last-of-type {
+        display: block;
+      }
+    }
+  }
+  
   [role=listbox] {
     width: 100%;
     display: table;
@@ -52,16 +60,16 @@
   th button,
   td button {
     height: 84px;
-      width: 84px;
+    width: 84px;
     float: left;
+    
+    &[aria-pressed=true] {
+      background-color: transparent;
+    }
   }
   
   svg {
     width: 32px;
     height: 32px;
-  }
-
-  td button[aria-pressed=true] {
-    background-color: transparent;
   }
 }
