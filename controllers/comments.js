@@ -27,11 +27,12 @@ function CommentsManager() {
 	 */
   
   var _doComments = function() {
-		var commentsRequest = $.ajax({
-			type: "GET",
-			contentType: "application/json; charset=utf-8",
-			url: _query,
-			dataType: 'json'
+		var params = '?origin=admin',
+        commentsRequest = $.ajax({
+			  type: "GET",
+			  contentType: "application/json; charset=utf-8",
+			  url: encodeURI(_query + params),
+			  dataType: 'json'
 		});
 		
 		admin.showAlert({message: 'Търся...', status: 'loading'});
