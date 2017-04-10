@@ -1,0 +1,150 @@
+<script>
+$(document).ready(function() { 
+  $.get('/forapi/forplay.php?offset=0&limit=5');
+}
+</script>
+
+<div id="header">
+  <div class="container">
+    <div id="logo-nav">
+      <div id="logo" class="left"> <a href="https://www.forplay.bg/" class="hover">{{:placeholder}}</a> </div>
+      <div id="search-memberarea" class="grid_12 right">
+        <div id="head-search" class="grid_6 right">
+          <form id="searchForm" action="{{:placeholder}}" method="post" accept-charset="{{:placeholder}}">
+            <fieldset>
+              <div class="input">
+                <input type="text" name="search" value="Търсене..." id="s">
+              </div>
+              <input type="submit" name="submit" value="" id="searchSubmit">
+              <input type="hidden" name="advanced" value="0">
+              {{if}}
+              <input type="hidden" name="topic" value="{{:placeholder}}" />
+              {{/if}}{{if}}
+              <input type="hidden" name="{{:placeholder}}" value="{{:placeholder}}" />
+              {{/if}}
+            </fieldset>
+          </form>
+        </div>
+        <div id="member-area" class="right">{{if}}
+          <div id="loginContainer"> <a id="loginButton" 
+                                       class="loginButton right"> <span>{{:placeholder}}</span> <em></em> <strong 
+                                       id="inactive_pm_count">{{:placeholder}}</strong> </a> <br 
+                                       class="clear">
+            <div id="loginBox" class="logged" style="display: none;">
+              <div id="loginForm">
+                <div class="user-menu">
+                  <ul>
+                    {{if}}
+                    <p class="avatar">{{:placeholder}}</p>
+                    {{/if}}{{for}}
+                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Начало </a></li>
+                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Помощ </a></li>
+                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Търси </a></li>
+                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Администриране </a></li>
+                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Модериране </a></li>
+                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Личен профил </a></li>
+                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Моите съобщения </a></li>
+                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Календар </a></li>
+                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Потребители </a></li>
+                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Изход </a></li>
+                    {{/for}}
+                    <li><a href="{{:placeholder}}">{{:placeholder}}</a></li>
+                    <li><a href="{{:placeholder}}">{{:placeholder}}</a></li>
+                    {{if}}
+                    <li class="notice">{{:placeholder}}</li>
+                    {{/if}}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="right">A добре дошъл, </span> </div>
+        {{else}} 
+        <script type="text/javascript" src="{{:placeholder}}"></script>
+        <div id="loginContainer"> <a id="loginButton" class="loginButton right"><span>Вход</span><em></em></a> <br class="clear">
+          <div id="loginBox" style="display: none;">
+            <form id="loginForm" action="{{:placeholder}}" method="post" accept-charset="{{:placeholder}}" onsubmit="{{:placeholder}}">
+              <fieldset id="body">
+                <fieldset>
+                  <label for="user">Никнейм</label>
+                  <input type="text" name="user" size="10" class="input_text">
+                </fieldset>
+                <fieldset>
+                  <label for="passwrd">Парола</label>
+                  <input type="password" name="passwrd" size="10" class="input_password">
+                </fieldset>
+                <fieldset class="left">
+                  <label for="cookielength">Запомни ме за</label>
+                  <select name="cookielength">
+                    <option value="60">{{:placeholder}}</option>
+                    <option value="1440">{{:placeholder}}</option>
+                    <option value="10080">{{:placeholder}}</option>
+                    <option value="43200">{{:placeholder}}</option>
+                    <option value="-1" selected="selected">{{:placeholder}}</option>
+                  </select>
+                </fieldset>
+                <input type="submit" value="{{:placeholder}}" id="login">
+                <br class="clear">
+                <div class="info">{{:placeholder}}</div>
+                <input type="hidden" name="hash_passwrd" value="">
+                <span><a href="{{:placeholder}}">{{:placeholder}}</a></span>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+      <span class="right">Привет, </span>{{/if}} </div>
+    <div id="nav" class="left">
+      <ul>
+        <li class="left"> <a href="./" class="active">Форум</a>
+          <ul id="forum-sub" class="submenu dropmenu">
+            <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}"> {{:placeholder}} </a> </li>
+            <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}"> {{:placeholder}} </a> </li>
+            <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}"> {{:placeholder}} </a> </li>
+            <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}"> {{:placeholder}} </a>
+              <ul>
+                <li> <a href="{{:placeholder}}"> <span>{{:placeholder}}</span> </a> </li>
+                <li> <a href="{{:placeholder}}"> <span>{{:placeholder}}</span> </a> </li>
+                <li> <a href="{{:placeholder}}"> <span>{{:placeholder}}е</span> </a> </li>
+                <li> <a href="{{:placeholder}}"> <span class="{{:placeholder}}">{{:placeholder}}</span> </a> </li>
+              </ul>
+            </li>
+            <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}">{{:placeholder}}</a>
+              <ul>
+                <li> <a href="{{:placeholder}}"> <span>{{:placeholder}}</span> </a> </li>
+                <li> <a href="{{:placeholder}}"> <span class="{{:placeholder}}">{{:placeholder}}</span> </a> </li>
+              </ul>
+            </li>
+            <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}"> {{:placeholder}} </a>
+              <ul>
+                <li> <a href="{{:placeholder}}"> <span>{{:placeholder}}</span> </a> </li>
+                <li> <a href="{{:placeholder}}"> <span>{{:placeholder}}</span> </a> </li>
+                <li> <a href="{{:placeholder}}"> <span class="{{:placeholder}}">{{:placeholder}}</span> </a> </li>
+              </ul>
+            </li>
+            <li id="{{:placeholder}}"> <a class="firstlevel" href="http://www.forplay.bg/forums/index.php?action=pm">{{:placeholder}}</a>
+              <ul>
+                <li> <a href="{{:placeholder}}"> <span>{{:placeholder}}</span> </a> </li>
+                <li> <a href="{{:placeholder}}"> <span class="{{:placeholder}}">{{:placeholder}}</span> </a> </li>
+              </ul>
+            </li>
+            <li id="{{:placeholder}}"> <a class="firstlevel" href="http://www.forplay.bg/forums/index.php?action=calendar">{{:placeholder}}</a>
+              <ul>
+                <li> <a href="http://www.forplay.bg/forums/index.php?action=calendar"> <span>{{:placeholder}}</span> </a> </li>
+                <li> <a href="http://www.forplay.bg/forums/index.php?action=calendar;sa=post"> <span class="last">{{:placeholder}}</span> </a> </li>
+              </ul>
+            </li>
+            <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="http://www.forplay.bg/forums/index.php?action=mlist">{{:placeholder}}</a>
+              <ul>
+                <li> <a href="{{:placeholder}}"> <span>{{:placeholder}}</span> </a> </li>
+                <li> <a href="{{:placeholder}}"> <span class="{{:placeholder}}">{{:placeholder}}</span> </a> </li>
+              </ul>
+            </li>
+            <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}">{{:placeholder}}</a> </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
