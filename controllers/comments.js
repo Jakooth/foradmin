@@ -113,7 +113,7 @@ function CommentsManager() {
       url: commentAPI,
       data: JSON.stringify(data),
       dataType: 'json'
-    }).done(function (data, textStatus, jqXHR) {
+    }).done(function(data, textStatus, jqXHR) {
     
 			/**
 			 * Result is either JSON from the GET
@@ -129,7 +129,7 @@ function CommentsManager() {
 			}
 			
 			admin.hideAlert();
-    }).fail(function (data, textStatus, jqXHR) {
+    }).fail(function(data, textStatus, jqXHR) {
       var data = data.length ? JSON.parse(data) : data;
 			
 			if (data.statusText) {

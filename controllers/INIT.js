@@ -27,7 +27,7 @@ $(document).ready(function() {
 	 * Require immediate login to enable save and logs. 
 	 */
 	 
-	//login.showAdminLock();
+	login.showAdminLock();
 	
 	/**
 	 * Send the authorization header on all API requests.

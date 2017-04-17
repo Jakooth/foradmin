@@ -1,0 +1,184 @@
+#loginContainer {
+    float: right;
+    font-size: 12px;
+    position: relative;
+}
+
+.loginButton {
+    border-radius: 3px 3px 3px 3px;
+    cursor: pointer;
+    position: relative;
+    z-index: 30;
+}
+
+.loginButton span {
+    background: url("../images/theme/loginArrow.png") no-repeat 98% 1px;
+    color: #fff;
+	text-shadow: 1px 1px 1px #a15700;
+    display: block;
+    font: bold 12px "PT Sans", Arial;
+	text-transform: uppercase;
+    padding: 3px 19px 4px 8px;
+}
+
+#loginBox {
+    display: none;
+    position: absolute;
+    right: -1px;
+    top: 22px;
+    z-index: 29;
+}
+
+.loginButton.active {
+    background:#FFFFFF;
+    border-radius: 3px 3px 0 0;
+}
+
+.loginButton.active span {
+    background-position: 98% 103%;
+	color: #000;
+	text-shadow: none;
+
+}
+
+.loginButton.active em {
+    background:#FFFFFF;
+    bottom: -1px;
+    height: 1px;
+    position: absolute;
+    width: 100%;
+}
+#loginForm {
+    background:#FFFFFF;
+    border: 1px solid #222222;
+    border-radius: 7px 0 7px 7px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    margin: 0px;
+    padding: 5px;
+    width: 200px;
+}
+
+.logged > #loginForm {
+	width: 160px;	
+	padding: 5px 0 9px 0px;
+}
+
+#loginForm fieldset {
+    border: 0 none;
+    display: block;
+    margin: 0 0 12px;
+    padding: 0;
+}
+
+fieldset#body {
+    background:#FFFFFF;
+    border-radius: 3px 3px 3px 3px;
+    margin: 0;
+    padding: 5px;
+}
+#loginForm #checkbox {
+    border: 0 none;
+    float: left;
+    margin: 2px 4px 0 0;
+    padding: 0;
+    width: auto;
+}
+
+#body label {
+    color: #3A454D;
+    display: block;
+    float: left;
+    margin: 4px 0 0;
+}
+
+#loginForm #body fieldset label {
+    display: block;
+    float: none;
+    margin: 0 0 6px;
+	font: bold 12px Arial;
+}
+
+#loginForm input {
+    border: 1px solid #899CAA;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 3px #BBBBBB inset;
+    color: #3A454D;
+    font: bold 12px Arial;
+    padding: 4px;
+    width: 95%;
+}
+
+#loginForm #login {
+    border: 1px solid #339CDF;
+	background: #025d8c;
+    box-shadow: none;
+    color: #FFFFFF;
+    cursor: pointer;
+    float: right;
+    margin: 15px 0 0 0;
+    padding: 4px 10px;
+    text-shadow: 0 -1px #278DB8;
+    width: auto;
+}
+
+#loginForm > span {
+    display: block;
+    padding: 7px 0 4px;
+    text-align: center;
+}
+
+#loginForm > span > img { vertical-align: middle; width: 20px; }
+
+#loginForm > span a {
+    color: #3A454D;
+    font-size: 12px;
+    text-shadow: 1px 1px #FFFFFF;
+}
+
+input:focus {
+    outline: medium none;
+}
+.user-menu { width: 100%; }
+.user-menu ul { list-style:none; padding:3px 0 0 0; margin: 0; }
+
+.user-menu ul li { display:block; zoom:1; }
+
+.user-menu ul li a { 
+    padding:3px 10px;
+    font-size:11px;
+    border-top:1px solid #e7e7f0;
+    border-bottom:1px solid #e7e7f0;
+    display:block;
+    margin:-1px 0 0 0;
+    position:relative;
+    text-shadow:0 1px 1px #fff;
+    zoom:1;
+}
+
+.user-menu ul li a span {
+    position:absolute;
+    bottom:-1px;
+    left:0; right:0;
+    height:1px;
+    display:block;
+    background:#d7dbea;
+    z-index:20;
+    display:none;
+    zoom:1;
+}
+
+
+.user-menu ul li:hover a {
+    color:#fff;
+    background: #0083B9;
+	text-shadow:1px 1px 0px #004e6e;
+ 
+}
+
+.user-menu ul li:hover a span {
+    display:block;
+}
+
+p.avatar {
+	padding: 0 5px;	
+}

@@ -1,0 +1,107 @@
+#loginBox {
+  display: none;
+  position: absolute;
+  top: 56px;
+  right: 6.25%;
+  background-color: rgba(0, 0, 0, 0.9);
+  width: 87.5%;
+  border: transparent;
+}
+
+#loginBox form,
+#loginBox ul,
+#loginBox li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#loginBox ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#loginBox li {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#loginBox li.notice strong {
+  color: orangered;
+}
+
+#loginBox li a,
+#loginBox li strong {
+  width: 100%;
+  display: block;
+  padding: 3.125%;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 10pt;
+}
+
+#loginBox li a:hover {
+  background-color: orangered;
+}
+
+#loginBox form label,
+#loginBox form span,
+#loginBox form input,
+#loginBox form select,
+#loginBox form a {
+  width: 100%;
+  display: block;
+  padding: 3.125%;
+  box-sizing: border-box;
+  color: #fff;
+  font: 10pt 'Open Sans', sans-serif;
+  border-radius: 0;
+}
+
+#loginBox form input,
+#loginBox form select {
+  color: #000;
+}
+
+#loginBox form a {
+  padding: 6.25%;
+  text-decoration: underline;
+}
+
+#loginBox form a:hover {
+  color: orangered;
+}
+
+#loginBox form [type=submit] {
+  margin: 3.125%;
+  width: 93.75%;
+  border: none;
+  cursor: pointer;
+  background: #000;
+  text-shadow: none;
+  text-transform: none;
+  color: #fff;
+}
+
+#loginBox form [type=submit]:hover {
+  background-color: orangered;
+}
+
+#loginBox form span {
+  padding-top: 0;
+}
+
+#loginBox form select {
+  border: 1px solid #999;
+}
+
+#loginBox form select,
+#loginBox form option {
+  color: #000;
+}
+
+#loginBox form input {
+  border: 1px solid #999;
+  background: #fff;
+}

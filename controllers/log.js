@@ -19,7 +19,7 @@ function LogManager() {
 	
 	var _renderLogResult = function(data) {
 		var getResult = data || $.get(_query),
-			getRenderer = $.get('renderers/log.html');
+			  getRenderer = $.get('renderers/log.html');
 		
 		$.when(getResult, getRenderer).done(function(resultData, renderData) {
 			

@@ -1,150 +1,122 @@
-<script>
-$(document).ready(function() { 
-  $.get('/forapi/forplay.php?offset=0&limit=5');
-}
-</script>
-
-<div id="header">
-  <div class="container">
-    <div id="logo-nav">
-      <div id="logo" class="left"> <a href="https://www.forplay.bg/" class="hover">{{:placeholder}}</a> </div>
-      <div id="search-memberarea" class="grid_12 right">
-        <div id="head-search" class="grid_6 right">
-          <form id="searchForm" action="{{:placeholder}}" method="post" accept-charset="{{:placeholder}}">
-            <fieldset>
-              <div class="input">
-                <input type="text" name="search" value="Търсене..." id="s">
-              </div>
-              <input type="submit" name="submit" value="" id="searchSubmit">
-              <input type="hidden" name="advanced" value="0">
-              {{if}}
-              <input type="hidden" name="topic" value="{{:placeholder}}" />
-              {{/if}}{{if}}
-              <input type="hidden" name="{{:placeholder}}" value="{{:placeholder}}" />
-              {{/if}}
-            </fieldset>
-          </form>
-        </div>
-        <div id="member-area" class="right">{{if}}
-          <div id="loginContainer"> <a id="loginButton" 
-                                       class="loginButton right"> <span>{{:placeholder}}</span> <em></em> <strong 
-                                       id="inactive_pm_count">{{:placeholder}}</strong> </a> <br 
-                                       class="clear">
-            <div id="loginBox" class="logged" style="display: none;">
-              <div id="loginForm">
-                <div class="user-menu">
-                  <ul>
-                    {{if}}
-                    <p class="avatar">{{:placeholder}}</p>
-                    {{/if}}{{for}}
-                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Начало </a></li>
-                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Помощ </a></li>
-                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Търси </a></li>
-                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Администриране </a></li>
-                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Модериране </a></li>
-                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Личен профил </a></li>
-                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Моите съобщения </a></li>
-                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Календар </a></li>
-                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Потребители </a></li>
-                    <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}" {{:placeholder}}> Изход </a></li>
-                    {{/for}}
-                    <li><a href="{{:placeholder}}">{{:placeholder}}</a></li>
-                    <li><a href="{{:placeholder}}">{{:placeholder}}</a></li>
-                    {{if}}
-                    <li class="notice">{{:placeholder}}</li>
-                    {{/if}}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <span class="right">A добре дошъл, </span> </div>
-        {{else}} 
-        <script type="text/javascript" src="{{:placeholder}}"></script>
-        <div id="loginContainer"> <a id="loginButton" class="loginButton right"><span>Вход</span><em></em></a> <br class="clear">
-          <div id="loginBox" style="display: none;">
-            <form id="loginForm" action="{{:placeholder}}" method="post" accept-charset="{{:placeholder}}" onsubmit="{{:placeholder}}">
-              <fieldset id="body">
-                <fieldset>
-                  <label for="user">Никнейм</label>
-                  <input type="text" name="user" size="10" class="input_text">
-                </fieldset>
-                <fieldset>
-                  <label for="passwrd">Парола</label>
-                  <input type="password" name="passwrd" size="10" class="input_password">
-                </fieldset>
-                <fieldset class="left">
-                  <label for="cookielength">Запомни ме за</label>
-                  <select name="cookielength">
-                    <option value="60">{{:placeholder}}</option>
-                    <option value="1440">{{:placeholder}}</option>
-                    <option value="10080">{{:placeholder}}</option>
-                    <option value="43200">{{:placeholder}}</option>
-                    <option value="-1" selected="selected">{{:placeholder}}</option>
-                  </select>
-                </fieldset>
-                <input type="submit" value="{{:placeholder}}" id="login">
-                <br class="clear">
-                <div class="info">{{:placeholder}}</div>
-                <input type="hidden" name="hash_passwrd" value="">
-                <span><a href="{{:placeholder}}">{{:placeholder}}</a></span>
-              </fieldset>
-            </form>
-          </div>
-        </div>
-      </div>
-      <span class="right">Привет, </span>{{/if}} </div>
-    <div id="nav" class="left">
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta content="charset=utf-8"/>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Forum</title>
+<link href="forplay/_forplay.css?v=3.0.0" type="text/css" rel="stylesheet"/>
+<link href="forplay/_login.css?v=3.0.0" type="text/css" rel="stylesheet"/>
+<link href="forplay/_media.css?v=3.0.0" type="text/css" rel="stylesheet"/>
+<link href="replace/css/index.css?v=3.0.0" type="text/css" rel="stylesheet"/>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script src="forplay/_forplay.js" type="text/javascript"></script>
+<script src="forplay/_svg.js" type="text/javascript"></script>
+<script src="forplay/_covers.js" type="text/javascript"></script>
+</head>
+<body>
+<header id="header" class="fixed">
+  <h1 id="logo"> <a href="/"><img 
+      id="forPlay" class="svg" src="forplay/forplay.svg" alt="Forplay&reg;" /></a> </h1>
+  <section class="cover-set">
+    <div id="covers">
+      <article class="cover"> <a href=""></a> </article>
+      <article class="cover"> <a href=""></a> </article>
+      <article class="cover"> <a href=""></a> </article>
+      <article class="cover"> <a href=""></a> </article>
+      <article class="cover"> <a href=""></a> </article>
+    </div>
+  </section>
+  <section class="nav-set">
+    <nav>
       <ul>
-        <li class="left"> <a href="./" class="active">Форум</a>
-          <ul id="forum-sub" class="submenu dropmenu">
-            <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}"> {{:placeholder}} </a> </li>
-            <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}"> {{:placeholder}} </a> </li>
-            <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}"> {{:placeholder}} </a> </li>
-            <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}"> {{:placeholder}} </a>
-              <ul>
-                <li> <a href="{{:placeholder}}"> <span>{{:placeholder}}</span> </a> </li>
-                <li> <a href="{{:placeholder}}"> <span>{{:placeholder}}</span> </a> </li>
-                <li> <a href="{{:placeholder}}"> <span>{{:placeholder}}е</span> </a> </li>
-                <li> <a href="{{:placeholder}}"> <span class="{{:placeholder}}">{{:placeholder}}</span> </a> </li>
-              </ul>
-            </li>
-            <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}">{{:placeholder}}</a>
-              <ul>
-                <li> <a href="{{:placeholder}}"> <span>{{:placeholder}}</span> </a> </li>
-                <li> <a href="{{:placeholder}}"> <span class="{{:placeholder}}">{{:placeholder}}</span> </a> </li>
-              </ul>
-            </li>
-            <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}"> {{:placeholder}} </a>
-              <ul>
-                <li> <a href="{{:placeholder}}"> <span>{{:placeholder}}</span> </a> </li>
-                <li> <a href="{{:placeholder}}"> <span>{{:placeholder}}</span> </a> </li>
-                <li> <a href="{{:placeholder}}"> <span class="{{:placeholder}}">{{:placeholder}}</span> </a> </li>
-              </ul>
-            </li>
-            <li id="{{:placeholder}}"> <a class="firstlevel" href="http://www.forplay.bg/forums/index.php?action=pm">{{:placeholder}}</a>
-              <ul>
-                <li> <a href="{{:placeholder}}"> <span>{{:placeholder}}</span> </a> </li>
-                <li> <a href="{{:placeholder}}"> <span class="{{:placeholder}}">{{:placeholder}}</span> </a> </li>
-              </ul>
-            </li>
-            <li id="{{:placeholder}}"> <a class="firstlevel" href="http://www.forplay.bg/forums/index.php?action=calendar">{{:placeholder}}</a>
-              <ul>
-                <li> <a href="http://www.forplay.bg/forums/index.php?action=calendar"> <span>{{:placeholder}}</span> </a> </li>
-                <li> <a href="http://www.forplay.bg/forums/index.php?action=calendar;sa=post"> <span class="last">{{:placeholder}}</span> </a> </li>
-              </ul>
-            </li>
-            <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="http://www.forplay.bg/forums/index.php?action=mlist">{{:placeholder}}</a>
-              <ul>
-                <li> <a href="{{:placeholder}}"> <span>{{:placeholder}}</span> </a> </li>
-                <li> <a href="{{:placeholder}}"> <span class="{{:placeholder}}">{{:placeholder}}</span> </a> </li>
-              </ul>
-            </li>
-            <li id="{{:placeholder}}"> <a class="{{:placeholder}}" href="{{:placeholder}}">{{:placeholder}}</a> </li>
+        <li> <a href="">Помощ</a> </li>
+        <li> <a href="">Търси</a> </li>
+        <li> <a href="">Администриране</a> </li>
+        <li> <a href="">Модериране</a> </li>
+        <li> <a href="">Календар</a> </li>
+        <li> <a href="">Потребители</a>
+          <ul>
+            <li> <a href=""> <span>Списък с потребителите</span> </a> </li>
+            <li> <a href=""> <span>Tърси потребители</span> </a> </li>
           </ul>
         </li>
       </ul>
+    </nav>
+    <div id="search-memberarea" class="search" role="search">
+      <form id="searchForm"
+            action="#" 
+            method="post" 
+            accept-charset="utf-8">
+        <input type="text" name="search" placeholder="Търси" id="s" />
+        <button type="submit" name="submit" value="" id="searchSubmit" aria-label="Търси"><img 
+                src="forplay/search.svg" alt="Търси" class="svg" /></button>
+        <input type="hidden" name="advanced" value="0" />
+        <input type="hidden" name="topic" value="" />
+        <input type="hidden" name="" value="" />
+      </form>
     </div>
-  </div>
-</div>
-</div>
+    <div id="loginContainer" class="user" role="region" style="display: none;">
+      <button id="loginButton" type="button" aria-pressed="false">
+      <label><em>Наздраве, </em><strong>Жорко<sup id="inactive_pm_count">4</sup></strong></label>
+      <img src="//www.forplay.bg/forums/avs/avatar_123_1491898957.png" alt="Жорко" />
+      </button>
+      <div id="loginBox" class="logged">
+        <div id="loginForm">
+          <div class="user-menu">
+            <ul>
+              <li id=""> <a class="" href=""> Начало </a></li>
+              <li id=""> <a class="" href=""> Помощ </a></li>
+              <li id=""> <a class="" href=""> Търси </a></li>
+              <li id=""> <a class="" href=""> Администриране </a></li>
+              <li id=""> <a class="" href=""> Модериране </a></li>
+              <li id=""> <a class="" href=""> Личен профил </a></li>
+              <li id=""> <a class="" href=""> Моите съобщения </a></li>
+              <li id=""> <a class="" href=""> Календар </a></li>
+              <li id=""> <a class="" href=""> Потребители </a></li>
+              <li id=""> <a class="" href=""> Изход </a></li>
+              <li class="notice"><a href="">Непрочетени публикации след последното ти влизане.</a></li>
+              <li class="notice"><a href="">Нови отговори на твоите публикации.</a></li>
+              <li class="notice"> <strong>Админкски мод е включен.</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="loginContainer" class="user" role="region" style="display: block;">
+      <button id="loginButton" type="button" aria-pressed="false">
+      <label><em>Наздраве, </em><strong>Непознат</strong></label>
+      <img src="forplay/anonymous.svg" class="svg" alt="Непознат" />
+      </button>
+      <div id="loginBox" class="logged" style="display: none;">
+        <form id="loginForm" action="#" method="post" accept-charset="utf-8">
+          <input type="hidden" name="hash_passwrd" value="" />
+          <label>
+            <input aria-label="Никнейм" placeholder="Никнейм" type="text" name="user" />
+          </label>
+          <label>
+            <input aria-label="Парола" placeholder="Парола" type="password" name="passwrd" />
+          </label>
+          <label for="cookielength"><span>Запомни ме за</span>
+            <select name="cookielength">
+              <option value="60">1 Час</option>
+              <option value="1440">1 Ден</option>
+              <option value="10080">1 Седмица</option>
+              <option value="43200">1 Месец</option>
+              <option value="-1" selected="selected">Завинаги</option>
+            </select>
+          </label>
+          <label>
+            <input aria-label="OpenID" placeholder="OpenID" type="text" 
+                   name="openid_identifier" id="openid_url" />
+          </label>
+          <input type="submit" value="Вход" id="login" />
+          <a href="#">Забравил си паролата?</a>
+        </form>
+      </div>
+    </div>
+  </section>
+</header>
+</body>
+</html>

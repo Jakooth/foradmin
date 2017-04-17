@@ -29,6 +29,10 @@
     }
   }
   
+  [data-deleted=true] {
+    opacity: 0.4;
+  }
+  
   [role=option] {    
     td:nth-of-type(2) {
       padding: 20px;
@@ -51,6 +55,17 @@
       
       p {
         padding: 0;
+        
+        img {
+          height: auto;
+          width: auto;
+          max-width: 320px;
+          max-height: 320px;
+        }
+        
+        a {
+          text-decoration: underline;
+        }
       }
     }
     

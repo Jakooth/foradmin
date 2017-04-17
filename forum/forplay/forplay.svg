@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" 
+	 xmlns="http://www.w3.org/2000/svg" 
+	 xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 xml:space="preserve"
+	 x="0px" y="0px"
+	 viewBox="0 0 338 80"
+	 height="22%"
+	 preserveAspectRatio="xMinYMax meet">
+    <title>Forplay</title>
+    <defs>
+        <filter id="filterX__uniqueID_2b016962" 
+				primitiveUnits="objectBoundingBox" 
+				x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="0.05"></feGaussianBlur>
+            <feOffset dx="0" dy="0" result="offsetblur"></feOffset>
+            <feFlood flood-color="rgb(0, 0, 0)" flood-opacity="0.25"></feFlood>
+            <feComposite in2="offsetblur" operator="in"></feComposite>
+            <feMerge>
+                <feMergeNode></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g filter="url(#filterX__uniqueID_2b016962)">
+        <path d="M0,0h41.366c26.535,0,41.495,7.154,41.495,30.959c0,23.154-15.089,32.781-41.626,32.781h-7.284V80H0V0z M38.634,41.496
+	c8.325,0,11.057-1.301,11.057-9.626c0-8.325-2.731-9.626-11.057-9.626h-4.683v19.252H38.634z"/>
+        <path d="M230.463,0h-42.666l-28.749,80h32.39l3.253-11.447c0.13,0,25.365,0,25.365,0L223.439,80h35.771L230.463,0z M200.545,48.52
+	l3.901-13.268c1.432-4.943,2.992-12.227,2.992-12.227s1.562,7.284,2.991,12.227l3.772,13.268H200.545z"/>
+        <path d="M127.048,57.365V0H93.097v80h56.845l8.196-22.635H127.048z M102.563,25.623c0-3.86,1.358-5.375,3.961-5.375
+		c2.014,0,3.037,1.141,3.55,2.78c0.236-0.519,0.65-0.932,1.459-1.347L114.687,20v4.067l-3.214,1.661
+		c-0.77,0.433-1.045,0.745-1.045,1.619v1.451h4.259v3.943h-12.124V25.623z M108.633,34.646c4.378,0,6.251,2.656,6.251,6.827
+		c0,4.15-1.873,6.807-6.251,6.807c-4.396,0-6.308-2.678-6.308-6.827C102.325,37.281,104.236,34.646,108.633,34.646z M117.821,60
+		h-15.258V49.459h2.62v6.577h3.154v-5.832h2.268v5.832h7.216V60z"/>
+        <path d="M106.586,24.067c-1.245,0-1.719,0.664-1.719,2.159v2.572h3.41v-2.386C108.278,24.793,107.943,24.067,106.586,24.067z"/>
+        <path d="M108.656,44.273c2.896,0,3.646-0.934,3.646-2.821c0-1.868-0.749-2.802-3.646-2.802c-2.939,0-3.726,0.913-3.726,2.823
+		C104.93,43.382,105.716,44.273,108.656,44.273z"/>
+        <path d="M246.163,0h36.813l7.284,15.87c1.951,4.293,4.033,11.317,4.033,11.317s2.081-7.154,3.901-11.317L304.959,0H338
+	l-28.357,53.203c0-0.131,0,26.797,0,26.797h-33.951V53.203L246.163,0z"/>
+    </g>
+</svg>
