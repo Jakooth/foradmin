@@ -4,7 +4,7 @@ $(document).ready(function() {
     var i = 0,
         articles = JSON.parse(data).articles,
         article,
-        service = 'https://forplay.bg/forapi/phplib/timthumb/timthumb.php',
+        service = 'https://forplay.bg/forapi/phplib/mthumb/mthumb.php',
         bg;
         
     var $covers = $('#covers article'),
