@@ -378,7 +378,7 @@ Article.prototype.resetData = function(isUpdate) {
 	if (this._$videoUrlInput.length) this._$videoUrlInput.val(null);
 	if (this._$audioFrameInput.length) this._$audioFrameInput.val(null);
 	if (this._$audioUrlInput.length) this._$audioUrlInput.val(null);
-	if (this._$hypeSelect.length) this._$hypeSelect.val(70);
+	if (this._$hypeSelect.length) this._$hypeSelect.val(null);
 	if (this._$versionTestedSelect.length) this._$versionTestedSelect.val(1);
 	
 	if (this._$betterInput.length) this._$betterInput.tagsinput('removeAll');
@@ -418,7 +418,7 @@ Article.prototype.updateData = function(data) {
 	this._setInputValue(this._$videoUrlInput, data.video_url || null);
 	this._setInputValue(this._$audioFrameInput, data.audio_frame || null);
 	this._setInputValue(this._$audioUrlInput, data.audio_url || null);
-	this._setInputValue(this._$hypeSelect, data.hype || 70);
+	this._setInputValue(this._$hypeSelect, data.hype || null);
 	this._setInputValue(this._$versionTestedSelect, data.platform || 1);
 	
 	this._setTagsinputValue(this._$betterInput, data.better || null);

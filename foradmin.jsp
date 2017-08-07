@@ -91,7 +91,7 @@
       <script src="controllers/objects/aside.js?v=2.0.1">
         <!--script-->
       </script>
-      <script src="controllers/objects/article.js?v=2.0.1">
+      <script src="controllers/objects/article.js?v=2.0.2">
         <!--script-->
       </script>
       <script src="controllers/objects/quote.js?v=2.0.0">
