@@ -668,5 +668,13 @@ function LoginManager() {
 	$('#userLogout').click(function(e) {
 		self.clearUserProfile();
 		self.hideUserProfile();
+    
+    /**
+     * Hide unauthorized actions comment actions.
+     * There is extra handling for this on backend.
+     * The goal is to prevent UI errors.
+     */
+     
+    comment.updatePermissionsOnLogout();
 	}); 
 }
