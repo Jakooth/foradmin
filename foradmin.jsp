@@ -76,7 +76,7 @@
       <script src="controllers/login.js?v=3.0.0">
         <!--script-->
       </script>
-      <script src="controllers/imgs.js?v=3.0.0">
+      <script src="controllers/imgs.js?v=3.0.1">
         <!--script-->
       </script>
       <script src="controllers/objects/fortag.js?v=2.1.0">

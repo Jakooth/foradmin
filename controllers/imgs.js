@@ -494,7 +494,7 @@ function ImgsManager() {
 		add.addImage(e);
 	});
 	
-	$('#article').on('change', '.z2Sublayout [type=text]', function(e) {
+	$('#article').on('change', '.z2Sublayout [type=text], .z3Sublayout [type=text]', function(e) {
 		var $this = $(this),
 			$proxy = $this.parents('.img-proxy'),
 			$img = $proxy.find('[type=file]');
