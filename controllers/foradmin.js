@@ -1222,11 +1222,6 @@ function AdminManager() {
 		$('#stickerEnNameInput').val(enName);
 	});
 	
-	/**
-	 * TODO: Next two section are now similar and can be merged.
-	 * Not merging to avoid additional testing.
-	 */
-	
 	$('#game, #movie, #album, #tv, ' + 
 	  '#event, #book, #platform, ' +
 	  '#genre, #sticker, #fortag').on('click', 'button.save', function(e) {
@@ -1248,7 +1243,7 @@ function AdminManager() {
 	});
 	
 	$('#company, #person, #character, ' + 
-	  '#serie, #dlc, #band' + 
+	  '#serie, #dlc, #band, ' + 
 	  '#country, #author, #issue').on('click', 'button.save', function(e) {
 		
 		var $this = $(this),
