@@ -7,7 +7,7 @@ function LogManager() {
 	var self = this;
 	var logAPI = '/forapi/forsecure/log.php';
 	var forplayAPI = '/forapi/forplay.php';
-	var fotagsAPI = '/forapi/tags.php';
+	var fortagsAPI = '/forapi/tags.php';
 	
 	var $body =  $('body'),
 		$header = $('header');
@@ -95,7 +95,7 @@ function LogManager() {
 			
 			getId = $.get(encodeURI(forplayAPI + '?url=' + tag + '&subtype=' + object));
 		} else {
-			getId = $.get(encodeURI(fotagsAPI + '?url=' + tag + '&object=' + object));
+			getId = $.get(encodeURI(fortagsAPI + '?url=' + tag + '&object=' + object));
 		}
 		
 		$.when(getId).done(function(dataId) {

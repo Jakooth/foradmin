@@ -210,7 +210,8 @@ function AdminManager() {
 			$(input).typeahead({
 				hint: true,
 				highlight: true,
-				minLength: 1
+				minLength: 1,
+				limit: 20
 			}, {
 				itemValue: 'tag',
 				itemText: displayKey || 'en_name',
@@ -272,6 +273,7 @@ function AdminManager() {
 					name: text,
 					displayKey: displayKey || 'en_name', 
 					source: data.ttAdapter(),
+					limit: 20,
 					templates: {
 						suggestion: function(data) {
 							if (data.lib) {
