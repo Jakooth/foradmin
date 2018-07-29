@@ -1,23 +1,23 @@
 function LoginManager() {
-	
+
 	/** 
 	 * PRIVATE
 	 */
-	 
+
 	var self = this;
 	var profilesAPI = '/forapi/forsecure/profiles.php';
 	var auth0clientID = 'P8wrSYlMVUu5rZDEFGSqFL18tVfgo9Gz';
 	var auth0Domain = 'forplay.eu.auth0.com';
-  var failedLogins = 0;
+	var failedLogins = 0;
 	var maxLoginAttempts = 1;
-	
+
 	var bg = {
 		error: {
 			forgotPassword: {
 				"too_many_requests": "Достигна максималния брой опити за смяна на паролата. Моля, изчакай преди да опиташ отново.",
 				"lock.fallback": "Съжаляваме, нещо се обърка при заявката за смяна на парола."
 			},
-			
+
 			login: {
 				"blocked_user": "Потребителят е блокиран.",
 				"invalid_user_password": "Невалидна оторизация.",
@@ -36,13 +36,13 @@ function LoginManager() {
 				"session_missing": "Не можем да завършим оторизацията. Моля, опитай отново, след като затвориш всички отворени диалогови прозорци.",
 				"hrd.not_matching_email": "Моля, използвайте твоя корпоративен имейл за вход."
 			},
-			
+
 			passwordless: {
 				"bad.email": "Невалиден имейл.",
 				"bad.phone_number": "Невалиден телефон.",
 				"lock.fallback": "Съжаляваме, нещо се обърка."
 			},
-			
+
 			signUp: {
 				"invalid_password": "Невалидна парола.",
 				"lock.fallback": "Съжаляваме, нещо се обърка при опита за регистрация.",
@@ -53,14 +53,14 @@ function LoginManager() {
 				"username_exists": "Потребителското име вече съществува."
 			}
 		},
-		  
+
 		success: {
 			logIn: "Благодарим за посещението.",
 			forgotPassword: "Току-що ти изпратихме имейл за подновяване на паролата.",
 			magicLink: "Изпратихме ти връзка за вход<br />в %s.",
 			signUp: "Благодарим за регистрацията."
 		},
-		
+
 		blankErrorHint: "Това поле не може да остане празно.",
 		codeInputPlaceholder: "твоят код",
 		databaseEnterpriseLoginInstructions: "",
@@ -83,7 +83,7 @@ function LoginManager() {
 		loginWithLabel: "Влез със %s",
 		notYourAccountAction: "Не е твоят профил?",
 		passwordInputPlaceholder: "твоята парола",
-		  
+
 		passwordStrength: {
 			containsAtLeast: "Съдържа поне %d от тези %d типове символи:",
 			identicalChars: "Не повече от %d идентични последователни символи (пример, \"%s\" не е позволено)",
@@ -95,7 +95,7 @@ function LoginManager() {
 			specialCharacters: "Специални символи (пример !@#$%^&*)",
 			upperCase: "Главни букви (А-Я)"
 		},
-		
+
 		passwordlessEmailAlternativeInstructions: "В противен случай въведи твоя имейл за вход<br/>или създай профил",
 		passwordlessEmailCodeInstructions: "Имейл с кода беше изпратен до %s.",
 		passwordlessEmailInstructions: "Въведи твоя имейл за вход<br/>или създай профил",
@@ -131,23 +131,23 @@ function LoginManager() {
 		mfaSubmitLabel: "Влез",
 		mfaCodeErrorHint: "Използвай %d числа"
 	}
-	
+
 	var lockAdminOptions = {
 		languageDictionary: bg,
 		avatar: null,
 		autoclose: true,
 		allowLogin: true,
 		closable: true,
-		allowedConnections: ['Username-Password-Authentication'],
+		allowedConnections: ['facebook', 'google-oauth2', 'Username-Password-Authentication'],
 		auth: {
 			redirect: false
 		},
 		theme: {
 			labeledSubmitButton: false,
-      primaryColor: '#FF5722'
+			primaryColor: '#FF5722'
 		}
-	}; 
-	
+	};
+
 	var lockUserOptions = {
 		languageDictionary: bg,
 		avatar: null,
@@ -157,7 +157,7 @@ function LoginManager() {
 		allowedConnections: ['facebook', 'google-oauth2'],
 		theme: {
 			labeledSubmitButton: false,
-      primaryColor: '#FF5722'
+			primaryColor: '#FF5722'
 		},
 		auth: {
 			redirectUrl: window.location.origin + '/auth/return-url',
@@ -165,23 +165,26 @@ function LoginManager() {
 			redirect: true,
 			params: {
 				state: JSON.stringify({
-					return_url: encodeURIComponent(window.location.pathname + 
-                                         window.location.hash)
+					return_url: encodeURIComponent(window.location.pathname +
+						window.location.hash)
 				})
 			}
 		}
-	}; 
-	
-	window.auth0 = new auth0.WebAuth({domain: auth0Domain, clientID: auth0clientID});
-	window.adminLock = new Auth0Lock(auth0clientID, auth0Domain, lockAdminOptions); 
-	window.userLock = new Auth0Lock(auth0clientID, auth0Domain, lockUserOptions); 
-	
-	var applyPermissions = function(isAdmin, isSuperAdmin) {
+	};
+
+	window.auth0 = new auth0.WebAuth({
+		domain: auth0Domain,
+		clientID: auth0clientID
+	});
+	window.adminLock = new Auth0Lock(auth0clientID, auth0Domain, lockAdminOptions);
+	window.userLock = new Auth0Lock(auth0clientID, auth0Domain, lockUserOptions);
+
+	var applyPermissions = function (isAdmin, isSuperAdmin) {
 		var $new = $('button.new'),
-        $save = $('button.save'),
-        $upload = $('button.upload'),
-        $publish = $('button.publish');
-		
+			$save = $('button.save'),
+			$upload = $('button.upload'),
+			$publish = $('button.publish');
+
 		if (isAdmin) {
 			if (isSuperAdmin) {
 				$('a[href="#issue"]').parents('li').show();
@@ -196,7 +199,7 @@ function LoginManager() {
 				$('a[href="#genre"]').parents('li').hide();
 				$('a[href="#advert"]').parents('li').hide();
 			}
-			
+
 			$new.show();
 			$upload.show();
 			$save.show();
@@ -207,131 +210,135 @@ function LoginManager() {
 			$('a[href="#sticker"]').parents('li').hide();
 			$('a[href="#genre"]').parents('li').hide();
 			$('a[href="#advert"]').parents('li').hide();
-			
+
 			$new.hide();
 			$upload.hide();
 			$save.hide();
 			$publish.hide();
 		}
 	}
-	
-	
-	
-	
+
+
+
+
 	/** 
 	 * PUBLIC
 	 */
-   
-  this.canRetryLogin = function() {
-    return failedLogins >= maxLoginAttempts ? false : true;
-  }
-  
-  this.increaseFailedLogins = function() {
-    failedLogins ++;
-  }
-	 
-	this.showAdminLock = function() {
+
+	this.canRetryLogin = function () {
+		return failedLogins >= maxLoginAttempts ? false : true;
+	}
+
+	this.increaseFailedLogins = function () {
+		failedLogins++;
+	}
+
+	this.showAdminLock = function () {
 		applyPermissions(false);
-		
+
 		window.adminLock.show();
 	}
-	
-	this.showUserLock = function() {
+
+	this.showUserLock = function () {
 		window.userLock.show();
 	}
-	
-	this.getUserProfile = function() {
+
+	this.getUserProfile = function () {
 		var profile = localStorage.getItem('forplayProfile'),
-        accessToken = localStorage.getItem('accessToken'),
-        idToken = localStorage.getItem('idToken');
-		
+			accessToken = localStorage.getItem('accessToken'),
+			idToken = localStorage.getItem('idToken');
+
 		/**
 		 * The user is not autheticated.
 		 */
-		
-		if (!profile && (!accessToken || !idToken)) {		
+
+		if (!profile && (!accessToken || !idToken)) {
 			self.clearUserProfile();
-			
+
 			return false;
 		}
-		
+
 		if (!profile && (accessToken || idToken)) {
-			window.userLock.getUserInfo(accessToken, function(err, profile) {
+			window.userLock.getUserInfo(accessToken, function (err, profile) {
 				if (err) {
-				  console.log("There is no stored Forplay profile and access has probably expired. " + 
-				  			      "Automatically trying to renew log in. Auth 0 says: " + err);
-				  
-				  self.renewUserProfile();
-				  
-				  return false;
+					console.log("There is no stored Forplay profile and access has probably expired. " +
+						"Automatically trying to renew log in. Auth 0 says: " + err);
+
+					self.renewUserProfile();
+
+					return false;
 				}
-				
-				self.extendUserProfile({idToken: idToken, 
-										            accessToken: accessToken}, profile);	
-			  
-        return false;
-      });
+
+				self.extendUserProfile({
+					idToken: idToken,
+					accessToken: accessToken
+				}, profile);
+
+				return false;
+			});
 		}
-		
+
 		if (profile && accessToken && idToken) {
-      window.userProfile = JSON.parse(profile); 
-      
+			window.userProfile = JSON.parse(profile);
+
 			self.renderUserUI(window.userProfile);
-			
+
 			return true;
 		}
 	}
-	
-	this.renewUserProfile = function(callback) {
+
+	this.renewUserProfile = function (callback) {
 		auth0.renewAuth({
 			audience: '',
 			scope: 'openid app_metadata user_metadata',
-      redirectUri: window.location.origin + '/auth/silent-callback',
-      usePostMessage: true,
+			redirectUri: window.location.origin + '/auth/silent-callback',
+			usePostMessage: true,
 		}, function (err, authResult) {
 			if (err) {
-			  console.log("Failed to renew log in. Logging out. " +
-			  			      "Try to log in again or contact admin@forplay.bg. Auth 0 says:" + err);
-			  
-			  self.clearUserProfile();
-			  
-			  return;
+				console.log("Failed to renew log in. Logging out. " +
+					"Try to log in again or contact admin@forplay.bg. Auth 0 says:" + err);
+
+				self.clearUserProfile();
+
+				return;
 			}
-			
-			window.userLock.getUserInfo(authResult.accessToken, function(err, profile) {
+
+			window.userLock.getUserInfo(authResult.accessToken, function (err, profile) {
 				if (err) {
-				  console.log("Renew login was successful, but we failed to get your profile. " + 
-				  			      "Logging out. Try to log in again or contact admin@forplay.bg. Auth 0 says: " + err);
-				  
-				  self.clearUserProfile();
-				  
-				  return;
+					console.log("Renew login was successful, but we failed to get your profile. " +
+						"Logging out. Try to log in again or contact admin@forplay.bg. Auth 0 says: " + err);
+
+					self.clearUserProfile();
+
+					return;
 				}
-        
-        failedLogins = 0;
-				
-				self.extendUserProfile({idToken: authResult.idToken, 
-										            accessToken: authResult.accessToken}, profile);	
-			  
-        if (callback) callback();
-      });
+
+				failedLogins = 0;
+
+				self.extendUserProfile({
+					idToken: authResult.idToken,
+					accessToken: authResult.accessToken
+				}, profile);
+
+				if (callback) callback();
+			});
 		});
 	}
-	
-	this.createUserProfile = function(profile, isUpdate) {
-		
+
+	this.createUserProfile = function (profile, isUpdate) {
+
 		/**
 		 * Clean old localStorage items.
 		 * This is only for Foplray admins and can be removed soon.
 		 */
-		
+
 		localStorage.removeItem('userToken');
-    localStorage.removeItem('header');
-		
+		localStorage.removeItem('header');
+
 		/**
 		 * Now save the new profile and tokens.
 		 */
-		
+
 		var postProfile = $.ajax({
 				type: "POST",
 				contentType: "application/json; charset=utf-8",
@@ -340,166 +347,166 @@ function LoginManager() {
 				dataType: 'json'
 			}),
 			data = null;
-		
-		$.when(postProfile).done(function(data) {
+
+		$.when(postProfile).done(function (data) {
 			var data = data.length ? JSON.parse(data) : data,
-          doReload = false;
-      
-      /**
-       * The problem is there are some articles to move around.
-       * and it is hard to do this in real time on profil update now.
-       */
-      
-      if (isUpdate && window.userProfile.collapsed != data.profiles.collapsed) {
-        doReload = true;
-      }
-      
-      $.extend(profile, data.profiles);
-      
-      localStorage.setItem('forplayProfile', JSON.stringify(profile));
-      
-      window.userProfile = profile;
-      
-      if (doReload) {
-        window.location.reload();
-      } else {
-        self.renderUserUI(window.userProfile);
-			
-        if (!isUpdate) {
-          self.showUserProfile();
-        }
-      }
-		}).fail(function(err) {
-      if (err.status == '401') {
-        if (failedLogins >= maxLoginAttempts) {
-          console.log("Too many automatic retries after update. Logging out.  " + 
-                      "Try to log in again or contact admin@forplay.bg.");
-                
-          self.clearUserProfile();
-          
-          return;
-        }
-        
-        console.log("Failed to update profile information on the server. " + 
-                    "Automatically trying to renew log in.");
-        
-        failedLogins ++;
-        
-        self.renewUserProfile(function() { 
-          self.createUserProfile(profile, isUpdate); 
-        });
-        
-        return;
-      }
-      
+				doReload = false;
+
+			/**
+			 * The problem is there are some articles to move around.
+			 * and it is hard to do this in real time on profil update now.
+			 */
+
+			if (isUpdate && window.userProfile.collapsed != data.profiles.collapsed) {
+				doReload = true;
+			}
+
+			$.extend(profile, data.profiles);
+
+			localStorage.setItem('forplayProfile', JSON.stringify(profile));
+
+			window.userProfile = profile;
+
+			if (doReload) {
+				window.location.reload();
+			} else {
+				self.renderUserUI(window.userProfile);
+
+				if (!isUpdate) {
+					self.showUserProfile();
+				}
+			}
+		}).fail(function (err) {
+			if (err.status == '401') {
+				if (failedLogins >= maxLoginAttempts) {
+					console.log("Too many automatic retries after update. Logging out.  " +
+						"Try to log in again or contact admin@forplay.bg.");
+
+					self.clearUserProfile();
+
+					return;
+				}
+
+				console.log("Failed to update profile information on the server. " +
+					"Automatically trying to renew log in.");
+
+				failedLogins++;
+
+				self.renewUserProfile(function () {
+					self.createUserProfile(profile, isUpdate);
+				});
+
+				return;
+			}
+
 			if (!isUpdate) {
 				console.log("Failed to create Forplay profile.");
 			} else {
 				console.log("Failed to update Forplay profile.");
 			}
-			
+
 			self.renderUserUI(window.userProfile);
 		});
 	}
-	
-	this.extendUserProfile = function(authResult, profile) {
+
+	this.extendUserProfile = function (authResult, profile) {
 		localStorage.setItem('idToken', authResult.idToken);
 		localStorage.setItem('accessToken', authResult.accessToken);
-				
+
 		window.userProfile = profile;
-		
+
 		var params = '?email=' + window.userProfile.email,
-        getProfile = $.get(encodeURI(profilesAPI + params)),
-        data = null;
-			
-		$.when(getProfile).done(function(data) {
+			getProfile = $.get(encodeURI(profilesAPI + params)),
+			data = null;
+
+		$.when(getProfile).done(function (data) {
 			data = data.length ? JSON.parse(data) : data;
-			
+
 			if (!data.profiles) {
 				self.createUserProfile(window.userProfile);
-			} else {				
-				if ((window.userProfile.identities[0].provider == 'facebook' && 
-             window.userProfile.identities[0].userId != data.profiles.facebook_id) ||
-            (window.userProfile.identities[0].provider == 'google-oauth2' && 
-             window.userProfile.identities[0].userId != data.profiles.google_id) || 
-            (window.userProfile.identities[0].provider == 'auth0' && 
-             window.userProfile.identities[0].userId != data.profiles.auth0_id)) {
-						
-					$.extend(window.userProfile, data.profiles);  	
-						
-					self.createUserProfile(window.userProfile, true);	
+			} else {
+				if ((window.userProfile.identities[0].provider == 'facebook' &&
+						window.userProfile.identities[0].userId != data.profiles.facebook_id) ||
+					(window.userProfile.identities[0].provider == 'google-oauth2' &&
+						window.userProfile.identities[0].userId != data.profiles.google_id) ||
+					(window.userProfile.identities[0].provider == 'auth0' &&
+						window.userProfile.identities[0].userId != data.profiles.auth0_id)) {
+
+					$.extend(window.userProfile, data.profiles);
+
+					self.createUserProfile(window.userProfile, true);
 				} else {
 					$.extend(window.userProfile, data.profiles);
-          
-          localStorage.setItem('forplayProfile', JSON.stringify(window.userProfile));
+
+					localStorage.setItem('forplayProfile', JSON.stringify(window.userProfile));
 
 					self.renderUserUI(window.userProfile);
 				}
-			} 
-		}).fail(function() {
-			if (failedLogins >= maxLoginAttempts) {
-				console.log("Too many automatic retries. Logging out.  " + 
-				  			    "Try to log in again or contact admin@forplay.bg.");
-							
-				self.clearUserProfile();
-        
-        return;
 			}
-			
-			console.log("Failed to load profile information from the server. " + 
-				  		    "Automatically trying to renew log in.");
-			
-			failedLogins ++;
-			
+		}).fail(function () {
+			if (failedLogins >= maxLoginAttempts) {
+				console.log("Too many automatic retries. Logging out.  " +
+					"Try to log in again or contact admin@forplay.bg.");
+
+				self.clearUserProfile();
+
+				return;
+			}
+
+			console.log("Failed to load profile information from the server. " +
+				"Automatically trying to renew log in.");
+
+			failedLogins++;
+
 			self.renewUserProfile();
 		});
 	}
-  
-  /**
-   * Logged out:
-   * This is a final stage of all methods.
-   * If renew or created failed the user is looged out.
-   */
-	
-	this.clearUserProfile = function() {
+
+	/**
+	 * Logged out:
+	 * This is a final stage of all methods.
+	 * If renew or created failed the user is looged out.
+	 */
+
+	this.clearUserProfile = function () {
 		localStorage.removeItem('idToken');
 		localStorage.removeItem('accessToken');
 		localStorage.removeItem('forplayProfile');
-		
+
 		window.userProfile = null;
-    
-    failedLogins = 0;
-		
+
+		failedLogins = 0;
+
 		self.renderUserUI();
 	}
-  
-  /**
-   * Logged in:
-   * This is a final stage of all methods.
-   * After renew, create or extend the user is logged in
-   * and the profile UI is rendered.
-   */
-	
-	this.renderUserUI = function(profile) {
-    
-    /**
-     * This is not applicable to the admin.
-     */
-    
-    if (typeof banner === 'undefined') return;
-    
+
+	/**
+	 * Logged in:
+	 * This is a final stage of all methods.
+	 * After renew, create or extend the user is logged in
+	 * and the profile UI is rendered.
+	 */
+
+	this.renderUserUI = function (profile) {
+
+		/**
+		 * This is not applicable to the admin.
+		 */
+
+		if (typeof banner === 'undefined') return;
+
 		var $profile = $('#userLogin'),
-        $avatar = $('#profileChange'),
-        $user = $('#userLogin b'),
-        $id = $('#profileId'),
-        $nickname = $('#profileNickname'),
-        $name = $('#profileGivenName'),
-        $family = $('#profileFamilyName'),
-        $darkened = $('#profileDarkened'),
-        $collapsed = $('#profileCollapsed');
-			
+			$avatar = $('#profileChange'),
+			$user = $('#userLogin b'),
+			$id = $('#profileId'),
+			$nickname = $('#profileNickname'),
+			$name = $('#profileGivenName'),
+			$family = $('#profileFamilyName'),
+			$darkened = $('#profileDarkened'),
+			$collapsed = $('#profileCollapsed');
+
 		var avatar = null;
-			
+
 		if (!profile) {
 			$profile.removeAttr('style');
 			$profile.attr('aria-pressed', false);
@@ -508,18 +515,18 @@ function LoginManager() {
 			$nickname.val('');
 			$name.val('');
 			$family.val('');
-      $darkened.prop('checked', false);
-      $collapsed.prop('checked', false);
-                
-      utils.setTheme('dark', 0);
-      banner.setHeader(localStorage.getItem('forplayHeader'));
-      
-      $(document).trigger('loggedOut');
+			$darkened.prop('checked', false);
+			$collapsed.prop('checked', false);
+
+			utils.setTheme('dark', 0);
+			banner.setHeader(localStorage.getItem('forplayHeader'));
+
+			$(document).trigger('loggedOut');
 		} else {
-			avatar = profile.pictureLarge ? 
-               profile.pictureLarge : 
-               profile.picture;
-			
+			avatar = profile.pictureLarge ?
+				profile.pictureLarge :
+				profile.picture;
+
 			$profile.css('background-image', 'url(' + profile.picture + ')');
 			$avatar.css('background-image', 'url(' + avatar + ')');
 			$profile.attr('aria-pressed', true);
@@ -528,153 +535,153 @@ function LoginManager() {
 			$nickname.val(profile.nickname);
 			$name.val(profile.given_name);
 			$family.val(profile.family_name);
-      $darkened.prop('checked', Number(profile.darkened));
-      $collapsed.prop('checked', Number(profile.collapsed));
-      
-      utils.setTheme('dark', Number(profile.darkened));
-      banner.setHeader(Number(profile.collapsed));
-      
-      $(document).trigger('loggedIn');
+			$darkened.prop('checked', Number(profile.darkened));
+			$collapsed.prop('checked', Number(profile.collapsed));
+
+			utils.setTheme('dark', Number(profile.darkened));
+			banner.setHeader(Number(profile.collapsed));
+
+			$(document).trigger('loggedIn');
 		}
 	}
-	
-	this.showUserProfile = function() {
+
+	this.showUserProfile = function () {
 		$profile = $('#userProfile');
-		
+
 		$profile.attr('aria-hidden', false);
 	}
-	
-	this.hideUserProfile = function() {
+
+	this.hideUserProfile = function () {
 		$profile = $('#userProfile');
-		
+
 		$profile.attr('aria-hidden', true);
 	}
-	 
-	
-	 
-	 
+
+
+
+
 	/** 
 	 * EVENTS
 	 */
-	
+
 	/**
 	 * Admin
-	 */ 
-	 
-	window.adminLock.on("authenticated", function(authResult) {
+	 */
+
+	window.adminLock.on("authenticated", function (authResult) {
 		var $login = $('#main button.login'),
-		  	$logout = $('#main button.logout');
-	  
-	  window.adminLock.getUserInfo(authResult.accessToken, function(err, profile) {	
-      if (err) {
-          $login.attr('aria-hidden', false);
-          $logout.attr('aria-hidden', true);
-        
-          return;
-      }
-      
-      self.extendUserProfile(authResult, profile);
-		
-      $logout.css('background-image', 'url(' + window.userProfile.picture + ')');
-      $login.attr('aria-hidden', true);
-      $logout.attr('aria-hidden', false);
-		
+			$logout = $('#main button.logout');
+
+		window.adminLock.getUserInfo(authResult.accessToken, function (err, profile) {
+			if (err) {
+				$login.attr('aria-hidden', false);
+				$logout.attr('aria-hidden', true);
+
+				return;
+			}
+
+			self.extendUserProfile(authResult, profile);
+
+			$logout.css('background-image', 'url(' + window.userProfile.picture + ')');
+			$login.attr('aria-hidden', true);
+			$logout.attr('aria-hidden', false);
+
 			if (window.userProfile['roles'][0] != 'admin' &&
-				  window.userProfile['roles'][0] != 'superadmin') {
-			
+				window.userProfile['roles'][0] != 'superadmin') {
+
 				applyPermissions(false, false);
-      } else {
+			} else {
 				if (window.userProfile['roles'][0] != 'superadmin') {
 					applyPermissions(true, false);
 				} else {
 					applyPermissions(true, true);
 				}
-			}	
-	  });
+			}
+		});
 	});
-	 
-	$(window).on('load', function(e) {
-		$('#login img.svg').each(function() {
+
+	$(window).on('load', function (e) {
+		$('#login img.svg').each(function () {
 			utils.convertSVG($(this));
 		});
 	});
-	
-	$('#main button.login').click(function(e) { 
+
+	$('#main button.login').click(function (e) {
 		self.showAdminLock();
 	});
-	
-	$('#main button.logout').click(function(e) {
+
+	$('#main button.logout').click(function (e) {
 		var $login = $('#main button.login'),
-			  $logout = $('#main button.logout');
-					
+			$logout = $('#main button.logout');
+
 		localStorage.removeItem('idToken');
 		localStorage.removeItem('forplayProfile');
-		
+
 		window.userProfile = null;
-		
+
 		$login.attr('aria-hidden', false);
 		$logout.attr('aria-hidden', true);
-	}); 
-	
+	});
+
 	$('#login').on('click', 'button.login', function (e) {
 		window.location.href = "foradmin.html#main";
 	});
-	
+
 	/**
 	 * Forplay
 	 */
-	
-	window.userLock.on("authenticated", function(authResult) {
+
+	window.userLock.on("authenticated", function (authResult) {
 		self.getUserProfile(authResult);
 	});
-	
-	$('#userLogin').click(function(e) {
-		
+
+	$('#userLogin').click(function (e) {
+
 		/**
 		 * For some reason this is not working as a selector:
 		 * #userLogin[aria-pressed=false].
 		 */
-		
-		if($(this).attr('aria-pressed') == 'true') {
+
+		if ($(this).attr('aria-pressed') == 'true') {
 			self.showUserProfile();
-			
+
 			return;
 		}
-		
+
 		self.showUserLock();
 	});
-	
-	$('#profileUpdate').click(function(e) {
+
+	$('#profileUpdate').click(function (e) {
 		window.userProfile.nickname = $('#profileNickname').val() ? $('#profileNickname').val() : null;
 		window.userProfile.given_name = $('#profileGivenName').val() ? $('#profileGivenName').val() : null;
 		window.userProfile.family_name = $('#profileFamilyName').val() ? $('#profileFamilyName').val() : null;
-    window.userProfile.settings = {
-      darkened: $('#profileDarkened').prop('checked') ? 1 : 0,
-      collapsed: $('#profileCollapsed').prop('checked') ? 1 : 0
-    };
-		
+		window.userProfile.settings = {
+			darkened: $('#profileDarkened').prop('checked') ? 1 : 0,
+			collapsed: $('#profileCollapsed').prop('checked') ? 1 : 0
+		};
+
 		self.createUserProfile(window.userProfile, true);
 		self.hideUserProfile();
 	});
-	
-	$('#profileChange').click(function(e) {		
+
+	$('#profileChange').click(function (e) {
 		self.showUserLock();
 	});
-	
-	$('#profileClose').click(function(e) {		
+
+	$('#profileClose').click(function (e) {
 		self.hideUserProfile();
 	});
-	
-	$('#userLogout').click(function(e) {
+
+	$('#userLogout').click(function (e) {
 		self.clearUserProfile();
 		self.hideUserProfile();
-    
-    /**
-     * Hide unauthorized actions comment actions.
-     * There is extra handling for this on backend.
-     * The goal is to prevent UI errors.
-     */
-     
-    comment.updatePermissionsOnLogout();
-	}); 
+
+		/**
+		 * Hide unauthorized actions comment actions.
+		 * There is extra handling for this on backend.
+		 * The goal is to prevent UI errors.
+		 */
+
+		comment.updatePermissionsOnLogout();
+	});
 }
